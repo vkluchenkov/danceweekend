@@ -11,7 +11,7 @@ export const Cta: React.FC = () => {
       <button type='button' className={styles.cta__button}>
         Sign Up!
       </button>
-      <Divider />
+      <Divider inverted />
     </section>
   );
 };

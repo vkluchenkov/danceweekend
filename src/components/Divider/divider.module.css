@@ -5,3 +5,7 @@
   background: url('/images/line_s.png') center no-repeat;
   background-size: 100%;
 }
+
+.divider_inverted {
+  transform: rotate(180deg);
+}

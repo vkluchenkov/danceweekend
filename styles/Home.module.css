@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   width: 110%;
+  margin: -10px 0 0;
   aspect-ratio: 969/559;
   transform: translateX(-3.5%);
 }

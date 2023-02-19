@@ -1,8 +1,8 @@
 .main {
-  margin: 150px 0 0; /*Header hight*/
-  height: calc(100vh - 150px); /*Header hight*/
+  margin: 170px 0 0; /*Header hight*/
+  height: calc(100vh - 170px); /*Header hight*/
   overflow-y: scroll;
   overflow-x: hidden;
   /* background-color: rgba(0, 0, 0, 0.4); */
-  mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 30px);
+  mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 20px);
 }

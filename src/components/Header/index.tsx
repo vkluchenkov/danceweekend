@@ -10,7 +10,6 @@ export const Header: React.FC = () => {
         <Image src={logo} alt='Dance Weekend in Warsaw logo' fill />
       </div>
       <LangSwitcher />
-
       <button type='button' className={styles.header__menuButton} />
     </header>
   );

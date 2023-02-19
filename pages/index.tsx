@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Divider } from '@/src/components/Divider';
 import Image from 'next/image';
 import teachers from 'public/images/teachers.png';
+import { Cta } from '@/src/components/CTA';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
           <Divider />
         </div>
       </div>
+      <Cta />
       <section className={styles.content}>
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia obcaecati, necessitatibus,

@@ -1,7 +1,7 @@
 .divider {
   width: 100vw;
-  margin: 0 0 0 -20px;
-  height: 20px;
-  background: url('/images/line3.png') center no-repeat;
+  aspect-ratio: 877/83;
+  margin: 0;
+  background: url('/images/line_s.png') center no-repeat;
   background-size: 100%;
 }

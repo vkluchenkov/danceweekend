@@ -1,4 +1,24 @@
-.sticky {
-  position: sticky;
-  top: 0px;
+.coverContainer {
+  position: relative;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 110%;
+  aspect-ratio: 969/559;
+  transform: translateX(-3.5%);
+}
+
+.imageDivider {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(48%);
+  z-index: 1;
+}
+
+.content {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px;
 }

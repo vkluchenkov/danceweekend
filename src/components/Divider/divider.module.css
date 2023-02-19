@@ -1,0 +1,7 @@
+.divider {
+  width: 100vw;
+  margin: 0 0 0 -20px;
+  height: 20px;
+  background: url('/images/line3.png') center no-repeat;
+  background-size: 100%;
+}

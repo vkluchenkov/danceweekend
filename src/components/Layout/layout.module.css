@@ -2,6 +2,7 @@
   margin: 150px 0 0;
   height: calc(100vh - 150px);
   overflow-y: scroll;
-  padding: 15px 20px 20px;
-  /* background: rgba(0, 0, 0, 0.4); */
+  padding: 0 20px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 5%);
 }

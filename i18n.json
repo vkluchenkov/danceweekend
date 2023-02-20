@@ -1,0 +1,9 @@
+{
+  "locales": ["en", "ru"],
+  "defaultLocale": "en",
+  "defaultNS": "en",
+  "pages": {
+    "*": ["common"],
+    "/": ["home", "cta"]
+  }
+}

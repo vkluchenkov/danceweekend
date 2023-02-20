@@ -1,15 +1,24 @@
+import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
+
 import { Divider } from '../Divider';
 import styles from './cta.module.css';
 
 export const Cta: React.FC = () => {
+  const { t } = useTranslation('cta');
+  const subtitle = (
+    <Trans
+      i18nKey='cta:subtitle'
+      components={[<span className={styles.cta__subtitle_accent} key={1} />]}
+    />
+  );
+
   return (
     <section className={styles.cta}>
-      <h1 className={styles.cta__title}>Registration is&nbsp;open!</h1>
-      <p className={styles.cta__subtitle}>
-        first 10 packages for <span className={styles.cta__subtitle_accent}>€249</span>
-      </p>
+      <h2 className={styles.cta__title}>{t('title')}</h2>
+      <p className={styles.cta__subtitle}>{subtitle}</p>
       <button type='button' className={styles.cta__button}>
-        Sign Up!
+        {t('button')}
       </button>
       <Divider inverted />
     </section>

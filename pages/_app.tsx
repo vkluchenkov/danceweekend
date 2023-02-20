@@ -13,6 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
         html {
           font-family: ${montserrat.style.fontFamily};
         }
+        button {
+          font-family: ${montserrat.style.fontFamily};
+        }
       `}</style>
       <Component {...pageProps} />
     </>

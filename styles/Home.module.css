@@ -19,8 +19,11 @@
   z-index: 1;
 }
 
-.content {
+.contentWrapper {
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.content {
   padding: 20px 20px 40px;
 }
 
@@ -53,6 +56,10 @@
 }
 
 .video {
-  width: 100vw;
   padding: 0 0 30px;
+}
+
+.schedule {
+  width: 100%;
+  padding: 20px;
 }

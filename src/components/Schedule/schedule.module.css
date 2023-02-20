@@ -1,0 +1,102 @@
+.schedule__title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
+  margin: 0 0 25px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.schedule__days {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 25px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.day {
+  /* width: 100%; */
+  /* max-width: 450px; */
+  /* margin: 0 auto; */
+}
+
+.day__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.day__events {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.event {
+  display: grid;
+  position: relative;
+  grid-template-columns: 60px 1fr;
+  column-gap: 44px;
+  align-items: center;
+  min-height: 60px;
+}
+
+.event__timeWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.event__timeWrapper::after {
+  content: '';
+  display: block;
+  width: 2px;
+  height: calc(100% - 12px);
+  position: absolute;
+  left: 82px;
+  border-radius: 50%;
+  background-color: var(--main-text-color);
+}
+
+.event__time {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}
+
+.event__title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--accent-text-color);
+  margin: 0;
+  padding: 0;
+}
+
+.event__description {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}

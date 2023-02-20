@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 
-import { Divider } from '../Divider';
+import { Divider } from '../../ui-kit/Divider';
 import styles from './cta.module.css';
 
 export const Cta: React.FC = () => {

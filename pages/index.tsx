@@ -1,6 +1,6 @@
 import styles from '@/styles/Home.module.css';
 import { Layout } from '@/src/components/Layout';
-import { Divider } from '@/src/components/Divider';
+import { Divider } from '@/src/ui-kit/Divider';
 import { Cta } from '@/src/components/CTA';
 import Image from 'next/image';
 import teachers from 'public/images/teachers.png';

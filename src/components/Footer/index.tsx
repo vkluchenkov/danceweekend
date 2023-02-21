@@ -14,13 +14,19 @@ export const Footer: React.FC = () => {
         <Divider />
       </div>
       <div className={styles.footer__social}>
-        <button type='button' className={clsx(styles.social__button, styles.social__button_fb)} />
-        <button
-          type='button'
+        <Link
+          href='https://www.facebook.com/danceweekendwarsaw'
+          target='_blank'
+          className={clsx(styles.social__button, styles.social__button_fb)}
+        />
+        <Link
+          href='https://www.instagram.com/danceweekendwarsaw/'
+          target='_blank'
           className={clsx(styles.social__button, styles.social__button_insta)}
         />
-        <button
+        <Link
           type='button'
+          href='mailto:danceweekend@aliah.dance'
           className={clsx(styles.social__button, styles.social__button_email)}
         />
       </div>

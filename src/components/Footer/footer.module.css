@@ -2,10 +2,11 @@
   position: relative;
   background: #15021e url('/images/camel.png') bottom right -33px no-repeat;
   background-size: 214px;
-  padding: 25px 20px 20px;
+  padding: 30px 20px 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin: 20px 0 0;
 }
 
 .footer__divider {

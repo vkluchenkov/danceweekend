@@ -1,8 +1,8 @@
 import useTranslation from 'next-translate/useTranslation';
 import styles from './schedule.module.css';
 import { schedule } from '@/src/ulis/schedule';
-import { SupportedLangs } from '@/src/ulis/schedule';
 import { useMemo } from 'react';
+import { SupportedLangs } from '@/src/types/langs';
 
 export const Schedule: React.FC = () => {
   const { t, lang } = useTranslation();

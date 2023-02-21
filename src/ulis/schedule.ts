@@ -1,4 +1,4 @@
-export type SupportedLangs = 'ru' | 'en';
+import { SupportedLangs } from '../types/langs';
 
 interface Event {
   start: string;

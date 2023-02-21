@@ -10,7 +10,7 @@
   bottom: 100vh;
   overflow: hidden;
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0px); /*Safari fix*/
   background: rgba(22, 22, 22, 0.7);
   z-index: 99;
 
@@ -20,6 +20,7 @@
 .mobileMenu_open {
   visibility: visible;
   bottom: 0;
+  backdrop-filter: blur(10px);
 }
 
 .mobileMenu__items {
@@ -28,7 +29,7 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  gap: 35px;
+  gap: 30px;
   margin: 0;
   list-style: none;
   width: 100%;
@@ -43,9 +44,9 @@
 
 .mobileMenu__item {
   font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
   text-decoration: none;
   transition: opacity 0.3s;
   text-transform: uppercase;

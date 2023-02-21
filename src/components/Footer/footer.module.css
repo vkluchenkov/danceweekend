@@ -1,0 +1,68 @@
+.footer {
+  position: relative;
+  background: #15021e url('/images/camel.png') bottom right -33px no-repeat;
+  background-size: 214px;
+  padding: 25px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer__divider {
+  position: absolute;
+  top: 0;
+  transform: translateY(-52%);
+  z-index: 1;
+  margin: 0 0 0 -20px;
+}
+
+.footer__social {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+}
+
+.social__button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
+.social__button_fb {
+  background: url('/images/icon_fb.svg') center no-repeat;
+}
+
+.social__button_insta {
+  background: url('/images/icon_insta.svg') center no-repeat;
+}
+
+.social__button_email {
+  background: url('/images/icon_at.svg') center no-repeat;
+}
+
+.footer__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__link {
+  text-decoration: underline;
+}
+
+.footer__copyright {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}

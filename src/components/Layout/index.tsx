@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Footer } from '../Footer';
 import { Header } from '../Header';
 import styles from './layout.module.css';
 
@@ -25,7 +26,10 @@ export const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         <link rel='icon' href='images/favicon.png' />
       </Head>
       <Header />
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        {children}
+        <Footer />
+      </main>
     </>
   );
 };

@@ -1,3 +1,5 @@
 {
-  "schedule": "schedule"
+  "schedule": "schedule",
+  "footerAddress": "Festival address",
+  "footerCopyright": "Website designed and created by Vladimir Kluchenkov"
 }

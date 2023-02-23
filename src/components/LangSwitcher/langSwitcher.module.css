@@ -27,3 +27,12 @@
     padding: 10px 15px;
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .langSwitcher {
+    position: absolute;
+    top: 27px;
+    right: 30px;
+    justify-content: flex-end;
+  }
+}

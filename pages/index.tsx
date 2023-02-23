@@ -4,6 +4,7 @@ import { Divider } from '@/src/ui-kit/Divider';
 import { Cta } from '@/src/components/CTA';
 import Image from 'next/image';
 import teachers from 'public/images/teachers.png';
+import teachers1Line from 'public/images/teachers_1_line.png';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -27,8 +28,11 @@ export default function Home() {
   return (
     <Layout>
       <section className={styles.coverContainer}>
-        <div className={styles.imageContainer}>
+        <div className={styles.imageContainerMobile}>
           <Image src={teachers} alt={t('home:coverImageAlt')} fill priority />
+        </div>
+        <div className={styles.imageContainerDesktop}>
+          <Image src={teachers1Line} alt={t('home:coverImageAlt')} fill priority />
         </div>
         <div className={styles.imageDivider}>
           <Divider />

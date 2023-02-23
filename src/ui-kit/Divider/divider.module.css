@@ -9,3 +9,12 @@
 .divider_inverted {
   transform: rotate(180deg);
 }
+
+@media screen and (min-width: 1024px) {
+  .divider {
+    /* width: 100%; */
+    aspect-ratio: 1700/91;
+    background: url('/images/line_l.png') center no-repeat;
+    background-size: 100%;
+  }
+}

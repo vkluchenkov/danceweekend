@@ -14,6 +14,10 @@ body {
   color: var(--main-text-color);
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background: url('/images/mobile_bg.jpg') fixed no-repeat var(--body-background-color);
   background-size: 100%;
@@ -115,6 +119,21 @@ a {
 @media screen and (min-width: 768px) {
   body {
     background: url('/images/mobile_bg.jpg') fixed top -100px center no-repeat var(--body-background-color);
+    background-size: 100%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    background: url('/images/desktop_bg.jpg') fixed top center no-repeat
+      var(--body-background-color);
+    background-size: 100%;
+  }
+}
+
+@media screen and (min-width: 1120px) {
+  body {
+    background: url('/images/desktop_bg.jpg') fixed top -20px center no-repeat var(--body-background-color);
     background-size: 100%;
   }
 }

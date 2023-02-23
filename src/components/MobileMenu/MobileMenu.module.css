@@ -127,3 +127,9 @@
     right: 23px;
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .mobileMenu {
+    display: none;
+  }
+}

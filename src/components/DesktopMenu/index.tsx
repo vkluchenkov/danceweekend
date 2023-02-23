@@ -1,24 +1,14 @@
-import { MobileMenuProps } from './types';
-import styles from './MobileMenu.module.css';
+import styles from './DesktopMenu.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { menu } from '../ulis/menu';
-import { useEffect } from 'react';
+import { menu } from '../../ulis/menu';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
-import { SupportedLangs } from '../types/langs';
+import { SupportedLangs } from '../../types/langs';
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
+export const DesktopMenu: React.FC = () => {
   const { t, lang } = useTranslation();
   const router = useRouter();
-
-  const handleClose = () => onClose();
-
-  // Blocking body scroll when menu visible
-  useEffect(() => {
-    if (isOpen) document.body.classList.add('no-scroll');
-    return () => document.body.classList.remove('no-scroll');
-  }, [isOpen]);
 
   const currentLang = lang as SupportedLangs;
 
@@ -31,10 +21,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
               <Link href={subItem.link} legacyBehavior>
                 <a
                   className={clsx(
-                    styles.mobileMenu__subItem,
-                    router.asPath.endsWith(item.link) && styles.mobileMenu__item_active
+                    styles.desktopMenu__subItem,
+                    router.asPath.endsWith(item.link) && styles.desktopMenu__item_active
                   )}
-                  onClick={handleClose}
                 >
                   {subItem.translations[currentLang].title}
                 </a>
@@ -43,20 +32,19 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           );
         });
 
-        return <ul className={styles.mobileMenu__subItems}>{list}</ul>;
+        return <ul className={styles.desktopMenu__subItems}>{list}</ul>;
       }
       return null;
     };
 
     return (
-      <li key={index} className={styles.mobileMenu__itemWrapper}>
+      <li key={index} className={styles.desktopMenu__itemWrapper}>
         <Link href={item.link} legacyBehavior>
           <a
             className={clsx(
-              styles.mobileMenu__item,
-              router.asPath.endsWith(item.link) && styles.mobileMenu__item_active
+              styles.desktopMenu__item,
+              router.asPath.endsWith(item.link) && styles.desktopMenu__item_active
             )}
-            onClick={handleClose}
           >
             {item.translations[currentLang].title}
           </a>
@@ -67,16 +55,15 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   });
 
   return (
-    <nav className={isOpen ? `${styles.mobileMenu} ${styles.mobileMenu_open}` : styles.mobileMenu}>
-      <ul className={styles.mobileMenu__items}>
+    <nav className={styles.desktopMenu}>
+      <ul className={styles.desktopMenu__items}>
         <li>
           <Link legacyBehavior href='/'>
             <a
               className={clsx(
-                styles.mobileMenu__item,
-                router.route === '/' && styles.mobileMenu__item_active
+                styles.desktopMenu__item,
+                router.route === '/' && styles.desktopMenu__item_active
               )}
-              onClick={handleClose}
             >
               {t('common:menuHome')}
             </a>
@@ -84,7 +71,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         </li>
         {renderMenu}
       </ul>
-      <button type='button' className={styles.mobileMenu__close} onClick={handleClose}></button>
     </nav>
   );
 };

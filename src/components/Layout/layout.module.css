@@ -4,5 +4,12 @@
   overflow-y: scroll;
   overflow-x: hidden;
   /* background-color: rgba(0, 0, 0, 0.4); */
-  mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 20px);
+  mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 30px);
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    margin: 225px 0 0; /*Header hight*/
+    height: calc((var(--vh, 1vh) * 100) - 225px); /*Header hight*/
+  }
 }

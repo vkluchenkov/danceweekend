@@ -63,3 +63,9 @@
   width: 100%;
   padding: 20px 20px 40px;
 }
+
+@media screen and (min-width: 768px) {
+  .imageContainer {
+    margin: -30px 0 0;
+  }
+}

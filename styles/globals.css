@@ -71,12 +71,15 @@ a {
 
 /* play button */
 .yt-lite > .lty-playbtn {
-  width: 70px;
-  height: 46px;
+  min-width: 80px;
+  min-height: 50px;
+  width: 12%;
+  height: 13%;
   background-color: #212121;
+  border: none;
   z-index: 1;
   opacity: 0.8;
-  border-radius: 14%; /* TODO: Consider replacing this with YT's actual svg. Eh. */
+  border-radius: 10px; /* TODO: Consider replacing this with YT's actual svg. Eh. */
   transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 .yt-lite:hover > .lty-playbtn {
@@ -87,7 +90,7 @@ a {
 .yt-lite > .lty-playbtn:before {
   content: '';
   border-style: solid;
-  border-width: 11px 0 11px 19px;
+  border-width: 15px 0 15px 25px;
   border-color: transparent transparent transparent #fff;
 }
 
@@ -107,4 +110,11 @@ a {
 .yt-lite.lyt-activated > .lty-playbtn {
   opacity: 0;
   pointer-events: none;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    background: url('/images/mobile_bg.jpg') fixed top -100px center no-repeat var(--body-background-color);
+    background-size: 100%;
+  }
 }

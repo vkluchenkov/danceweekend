@@ -67,3 +67,10 @@
   margin: 0;
   padding: 0;
 }
+
+@media screen and (min-width: 768px) {
+  .footer {
+    background: #15021e url('/images/camel.png') bottom right -20px no-repeat;
+    background-size: 302px;
+  }
+}

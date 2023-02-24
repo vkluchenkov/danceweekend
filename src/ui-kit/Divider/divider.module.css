@@ -2,8 +2,7 @@
   width: 100vw;
   aspect-ratio: 877/83;
   margin: 0;
-  background: url('/images/line_s.png') center no-repeat;
-  background-size: 100%;
+  background: url('/images/line_s.png') center/100% no-repeat;
 }
 
 .divider_inverted {
@@ -12,9 +11,16 @@
 
 @media screen and (min-width: 1024px) {
   .divider {
-    /* width: 100%; */
     aspect-ratio: 1700/91;
-    background: url('/images/line_l.png') center no-repeat;
-    background-size: 100%;
+    background: url('/images/line_l.png') center/100% no-repeat;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .divider {
+    background: url('/images/line_l.png') center/1500px no-repeat;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
   }
 }

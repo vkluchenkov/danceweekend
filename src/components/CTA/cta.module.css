@@ -46,6 +46,8 @@
   line-height: 29px;
   text-transform: uppercase;
   margin: 10px 0 15px;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
@@ -66,7 +68,7 @@
 
   .cta__button {
     border-radius: 7px;
-    padding: 12px 30px;
+    padding: 10px 30px;
     font-size: 28px;
     line-height: 32px;
     margin: 10px 0 10px;
@@ -84,5 +86,16 @@
 
   .cta__subtitle {
     font-size: 26px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .cta__button {
+    margin: 10px 0 -10px;
+    opacity: 1;
+  }
+
+  .cta__button:hover {
+    opacity: 0.8;
   }
 }

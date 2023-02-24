@@ -129,3 +129,25 @@
     padding: 20px 170px 40px;
   }
 }
+
+@media screen and (min-width: 1280px) {
+  .imageContainerDesktop {
+    margin: -35px auto 0;
+  }
+
+  .imageDivider {
+    width: 100%;
+  }
+
+  .content {
+    max-width: 782px;
+    padding: 0 0 50px;
+    margin: 0 auto;
+  }
+
+  .video {
+    max-width: 977px;
+    padding: 0 0 30px;
+    margin: 0 auto;
+  }
+}

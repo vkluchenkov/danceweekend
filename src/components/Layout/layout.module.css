@@ -13,3 +13,10 @@
     height: calc((var(--vh, 1vh) * 100) - 225px); /*Header hight*/
   }
 }
+
+@media screen and (min-width: 1280px) {
+  .main {
+    margin: 260px 0 0; /*Header hight*/
+    height: calc((var(--vh, 1vh) * 100) - 260px); /*Header hight*/
+  }
+}

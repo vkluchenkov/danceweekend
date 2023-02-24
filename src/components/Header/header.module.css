@@ -53,3 +53,17 @@
     display: none;
   }
 }
+
+@media screen and (min-width: 1280px) {
+  .header {
+    max-width: 1280px;
+    left: 50%;
+    right: 50%;
+    margin: 0 0 0 -640px; /*half of width*/
+  }
+
+  .header__logoContainer {
+    max-width: 315px;
+    margin: 15px auto 20px;
+  }
+}

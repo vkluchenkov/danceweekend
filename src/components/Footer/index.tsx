@@ -30,21 +30,23 @@ export const Footer: React.FC = () => {
           className={clsx(styles.social__button, styles.social__button_email)}
         />
       </div>
-      <p className={styles.footer__text}>
-        {t('common:footerAddress')}:{' '}
-        <Link
-          href='https://goo.gl/maps/SnjPT318FQs6SeTW8'
-          target='_blank'
-          className={styles.footer__link}
-        >
-          Podskarbińska 2, Warszawa
-        </Link>
-      </p>
-      <p className={styles.footer__copyright}>
-        ©2016-{year} Dance Weekend in Warsaw festival
-        <br />
-        {t('common:footerCopyright')}
-      </p>
+      <div className={styles.footer__copyrightWrapper}>
+        <p className={styles.footer__text}>
+          {t('common:footerAddress')}:{' '}
+          <Link
+            href='https://goo.gl/maps/SnjPT318FQs6SeTW8'
+            target='_blank'
+            className={styles.footer__link}
+          >
+            Podskarbińska 2, Warszawa
+          </Link>
+        </p>
+        <p className={styles.footer__copyright}>
+          ©2016-{year} Dance Weekend in Warsaw festival
+          <br />
+          {t('common:footerCopyright')}
+        </p>
+      </div>
     </footer>
   );
 };

@@ -74,3 +74,28 @@
     background-size: 302px;
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .footer {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px 50px;
+  }
+
+  .footer__divider {
+    margin: 0 -50px 0 0;
+  }
+
+  .footer__copyrightWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footer__text,
+  .footer__copyright {
+    text-align: left;
+    font-size: 14px;
+  }
+}

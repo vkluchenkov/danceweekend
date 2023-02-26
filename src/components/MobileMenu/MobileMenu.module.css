@@ -50,6 +50,8 @@
   text-decoration: none;
   transition: opacity 0.3s;
   text-transform: uppercase;
+  padding: 0;
+  margin: 0;
 }
 
 .mobileMenu__subItems {

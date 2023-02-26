@@ -47,30 +47,21 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
       }
       return null;
     };
+    const itemStyle = clsx(
+      styles.mobileMenu__item,
+      router.asPath.startsWith(item.link) && styles.mobileMenu__item_active
+    );
 
     return (
       <li key={index} className={styles.mobileMenu__itemWrapper}>
         {getSubItems() ? (
           <>
-            <p
-              className={clsx(
-                styles.mobileMenu__item,
-                router.asPath.startsWith(item.link) && styles.mobileMenu__item_active
-              )}
-            >
-              {item.translations[currentLang].title}
-            </p>
+            <p className={itemStyle}>{item.translations[currentLang].title}</p>
             {getSubItems()}
           </>
         ) : (
           <Link href={item.link} legacyBehavior>
-            <a
-              className={clsx(
-                styles.mobileMenu__item,
-                router.asPath.startsWith(item.link) && styles.mobileMenu__item_active
-              )}
-              onClick={handleClose}
-            >
+            <a className={itemStyle} onClick={handleClose}>
               {item.translations[currentLang].title}
             </a>
           </Link>

@@ -13,6 +13,7 @@
   margin: 0;
   list-style: none;
   width: 100%;
+  cursor: pointer;
 }
 
 .desktopMenu__itemWrapper {
@@ -31,6 +32,8 @@
   text-decoration: none;
   transition: opacity 0.3s;
   text-transform: uppercase;
+  margin: 0;
+  padding: 0;
 }
 
 .desktopMenu__subItems {
@@ -40,7 +43,7 @@
   backdrop-filter: blur(10px);
   border-radius: 10px;
   position: absolute;
-  top: 30px;
+  top: 25px;
   flex-direction: column;
   align-items: center;
   justify-content: center;

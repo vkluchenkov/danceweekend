@@ -37,19 +37,23 @@ export const DesktopMenu: React.FC = () => {
       return null;
     };
 
+    const itemStyle = clsx(
+      styles.desktopMenu__item,
+      router.asPath.startsWith(item.link) && styles.desktopMenu__item_active
+    );
+
     return (
       <li key={index} className={styles.desktopMenu__itemWrapper}>
-        <Link href={getSubItems() ? '#' : item.link} legacyBehavior>
-          <a
-            className={clsx(
-              styles.desktopMenu__item,
-              router.asPath.startsWith(item.link) && styles.desktopMenu__item_active
-            )}
-          >
-            {item.translations[currentLang].title}
-          </a>
-        </Link>
-        {getSubItems() ? getSubItems() : <></>}
+        {getSubItems() ? (
+          <>
+            <p className={itemStyle}>{item.translations[currentLang].title}</p>
+            {getSubItems()}
+          </>
+        ) : (
+          <Link href={item.link} legacyBehavior>
+            <a className={itemStyle}>{item.translations[currentLang].title}</a>
+          </Link>
+        )}
       </li>
     );
   });

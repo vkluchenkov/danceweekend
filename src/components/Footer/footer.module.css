@@ -6,7 +6,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin: 0;
+  margin: auto 0 0;
+  width: 100%;
+  justify-self: flex-end;
 }
 
 .footer__divider {
@@ -78,6 +80,7 @@
   .footer {
     background: #15021e url('/images/camel.png') bottom right -20px no-repeat;
     background-size: 302px;
+    margin: auto 0 0;
   }
 }
 
@@ -87,6 +90,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 35px 50px;
+    margin: auto 0 0;
   }
 
   .footer__divider {
@@ -106,11 +110,11 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
   .footer {
     background: none;
     max-width: 1500px;
-    margin: 0 auto;
+    margin: auto auto 0;
     padding: 50px 160px;
     background-color: rgba(0, 0, 0, 0.4);
   }

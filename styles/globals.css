@@ -138,7 +138,7 @@ a {
 @media screen and (min-width: 1280px) {
   body {
     background: url('/images/splash_xl.png') fixed top 200px center/1450px no-repeat,
-      url('/images/desktop_xlarge2_bg.jpg') fixed top center/1700px no-repeat
+      url('/images/desktop_xlarge2_bg.jpg') fixed top center/1500px no-repeat
         var(--body-background-color);
   }
 }

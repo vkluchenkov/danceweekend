@@ -26,7 +26,7 @@ export default function Home() {
   );
 
   return (
-    <Layout>
+    <Layout isHome>
       <section className={styles.coverContainer}>
         <div className={styles.imageContainerMobile}>
           <Image src={teachers} alt={t('home:coverImageAlt')} fill priority />

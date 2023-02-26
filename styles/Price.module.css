@@ -65,7 +65,7 @@
 @media screen and (min-width: 1280px) {
   .content {
     max-width: 782px;
-    padding: 0 0 50px;
+    padding: 25px 0 50px;
     margin: 0 auto;
   }
 }

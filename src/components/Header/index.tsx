@@ -6,8 +6,13 @@ import { useState } from 'react';
 import { MobileMenu } from '@/src/components/MobileMenu';
 import Link from 'next/link';
 import { DesktopMenu } from '../DesktopMenu';
+import { Divider } from '@/src/ui-kit/Divider';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  isHome?: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ isHome }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => setIsOpen(true);
@@ -21,9 +26,16 @@ export const Header: React.FC = () => {
             <Image src={logo} alt='Dance Weekend in Warsaw logo' fill />
           </Link>
         </div>
-        <LangSwitcher />
+        <div className={styles.header__langSwitcher}>
+          <LangSwitcher />
+        </div>
         <DesktopMenu />
         <button type='button' className={styles.header__menuButton} onClick={handleOpen} />
+        {!isHome && (
+          <div className={styles.dividerWrapper}>
+            <Divider />
+          </div>
+        )}
       </header>
       <MobileMenu isOpen={isOpen} onClose={handleClose} />
     </>

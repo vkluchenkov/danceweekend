@@ -1,3 +1,5 @@
+import { Divider } from '@/src/ui-kit/Divider';
+import clsx from 'clsx';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { Footer } from '../Footer';
@@ -7,9 +9,10 @@ import styles from './layout.module.css';
 interface LayoutProps {
   children: any;
   title?: string;
+  isHome?: boolean;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, title }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, title, isHome }) => {
   useEffect(() => {
     const handleVh = () => {
       if (typeof window != 'undefined') {
@@ -22,6 +25,20 @@ export const Layout: React.FC<LayoutProps> = ({ children, title }) => {
     return () => window.removeEventListener('resize', handleVh);
   }, []);
 
+  const Main = isHome ? (
+    <main className={styles.main}>
+      {children}
+      <Footer />
+    </main>
+  ) : (
+    <>
+      <main className={clsx(styles.main, styles.main_notHome)}>
+        {children}
+        <Footer />
+      </main>
+    </>
+  );
+
   return (
     <>
       <Head>
@@ -30,11 +47,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='images/favicon.png' />
       </Head>
-      <Header />
-      <main className={styles.main}>
-        {children}
-        <Footer />
-      </main>
+      <Header isHome={isHome} />
+      {Main}
     </>
   );
 };

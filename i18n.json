@@ -4,6 +4,7 @@
   "defaultNS": "en",
   "pages": {
     "*": ["common"],
-    "/": ["home", "cta"]
+    "/": ["home", "cta"],
+    "/price/live": ["price"]
   }
 }

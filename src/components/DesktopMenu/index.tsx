@@ -22,7 +22,7 @@ export const DesktopMenu: React.FC = () => {
                 <a
                   className={clsx(
                     styles.desktopMenu__subItem,
-                    router.asPath.endsWith(item.link) && styles.desktopMenu__item_active
+                    router.asPath.endsWith(subItem.link) && styles.desktopMenu__item_active
                   )}
                 >
                   {subItem.translations[currentLang].title}
@@ -39,11 +39,11 @@ export const DesktopMenu: React.FC = () => {
 
     return (
       <li key={index} className={styles.desktopMenu__itemWrapper}>
-        <Link href={item.link} legacyBehavior>
+        <Link href={getSubItems() ? '#' : item.link} legacyBehavior>
           <a
             className={clsx(
               styles.desktopMenu__item,
-              router.asPath.endsWith(item.link) && styles.desktopMenu__item_active
+              router.asPath.startsWith(item.link) && styles.desktopMenu__item_active
             )}
           >
             {item.translations[currentLang].title}

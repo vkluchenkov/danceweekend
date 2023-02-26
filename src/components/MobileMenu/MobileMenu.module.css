@@ -74,10 +74,10 @@
   text-transform: uppercase;
 }
 
-.mobileMenu__item:hover,
+/* .mobileMenu__item:hover,
 .mobileMenu__subitem:hover {
   opacity: 0.7;
-}
+} */
 
 .mobileMenu__item_active {
   color: var(--accent-text-color);

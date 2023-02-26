@@ -32,6 +32,30 @@ export const menu: MenuItem[] = [
         title: 'Цены',
       },
     },
+    subItems: [
+      {
+        link: '/price/live',
+        translations: {
+          en: {
+            title: 'Live version',
+          },
+          ru: {
+            title: 'Live версия',
+          },
+        },
+      },
+      {
+        link: '/price/online',
+        translations: {
+          en: {
+            title: 'Online Version',
+          },
+          ru: {
+            title: 'Online версия',
+          },
+        },
+      },
+    ],
   },
   {
     link: '/competition',

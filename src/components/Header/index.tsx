@@ -16,11 +16,11 @@ export const Header: React.FC = () => {
   return (
     <>
       <header className={styles.header}>
-        <Link href='/'>
-          <div className={styles.header__logoContainer}>
+        <div className={styles.header__logoContainer}>
+          <Link href='/'>
             <Image src={logo} alt='Dance Weekend in Warsaw logo' fill />
-          </div>
-        </Link>
+          </Link>
+        </div>
         <LangSwitcher />
         <DesktopMenu />
         <button type='button' className={styles.header__menuButton} onClick={handleOpen} />

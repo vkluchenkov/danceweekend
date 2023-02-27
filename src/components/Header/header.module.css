@@ -2,7 +2,7 @@
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
 }
@@ -58,7 +58,6 @@
 @media screen and (min-width: 1024px) {
   .header {
     height: fit-content;
-    /* z-index: 2; */
   }
 
   .header__menuButton {

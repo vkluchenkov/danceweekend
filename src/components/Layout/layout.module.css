@@ -1,9 +1,9 @@
 .main {
-  margin: 170px 0 0; /*Header hight*/
-  height: calc((var(--vh, 1vh) * 100) - 170px); /*Header hight*/
+  margin: 175px 0 0; /*Header hight*/
+  height: calc((var(--vh, 1vh) * 100) - 175px); /*Header hight*/
   overflow-y: scroll;
   overflow-x: hidden;
-  mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 30px);
+  mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 20px);
   padding: 30px 0 0; /*move content down from blur*/
   display: flex;
   flex-direction: column;
@@ -16,32 +16,38 @@
   padding: 10px 0 0;
 }
 
+.imageDivider {
+  position: fixed;
+  top: 160px;
+  transform: translateY(-52%);
+  z-index: 1;
+}
+
 @media screen and (min-width: 768px) {
   .main {
-    margin: 225px 0 0; /*Header hight*/
-    height: calc((var(--vh, 1vh) * 100) - 225px); /*Header hight*/
-  }
-  .main_notHome {
-    margin: 230px 0 0;
-    height: calc((var(--vh, 1vh) * 100) - 230px);
+    margin: 230px 0 0; /*Header hight*/
+    height: calc((var(--vh, 1vh) * 100) - 230px); /*Header hight*/
   }
 }
 
+@media screen and (min-width: 1024px) {
+}
+
 @media screen and (min-width: 1280px) {
-  .main_notHome {
+  .main {
     margin: 240px 0 0;
     height: calc((var(--vh, 1vh) * 100) - 240px);
     padding: 20px 0 0;
+  }
+
+  .imageDivider {
+    width: 100%;
   }
 }
 
 @media screen and (min-width: 1280px) and (min-height: 900px) {
   .main {
-    margin: 260px 0 0; /*Header hight*/
-    height: calc((var(--vh, 1vh) * 100) - 260px); /*Header hight*/
-  }
-  .main_notHome {
-    margin: 275px 0 0;
-    height: calc((var(--vh, 1vh) * 100) - 275px);
+    margin: 275px 0 0; /*Header hight*/
+    height: calc((var(--vh, 1vh) * 100) - 275px); /*Header hight*/
   }
 }

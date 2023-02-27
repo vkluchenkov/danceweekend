@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import styles from '@/styles/Home.module.css';
 import { Layout } from '@/src/components/Layout';
 import { Divider } from '@/src/ui-kit/Divider';
@@ -12,6 +13,7 @@ import { Schedule } from '@/src/components/Schedule';
 
 export default function Home() {
   const { t } = useTranslation();
+  const imageRef = useRef<HTMLDivElement | null>(null);
 
   // Translations with HTML
   const welcomeTitle = <Trans i18nKey='home:welcomeTitle' components={[<br key={1} />]} />;
@@ -26,16 +28,13 @@ export default function Home() {
   );
 
   return (
-    <Layout isHome>
-      <section className={styles.coverContainer}>
+    <Layout isHome imageRef={imageRef}>
+      <section className={styles.coverContainer} ref={imageRef}>
         <div className={styles.imageContainerMobile}>
           <Image src={teachers} alt={t('home:coverImageAlt')} fill priority />
         </div>
         <div className={styles.imageContainerDesktop}>
           <Image src={teachers1Line} alt={t('home:coverImageAlt')} fill priority />
-        </div>
-        <div className={styles.imageDivider}>
-          <Divider />
         </div>
       </section>
 

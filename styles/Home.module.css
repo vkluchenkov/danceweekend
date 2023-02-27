@@ -7,20 +7,13 @@
   display: flex;
   justify-content: center;
   width: 110%;
-  margin: -40px 0 0;
+  margin: -45px 0 0;
   aspect-ratio: 969/559;
   transform: translateX(-3.5%);
 }
 
 .imageContainerDesktop {
   display: none;
-}
-
-.imageDivider {
-  position: absolute;
-  bottom: 0;
-  transform: translateY(48%);
-  z-index: 1;
 }
 
 .contentWrapper {
@@ -133,10 +126,6 @@
 @media screen and (min-width: 1280px) {
   .imageContainerDesktop {
     margin: -65px auto 0;
-  }
-
-  .imageDivider {
-    width: 100%;
   }
 
   .content {

@@ -139,6 +139,13 @@
   }
 }
 
+@media screen and (min-width: 1280px) and (max-height: 750px) {
+  .imageContainerDesktop {
+    max-width: 950px;
+    margin: -50px auto 0;
+  }
+}
+
 @media screen and (min-width: 1280px) and (min-height: 900px) {
   .imageContainerDesktop {
     max-width: 1390px;

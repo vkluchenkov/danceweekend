@@ -62,6 +62,13 @@
   }
 }
 
+@media screen and (min-width: 1280px) and (max-height: 750px) {
+  .main {
+    margin: 185px 0 0; /*Header hight*/
+    height: calc((var(--vh, 1vh) * 100) - 185px); /*Header hight*/
+  }
+}
+
 @media screen and (min-width: 1280px) and (min-height: 900px) {
   .main {
     margin: 275px 0 0; /*Header hight*/

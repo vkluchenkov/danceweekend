@@ -1,7 +1,9 @@
 .switcher {
   display: flex;
   width: 100%;
+  gap: 20px;
   justify-content: center;
+  padding: 15px 0;
 }
 
 .option {
@@ -11,7 +13,8 @@
   text-transform: uppercase;
   padding: 7px 10px;
   background: none;
-  border: none;
+  border: 1px solid var(--main-text-color);
+  border-radius: 5px;
   outline: none;
   color: var(--text-color);
   cursor: pointer;
@@ -19,18 +22,22 @@
   transition: opacity 0.3s;
 }
 
-.option:hover {
-  opacity: 0.7;
-}
-
 .optionActive {
   font-weight: 700;
-  color: var(--accent-text-color);
+  background: linear-gradient(90deg, #eec571 -15.03%, #ad560a 50.97%, #eec571 110.43%);
+  border: 1px solid #eec571;
+  color: var(--main-text-color);
 }
 
 @media screen and (min-width: 768px) {
   .option {
     font-size: 16px;
     padding: 10px 15px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .option:hover {
+    opacity: 0.7;
   }
 }

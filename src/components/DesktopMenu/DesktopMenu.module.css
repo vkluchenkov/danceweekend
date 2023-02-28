@@ -57,14 +57,13 @@
   transition: visibility 0s linear 0.5s, opacity 0.5s;
 }
 
-.desktopMenu__subitem {
+.desktopMenu__subItem {
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 18px;
   text-decoration: none;
   transition: opacity 0.3s;
-  text-transform: uppercase;
 }
 
 .desktopMenu__item:hover,

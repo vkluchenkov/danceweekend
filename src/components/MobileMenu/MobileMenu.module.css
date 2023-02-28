@@ -66,14 +66,13 @@
   width: 100%;
 }
 
-.mobileMenu__subitem {
+.mobileMenu__subItem {
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   text-decoration: none;
   transition: opacity 0.3s;
-  text-transform: uppercase;
 }
 
 /* .mobileMenu__item:hover,

@@ -1,6 +1,6 @@
 import { SupportedLangs } from '../types/langs';
 
-type Level = 'beginners' | 'allStyles' | 'intermediate' | 'professionals' | 'openLevel';
+type Level = 'beginners' | 'intermediate' | 'professionals' | 'openLevel';
 
 interface Category {
   translations: {
@@ -11,6 +11,7 @@ interface Category {
 }
 
 interface ContestCategory {
+  description?: string;
   age: string;
   levels: Level[];
   translations: {
@@ -18,13 +19,86 @@ interface ContestCategory {
       title: string;
     };
   };
-  categories: Category[];
+  categories?: Category[];
 }
+
+const soloSet: Category[] = [
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Classic',
+      },
+      ru: {
+        categoryTitle: 'Классика',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Folk',
+      },
+      ru: {
+        categoryTitle: 'Фольклор',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Tabla solo CD',
+      },
+      ru: {
+        categoryTitle: 'Табла соло CD',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Tabla solo live',
+      },
+      ru: {
+        categoryTitle: 'Табла соло live',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Show/fusion',
+      },
+      ru: {
+        categoryTitle: 'Шоу/фьюжн',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Bollywood',
+      },
+      ru: {
+        categoryTitle: 'Болливуд',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Pop song',
+      },
+      ru: {
+        categoryTitle: 'Эстрадная песня',
+      },
+    },
+  },
+];
 
 export const contestCategories: ContestCategory[] = [
   {
     age: '4-6',
-    levels: ['allStyles'],
+    levels: ['openLevel'],
     translations: {
       en: {
         title: 'Baby',
@@ -58,78 +132,7 @@ export const contestCategories: ContestCategory[] = [
         title: 'Дети начинающие',
       },
     },
-    categories: [
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo classic',
-          },
-          ru: {
-            categoryTitle: 'Соло классика',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo folk',
-          },
-          ru: {
-            categoryTitle: 'Соло фольклор',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo tabla CD',
-          },
-          ru: {
-            categoryTitle: 'Соло табла CD',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo tabla live',
-          },
-          ru: {
-            categoryTitle: 'Соло табла live',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Соло шоу/фьюжн',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo bollywood',
-          },
-          ru: {
-            categoryTitle: 'Соло болливуд',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo pop song',
-          },
-          ru: {
-            categoryTitle: 'Соло эстрадная песня',
-          },
-        },
-      },
-    ],
+    categories: soloSet,
   },
 
   {
@@ -212,10 +215,10 @@ export const contestCategories: ContestCategory[] = [
       {
         translations: {
           en: {
-            categoryTitle: 'Tabla solo',
+            categoryTitle: 'Tabla solo CD',
           },
           ru: {
-            categoryTitle: 'Табла соло',
+            categoryTitle: 'Табла соло CD',
           },
         },
       },
@@ -254,6 +257,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '12-15',
+    description: 'descriptionJuniors',
     levels: ['beginners', 'professionals'],
     translations: {
       en: {
@@ -263,78 +267,7 @@ export const contestCategories: ContestCategory[] = [
         title: 'Юниоры',
       },
     },
-    categories: [
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo classic',
-          },
-          ru: {
-            categoryTitle: 'Соло классика',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo folk',
-          },
-          ru: {
-            categoryTitle: 'Соло фольклор',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo tabla CD',
-          },
-          ru: {
-            categoryTitle: 'Соло табла CD',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo tabla live',
-          },
-          ru: {
-            categoryTitle: 'Соло табла live',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Соло шоу/фьюжн',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo bollywood',
-          },
-          ru: {
-            categoryTitle: 'Соло болливуд',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo pop song',
-          },
-          ru: {
-            categoryTitle: 'Соло эстрадная песня',
-          },
-        },
-      },
-    ],
+    categories: soloSet,
   },
 
   {
@@ -372,10 +305,10 @@ export const contestCategories: ContestCategory[] = [
       {
         translations: {
           en: {
-            categoryTitle: 'Tabla solo',
+            categoryTitle: 'Tabla solo CD',
           },
           ru: {
-            categoryTitle: 'Табла соло',
+            categoryTitle: 'Табла соло CD',
           },
         },
       },
@@ -447,10 +380,10 @@ export const contestCategories: ContestCategory[] = [
       {
         translations: {
           en: {
-            categoryTitle: 'Tabla solo',
+            categoryTitle: 'Tabla solo CD',
           },
           ru: {
-            categoryTitle: 'Табла соло',
+            categoryTitle: 'Табла соло CD',
           },
         },
       },
@@ -460,7 +393,7 @@ export const contestCategories: ContestCategory[] = [
             categoryTitle: 'Show/fusion',
           },
           ru: {
-            categoryTitle: 'Щоу/фьюжн',
+            categoryTitle: 'Шоу/фьюжн',
           },
         },
       },
@@ -488,6 +421,20 @@ export const contestCategories: ContestCategory[] = [
   },
 
   {
+    age: '12+',
+    description: 'descriptionQueen',
+    levels: ['openLevel'],
+    translations: {
+      en: {
+        title: 'Queen of live tabla solo',
+      },
+      ru: {
+        title: 'Королева live табла соло',
+      },
+    },
+  },
+
+  {
     age: '16+',
     levels: ['beginners', 'professionals'],
     translations: {
@@ -498,78 +445,7 @@ export const contestCategories: ContestCategory[] = [
         title: 'Взрослые',
       },
     },
-    categories: [
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo classic',
-          },
-          ru: {
-            categoryTitle: 'Соло классика',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo folk',
-          },
-          ru: {
-            categoryTitle: 'Соло фольклор',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo tabla CD',
-          },
-          ru: {
-            categoryTitle: 'Соло табла CD',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo tabla live',
-          },
-          ru: {
-            categoryTitle: 'Соло табла live',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Соло шоу/фьюжн',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo bollywood',
-          },
-          ru: {
-            categoryTitle: 'Соло болливуд',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo pop song',
-          },
-          ru: {
-            categoryTitle: 'Соло эстрадная песня',
-          },
-        },
-      },
-    ],
+    categories: soloSet,
   },
 
   {
@@ -724,6 +600,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '40+',
+    description: 'descriptionSeniors',
     levels: ['openLevel'],
     translations: {
       en: {
@@ -733,77 +610,6 @@ export const contestCategories: ContestCategory[] = [
         title: 'Сеньоры',
       },
     },
-    categories: [
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo classic',
-          },
-          ru: {
-            categoryTitle: 'Соло классика',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo folk',
-          },
-          ru: {
-            categoryTitle: 'Соло фольклор',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo tabla CD',
-          },
-          ru: {
-            categoryTitle: 'Соло табла CD',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo tabla live',
-          },
-          ru: {
-            categoryTitle: 'Соло табла live',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Соло шоу/фьюжн',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo bollywood',
-          },
-          ru: {
-            categoryTitle: 'Соло болливуд',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Solo pop song',
-          },
-          ru: {
-            categoryTitle: 'Соло эстрадная песня',
-          },
-        },
-      },
-    ],
+    categories: soloSet,
   },
 ];

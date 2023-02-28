@@ -5,6 +5,7 @@
   "pages": {
     "*": ["common"],
     "/": ["home", "cta"],
-    "/price/live": ["price"]
+    "/price/live": ["price"],
+    "/competition/rules": ["competitionRules"]
   }
 }

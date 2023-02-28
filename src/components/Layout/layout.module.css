@@ -16,6 +16,11 @@
   padding: 10px 0 0;
 }
 
+.contentWrapper {
+  width: 100%;
+  padding: 20px 20px 40px;
+}
+
 .imageDivider {
   position: fixed;
   top: 160px;
@@ -28,9 +33,15 @@
     margin: 230px 0 0; /*Header hight*/
     height: calc((var(--vh, 1vh) * 100) - 230px); /*Header hight*/
   }
+  .contentWrapper {
+    padding: 20px 35px 40px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
+  .contentWrapper {
+    padding: 20px 170px 40px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -38,6 +49,12 @@
     margin: 240px 0 0;
     height: calc((var(--vh, 1vh) * 100) - 240px);
     padding: 20px 0 0;
+  }
+
+  .contentWrapper {
+    padding: 25px 0100px 50px;
+    max-width: 1280px;
+    margin: 0 auto;
   }
 
   .imageDivider {

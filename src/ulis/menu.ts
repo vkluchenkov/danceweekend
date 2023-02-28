@@ -67,6 +67,30 @@ export const menu: MenuItem[] = [
         title: 'Конкурс',
       },
     },
+    subItems: [
+      {
+        link: '/competition/rules',
+        translations: {
+          en: {
+            title: 'Rules',
+          },
+          ru: {
+            title: 'Положение конкурса',
+          },
+        },
+      },
+      {
+        link: '/competition/judging',
+        translations: {
+          en: {
+            title: 'Judging',
+          },
+          ru: {
+            title: 'Судейство',
+          },
+        },
+      },
+    ],
   },
   {
     link: '/shows',

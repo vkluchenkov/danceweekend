@@ -63,11 +63,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRe
       <div className={styles.imageDivider} ref={lineRef}>
         <Divider />
       </div>
-      <main
-        ref={mainRef}
-        className={styles.main}
-        // onScroll={() => console.log(scrollRef?.current?.getBoundingClientRect().bottom)}
-      >
+      <main ref={mainRef} className={styles.main}>
         {children}
         <Footer />
       </main>
@@ -75,7 +71,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRe
   ) : (
     <>
       <main className={clsx(styles.main, styles.main_notHome)}>
-        {children}
+        <div className={styles.contentWrapper}>{children}</div>
         <Footer />
       </main>
     </>

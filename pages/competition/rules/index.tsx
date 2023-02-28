@@ -8,6 +8,9 @@ import { contestCategories } from '@/src/ulis/contestCategories';
 import { SupportedLangs } from '@/src/types/langs';
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
+import textStyles from '@/styles/Text.module.css';
+import styles from '@/styles/Rules.module.css';
+import clsx from 'clsx';
 
 type Version = 'live' | 'online';
 
@@ -53,56 +56,64 @@ const ContestRules: NextPage = () => {
     });
 
     return (
-      <div key={title + groupIndex}>
-        <h3>{title + ` (${group.age} ${t('age')})`}</h3>
-        <p>{t('levels') + levels}</p>
+      <div key={title + groupIndex} className={styles.categories}>
+        <h3 className={textStyles.h3}>{title + ` (${group.age} ${t('age')})`}</h3>
+        <p className={textStyles.p}>
+          <span className={styles.levels}>{t('levels')}</span>
+          {levels}
+        </p>
         {categories && (
           <>
-            <h4>{t('styles')}</h4>
-            <ul key={group.translations[currentLang] + groupIndex.toString()}>{categories}</ul>
+            <h4 className={textStyles.h4}>{t('styles')}</h4>
+            <ul
+              className={styles.catList}
+              key={group.translations[currentLang] + groupIndex.toString()}
+            >
+              {categories}
+            </ul>
           </>
         )}
-        {group.description && <p>{t(group.description)}</p>}
+        {group.description && <p className={textStyles.p}>{t(group.description)}</p>}
       </div>
     );
   });
 
   const liveContent = (
-    <>
-      <p>{t('version', { version: '1', date: '1.03.2023' })}</p>
+    <section className={styles.section}>
+      <p className={textStyles.p}>{t('version', { version: '1', date: '1.03.2023' })}</p>
 
-      <h3>{t('attentionTitle')}</h3>
-      <p>{t('attentionText')}</p>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
+      <p className={textStyles.p}>{t('attentionText')}</p>
 
-      <h3>1. {t('categoriesTitle')}</h3>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
       {catsList}
 
-      <h3>2. {t('timingTitle')}</h3>
-      <p>{t('timingSolo')}</p>
-      <p>{t('timingGroups')}</p>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
+      <p className={textStyles.p}>{t('timingSolo')}</p>
+      <p className={textStyles.p}>{t('timingGroups')}</p>
 
-      <h3>3. {t('profiRulesTitle')}</h3>
-      <p>{profiRulesText}</p>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>3. {t('profiRulesTitle')}</h2>
+      <p className={textStyles.p}>{profiRulesText}</p>
 
-      <h3>4. {t('limitationsTitle')}</h3>
-      <p>{t('limitationsText')}</p>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>4. {t('limitationsTitle')}</h2>
+      <p className={textStyles.p}>{t('limitationsText')}</p>
 
-      <h3>5. {t('prizesTitle')}</h3>
-      <p>{t('prizesMain')}</p>
-      <p>{t('prizesSolo')}</p>
-      <p>{t('prizesGroups')}</p>
-      <p>{t('prizesQueen')}</p>
-      <p>{t('prizesAdditional')}</p>
-      <p>{t('prizesKids')}</p>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>5. {t('prizesTitle')}</h2>
+      <p className={textStyles.p}>{t('prizesMain')}</p>
+      <p className={textStyles.p}>{t('prizesSolo')}</p>
+      <p className={textStyles.p}>{t('prizesGroups')}</p>
+      <p className={textStyles.p}>{t('prizesQueen')}</p>
+      <p className={textStyles.p}>{t('prizesAdditional')}</p>
+      <p className={textStyles.p}>{t('prizesKids')}</p>
 
-      <h3>{t('additionalTitle')}:</h3>
-      <p>{t('additionalText')}</p>
-    </>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('additionalTitle')}:</h2>
+      <p className={textStyles.p}>{t('additionalText')}</p>
+    </section>
   );
 
   return (
     <Layout title={t('pageTitle')}>
-      <h1 className={homeStyles.content__title}>{t('pageTitle')}</h1>
+      <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
       {version === 'live' && liveContent}
     </Layout>

@@ -1,18 +1,15 @@
 import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
-import homeStyles from '@/styles/Home.module.css';
 import useTranslation from 'next-translate/useTranslation';
 import { Switcher } from '@/src/ui-kit/Switcher';
 import { useMemo, useState } from 'react';
 import { contestCategories } from '@/src/ulis/contestCategories';
-import { SupportedLangs } from '@/src/types/langs';
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Rules.module.css';
 import clsx from 'clsx';
-
-type Version = 'live' | 'online';
+import { Version, SupportedLangs } from '@/src/types';
 
 const ContestRules: NextPage = () => {
   const { t, lang } = useTranslation('competitionRules');

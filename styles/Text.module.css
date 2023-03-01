@@ -45,13 +45,24 @@
   color: var(--accent-text-color);
 }
 
-.p {
+.p,
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.4;
   margin: 0;
+}
+
+.p {
   padding: 5px 0;
+}
+
+.list {
+  padding: 5px 0 5px 30px;
 }
 
 @media screen and (min-width: 768px) {
@@ -84,7 +95,8 @@
   }
 
   .p,
-  .h4 {
+  .h4,
+  .list {
     font-size: 16px;
   }
 }

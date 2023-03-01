@@ -63,7 +63,7 @@ const ContestRules: NextPage = () => {
           <>
             <h4 className={textStyles.h4}>{t('styles')}</h4>
             <ul
-              className={styles.catList}
+              className={textStyles.list}
               key={group.translations[currentLang] + groupIndex.toString()}
             >
               {categories}

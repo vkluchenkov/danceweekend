@@ -11,7 +11,7 @@
 }
 
 .main_notHome {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 10px);
   padding: 10px 0 0;
 }

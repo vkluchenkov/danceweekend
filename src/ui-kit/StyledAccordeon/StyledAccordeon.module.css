@@ -5,6 +5,11 @@
   border-radius: 10px !important;
   margin: 10px !important;
   padding: 0 10px;
+  transition: all 0.3s;
+}
+
+.accordeon_expanded {
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
 .summary {

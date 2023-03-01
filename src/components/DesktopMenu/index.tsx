@@ -1,10 +1,10 @@
 import styles from './DesktopMenu.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { menu } from '../../ulis/menu';
+import { menu } from '@/src/ulis/menu';
 import clsx from 'clsx';
 import useTranslation from 'next-translate/useTranslation';
-import { SupportedLangs } from '../../types/langs';
+import { SupportedLangs } from '@/src/types';
 
 export const DesktopMenu: React.FC = () => {
   const { t, lang } = useTranslation();

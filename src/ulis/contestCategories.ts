@@ -1,4 +1,4 @@
-import { SupportedLangs } from '../types/langs';
+import { SupportedLangs } from '@/src/types';
 
 type Level = 'beginners' | 'intermediate' | 'professionals' | 'openLevel';
 

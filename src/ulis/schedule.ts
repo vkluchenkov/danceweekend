@@ -1,4 +1,4 @@
-import { SupportedLangs } from '../types/langs';
+import { SupportedLangs } from '@/src/types';
 
 interface Event {
   start: string;

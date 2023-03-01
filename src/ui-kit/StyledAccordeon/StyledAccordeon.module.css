@@ -1,0 +1,26 @@
+.accordeon {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--main-text-color);
+  border-radius: 10px !important;
+  margin: 10px !important;
+  padding: 0 10px;
+}
+
+.summary {
+  color: var(--accent-text-color);
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+@media screen and (min-width: 768px) {
+  .accordeon {
+    margin: 10px 25px !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .summary:hover {
+    opacity: 0.7;
+  }
+}

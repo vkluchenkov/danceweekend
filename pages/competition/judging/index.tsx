@@ -7,6 +7,7 @@ import { useMemo, useState } from 'react';
 import { Version, SupportedLangs } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
 import Trans from 'next-translate/Trans';
+import { StyledAccordeon } from '@/src/ui-kit/StyledAccordeon';
 
 const Judging: NextPage = () => {
   const { t, lang } = useTranslation('competitionJudging');
@@ -73,21 +74,16 @@ const Judging: NextPage = () => {
         <li>{t('criteria5')}</li>
         <li>{t('criteria6')}</li>
       </ul>
+
       <p className={textStyles.p}>{t('place')}</p>
-      <details className={styles.details}>
-        <summary className={styles.details__summary}>{t('example')}</summary>
-        {example1}
-      </details>
+      <StyledAccordeon summary={t('example')} details={example1} />
+
       <p className={textStyles.p}>{t('winner')}</p>
-      <details className={styles.details}>
-        <summary className={styles.details__summary}>{t('example')}</summary>
-        {example2}
-      </details>
+      <StyledAccordeon summary={t('example')} details={example2} />
+
       <p className={textStyles.p}>{t('equal')}</p>
-      <details className={styles.details}>
-        <summary className={styles.details__summary}>{t('example')}</summary>
-        {example3}
-      </details>
+      <StyledAccordeon summary={t('example')} details={example3} />
+
       <p className={textStyles.p}>{t('tabla')}</p>
       <ul className={textStyles.list}>
         <li>{t('tablaCriteria1')}</li>
@@ -99,11 +95,10 @@ const Judging: NextPage = () => {
         <li>{t('tablaCriteria4')}</li>
         <li>{t('tablaCriteria5')}</li>
       </ul>
+
       <p className={textStyles.p}>{t('winnerPro')}</p>
-      <details className={styles.details}>
-        <summary className={styles.details__summary}>{t('example')}</summary>
-        {example4}
-      </details>
+      <StyledAccordeon summary={t('example')} details={example4} />
+
       <p className={textStyles.p}>{t('winnerProNote')}</p>
     </>
   );

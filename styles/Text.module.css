@@ -47,9 +47,6 @@
 
 .p,
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -62,6 +59,9 @@
 }
 
 .list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   padding: 5px 0 5px 30px;
 }
 

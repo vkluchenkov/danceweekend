@@ -23,7 +23,6 @@
 
 .imageDivider {
   position: fixed;
-  top: 160px;
   transform: translateY(-52%);
   z-index: 1;
 }

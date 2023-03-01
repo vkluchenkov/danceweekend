@@ -6,6 +6,7 @@
     "*": ["common"],
     "/": ["home", "cta"],
     "/price": ["price"],
-    "/competition/rules": ["competitionRules"]
+    "/competition/rules": ["competitionRules"],
+    "/competition/judging": ["competitionJudging"]
   }
 }

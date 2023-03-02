@@ -8,13 +8,21 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  scrollbar-gutter: stable both-edges;
+}
+
+.main::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .main_notHome {
+  scrollbar-gutter: stable both-edges;
   background-color: rgba(0, 0, 0, 0.6);
   mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 10px);
   padding: 10px 0 0;
+}
+
+.main_notHome::-webkit-scrollbar-track {
+  background: none;
 }
 
 .contentWrapper {

@@ -17,9 +17,9 @@ export const Cta: React.FC = () => {
     <section className={styles.cta}>
       <h2 className={styles.cta__title}>{t('title')}</h2>
       <p className={styles.cta__subtitle}>{subtitle}</p>
-      <button type='button' className={styles.cta__button}>
+      {/* <button type='button' className={styles.cta__button}>
         {t('button')}
-      </button>
+      </button> */}
       <Divider inverted />
     </section>
   );

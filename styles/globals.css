@@ -14,15 +14,6 @@ body {
   color: var(--main-text-color);
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--accent-text-color);
-  border-radius: 2px;
-}
-
 body {
   background: url('/images/mobile_bg.jpg') fixed no-repeat var(--body-background-color);
   background-size: 100%;
@@ -137,6 +128,14 @@ a:hover {
   body {
     background: url('/images/desktop_bg.jpg') fixed top center/100% no-repeat
       var(--body-background-color);
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--accent-text-color);
+    border-radius: 2px;
   }
 }
 

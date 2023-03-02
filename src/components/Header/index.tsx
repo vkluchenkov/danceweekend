@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({ isHome }) => {
     <>
       <header className={styles.header}>
         <div className={styles.header__logoContainer}>
-          <Link href='/'>
+          <Link href='/' className={styles.logo__link}>
             <Image src={logo} alt='Dance Weekend in Warsaw logo' fill />
           </Link>
         </div>

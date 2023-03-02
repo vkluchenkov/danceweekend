@@ -8,11 +8,10 @@ import { Version, SupportedLangs } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
 import Trans from 'next-translate/Trans';
 import { StyledAccordeon } from '@/src/ui-kit/StyledAccordeon';
+import clsx from 'clsx';
 
 const Judging: NextPage = () => {
   const { t, lang } = useTranslation('competitionJudging');
-
-  const [version, setVersion] = useState<Version>('live');
 
   // translations with HTML
   const example1 = (
@@ -43,23 +42,6 @@ const Judging: NextPage = () => {
     />
   );
 
-  const switcher = useMemo(() => {
-    return (
-      <Switcher
-        value={version}
-        option1={{
-          value: 'live',
-          label: t('live'),
-        }}
-        option2={{
-          value: 'online',
-          label: t('online'),
-        }}
-        onClick={(value) => setVersion(value as Version)}
-      />
-    );
-  }, [t, version]);
-
   const content = (
     <>
       <p className={textStyles.p}>{t('criteriaTitle')}</p>
@@ -68,7 +50,7 @@ const Judging: NextPage = () => {
         <li>{t('criteria2')}</li>
         <li>
           {t('criteria3')}
-          {version === 'online' && <p className={textStyles.p}>{t('criteria3Note')}</p>}
+          <p className={textStyles.p}>{t('criteria3Note')}</p>
         </li>
         <li>{t('criteria4')}</li>
         <li>{t('criteria5')}</li>
@@ -90,7 +72,7 @@ const Judging: NextPage = () => {
         <li>{t('tablaCriteria2')}</li>
         <li>
           {t('tablaCriteria3')}
-          {version === 'online' && <p className={textStyles.p}>{t('criteria3Note')}</p>}
+          <p className={textStyles.p}>{t('criteria3Note')}</p>
         </li>
         <li>{t('tablaCriteria4')}</li>
         <li>{t('tablaCriteria5')}</li>
@@ -106,8 +88,17 @@ const Judging: NextPage = () => {
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
-      {switcher}
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('judgingSystem')}</h2>
       <section className={styles.section}>{content}</section>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('judgingLineup')}</h2>
+      <section className={styles.section}>
+        <h3 className={textStyles.h3}>{t('live')}</h3>
+        <p className={textStyles.p}>{t('winnerProNote')}</p>
+        <h3 className={textStyles.h3}>{t('online')}</h3>
+        <p className={textStyles.p}>{t('winnerProNote')}</p>
+      </section>
     </Layout>
   );
 };

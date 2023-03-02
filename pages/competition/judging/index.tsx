@@ -95,9 +95,9 @@ const Judging: NextPage = () => {
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('judgingLineup')}</h2>
       <section className={styles.section}>
         <h3 className={textStyles.h3}>{t('live')}</h3>
-        <p className={textStyles.p}>{t('winnerProNote')}</p>
+        <p className={textStyles.p}>{t('judgesLive')}</p>
         <h3 className={textStyles.h3}>{t('online')}</h3>
-        <p className={textStyles.p}>{t('winnerProNote')}</p>
+        <p className={textStyles.p}>{t('judgesOnline')}</p>
       </section>
     </Layout>
   );

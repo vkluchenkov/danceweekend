@@ -1,7 +1,7 @@
 .main {
   margin: 175px 0 0; /*Header hight*/
   height: calc((var(--vh, 1vh) * 100) - 175px); /*Header hight*/
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   mask-image: linear-gradient(transparent, rgba(0, 0, 0, 1) 20px);
   padding: 30px 0 0; /*move content down from blur*/

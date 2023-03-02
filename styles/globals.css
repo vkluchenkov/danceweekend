@@ -14,9 +14,14 @@ body {
   color: var(--main-text-color);
 }
 
-/* ::-webkit-scrollbar {
-  display: none;
-} */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent-text-color);
+  border-radius: 2px;
+}
 
 body {
   background: url('/images/mobile_bg.jpg') fixed no-repeat var(--body-background-color);

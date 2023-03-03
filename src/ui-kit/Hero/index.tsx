@@ -13,8 +13,10 @@ export const Hero: React.FC<HeroProps> = ({ name, title, image }) => {
       <div className={styles.hero__imageWrapper}>
         <Image src={image} fill alt={name} />
       </div>
-      <h2 className={styles.hero__name}>{name}</h2>
-      <p className={styles.hero__title}>{title}</p>
+      <div className={styles.hero__textWrapper}>
+        <h2 className={styles.hero__name}>{name}</h2>
+        <p className={styles.hero__title}>{title}</p>
+      </div>
     </article>
   );
 };

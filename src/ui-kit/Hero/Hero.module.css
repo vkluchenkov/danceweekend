@@ -3,7 +3,14 @@
   flex-direction: column;
   gap: 15px;
   align-items: center;
-  padding: 15px 0;
+  padding: 15px 0 5px;
+}
+
+.hero__textWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
 }
 
 .hero__name {
@@ -33,4 +40,26 @@
   border: 2px solid var(--accent-text-color);
   width: 100%;
   max-width: 150px;
+}
+
+@media screen and (min-width: 768px) {
+  .hero__name {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .hero__title {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hero__name {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .hero__title {
+    font-size: 20px;
+  }
 }

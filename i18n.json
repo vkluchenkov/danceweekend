@@ -8,6 +8,7 @@
     "/price": ["price"],
     "/competition/rules": ["competitionRules"],
     "/competition/judging": ["competitionJudging"],
-    "/info/photo-video": ["photoVideo"]
+    "/info/photo-video": ["photoVideo"],
+    "/shows/arabic-dreams": ["arabicDreams"]
   }
 }

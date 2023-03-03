@@ -137,13 +137,13 @@ export const menu: MenuItem[] = [
         },
       },
       {
-        link: '/info/accomodation',
+        link: '/info/faq',
         translations: {
           en: {
-            title: 'Accommodation',
+            title: 'FAQ',
           },
           ru: {
-            title: 'Проживание',
+            title: 'FAQ',
           },
         },
       },

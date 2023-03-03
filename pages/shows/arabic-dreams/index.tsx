@@ -3,8 +3,6 @@ import { NextPage } from 'next';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/ArabicDreams.module.css';
 import useTranslation from 'next-translate/useTranslation';
-import Trans from 'next-translate/Trans';
-import Link from 'next/link';
 import arabicDreamsLogo from '/public/images/arabicDreams_logo.png';
 import Image from 'next/image';
 

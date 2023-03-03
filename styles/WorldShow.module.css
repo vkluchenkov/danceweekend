@@ -1,0 +1,31 @@
+.logoWrapper {
+  position: relative;
+  aspect-ratio: 400/245;
+  width: 100%;
+  max-width: 200px;
+  margin: 15px auto 15px;
+}
+
+.playerWrapper {
+  aspect-ratio: 16/9;
+  width: 100%;
+  margin: 25px auto;
+}
+
+@media screen and (min-width: 768px) {
+  .logoWrapper {
+    max-width: 270px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .logoWrapper {
+    max-width: 300px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .playerWrapper {
+    max-width: 977px;
+  }
+}

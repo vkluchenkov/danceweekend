@@ -8,6 +8,7 @@ import andre from '/public/images/andre.jpg';
 import vladimir from '/public/images/vladimir.jpg';
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
+import clsx from 'clsx';
 
 const PhotoVideo: NextPage = () => {
   const { t, lang } = useTranslation('photoVideo');
@@ -40,7 +41,7 @@ const PhotoVideo: NextPage = () => {
         <Hero name={t('andre')} title={t('photographer')} image={andre} />
         <p className={textStyles.p}>{photographerText}</p>
 
-        <h3 className={textStyles.h3}>{t('price')}:</h3>
+        <h3 className={clsx(textStyles.h3, textStyles.accent)}>{t('price')}:</h3>
         <ul className={textStyles.list}>
           <li>{t('photoPack')} 20€</li>
           <li>10 {t('pictures')}: 30€*</li>
@@ -49,7 +50,7 @@ const PhotoVideo: NextPage = () => {
         </ul>
         <p className={textStyles.p}>{t('photoNote')}</p>
 
-        <h3 className={textStyles.h3}>{t('photoshootTitle')}:</h3>
+        <h3 className={clsx(textStyles.h3, textStyles.accent)}>{t('photoshootTitle')}:</h3>
         <p className={textStyles.p}>{t('photoshootIntro')}</p>
         <h4 className={textStyles.h4}>{t('photoshootPriceTitle')}</h4>
         <p className={textStyles.p}>{t('photoshootPriceText')}</p>
@@ -59,7 +60,7 @@ const PhotoVideo: NextPage = () => {
       <section className={styles.section}>
         <Hero name={t('vladimir')} title={t('videographer')} image={vladimir} />
         <p className={textStyles.p}>{videographerText}</p>
-        <h3 className={textStyles.h3}>{t('price')}:</h3>
+        <h3 className={clsx(textStyles.h3, textStyles.accent)}>{t('price')}:</h3>
         <ul className={textStyles.list}>
           <li>{t('videoPrice')}</li>
         </ul>

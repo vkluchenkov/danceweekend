@@ -7,6 +7,7 @@
     "/": ["home", "cta"],
     "/price": ["price"],
     "/competition/rules": ["competitionRules"],
-    "/competition/judging": ["competitionJudging"]
+    "/competition/judging": ["competitionJudging"],
+    "/info/photo-video": ["photoVideo"]
   }
 }

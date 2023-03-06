@@ -4,6 +4,7 @@ import { Montserrat } from '@next/font/google';
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic', 'latin-ext', 'cyrillic-ext'],
+  display: 'swap',
 });
 
 export default function App({ Component, pageProps }: AppProps) {

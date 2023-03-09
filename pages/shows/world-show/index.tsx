@@ -20,8 +20,9 @@ const WorldShow: NextPage = () => {
       </p>
       <p className={textStyles.p}>{t('description')}</p>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('conditionsTitle')}</h2>
-      <p className={textStyles.p}>{t('conditionsSolo')} 30€</p>
-      <p className={textStyles.p}>{t('conditionsSoloFullPass')} 20€</p>
+      <p className={textStyles.p}>{t('conditionsGeneral')}</p>
+      <p className={textStyles.p}>{t('conditionsSolo')} 40€</p>
+      <p className={textStyles.p}>{t('conditionsSoloFullPass')} 30€</p>
       <p className={textStyles.p}>
         {t('conditionsGroup')} 20€ {t('perPerson')}
       </p>

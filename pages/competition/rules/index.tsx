@@ -29,7 +29,10 @@ const ContestRules: NextPage = () => {
   const videoSpecText = (
     <Trans
       i18nKey='competitionRules:videoSpecText'
-      components={[<br key={1} />, <Link href='/competition/judging' key={2} />]}
+      components={[
+        <p className={textStyles.p} key={1} />,
+        <Link href='/competition/judging' key={2} />,
+      ]}
     />
   );
 

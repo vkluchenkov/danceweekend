@@ -1,6 +1,7 @@
 import { SupportedLangs } from '@/src/types';
 
 type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
+type CategoryType = 'live' | 'online';
 
 interface Category {
   translations: {
@@ -8,12 +9,14 @@ interface Category {
       categoryTitle: string;
     };
   };
+  types: CategoryType[];
 }
 
 interface ContestCategory {
   description?: string;
   age: string;
   levels: Level[];
+  types: CategoryType[];
   translations: {
     [lang in SupportedLangs]: {
       title: string;
@@ -24,6 +27,7 @@ interface ContestCategory {
 
 const soloSet: Category[] = [
   {
+    types: ['live', 'online'],
     translations: {
       en: {
         categoryTitle: 'Classic',
@@ -34,6 +38,7 @@ const soloSet: Category[] = [
     },
   },
   {
+    types: ['live', 'online'],
     translations: {
       en: {
         categoryTitle: 'Folk',
@@ -44,6 +49,7 @@ const soloSet: Category[] = [
     },
   },
   {
+    types: ['live', 'online'],
     translations: {
       en: {
         categoryTitle: 'Tabla solo CD',
@@ -54,6 +60,7 @@ const soloSet: Category[] = [
     },
   },
   {
+    types: ['live'],
     translations: {
       en: {
         categoryTitle: 'Tabla solo live',
@@ -64,6 +71,7 @@ const soloSet: Category[] = [
     },
   },
   {
+    types: ['live', 'online'],
     translations: {
       en: {
         categoryTitle: 'Show/fusion',
@@ -74,6 +82,7 @@ const soloSet: Category[] = [
     },
   },
   {
+    types: ['live', 'online'],
     translations: {
       en: {
         categoryTitle: 'Bollywood',
@@ -84,6 +93,7 @@ const soloSet: Category[] = [
     },
   },
   {
+    types: ['live', 'online'],
     translations: {
       en: {
         categoryTitle: 'Pop song',
@@ -95,10 +105,80 @@ const soloSet: Category[] = [
   },
 ];
 
+const groupSet: Category[] = [
+  {
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        categoryTitle: 'Oriental',
+      },
+      ru: {
+        categoryTitle: 'Ориентал',
+      },
+    },
+  },
+  {
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        categoryTitle: 'Folklore',
+      },
+      ru: {
+        categoryTitle: 'Фольклор',
+      },
+    },
+  },
+  {
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        categoryTitle: 'Tabla solo CD',
+      },
+      ru: {
+        categoryTitle: 'Табла соло CD',
+      },
+    },
+  },
+  {
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        categoryTitle: 'Show/fusion',
+      },
+      ru: {
+        categoryTitle: 'Щоу/фьюжн',
+      },
+    },
+  },
+  {
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        categoryTitle: 'Bollywood',
+      },
+      ru: {
+        categoryTitle: 'Болливуд',
+      },
+    },
+  },
+  {
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        categoryTitle: 'Tribal',
+      },
+      ru: {
+        categoryTitle: 'Трайбл',
+      },
+    },
+  },
+];
+
 export const contestCategories: ContestCategory[] = [
   {
     age: '4-6',
     levels: ['openLevel'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Baby',
@@ -109,6 +189,7 @@ export const contestCategories: ContestCategory[] = [
     },
     categories: [
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'All styles',
@@ -124,6 +205,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '7-11',
     levels: ['beginners', 'intermediate'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Kids solo',
@@ -138,6 +220,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '7-11',
     levels: ['openLevel'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Kids duos',
@@ -148,6 +231,7 @@ export const contestCategories: ContestCategory[] = [
     },
     categories: [
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'All styles',
@@ -158,6 +242,7 @@ export const contestCategories: ContestCategory[] = [
         },
       },
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'Bbollywood',
@@ -168,6 +253,7 @@ export const contestCategories: ContestCategory[] = [
         },
       },
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'Tribal',
@@ -183,6 +269,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '7-11',
     levels: ['openLevel'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Kids groups',
@@ -193,6 +280,7 @@ export const contestCategories: ContestCategory[] = [
     },
     categories: [
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'Oriental',
@@ -203,6 +291,7 @@ export const contestCategories: ContestCategory[] = [
         },
       },
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'Folklore',
@@ -213,6 +302,7 @@ export const contestCategories: ContestCategory[] = [
         },
       },
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'Tabla solo CD',
@@ -223,6 +313,7 @@ export const contestCategories: ContestCategory[] = [
         },
       },
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'Show/fusion',
@@ -233,6 +324,7 @@ export const contestCategories: ContestCategory[] = [
         },
       },
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'Bollywood',
@@ -243,6 +335,7 @@ export const contestCategories: ContestCategory[] = [
         },
       },
       {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'Tribal',
@@ -259,6 +352,7 @@ export const contestCategories: ContestCategory[] = [
     age: '12-15',
     description: 'descriptionJuniors',
     levels: ['risingStar', 'professionals'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Juniors',
@@ -273,6 +367,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '12-15',
     levels: ['openLevel'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Juniors duos',
@@ -281,73 +376,13 @@ export const contestCategories: ContestCategory[] = [
         title: 'Юниоры дуэты',
       },
     },
-    categories: [
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Oriental',
-          },
-          ru: {
-            categoryTitle: 'Ориентал',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Folklore',
-          },
-          ru: {
-            categoryTitle: 'Фольклор',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Tabla solo CD',
-          },
-          ru: {
-            categoryTitle: 'Табла соло CD',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Щоу/фьюжн',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Bollywood',
-          },
-          ru: {
-            categoryTitle: 'Болливуд',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Tribal',
-          },
-          ru: {
-            categoryTitle: 'Трайбл',
-          },
-        },
-      },
-    ],
+    categories: groupSet,
   },
 
   {
     age: '12-15',
     levels: ['openLevel'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Juniors groups',
@@ -356,74 +391,14 @@ export const contestCategories: ContestCategory[] = [
         title: 'Юниоры группы',
       },
     },
-    categories: [
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Oriental',
-          },
-          ru: {
-            categoryTitle: 'Ориентал',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Folklore',
-          },
-          ru: {
-            categoryTitle: 'Фольклор',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Tabla solo CD',
-          },
-          ru: {
-            categoryTitle: 'Табла соло CD',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Шоу/фьюжн',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Bollywood',
-          },
-          ru: {
-            categoryTitle: 'Болливуд',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Tribal',
-          },
-          ru: {
-            categoryTitle: 'Трайбл',
-          },
-        },
-      },
-    ],
+    categories: groupSet,
   },
 
   {
     age: '12+',
     description: 'descriptionQueen',
     levels: ['openLevel'],
+    types: ['live'],
     translations: {
       en: {
         title: 'Queen of live tabla solo',
@@ -437,6 +412,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '16+',
     levels: ['risingStar', 'professionals'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Adults',
@@ -451,6 +427,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '16+',
     levels: ['openLevel'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Adults duos',
@@ -459,73 +436,13 @@ export const contestCategories: ContestCategory[] = [
         title: 'Взрослые дуэты',
       },
     },
-    categories: [
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Oriental',
-          },
-          ru: {
-            categoryTitle: 'Ориентал',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Folklore',
-          },
-          ru: {
-            categoryTitle: 'Фольклор',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Tabla solo',
-          },
-          ru: {
-            categoryTitle: 'Табла соло',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Щоу/фьюжн',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Bollywood',
-          },
-          ru: {
-            categoryTitle: 'Болливуд',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Tribal',
-          },
-          ru: {
-            categoryTitle: 'Трайбл',
-          },
-        },
-      },
-    ],
+    categories: groupSet,
   },
 
   {
     age: '16+',
     levels: ['openLevel'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Adults groups',
@@ -534,74 +451,14 @@ export const contestCategories: ContestCategory[] = [
         title: 'Взрослые группы',
       },
     },
-    categories: [
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Oriental',
-          },
-          ru: {
-            categoryTitle: 'Ориентал',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Folklore',
-          },
-          ru: {
-            categoryTitle: 'Фольклор',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Tabla solo',
-          },
-          ru: {
-            categoryTitle: 'Табла соло',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Щоу/фьюжн',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Bollywood',
-          },
-          ru: {
-            categoryTitle: 'Болливуд',
-          },
-        },
-      },
-      {
-        translations: {
-          en: {
-            categoryTitle: 'Tribal',
-          },
-          ru: {
-            categoryTitle: 'Трайбл',
-          },
-        },
-      },
-    ],
+    categories: groupSet,
   },
 
   {
     age: '40+',
     description: 'descriptionSeniors',
     levels: ['openLevel'],
+    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Seniors',

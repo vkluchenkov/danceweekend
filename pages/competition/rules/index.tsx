@@ -26,6 +26,13 @@ const ContestRules: NextPage = () => {
     />
   );
 
+  const videoSpecText = (
+    <Trans
+      i18nKey='competitionRules:videoSpecText'
+      components={[<br key={1} />, <Link href='/competition/judging' key={2} />]}
+    />
+  );
+
   const switcher = useMemo(() => {
     return (
       <Switcher
@@ -43,37 +50,40 @@ const ContestRules: NextPage = () => {
     );
   }, [t, version]);
 
-  const catsList = contestCategories.map((group, groupIndex) => {
-    const title = group.translations[currentLang].title;
-    const levels = group.levels.map((l) => t(l)).join(', ');
+  const getCatsList = (type: 'live' | 'online') =>
+    contestCategories.map((group, groupIndex) => {
+      const title = group.translations[currentLang].title;
+      const levels = group.levels.map((l) => t(l)).join(', ');
 
-    const categories = group.categories?.map((cat, catIndex) => {
-      const catTitle = cat.translations[currentLang].categoryTitle;
-      return <li key={catTitle + catIndex}>{catTitle}</li>;
+      const categories = group.categories?.map((cat, catIndex) => {
+        const catTitle = cat.translations[currentLang].categoryTitle;
+        return cat.types.includes(type) ? <li key={catTitle + catIndex}>{catTitle}</li> : <></>;
+      });
+
+      return group.types.includes(type) ? (
+        <div key={title + groupIndex} className={styles.categories}>
+          <h3 className={textStyles.h3}>{title + ` (${group.age} ${t('age')})`}</h3>
+          <p className={textStyles.p}>
+            <span className={styles.levels}>{t('levels')}</span>
+            {levels}
+          </p>
+          {categories && (
+            <>
+              <h4 className={textStyles.h4}>{t('styles')}</h4>
+              <ul
+                className={textStyles.list}
+                key={group.translations[currentLang] + groupIndex.toString()}
+              >
+                {categories}
+              </ul>
+            </>
+          )}
+          {group.description && <p className={textStyles.p}>{t(group.description)}</p>}
+        </div>
+      ) : (
+        <></>
+      );
     });
-
-    return (
-      <div key={title + groupIndex} className={styles.categories}>
-        <h3 className={textStyles.h3}>{title + ` (${group.age} ${t('age')})`}</h3>
-        <p className={textStyles.p}>
-          <span className={styles.levels}>{t('levels')}</span>
-          {levels}
-        </p>
-        {categories && (
-          <>
-            <h4 className={textStyles.h4}>{t('styles')}</h4>
-            <ul
-              className={textStyles.list}
-              key={group.translations[currentLang] + groupIndex.toString()}
-            >
-              {categories}
-            </ul>
-          </>
-        )}
-        {group.description && <p className={textStyles.p}>{t(group.description)}</p>}
-      </div>
-    );
-  });
 
   const liveContent = (
     <section className={styles.section}>
@@ -83,7 +93,7 @@ const ContestRules: NextPage = () => {
       <p className={textStyles.p}>{t('attentionText')}</p>
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
-      {catsList}
+      {getCatsList('live')}
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
       <p className={textStyles.p}>{t('timingSolo')}</p>
@@ -108,11 +118,41 @@ const ContestRules: NextPage = () => {
     </section>
   );
 
+  const onlineContent = (
+    <section className={styles.section}>
+      <p className={textStyles.p}>{t('version', { version: '1', date: '1.03.2023' })}</p>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
+      <p className={textStyles.p}>{t('attentionText')}</p>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
+      {getCatsList('online')}
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
+      <p className={textStyles.p}>{t('timingSolo')}</p>
+      <p className={textStyles.p}>{t('timingGroups')}</p>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>3. {t('limitationsTitle')}</h2>
+      <p className={textStyles.p}>{t('limitationsText')}</p>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>4. {t('videoSpecTitle')}</h2>
+      <p className={textStyles.p}>{videoSpecText}</p>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>5. {t('prizesTitle')}</h2>
+      <p className={textStyles.p}>{t('onlinePrizesMain')}</p>
+      <p className={textStyles.p}>{t('onlinePrizesSolo')}</p>
+      <p className={textStyles.p}>{t('onlinePrizesGroups')}</p>
+      <p className={textStyles.p}>{t('onlinepPizesAdditional')}</p>
+      <p className={textStyles.p}>{t('onlinepPizesAdditional2')}</p>
+    </section>
+  );
+
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
       {version === 'live' && liveContent}
+      {version === 'online' && onlineContent}
     </Layout>
   );
 };

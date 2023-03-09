@@ -1,6 +1,6 @@
 import { SupportedLangs } from '@/src/types';
 
-type Level = 'beginners' | 'intermediate' | 'professionals' | 'openLevel';
+type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
 
 interface Category {
   translations: {
@@ -258,7 +258,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '12-15',
     description: 'descriptionJuniors',
-    levels: ['beginners', 'professionals'],
+    levels: ['risingStar', 'professionals'],
     translations: {
       en: {
         title: 'Juniors',
@@ -436,7 +436,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '16+',
-    levels: ['beginners', 'professionals'],
+    levels: ['risingStar', 'professionals'],
     translations: {
       en: {
         title: 'Adults',

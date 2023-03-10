@@ -12,6 +12,7 @@ import {
   contestSoloPrice,
   teachersWsGroups,
   workshopsPrice,
+  worldShowPrice,
 } from '@/src/ulis/price';
 import Trans from 'next-translate/Trans';
 
@@ -24,6 +25,13 @@ const Price: NextPage = () => {
   const contestAttention = (
     <Trans
       i18nKey='price:competition.attention'
+      components={[<span className={textStyles.accent} key={1} />]}
+    />
+  );
+
+  const worldShowAttention = (
+    <Trans
+      i18nKey='price:worldShow.attention'
       components={[<span className={textStyles.accent} key={1} />]}
     />
   );
@@ -123,6 +131,7 @@ const Price: NextPage = () => {
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('competition.title')}</h2>
       <p className={textStyles.p}>{contestAttention}</p>
 
+      {/* Price table */}
       <div className={styles.table}>
         <div className={styles.table__row}>
           <h4 className={clsx(textStyles.h4, styles.table__header, styles.table__cell)}>
@@ -137,7 +146,13 @@ const Price: NextPage = () => {
         </div>
 
         <div className={styles.table__row}>
-          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.kids')}</p>
+          <h3 className={clsx(textStyles.h3, styles.table__cell, styles.table__cell_fullWidth)}>
+            {t('competition.kids')}
+          </h3>
+        </div>
+
+        <div className={styles.table__row}>
+          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.openLevel')}</p>
           <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
             {contestSoloPrice.kids.priceDiscounted}€
           </p>
@@ -233,6 +248,78 @@ const Price: NextPage = () => {
           </p>
         </div>
       </div>
+
+      {/* World show */}
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('worldShow.title')}</h2>
+      <p className={textStyles.p}>{worldShowAttention}</p>
+      <ul className={textStyles.list}>
+        <li>
+          {t('worldShow.soloNormal')}:{' '}
+          <span className={textStyles.accent}>{worldShowPrice.soloPriceNormal}€</span>
+        </li>
+        <li>
+          {t('worldShow.soloDiscounted')}:{' '}
+          <span className={textStyles.accent}>{worldShowPrice.soloPriceDicounted}€</span>
+        </li>
+        <li>
+          {t('worldShow.groups')}:{' '}
+          <span className={textStyles.accent}>{worldShowPrice.groups}€</span>{' '}
+          {t('worldShow.perPerson')}
+        </li>
+      </ul>
+    </>
+  );
+
+  const onlineContent = <></>;
+
+  const paymentContent = (
+    <>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('payment.title')}</h2>
+
+      <h3 className={clsx(textStyles.h3)}>{t('payment.conditionsTitle')}</h3>
+      <p className={textStyles.p}>{t('payment.conditionsText')}</p>
+
+      {version === 'live' && (
+        <>
+          <h3 className={clsx(textStyles.h3)}>{t('payment.installmentsTitle')}</h3>
+          <p className={textStyles.p}>{t('payment.installmentsText')}</p>
+          <p className={textStyles.p}>{t('payment.installmentsWarning')}</p>
+        </>
+      )}
+
+      <h3 className={clsx(textStyles.h3)}>{t('payment.optionsTitle')}</h3>
+      <ul className={textStyles.list}>
+        <li>
+          <span className={textStyles.accent}>{t('payment.optionsCards')}</span> (
+          {t('payment.ImmediateArrival')})
+        </li>
+        <li>
+          <span className={textStyles.accent}>{t('payment.optionsPayPal')}</span> (
+          {t('payment.ImmediateArrival')})
+        </li>
+        <li>
+          <span className={textStyles.accent}>{t('payment.optionsBank')}</span> (
+          {t('payment.bankeArrival')})
+        </li>
+      </ul>
+      <p className={textStyles.p}>{t('payment.optionsDescription')}</p>
+
+      <h3 className={clsx(textStyles.h3)}>{t('payment.termsTitle')}</h3>
+      <ul className={textStyles.list}>
+        <li>{t('payment.term1')}</li>
+        <li>{t('payment.term2')}</li>
+        <li>{t('payment.term3')}</li>
+        <li>{t('payment.term4')}</li>
+      </ul>
+    </>
+  );
+
+  const privacyPolicy = (
+    <>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('privacyPolicy.title')}</h2>
+      <p className={textStyles.p}>{t('privacyPolicy.p1')}</p>
+      <p className={textStyles.p}>{t('privacyPolicy.p2')}</p>
+      <p className={textStyles.p}>{t('privacyPolicy.p3')}</p>
     </>
   );
 
@@ -240,7 +327,12 @@ const Price: NextPage = () => {
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
-      <section className={styles.section}>{version === 'live' && liveContent}</section>
+      <section className={styles.section}>
+        {version === 'live' && liveContent}
+        {version === 'online' && onlineContent}
+        {paymentContent}
+        {privacyPolicy}
+      </section>
     </Layout>
   );
 };

@@ -72,3 +72,9 @@ export const contestSoloPrice = {
 };
 
 export const contestGroupPrice = 20;
+
+export const worldShowPrice = {
+  soloPriceNormal: 40,
+  soloPriceDicounted: 30,
+  groups: 20,
+};

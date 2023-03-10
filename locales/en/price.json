@@ -33,10 +33,11 @@
     "categoryTitle": "Category",
     "kids": "Kids and baby solo",
     "juniors+": "Juniors and adults solo",
+    "openLevel": "Open level",
     "risingStar": "Rising star / open level",
     "professionals": "Professionals and Queen of live tabla",
     "soloPass": "Solo Pass",
-    "solosPassDescription": "With the Solo passyou can dance unlimited times in all solo categories, except live tabla solo. You save when dance more than 3 times.",
+    "solosPassDescription": "With the Solo pass you can dance unlimited times in all solo categories, except live tabla solo. You save when dance more than 3 times.",
     "soloPassKids": "Kids and baby",
     "soloPassRisingStar": "Rising star / open level",
     "soloPassProfessionals": "Professionals",
@@ -44,5 +45,39 @@
     "perPerson": "each dancer",
     "with": "with",
     "without": "without"
+  },
+  "worldShow": {
+    "title": "World show",
+    "attention": "Attention! To be able to take part in World show, you must order workshops. At least <0>one workshop or Full Pass</0> for kids, at least <0>3 workshops or Full Pass</0> for adults.",
+    "soloNormal": "Solo performance",
+    "soloDiscounted": "Solo performance (with Full Pass)",
+    "groups": "Groups and duos",
+    "perPerson": "per person"
+  },
+  "payment": {
+    "title": "Payment conditions and options",
+    "conditionsTitle": "Conditions",
+    "conditionsText": "All payments for participation in the festival are non-refundable in any case, except cancellation of the festival. If you are not able to visit our festival, you are allowed to transfer your packageto another person with mandatory notification of the organizers. In this case competition categories could be changed to another ones inside the payment made. To add new categories to this registration is possible only if there are free spots left.",
+    "installmentsTitle": "Installments",
+    "installmentsText": "There is a possibility to pay your package in 2 installments. The first 50% should be paid right after registration, the other 50% any time before 31.07.2023. This option is not available for Promo packages.",
+    "installmentsWarning": "In case if the second payment is failed to be transferred in due time you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
+    "optionsTitle": "Payment options",
+    "optionsDescription": "Details for chosen payment options will be provided after the registration.",
+    "optionsCards": "Credit / debit cards",
+    "optionsPayPal": "PayPal",
+    "optionsBank": "Bank transfer (SWIFT) to Polish bank",
+    "ImmediateArrival": "immediate arrival",
+    "bankeArrival": "arrival in 3-10 work days",
+    "termsTitle": "Payment terms",
+    "term1": "If registration is made with “regular” prices, payment should be completed within 5 work days. Otherwise your registration will be cancelled.",
+    "term2": "If registration is made with “promo” or “sale” prices, payment should be completed within 1 work day. Otherwise your registration will be cancelled.",
+    "term3": "Work day – is a day when banks and other financial institutions work in your country.",
+    "term4": "We recommend to save and send to us your payment confirmation. It can be a bank receipt, an internet bank receipt or a screenshot, etc."
+  },
+  "privacyPolicy": {
+    "title": "Privacy policy and personal data",
+    "p1": "We use your personal data provided during the registration ONLY in purposes related to your participation in our festival. We do not share this data with any 3rd party for any purpose.",
+    "p2": "Completing the registration to Dance Weekend in Warsaw you acknowledge and agree to be filmed and photographed for the marketing purposes of the festival and for the purposes of providing opportunity to every participant to buy photos and videos of their performances.",
+    "p3": "Completing the registration to Dance Weekend in Warsaw you also agree to receive information emails from our festival. We will not send you any marketing letters or emails not related to the festival. You can unsubscribe at any time. Beware that in this case you may not receive important information about the festival like schedule changes, competition information and other."
   }
 }

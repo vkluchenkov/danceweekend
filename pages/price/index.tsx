@@ -23,7 +23,7 @@ const Price: NextPage = () => {
           value: 'online',
           label: t('online'),
         }}
-        onClick={(value) => setVersion(value as Version)}
+        onClick={(value) => setVersion(value)}
       />
     );
   }, [t, version]);

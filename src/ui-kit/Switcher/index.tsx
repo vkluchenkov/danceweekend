@@ -1,17 +1,18 @@
+import { Version } from '@/src/types';
 import clsx from 'clsx';
 import styles from './Switcher.module.css';
 
 interface SwitcherProps {
   option1: {
-    value: string;
+    value: Version;
     label: string;
   };
   option2: {
-    value: string;
+    value: Version;
     label: string;
   };
-  onClick: (value: string) => void;
-  value: string;
+  onClick: (value: Version) => void;
+  value: Version;
 }
 
 export const Switcher: React.FC<SwitcherProps> = ({ option1, option2, onClick, value }) => {

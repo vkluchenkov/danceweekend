@@ -48,22 +48,22 @@ const ContestRules: NextPage = () => {
           value: 'online',
           label: t('online'),
         }}
-        onClick={(value) => setVersion(value as Version)}
+        onClick={(value) => setVersion(value)}
       />
     );
   }, [t, version]);
 
-  const getCatsList = (type: 'live' | 'online') =>
+  const getCatsList = (version: Version) =>
     contestCategories.map((group, groupIndex) => {
       const title = group.translations[currentLang].title;
       const levels = group.levels.map((l) => t(l)).join(', ');
 
       const categories = group.categories?.map((cat, catIndex) => {
         const catTitle = cat.translations[currentLang].categoryTitle;
-        return cat.types.includes(type) ? <li key={catTitle + catIndex}>{catTitle}</li> : <></>;
+        return cat.types.includes(version) ? <li key={catTitle + catIndex}>{catTitle}</li> : <></>;
       });
 
-      return group.types.includes(type) ? (
+      return group.types.includes(version) ? (
         <div key={title + groupIndex} className={styles.categories}>
           <h3 className={textStyles.h3}>{title + ` (${group.age} ${t('age')})`}</h3>
           <p className={textStyles.p}>
@@ -89,19 +89,7 @@ const ContestRules: NextPage = () => {
     });
 
   const liveContent = (
-    <section className={styles.section}>
-      <p className={textStyles.p}>{t('version', { version: '1', date: '1.03.2023' })}</p>
-
-      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
-      <p className={textStyles.p}>{t('attentionText')}</p>
-
-      <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
-      {getCatsList('live')}
-
-      <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
-      <p className={textStyles.p}>{t('timingSolo')}</p>
-      <p className={textStyles.p}>{t('timingGroups')}</p>
-
+    <>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>3. {t('profiRulesTitle')}</h2>
       <p className={textStyles.p}>{profiRulesText}</p>
 
@@ -118,23 +106,11 @@ const ContestRules: NextPage = () => {
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('additionalTitle')}:</h2>
       <p className={textStyles.p}>{t('additionalText')}</p>
-    </section>
+    </>
   );
 
   const onlineContent = (
-    <section className={styles.section}>
-      <p className={textStyles.p}>{t('version', { version: '1', date: '1.03.2023' })}</p>
-
-      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
-      <p className={textStyles.p}>{t('attentionText')}</p>
-
-      <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
-      {getCatsList('online')}
-
-      <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
-      <p className={textStyles.p}>{t('timingSolo')}</p>
-      <p className={textStyles.p}>{t('timingGroups')}</p>
-
+    <>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>3. {t('limitationsTitle')}</h2>
       <p className={textStyles.p}>{t('limitationsText')}</p>
 
@@ -147,15 +123,29 @@ const ContestRules: NextPage = () => {
       <p className={textStyles.p}>{t('onlinePrizesGroups')}</p>
       <p className={textStyles.p}>{t('onlinepPizesAdditional')}</p>
       <p className={textStyles.p}>{t('onlinepPizesAdditional2')}</p>
-    </section>
+    </>
   );
 
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
-      {version === 'live' && liveContent}
-      {version === 'online' && onlineContent}
+      <section className={styles.section}>
+        <p className={textStyles.p}>{t('version', { version: '1', date: '1.03.2023' })}</p>
+
+        <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
+        <p className={textStyles.p}>{t('attentionText')}</p>
+
+        <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
+        {getCatsList(version)}
+
+        <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
+        <p className={textStyles.p}>{t('timingSolo')}</p>
+        <p className={textStyles.p}>{t('timingGroups')}</p>
+
+        {version === 'live' && liveContent}
+        {version === 'online' && onlineContent}
+      </section>
     </Layout>
   );
 };

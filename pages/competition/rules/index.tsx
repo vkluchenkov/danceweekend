@@ -88,8 +88,25 @@ const ContestRules: NextPage = () => {
       );
     });
 
+  const commonContent = (
+    <>
+      <p className={textStyles.p}>{t('version', { version: '1', date: '1.03.2023' })}</p>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
+      <p className={textStyles.p}>{t('attentionText')}</p>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
+      {getCatsList(version)}
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
+      <p className={textStyles.p}>{t('timingSolo')}</p>
+      <p className={textStyles.p}>{t('timingGroups')}</p>
+    </>
+  );
+
   const liveContent = (
     <>
+      {commonContent}
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>3. {t('profiRulesTitle')}</h2>
       <p className={textStyles.p}>{profiRulesText}</p>
 
@@ -111,6 +128,7 @@ const ContestRules: NextPage = () => {
 
   const onlineContent = (
     <>
+      {commonContent}
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>3. {t('limitationsTitle')}</h2>
       <p className={textStyles.p}>{t('limitationsText')}</p>
 
@@ -131,18 +149,6 @@ const ContestRules: NextPage = () => {
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
       <section className={styles.section}>
-        <p className={textStyles.p}>{t('version', { version: '1', date: '1.03.2023' })}</p>
-
-        <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
-        <p className={textStyles.p}>{t('attentionText')}</p>
-
-        <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
-        {getCatsList(version)}
-
-        <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
-        <p className={textStyles.p}>{t('timingSolo')}</p>
-        <p className={textStyles.p}>{t('timingGroups')}</p>
-
         {version === 'live' && liveContent}
         {version === 'online' && onlineContent}
       </section>

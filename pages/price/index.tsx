@@ -1,15 +1,32 @@
 import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
 import textStyles from '@/styles/Text.module.css';
+import styles from '@/styles/Price.module.css';
 import useTranslation from 'next-translate/useTranslation';
 import { useMemo, useState } from 'react';
 import { Version, SupportedLangs } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
+import clsx from 'clsx';
+import {
+  contestGroupPrice,
+  contestSoloPrice,
+  teachersWsGroups,
+  workshopsPrice,
+} from '@/src/ulis/price';
+import Trans from 'next-translate/Trans';
 
 const Price: NextPage = () => {
   const { t, lang } = useTranslation('price');
 
   const [version, setVersion] = useState<Version>('live');
+
+  // HTML translations
+  const contestAttention = (
+    <Trans
+      i18nKey='price:competition.attention'
+      components={[<span className={textStyles.accent} key={1} />]}
+    />
+  );
 
   const switcher = useMemo(() => {
     return (
@@ -28,13 +45,202 @@ const Price: NextPage = () => {
     );
   }, [t, version]);
 
-  const liveContent = <></>;
+  const group1Names = teachersWsGroups.group1.map((n) => t(`workshops.teachers.${n}`)).join(', ');
+  const group2Names = teachersWsGroups.group2.map((n) => t(`workshops.teachers.${n}`)).join(', ');
+
+  const ispromoPeriod = process.env.NEXT_PUBLIC_PROMO_PERIOD === 'true' ? true : false;
+
+  const workshops = workshopsPrice.map((period, index) => {
+    const getTitle = () => {
+      if (period.isPromo) return t('workshops.promo');
+      if (period.startDate && period.endDate) {
+        return `${period.startDate.toLocaleDateString('pl')} – ${period.endDate.toLocaleDateString(
+          'pl'
+        )}`;
+      }
+      if (period.startDate && !period.endDate) {
+        return `${t('workshops.from') + ' ' + period.startDate.toLocaleDateString('pl')}`;
+      }
+      if (!period.startDate && period.endDate) {
+        return `${t('workshops.till') + ' ' + period.endDate.toLocaleDateString('pl')}`;
+      } else {
+        return <></>;
+      }
+    };
+
+    const today = new Date();
+    const isPast = period.endDate && today > period.endDate;
+    const isNow =
+      period.endDate && period.startDate && today <= period.endDate && today >= period.startDate;
+
+    return (
+      <div
+        key={period.fullPassPrice + index}
+        className={clsx(
+          styles.period,
+          // Promo styles
+          period.isPromo && ispromoPeriod && styles.period_active,
+          period.isPromo && !ispromoPeriod && styles.period_expired,
+          // Date based styles, ignored if promo is active
+          !period.isPromo && !ispromoPeriod && isPast && styles.period_expired,
+          !period.isPromo && !ispromoPeriod && isNow && styles.period_active
+        )}
+      >
+        <h4 className={styles.period__title}>{getTitle()}</h4>
+
+        <p className={clsx(textStyles.p, styles.period__fullPass)}>
+          {`${t('workshops.fullPass')}: ${period.fullPassPrice}€`}
+        </p>
+
+        <p className={textStyles.p}>
+          {group1Names}:<span className={textStyles.accent}> {period.group1Price}€</span>
+        </p>
+
+        <p className={textStyles.p}>
+          {group2Names}:<span className={textStyles.accent}> {period.group2Price}€</span>
+        </p>
+
+        {period.description && (
+          <p className={clsx(textStyles.p, styles.period__description)}>
+            {t(`workshops.${period.description}`)}
+          </p>
+        )}
+      </div>
+    );
+  });
+
+  const liveContent = (
+    <>
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('workshops.title')}</h2>
+
+      <p className={textStyles.p}>{t('workshops.description')}</p>
+      <p className={textStyles.p}>{t('workshops.kidsDiscount')}</p>
+      <div className={styles.workshopsContainer}>{workshops}</div>
+
+      <h3 className={textStyles.h3}>{t('workshops.groupOfferTitle')}</h3>
+      <p className={textStyles.p}>{t('workshops.groupOfferText')}</p>
+
+      <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('competition.title')}</h2>
+      <p className={textStyles.p}>{contestAttention}</p>
+
+      <div className={styles.table}>
+        <div className={styles.table__row}>
+          <h4 className={clsx(textStyles.h4, styles.table__header, styles.table__cell)}>
+            {t('competition.categoryTitle')}
+          </h4>
+          <h4 className={clsx(textStyles.h4, styles.table__header, styles.table__cell)}>
+            {t('competition.with')} Full&nbsp;Pass
+          </h4>
+          <h4 className={clsx(textStyles.h4, styles.table__header, styles.table__cell)}>
+            {t('competition.without')} Full&nbsp;Pass
+          </h4>
+        </div>
+
+        <div className={styles.table__row}>
+          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.kids')}</p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.kids.priceDiscounted}€
+          </p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.kids.priceNormal}€
+          </p>
+        </div>
+
+        <div className={styles.table__row}>
+          <h3 className={clsx(textStyles.h3, styles.table__cell, styles.table__cell_fullWidth)}>
+            {t('competition.juniors+')}
+          </h3>
+        </div>
+
+        <div className={styles.table__row}>
+          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.risingStar')}</p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.risingStar.priceDiscounted}€
+          </p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.risingStar.priceNormal}€
+          </p>
+        </div>
+
+        <div className={styles.table__row}>
+          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.professionals')}</p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.professionals.priceDiscounted}€
+          </p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.professionals.priceNormal}€
+          </p>
+        </div>
+
+        <div className={styles.table__row}>
+          <div className={clsx(styles.table__cell, styles.table__cell_fullWidth)}>
+            <h3 className={clsx(textStyles.h3)}>{t('competition.soloPass')}</h3>
+            <p className={textStyles.p}>{t('competition.solosPassDescription')}</p>
+          </div>
+        </div>
+
+        <div className={styles.table__row}>
+          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.soloPassKids')}</p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.soloPassKids.priceDiscounted}€
+          </p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.soloPassKids.priceNormal}€
+          </p>
+        </div>
+
+        <div className={styles.table__row}>
+          <p className={clsx(textStyles.p, styles.table__cell)}>
+            {t('competition.soloPassRisingStar')}
+          </p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.soloPassRisingStar.priceDiscounted}€
+          </p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.soloPassRisingStar.priceNormal}€
+          </p>
+        </div>
+
+        <div className={styles.table__row}>
+          <p className={clsx(textStyles.p, styles.table__cell)}>
+            {t('competition.soloPassProfessionals')}
+          </p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.soloPassProfessionals.priceDiscounted}€
+          </p>
+          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+            {contestSoloPrice.soloPassProfessionals.priceNormal}€
+          </p>
+        </div>
+
+        <div className={styles.table__row}>
+          <div className={clsx(styles.table__cell, styles.table__cell_fullWidth)}>
+            <h3 className={clsx(textStyles.h3)}>{t('competition.groups')}</h3>
+          </div>
+        </div>
+
+        <div className={styles.table__row}>
+          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.perPerson')}</p>
+          <p
+            className={clsx(
+              textStyles.p,
+              textStyles.accent,
+              styles.table__cell,
+              styles.table__cell_singlePrice
+            )}
+          >
+            {contestGroupPrice}€
+          </p>
+        </div>
+      </div>
+    </>
+  );
 
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
-      {version === 'live' && liveContent}
+      <section className={styles.section}>{version === 'live' && liveContent}</section>
     </Layout>
   );
 };

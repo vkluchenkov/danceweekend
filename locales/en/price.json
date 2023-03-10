@@ -1,5 +1,48 @@
 {
   "pageTitle": "Prices and conditions",
   "live": "Live version",
-  "online": "Online version"
+  "online": "Online version",
+  "workshops": {
+    "title": "Workshops",
+    "description": "It’s possible to buy workshops as a FULL PASS (all the festival workshops) or single workshops of your choice.",
+    "priceTitle": "Price",
+    "promo": "Promo*",
+    "promoDescription": "*first 10 packages",
+    "from": "from",
+    "till": "till",
+    "fullPass": "Full Pass",
+    "groupTitle": "Workshops group",
+    "teachers": {
+      "pablo": "Pablo",
+      "diana": "Diana",
+      "alexey": "Alexey",
+      "leandro": "Leandro",
+      "chronis": "Chronis",
+      "aliahChronis": "Aliah\u00a0&\u00a0Chronis",
+      "polina": "Polina",
+      "eva": "Eva",
+      "levana": "Levana"
+    },
+    "kidsDiscount": "Kids and baby age groups get 50% discount on Full Pass, applied automatically during the registration",
+    "groupOfferTitle": "Special offer for groups!",
+    "groupOfferText": "When you register group of 3+ persons, each participant in this group entitled to 20% discount for Full Pass (in condition that every person from this group buys Full Pass). Please, choose this discount during the registration. Discount can not be summarized with personal discounts or discounts for kids."
+  },
+  "competition": {
+    "title": "Competition price",
+    "attention": "Attention! To be able to take part in competition, you must order workshops. At least <0>one workshop or Full Pass</0> for kids, at least <0>3 workshops or Full Pass</0> for adults.",
+    "categoryTitle": "Category",
+    "kids": "Kids and baby solo",
+    "juniors+": "Juniors and adults solo",
+    "risingStar": "Rising star / open level",
+    "professionals": "Professionals and Queen of live tabla",
+    "soloPass": "Solo Pass",
+    "solosPassDescription": "With the Solo passyou can dance unlimited times in all solo categories, except live tabla solo. You save when dance more than 3 times.",
+    "soloPassKids": "Kids and baby",
+    "soloPassRisingStar": "Rising star / open level",
+    "soloPassProfessionals": "Professionals",
+    "groups": "Groups and duos",
+    "perPerson": "each dancer",
+    "with": "with",
+    "without": "without"
+  }
 }

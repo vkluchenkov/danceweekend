@@ -8,7 +8,7 @@ on:
 
 env:
   SERVER: production
-  NEXT_PUBLIC_PROMO_PERIOD: ${{ vars.NEXT_PUBLIC_PROMO_PERIOD }}
+  NEXT_PUBLIC_PROMO_PERIOD: ${{ secrets.NEXT_PUBLIC_PROMO_PERIOD }}
 jobs:
   build:
     runs-on: ubuntu-latest

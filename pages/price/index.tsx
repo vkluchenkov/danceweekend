@@ -83,7 +83,7 @@ const Price: NextPage = () => {
 
     return (
       <div
-        key={period.fullPassPrice + index}
+        key={period.price[version].fullPassPrice + index}
         className={clsx(
           styles.period,
           // Promo styles
@@ -97,15 +97,17 @@ const Price: NextPage = () => {
         <h4 className={styles.period__title}>{getTitle()}</h4>
 
         <p className={clsx(textStyles.p, styles.period__fullPass)}>
-          {`${t('workshops.fullPass')}: ${period.fullPassPrice}€`}
+          {`${t('workshops.fullPass')}: ${period.price[version].fullPassPrice}€`}
         </p>
 
         <p className={textStyles.p}>
-          {group1Names}:<span className={textStyles.accent}> {period.group1Price}€</span>
+          {group1Names}:
+          <span className={textStyles.accent}> {period.price[version].group1Price}€</span>
         </p>
 
         <p className={textStyles.p}>
-          {group2Names}:<span className={textStyles.accent}> {period.group2Price}€</span>
+          {group2Names}:
+          <span className={textStyles.accent}> {period.price[version].group2Price}€</span>
         </p>
 
         {period.description && (
@@ -117,17 +119,69 @@ const Price: NextPage = () => {
     );
   });
 
-  const liveContent = (
+  const soloPassTable = (
+    <>
+      <div className={styles.table__row}>
+        <div className={clsx(styles.table__cell, styles.table__cell_fullWidth)}>
+          <h3 className={clsx(textStyles.h3)}>{t('competition.soloPass')}</h3>
+          <p className={textStyles.p}>{t('competition.solosPassDescription')}</p>
+        </div>
+      </div>
+
+      <div className={styles.table__row}>
+        <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.soloPassKids')}</p>
+        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+          {contestSoloPrice.soloPassKids.price[version].priceDiscounted}€
+        </p>
+        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+          {contestSoloPrice.soloPassKids.price[version].priceNormal}€
+        </p>
+      </div>
+
+      <div className={styles.table__row}>
+        <p className={clsx(textStyles.p, styles.table__cell)}>
+          {t('competition.soloPassRisingStar')}
+        </p>
+        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+          {contestSoloPrice.soloPassRisingStar.price.live.priceDiscounted}€
+        </p>
+        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+          {contestSoloPrice.soloPassRisingStar.price.live.priceNormal}€
+        </p>
+      </div>
+
+      <div className={styles.table__row}>
+        <p className={clsx(textStyles.p, styles.table__cell)}>
+          {t('competition.soloPassProfessionals')}
+        </p>
+        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+          {contestSoloPrice.soloPassProfessionals.price.live.priceDiscounted}€
+        </p>
+        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
+          {contestSoloPrice.soloPassProfessionals.price.live.priceNormal}€
+        </p>
+      </div>
+    </>
+  );
+
+  const workshopsContent = (
     <>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('workshops.title')}</h2>
-
       <p className={textStyles.p}>{t('workshops.description')}</p>
-      <p className={textStyles.p}>{t('workshops.kidsDiscount')}</p>
+      {version === 'live' && <p className={textStyles.p}>{t('workshops.kidsDiscount')}</p>}
       <div className={styles.workshopsContainer}>{workshops}</div>
 
-      <h3 className={textStyles.h3}>{t('workshops.groupOfferTitle')}</h3>
-      <p className={textStyles.p}>{t('workshops.groupOfferText')}</p>
+      {version === 'live' && (
+        <>
+          <h3 className={textStyles.h3}>{t('workshops.groupOfferTitle')}</h3>
+          <p className={textStyles.p}>{t('workshops.groupOfferText')}</p>
+        </>
+      )}
+    </>
+  );
 
+  const competitionContent = (
+    <>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('competition.title')}</h2>
       <p className={textStyles.p}>{contestAttention}</p>
 
@@ -152,12 +206,12 @@ const Price: NextPage = () => {
         </div>
 
         <div className={styles.table__row}>
-          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.openLevel')}</p>
+          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.allLevels')}</p>
           <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.kids.priceDiscounted}€
+            {contestSoloPrice.kids.price[version].priceDiscounted}€
           </p>
           <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.kids.priceNormal}€
+            {contestSoloPrice.kids.price[version].priceNormal}€
           </p>
         </div>
 
@@ -170,63 +224,28 @@ const Price: NextPage = () => {
         <div className={styles.table__row}>
           <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.risingStar')}</p>
           <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.risingStar.priceDiscounted}€
+            {contestSoloPrice.risingStar.price[version].priceDiscounted}€
           </p>
           <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.risingStar.priceNormal}€
-          </p>
-        </div>
-
-        <div className={styles.table__row}>
-          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.professionals')}</p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.professionals.priceDiscounted}€
-          </p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.professionals.priceNormal}€
-          </p>
-        </div>
-
-        <div className={styles.table__row}>
-          <div className={clsx(styles.table__cell, styles.table__cell_fullWidth)}>
-            <h3 className={clsx(textStyles.h3)}>{t('competition.soloPass')}</h3>
-            <p className={textStyles.p}>{t('competition.solosPassDescription')}</p>
-          </div>
-        </div>
-
-        <div className={styles.table__row}>
-          <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.soloPassKids')}</p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.soloPassKids.priceDiscounted}€
-          </p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.soloPassKids.priceNormal}€
+            {contestSoloPrice.risingStar.price[version].priceNormal}€
           </p>
         </div>
 
         <div className={styles.table__row}>
           <p className={clsx(textStyles.p, styles.table__cell)}>
-            {t('competition.soloPassRisingStar')}
+            {version === 'live'
+              ? t('competition.professionals')
+              : t('competition.professionalsOnline')}
           </p>
           <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.soloPassRisingStar.priceDiscounted}€
+            {contestSoloPrice.professionals.price[version].priceDiscounted}€
           </p>
           <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.soloPassRisingStar.priceNormal}€
+            {contestSoloPrice.professionals.price[version].priceNormal}€
           </p>
         </div>
 
-        <div className={styles.table__row}>
-          <p className={clsx(textStyles.p, styles.table__cell)}>
-            {t('competition.soloPassProfessionals')}
-          </p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.soloPassProfessionals.priceDiscounted}€
-          </p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.soloPassProfessionals.priceNormal}€
-          </p>
-        </div>
+        {version === 'live' && soloPassTable}
 
         <div className={styles.table__row}>
           <div className={clsx(styles.table__cell, styles.table__cell_fullWidth)}>
@@ -244,12 +263,15 @@ const Price: NextPage = () => {
               styles.table__cell_singlePrice
             )}
           >
-            {contestGroupPrice}€
+            {contestGroupPrice[version]}€
           </p>
         </div>
       </div>
+    </>
+  );
 
-      {/* World show */}
+  const worldShowContent = (
+    <>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('worldShow.title')}</h2>
       <p className={textStyles.p}>{worldShowAttention}</p>
       <ul className={textStyles.list}>
@@ -269,8 +291,6 @@ const Price: NextPage = () => {
       </ul>
     </>
   );
-
-  const onlineContent = <></>;
 
   const paymentContent = (
     <>
@@ -328,8 +348,9 @@ const Price: NextPage = () => {
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
       <section className={styles.section}>
-        {version === 'live' && liveContent}
-        {version === 'online' && onlineContent}
+        {workshopsContent}
+        {competitionContent}
+        {version === 'live' && worldShowContent}
         {paymentContent}
         {privacyPolicy}
       </section>

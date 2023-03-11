@@ -9,6 +9,7 @@
     "/competition/rules": ["competitionRules"],
     "/competition/judging": ["competitionJudging"],
     "/info/photo-video": ["photoVideo"],
+    "/info/bazaar": ["bazaar"],
     "/shows/arabic-dreams": ["arabicDreams"],
     "/shows/world-show": ["worldShow"]
   }

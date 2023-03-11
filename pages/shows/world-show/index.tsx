@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import worldShowLogo from '/public/images/world_show_logo.png';
 import Image from 'next/image';
 import clsx from 'clsx';
+import { worldShowPrice } from '@/src/ulis/price';
 
 const WorldShow: NextPage = () => {
   const { t, lang } = useTranslation('worldShow');
@@ -21,10 +22,17 @@ const WorldShow: NextPage = () => {
       <p className={textStyles.p}>{t('description')}</p>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('conditionsTitle')}</h2>
       <p className={textStyles.p}>{t('conditionsGeneral')}</p>
-      <p className={textStyles.p}>{t('conditionsSolo')} 40€</p>
-      <p className={textStyles.p}>{t('conditionsSoloFullPass')} 30€</p>
       <p className={textStyles.p}>
-        {t('conditionsGroup')} 20€ {t('perPerson')}
+        {t('conditionsSolo')}
+        <span className={textStyles.accent}> {worldShowPrice.soloPriceNormal}€</span>
+      </p>
+      <p className={textStyles.p}>
+        {t('conditionsSoloFullPass')}{' '}
+        <span className={textStyles.accent}> {worldShowPrice.soloPriceDicounted}€</span>
+      </p>
+      <p className={textStyles.p}>
+        {t('conditionsGroup')} <span className={textStyles.accent}> {worldShowPrice.groups}€</span>{' '}
+        {t('perPerson')}
       </p>
     </>
   );

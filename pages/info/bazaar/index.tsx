@@ -27,10 +27,15 @@ const Bazaar: NextPage = () => {
     <div className={styles.contentWrapper}>
       <section className={styles.section}>
         <div className={clsx(styles.logoWrapper, styles.logoWrapper_aliah)}>
-          <Image src={aliah} alt={t('aliah.title')} style={{ objectFit: 'contain' }} fill />
+          <Link href='https://aliah.fashion' target='_blank'>
+            <Image src={aliah} alt={t('aliah.title')} style={{ objectFit: 'contain' }} fill />
+          </Link>
         </div>
         <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('aliah.title')}</h2>
         {aliahText}
+        <Link href='https://aliah.fashion' target='_blank'>
+          www.aliah.fashion
+        </Link>
       </section>
 
       <section className={styles.section}>

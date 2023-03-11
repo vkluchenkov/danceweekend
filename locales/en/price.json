@@ -5,13 +5,9 @@
   "workshops": {
     "title": "Workshops",
     "description": "It’s possible to buy workshops as a FULL PASS (all the festival workshops) or single workshops of your choice.",
-    "priceTitle": "Price",
     "promo": "Promo*",
     "promoDescription": "*first 10 packages",
-    "from": "from",
-    "till": "till",
     "fullPass": "Full Pass",
-    "groupTitle": "Workshops group",
     "teachers": {
       "pablo": "Pablo",
       "diana": "Diana",
@@ -58,7 +54,7 @@
   "payment": {
     "title": "Payment conditions and options",
     "conditionsTitle": "Conditions",
-    "conditionsText": "All payments for participation in the festival are non-refundable in any case, except cancellation of the festival. If you are not able to visit our festival, you are allowed to transfer your packageto another person with mandatory notification of the organizers. In this case competition categories could be changed to another ones inside the payment made. To add new categories to this registration is possible only if there are free spots left.",
+    "conditionsText": "All payments for participation in the festival are non-refundable in any case, except cancellation of the festival. If you are not able to visit our festival, you are allowed to transfer your package to another person with mandatory notification of the organizers. In this case competition categories could be changed to another ones within the purchased package. To add new categories to this registration is possible only if there are free spots left.",
     "installmentsTitle": "Installments",
     "installmentsText": "There is a possibility to pay your package in 2 installments. The first 50% should be paid right after registration, the other 50% any time before 31.07.2023. This option is not available for Promo packages.",
     "installmentsWarning": "In case if the second payment is failed to be transferred in due time you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",

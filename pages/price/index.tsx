@@ -60,20 +60,10 @@ const Price: NextPage = () => {
 
   const workshops = workshopsPrice.map((period, index) => {
     const getTitle = () => {
+      const startDate = period.startDate?.toLocaleDateString('pl');
+      const endDate = period.endDate?.toLocaleDateString('pl');
       if (period.isPromo) return t('workshops.promo');
-      if (period.startDate && period.endDate) {
-        return `${period.startDate.toLocaleDateString('pl')} – ${period.endDate.toLocaleDateString(
-          'pl'
-        )}`;
-      }
-      if (period.startDate && !period.endDate) {
-        return `${t('workshops.from') + ' ' + period.startDate.toLocaleDateString('pl')}`;
-      }
-      if (!period.startDate && period.endDate) {
-        return `${t('workshops.till') + ' ' + period.endDate.toLocaleDateString('pl')}`;
-      } else {
-        return <></>;
-      }
+      else return `${startDate} – ${endDate}`;
     };
 
     const today = new Date();

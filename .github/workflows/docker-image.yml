@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Deploy main
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: ['main']
 
-  env:
-    NEXT_PUBLIC_PROMO_PERIOD: ${{ vars.ISPROMO }}
+env:
+  NEXT_PUBLIC_PROMO_PERIOD: ${{ vars.ISPROMO }}
 
 jobs:
   build:

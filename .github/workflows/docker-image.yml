@@ -28,8 +28,24 @@ jobs:
       - name: Push the Docker image
         run: docker push cloud.canister.io:5000/vkluchenkov/danceweekend:latest-main
 
-      - name: Deploy Stage
-        uses: fjogeleit/http-request-action@v1
+      #- name: Deploy Stage
+      #uses: fjogeleit/http-request-action@v1
+      #with:
+      #url: ${{ secrets.MASTERWEBHOOK }}
+      #method: 'POST'
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v0.1.8
         with:
-          url: ${{ secrets.MASTERWEBHOOK }}
-          method: 'POST'
+          host: ${{ secrets.SSHHOST }}
+          username: ${{ secrets.SSHUSER }}
+          key: ${{ secrets.SSHKEY }}
+          passphrase: ${{ secrets.SSHPASS }}
+          port: 22
+          script: |
+            docker login --username=${{ secrets.CANISTERLOGIN }} --password=${{ secrets.CANISTERPASS }} cloud.canister.io:5000
+            docker pull cloud.canister.io:5000/vkluchenkov/danceweekend:latest-main
+            docker stop Danceweekend-main
+            docker rm Danceweekend-main
+            docker run -d -p 49161:3000 --name=Danceweekend-main --restart=always --pull=always cloud.canister.io:5000/vkluchenkov/danceweekend:latest-main
+            docker system prune -f

@@ -35,7 +35,6 @@ jobs:
           username: ${{ secrets.SSHUSER }}
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.SSHPASS }}
-          port: 22
           script: |
             docker login --username=${{ secrets.CANISTERLOGIN }} --password=${{ secrets.CANISTERPASS }} cloud.canister.io:5000
             docker pull cloud.canister.io:5000/vkluchenkov/danceweekend:latest-main

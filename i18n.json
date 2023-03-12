@@ -5,6 +5,7 @@
   "pages": {
     "*": ["common"],
     "/": ["home", "cta"],
+    "/registration": ["registration"],
     "/price": ["price"],
     "/404": ["errors"],
     "/competition/rules": ["competitionRules"],

@@ -11,17 +11,17 @@ interface MenuItem {
 }
 
 export const menu: MenuItem[] = [
-  // {
-  //   link: '/registration',
-  //   translations: {
-  //     en: {
-  //       title: 'Registration',
-  //     },
-  //     ru: {
-  //       title: 'Регистрация',
-  //     },
-  //   },
-  // },
+  {
+    link: '/registration',
+    translations: {
+      en: {
+        title: 'Registration',
+      },
+      ru: {
+        title: 'Регистрация',
+      },
+    },
+  },
   {
     link: '/price',
     translations: {

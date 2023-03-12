@@ -1,5 +1,22 @@
 {
   "pageTitle": "Registration",
   "live": "Live festival",
-  "online": "Online festival"
+  "online": "Online festival",
+  "form": {
+    "common": {
+      "required": "This field is required"
+    },
+    "personal": {
+      "title": "Tell us about yourself",
+      "contacts": "And some contact data",
+      "name": "Name",
+      "surname": "Surname",
+      "stageName": "Stage name (if exists)",
+      "age": "Age (on festival start date)",
+      "social": "Social networks profile(s)",
+      "country": "Country",
+      "city": "City",
+      "tel": "Phone number"
+    }
+  }
 }

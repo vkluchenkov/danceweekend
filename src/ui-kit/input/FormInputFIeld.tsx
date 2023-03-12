@@ -34,7 +34,7 @@ export const FormInputField: React.FC<FormInputFieldProps> = ({
       value={value}
       name={name}
       inputRef={ref}
-      // inputProps={inputProps}
+      // InputProps={props.InputProps}
       InputProps={{ ...props.InputProps, required: false }}
     />
   );

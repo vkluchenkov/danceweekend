@@ -1,0 +1,56 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 250px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+.cta__button {
+  min-width: 215px;
+  background: none;
+  border: 1px solid var(--main-text-color);
+  border-radius: 5px;
+  padding: 8px 20px;
+
+  color: var(--main-text-color);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  margin: 10px 0 15px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.cta__button:hover {
+  opacity: 0.7;
+}
+
+@media screen and (min-width: 768px) {
+  .section {
+    min-height: 500px;
+    gap: 25px;
+  }
+
+  .cta__button {
+    border-radius: 7px;
+    padding: 10px 30px;
+    font-size: 20px;
+    margin: 10px 0 10px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .cta__button {
+    margin: 10px 0 -10px;
+    opacity: 1;
+  }
+}

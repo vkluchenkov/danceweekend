@@ -4,7 +4,7 @@
   "online": "Online version",
   "workshops": {
     "title": "Workshops",
-    "description": "It’s possible to buy workshops as a FULL PASS (all the festival workshops) or single workshops of your choice.",
+    "description": "It’s possible to buy workshops as a package — FULL PASS (all the festival workshops) or single workshops of your choice.",
     "promo": "Promo*",
     "promoDescription": "*first 10 packages",
     "fullPass": "Full Pass",
@@ -21,11 +21,11 @@
     },
     "kidsDiscount": "Kids and baby age groups get 50% discount on Full Pass, applied automatically during the registration",
     "groupOfferTitle": "Special offer for groups!",
-    "groupOfferText": "When you register group of 3+ persons, each participant in this group entitled to 20% discount for Full Pass (in condition that every person from this group buys Full Pass). Please, choose this discount during the registration. Discount can not be summarized with personal discounts or discounts for kids."
+    "groupOfferText": "When you register a group of 3+ persons, each participant in this group is entitled to 20% discount for Full Pass (on condition that every person from this group buys Full Pass). Please, choose this discount during the registration. Discount can not be summarized with personal discounts or discounts for kids."
   },
   "competition": {
     "title": "Competition price",
-    "attention": "Attention! To be able to take part in competition, you must order workshops. At least <0>one workshop or Full Pass</0> for kids, at least <0>3 workshops or Full Pass</0> for adults.",
+    "attention": "Attention! In order to take part in competition, you must have workshops. At least <0>one workshop or Full Pass</0> for kids, at least <0>3 workshops or Full Pass</0> for adults.",
     "categoryTitle": "Category",
     "kids": "Kids and baby solo",
     "juniors+": "Juniors and adults solo",
@@ -34,7 +34,7 @@
     "professionals": "Professionals and Queen of live tabla",
     "professionalsOnline": "Professionals",
     "soloPass": "Solo Pass",
-    "solosPassDescription": "With the Solo pass you can dance unlimited times in all solo categories, except live tabla solo. You save when dance more than 3 times.",
+    "solosPassDescription": "With the Solo pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
     "soloPassKids": "Kids and baby",
     "soloPassRisingStar": "Rising star / open level",
     "soloPassProfessionals": "Professionals",
@@ -45,7 +45,7 @@
   },
   "worldShow": {
     "title": "World show",
-    "attention": "Attention! To be able to take part in World show, you must order workshops. At least <0>one workshop or Full Pass</0> for kids, at least <0>3 workshops or Full Pass</0> for adults.",
+    "attention": "Attention! To participate in World show, you must order workshops. At least <0>one workshop or Full Pass</0> for kids, at least <0>3 workshops or Full Pass</0> for adults.",
     "soloNormal": "Solo performance",
     "soloDiscounted": "Solo performance (with Full Pass)",
     "groups": "Groups and duos",
@@ -54,22 +54,22 @@
   "payment": {
     "title": "Payment conditions and options",
     "conditionsTitle": "Conditions",
-    "conditionsText": "All payments for participation in the festival are non-refundable in any case, except cancellation of the festival. If you are not able to visit our festival, you are allowed to transfer your package to another person with mandatory notification of the organizers. In this case competition categories could be changed to another ones within the purchased package. To add new categories to this registration is possible only if there are free spots left.",
+    "conditionsText": "All the payments for the participation in the festival are non-refundable in any case, except for the cancellation of the festival. If you are not able to visit our festival, you are allowed to transfer your package to another person with mandatory notification of the organizers. In this case competition categories could be changed to other ones within the purchased package. Addition of new categories to this registration is possible only if there are free spots left.",
     "installmentsTitle": "Installments",
-    "installmentsText": "There is a possibility to pay your package in 2 installments. The first 50% should be paid right after registration, the other 50% any time before 31.07.2023. This option is not available for Promo packages.",
-    "installmentsWarning": "In case if the second payment is failed to be transferred in due time you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
+    "installmentsText": "There is a possibility to pay for your package in 2 installments. The first 50% should be paid right after the registration, the other 50% any time before 31.07.2023. This option is not available for Promo packages.",
+    "installmentsWarning": "In case if the second payment is failed to be transferred in due time, you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
     "optionsTitle": "Payment options",
-    "optionsDescription": "Details for chosen payment options will be provided after the registration.",
+    "optionsDescription": "Details for the chosen payment options will be provided after the registration.",
     "optionsCards": "Credit / debit cards",
     "optionsPayPal": "PayPal",
     "optionsBank": "Bank transfer (SWIFT) to Polish bank",
     "ImmediateArrival": "immediate arrival",
     "bankeArrival": "arrival in 3-10 work days",
     "termsTitle": "Payment terms",
-    "term1": "If registration is made with “regular” prices, payment should be completed within 5 work days. Otherwise your registration will be cancelled.",
-    "term2": "If registration is made with “promo” or “sale” prices, payment should be completed within 1 work day. Otherwise your registration will be cancelled.",
+    "term1": "If the registration is made with “regular” prices, payment should be completed within 5 work days. Otherwise your registration will be cancelled.",
+    "term2": "If the registration is made with “promo” or “sale” prices, payment should be completed within 1 work day. Otherwise your registration will be cancelled.",
     "term3": "Work day – is a day when banks and other financial institutions work in your country.",
-    "term4": "We recommend to save and send to us your payment confirmation. It can be a bank receipt, an internet bank receipt or a screenshot, etc."
+    "term4": "We recommend to save and send us your payment confirmation. It can be a bank receipt, an internet bank receipt or a screenshot, etc."
   },
   "privacyPolicy": {
     "title": "Privacy policy and personal data",

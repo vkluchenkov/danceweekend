@@ -245,11 +245,11 @@ export const schedule: Day[] = [
         translations: {
           en: {
             title: 'Diana Gnatchenko',
-            description: 'Pop song',
+            description: 'Pop song choreography',
           },
           ru: {
             title: 'Диана Гнатченко',
-            description: 'Pop song',
+            description: 'Хореография Pop song',
           },
         },
       },

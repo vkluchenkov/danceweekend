@@ -26,7 +26,7 @@ export const menu: MenuItem[] = [
     link: '/price',
     translations: {
       en: {
-        title: 'Price',
+        title: 'Prices',
       },
       ru: {
         title: 'Цены',

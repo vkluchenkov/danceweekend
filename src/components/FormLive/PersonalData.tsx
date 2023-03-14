@@ -5,7 +5,13 @@ import textStyles from '@/styles/Text.module.css';
 import { useEffect } from 'react';
 import { Button } from '@mui/material';
 
-export const PersonalData: React.FC = () => {
+interface StepProps {
+  onNext?: () => void;
+  onPrev?: () => void;
+  currentStep: number;
+}
+
+export const PersonalData: React.FC<StepProps> = ({ onNext, onPrev, currentStep }) => {
   const { t } = useTranslation('registration');
   const methods = useFormContext();
 
@@ -21,6 +27,10 @@ export const PersonalData: React.FC = () => {
   //   const subscription = watch((value, { name, type }) => console.log(value));
   //   return () => subscription.unsubscribe();
   // }, [watch]);
+
+  const onSubmit = () => {
+    console.log(1);
+  };
 
   return (
     <>
@@ -130,7 +140,14 @@ export const PersonalData: React.FC = () => {
         helperText={errors?.tel?.message as string | undefined}
       />
 
-      <Button type='submit' variant='contained' size='large' disableElevation fullWidth>
+      <Button
+        type='button'
+        variant='contained'
+        size='large'
+        disableElevation
+        fullWidth
+        onClick={handleSubmit(onNext ? onNext : () => {})}
+      >
         Submit me
       </Button>
     </>

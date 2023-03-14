@@ -131,6 +131,7 @@ export const PersonalData: React.FC<StepProps> = ({ onNext, onPrev, currentStep 
       <FormInputField
         name='tel'
         type='tel'
+        placeholder='+48 123456789'
         label={t('form.personal.tel')}
         control={control}
         rules={{

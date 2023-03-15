@@ -6,12 +6,10 @@ import { useEffect } from 'react';
 import { Button } from '@mui/material';
 
 interface StepProps {
-  onNext?: () => void;
-  onPrev?: () => void;
-  currentStep: number;
+  onStepSubmit: (direction: 'next' | 'prev') => void;
 }
 
-export const PersonalData: React.FC<StepProps> = ({ onNext, onPrev, currentStep }) => {
+export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
   const { t } = useTranslation('registration');
   const methods = useFormContext();
 
@@ -27,10 +25,6 @@ export const PersonalData: React.FC<StepProps> = ({ onNext, onPrev, currentStep 
   //   const subscription = watch((value, { name, type }) => console.log(value));
   //   return () => subscription.unsubscribe();
   // }, [watch]);
-
-  const onSubmit = () => {
-    console.log(1);
-  };
 
   return (
     <>
@@ -147,9 +141,9 @@ export const PersonalData: React.FC<StepProps> = ({ onNext, onPrev, currentStep 
         size='large'
         disableElevation
         fullWidth
-        onClick={handleSubmit(onNext ? onNext : () => {})}
+        onClick={handleSubmit(() => onStepSubmit('next'))}
       >
-        Submit me
+        Next →
       </Button>
     </>
   );

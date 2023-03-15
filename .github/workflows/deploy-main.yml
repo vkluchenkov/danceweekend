@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: ['main']
 
-env:
-  NEXT_PUBLIC_PROMO_PERIOD: ${{ vars.ISPROMO }}
-
 jobs:
   build:
     runs-on: ubuntu-latest

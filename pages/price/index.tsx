@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import {
   contestGroupPrice,
   contestSoloPrice,
+  ispromoPeriod,
   teachersWsGroups,
   workshopsPrice,
   worldShowPrice,
@@ -55,8 +56,6 @@ const Price: NextPage = () => {
 
   const group1Names = teachersWsGroups.group1.map((n) => t(`workshops.teachers.${n}`)).join(', ');
   const group2Names = teachersWsGroups.group2.map((n) => t(`workshops.teachers.${n}`)).join(', ');
-
-  const ispromoPeriod = process.env.NEXT_PUBLIC_PROMO_PERIOD === 'true' ? true : false;
 
   const workshops = workshopsPrice.map((period, index) => {
     const getTitle = () => {

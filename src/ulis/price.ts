@@ -31,6 +31,8 @@ interface ContestSoloPrice {
   };
 }
 
+export const ispromoPeriod = true;
+
 export const teachersWsGroups = {
   group1: ['pablo', 'diana', 'alexey', 'leandro', 'chronis', 'aliahChronis'],
   group2: ['polina', 'eva', 'levana'],

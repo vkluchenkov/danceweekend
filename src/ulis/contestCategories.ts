@@ -211,7 +211,7 @@ export const contestCategories: ContestCategory[] = [
         title: 'Kids solo',
       },
       ru: {
-        title: 'Дети начинающие',
+        title: 'Дети соло',
       },
     },
     categories: soloSet,
@@ -245,7 +245,7 @@ export const contestCategories: ContestCategory[] = [
         types: ['live', 'online'],
         translations: {
           en: {
-            categoryTitle: 'Bbollywood',
+            categoryTitle: 'Bollywood',
           },
           ru: {
             categoryTitle: 'Болливуд',

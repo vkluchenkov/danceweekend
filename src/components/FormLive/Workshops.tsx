@@ -1,13 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import { useMemo } from 'react';
-import { Button, FormControlLabel } from '@mui/material';
+import { Button } from '@mui/material';
 import { SupportedLangs } from '@/src/types';
 import { ispromoPeriod, workshopsPrice } from '@/src/ulis/price';
-import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
-import { WorkshopsField, StepProps } from './types';
-import clsx from 'clsx';
+import { StepProps } from './types';
+import { WorkshopsList } from './WorkshopsList';
 
 export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
   const { t, lang } = useTranslation('registration');
@@ -15,21 +14,7 @@ export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
 
   const { handleSubmit, setValue, control, watch } = methods;
 
-  const { fields } = useFieldArray({
-    control,
-    name: 'workshops',
-  });
-
   const currentLang = lang as SupportedLangs;
-
-  const watchWorkshops: WorkshopsField = watch('workshops');
-
-  const controlledFields = fields.map((field, index) => {
-    return {
-      ...field,
-      ...watchWorkshops[index],
-    };
-  });
 
   const getCurrentPricePeriod = useMemo(() => {
     const today = new Date();
@@ -39,57 +24,11 @@ export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
     }
   }, []);
 
-  const handleChange = (
-    wsId: number,
-    event: React.ChangeEvent<HTMLInputElement>,
-    checked: boolean
-  ) => {
-    const wsIndex = watchWorkshops.findIndex((ws) => ws.id === wsId);
-    setValue(`workshops.${wsIndex}.selected`, checked, { shouldTouch: true });
-  };
-
-  const days = controlledFields.map((ws) => ws.day);
-  const uniqueDays = Array.from(new Set(days));
-
-  const workshops = uniqueDays.map((day) => {
-    const workshopsInputs = controlledFields.map((ws) => {
-      const price = getCurrentPricePeriod?.price.live[`${ws.teachersPriceGroup!}Price`];
-      if (ws.day === day) {
-        return (
-          <FormControlLabel
-            key={ws.id}
-            control={
-              <InputCheckbox checked={ws.selected} onChange={handleChange.bind(null, ws.id)} />
-            }
-            label={
-              <p className={textStyles.p}>
-                {ws.start}—{ws.end}
-                <br />
-                {ws.translations[currentLang].title}: {ws.translations[currentLang].description}
-                <br />
-                {price}€
-              </p>
-            }
-          />
-        );
-      }
-    });
-
-    return (
-      <>
-        <h3 className={clsx(textStyles.h2, textStyles.accent)} key={day}>
-          {day}
-        </h3>
-        {workshopsInputs}
-      </>
-    );
-  });
-
   return (
     <>
       <h2 className={textStyles.h2}>Workshops</h2>
 
-      {workshops}
+      <WorkshopsList currentPricePeriod={getCurrentPricePeriod} />
 
       <Button
         type='button'

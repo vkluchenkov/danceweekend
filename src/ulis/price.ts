@@ -8,6 +8,9 @@ export const teachersWsGroups = {
   group2: ['polina', 'eva', 'levana'],
 };
 
+export const kidsDiscount = 0.5;
+export const kidsMaxAge = 11;
+
 export const workshopsPrice: PricePeriod[] = [
   {
     isPromo: true,

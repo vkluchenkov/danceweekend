@@ -4,7 +4,7 @@ import textStyles from '@/styles/Text.module.css';
 import { useEffect, useMemo, useState } from 'react';
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { SupportedLangs } from '@/src/types';
-import { ispromoPeriod, workshopsPrice } from '@/src/ulis/price';
+import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
 import { StepProps, WorkshopsField } from './types';
 import { WorkshopsList } from './WorkshopsList';
 
@@ -41,8 +41,8 @@ export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
   };
 
   const fullPassPrice =
-    age < 12
-      ? getCurrentPricePeriod && getCurrentPricePeriod.price.live.fullPassPrice / 2
+    age <= kidsMaxAge
+      ? getCurrentPricePeriod && getCurrentPricePeriod.price.live.fullPassPrice * kidsDiscount
       : getCurrentPricePeriod?.price.live.fullPassPrice;
 
   return (

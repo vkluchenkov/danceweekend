@@ -1,6 +1,21 @@
 import { SupportedLangs } from '@/src/types';
 
-interface Event {
+export interface Workshop {
+  id: number;
+  start: string;
+  end: string;
+  translations: {
+    [lang in SupportedLangs]: {
+      title: string;
+      description?: string;
+    };
+  };
+  type: 'workshop';
+  teachersPriceGroup: 'group1' | 'group2';
+}
+
+interface OtherEvent {
+  id: number;
   start: string;
   end?: string;
   translations: {
@@ -9,7 +24,10 @@ interface Event {
       description?: string;
     };
   };
+  type: 'show' | 'contest' | 'other';
 }
+
+type Event = Workshop | OtherEvent;
 
 interface Day {
   translations: {
@@ -32,7 +50,9 @@ export const schedule: Day[] = [
     },
     dayEvents: [
       {
+        id: 1,
         start: '8:30',
+        type: 'other',
         translations: {
           en: {
             title: 'Check-in',
@@ -43,8 +63,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 2,
         start: '9:00',
         end: '11:00',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Aleksey Riaboshapka',
@@ -57,8 +80,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 3,
         start: '11:15',
         end: '13:15',
+        type: 'workshop',
+        teachersPriceGroup: 'group2',
         translations: {
           en: {
             title: 'Eva Charkina',
@@ -71,8 +97,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 4,
         start: '13:30',
         end: '16:00',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Aliah & Chronis Taxidis',
@@ -85,8 +114,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 5,
         start: '16:15',
         end: '18:15',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Leandro Ferreyra',
@@ -99,7 +131,9 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 6,
         start: '20:00',
+        type: 'other',
         translations: {
           en: {
             title: 'Welcome party',
@@ -122,8 +156,11 @@ export const schedule: Day[] = [
     },
     dayEvents: [
       {
+        id: 7,
         start: '9:00',
         end: '11:30',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Diana Gnatchenko',
@@ -136,8 +173,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 8,
         start: '11:45',
         end: '13:45',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Pablo Acosta',
@@ -150,8 +190,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 9,
         start: '14:00',
         end: '15:30',
+        type: 'workshop',
+        teachersPriceGroup: 'group2',
         translations: {
           en: {
             title: 'Polina Ostrovska',
@@ -164,8 +207,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 10,
         start: '16:45',
         end: '18:15',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Chronis Taxidis',
@@ -178,7 +224,9 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 11,
         start: '20:00',
+        type: 'show',
         translations: {
           en: {
             title: 'Arabic Dreams gala show',
@@ -203,7 +251,9 @@ export const schedule: Day[] = [
     },
     dayEvents: [
       {
+        id: 12,
         start: '9:00',
+        type: 'contest',
         translations: {
           en: {
             title: 'Competition',
@@ -226,8 +276,11 @@ export const schedule: Day[] = [
     },
     dayEvents: [
       {
+        id: 13,
         start: '9:00',
         end: '11:00',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Aleksey Riaboshapka',
@@ -240,8 +293,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 14,
         start: '11:15',
         end: '13:45',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Diana Gnatchenko',
@@ -254,8 +310,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 15,
         start: '14:00',
         end: '16:00',
+        type: 'workshop',
+        teachersPriceGroup: 'group2',
         translations: {
           en: {
             title: 'Levana',
@@ -268,8 +327,11 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 16,
         start: '16:15',
         end: '18:15',
+        type: 'workshop',
+        teachersPriceGroup: 'group1',
         translations: {
           en: {
             title: 'Pablo Acosta',
@@ -282,7 +344,9 @@ export const schedule: Day[] = [
         },
       },
       {
+        id: 17,
         start: '19:00',
+        type: 'show',
         translations: {
           en: {
             title: 'World show',

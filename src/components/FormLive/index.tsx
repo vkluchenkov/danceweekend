@@ -1,32 +1,12 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { PersonalData } from './PersonalData';
 import styles from '@/styles/Registration.module.css';
-import { useCallback, useState } from 'react';
-import { Button } from '@mui/material';
-import next from 'next';
+import { useCallback, useEffect, useState } from 'react';
 import { Workshops } from './Workshops';
-
-type StepId = 'personal' | 'workshops' | 'constestSolo' | 'contestGroups' | 'worldShow' | 'summary';
-
-interface Step {
-  id: StepId;
-  // component: React.ReactNode;
-  prev: StepId | null;
-  next: StepId | null;
-  showOn?: boolean;
-}
-
-interface FormFields {
-  name: string;
-  surname: string;
-  stageName: string;
-  age: number;
-  email: string;
-  social: string;
-  country: string;
-  city: string;
-  tel: string;
-}
+import { schedule, Workshop } from '@/src/ulis/schedule';
+import useTranslation from 'next-translate/useTranslation';
+import { SupportedLangs } from '@/src/types';
+import { FormFields, Step, StepId, WorkshopsField } from './types';
 
 const steps: Step[] = [
   {
@@ -41,7 +21,14 @@ const steps: Step[] = [
   },
 ];
 
+const defaultValues: Partial<FormFields> = {
+  isFullPass: false,
+  isSoloPass: false,
+};
+
 export const FormLive: React.FC = () => {
+  const { t, lang } = useTranslation();
+  const currentLang = lang as SupportedLangs;
   const [currentStep, setCurrentStep] = useState<StepId>('personal');
 
   const hanleSteps = useCallback(
@@ -52,8 +39,22 @@ export const FormLive: React.FC = () => {
     [currentStep]
   );
 
-  const methods = useForm<FormFields>();
-  const { handleSubmit, getValues } = methods;
+  const methods = useForm<FormFields>({
+    defaultValues: defaultValues,
+  });
+  const { handleSubmit, getValues, setValue } = methods;
+
+  // Map workshops data into form state
+  useEffect(() => {
+    const res: WorkshopsField = [];
+    schedule.forEach((day) => {
+      day.dayEvents.forEach((event) => {
+        event.type === 'workshop' &&
+          res.push({ ...event, selected: false, day: day.translations[currentLang].dayTitle });
+      });
+    });
+    setValue('workshops', res);
+  }, [setValue, currentLang]);
 
   const onSubmit = (data: any) => console.log(data);
 

@@ -4,11 +4,13 @@
   "online": "Online festival",
   "form": {
     "common": {
-      "required": "This field is required"
+      "required": "This field is required",
+      "prev": "← Back",
+      "next": "Next →"
     },
     "personal": {
       "title": "Tell us about yourself",
-      "contacts": "And some contact data",
+      "contacts": "Contact data",
       "name": "Name",
       "surname": "Surname",
       "stageName": "Stage name (if exists)",
@@ -17,6 +19,9 @@
       "country": "Country",
       "city": "City",
       "tel": "Phone number"
+    },
+    "workshops": {
+      "title": "Workshops"
     }
   }
 }

@@ -143,7 +143,7 @@ export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
         fullWidth
         onClick={handleSubmit(() => onStepSubmit('next'))}
       >
-        Next →
+        {t('form.common.next')}
       </Button>
     </>
   );

@@ -1,11 +1,11 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { SupportedLangs } from '@/src/types';
 import { ispromoPeriod, workshopsPrice } from '@/src/ulis/price';
-import { StepProps } from './types';
+import { StepProps, WorkshopsField } from './types';
 import { WorkshopsList } from './WorkshopsList';
 
 type WorkshopsType = 'fullPass' | 'single';
@@ -18,22 +18,32 @@ export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
 
   const { handleSubmit, setValue, control, watch } = methods;
 
-  const currentLang = lang as SupportedLangs;
-
   const getCurrentPricePeriod = useMemo(() => {
     const today = new Date();
     if (ispromoPeriod) return workshopsPrice.find((i) => i.isPromo);
-    else {
-      return workshopsPrice.find((i) => i.startDate! <= today && today <= i.endDate!);
-    }
+    else return workshopsPrice.find((i) => i.startDate! <= today && today <= i.endDate!);
   }, []);
+
+  const isFullPass: boolean = watch('isFullPass');
+  const isWorkshops: WorkshopsField = watch('workshops');
+  const age: number = watch('age');
+
+  // Restore Full pass selection state
+  useEffect(() => {
+    const isSinglesSelected = isWorkshops.filter((ws) => ws.selected);
+    if (isFullPass) setWorkshopsType('fullPass');
+    else if (isSinglesSelected.length) setWorkshopsType('single');
+  }, [isFullPass, isWorkshops]);
 
   const handleFullPass = (event: React.ChangeEvent<HTMLInputElement>, value: WorkshopsType) => {
     setValue('isFullPass', value === 'fullPass', { shouldTouch: true });
     setWorkshopsType(value);
   };
 
-  const fullPassPrice = getCurrentPricePeriod?.price.live.fullPassPrice;
+  const fullPassPrice =
+    age < 12
+      ? getCurrentPricePeriod && getCurrentPricePeriod.price.live.fullPassPrice / 2
+      : getCurrentPricePeriod?.price.live.fullPassPrice;
 
   return (
     <>

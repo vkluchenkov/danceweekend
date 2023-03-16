@@ -20,6 +20,7 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = ({ currentPricePeri
   const { fields } = useFieldArray({
     control,
     name: 'workshops',
+    keyName: 'id',
   });
 
   const currentLang = lang as SupportedLangs;

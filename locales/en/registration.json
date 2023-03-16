@@ -21,7 +21,10 @@
       "tel": "Phone number"
     },
     "workshops": {
-      "title": "Workshops"
+      "title": "Workshops",
+      "selectTitle": "I want to take workshops as:",
+      "fullPass": "Full Pass",
+      "singleWs": "Single workshops"
     }
   }
 }

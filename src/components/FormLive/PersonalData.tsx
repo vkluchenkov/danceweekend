@@ -4,10 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import { useEffect } from 'react';
 import { Button } from '@mui/material';
-
-interface StepProps {
-  onStepSubmit: (direction: 'next' | 'prev') => void;
-}
+import { StepProps } from './types';
 
 export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
   const { t } = useTranslation('registration');
@@ -16,15 +13,8 @@ export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
   const {
     handleSubmit,
     control,
-    watch,
     formState: { errors },
-    setError,
   } = methods;
-
-  // useEffect(() => {
-  //   const subscription = watch((value, { name, type }) => console.log(value));
-  //   return () => subscription.unsubscribe();
-  // }, [watch]);
 
   return (
     <>

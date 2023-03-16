@@ -1,38 +1,8 @@
-import { Version } from '@/src/types';
-
-interface PricePeriod {
-  price: {
-    [version in Version]: {
-      fullPassPrice: number;
-      group1Price: number;
-      group2Price: number;
-    };
-  };
-  description?: string;
-  startDate?: Date;
-  endDate?: Date;
-  isPromo?: boolean;
-}
-
-type SoloPriceCats =
-  | 'kids'
-  | 'risingStar'
-  | 'professionals'
-  | 'soloPassKids'
-  | 'soloPassRisingStar'
-  | 'soloPassProfessionals';
-
-interface ContestSoloPrice {
-  price: {
-    [version in Version]: {
-      priceNormal: number;
-      priceDiscounted: number;
-    };
-  };
-}
+import { PricePeriod, SoloPriceCats, ContestSoloPrice } from '@/src/types';
 
 export const ispromoPeriod = true;
 
+//Translation keys for Price page
 export const teachersWsGroups = {
   group1: ['pablo', 'diana', 'alexey', 'leandro', 'chronis', 'aliahChronis'],
   group2: ['polina', 'eva', 'levana'],
@@ -40,6 +10,7 @@ export const teachersWsGroups = {
 
 export const workshopsPrice: PricePeriod[] = [
   {
+    isPromo: true,
     price: {
       live: {
         fullPassPrice: 249,
@@ -53,7 +24,6 @@ export const workshopsPrice: PricePeriod[] = [
       },
     },
     description: 'promoDescription',
-    isPromo: true,
   },
   {
     price: {
@@ -68,7 +38,7 @@ export const workshopsPrice: PricePeriod[] = [
         group2Price: 20,
       },
     },
-    startDate: new Date('2023-03-10T00:00:00+01:00'),
+    startDate: new Date('2023-03-10T00:00:00+01:00'), //Must start before current date
     endDate: new Date('2023-05-31T23:59:59+01:00'),
   },
   {
@@ -84,7 +54,7 @@ export const workshopsPrice: PricePeriod[] = [
         group2Price: 25,
       },
     },
-    startDate: new Date('2023-06-01T00:00:00+01:00'),
+    startDate: new Date('2023-06-01T00:00:00+01:00'), //Must start immediately after previous
     endDate: new Date('2023-07-31T23:59:59+01:00'),
   },
   {
@@ -100,7 +70,7 @@ export const workshopsPrice: PricePeriod[] = [
         group2Price: 30,
       },
     },
-    startDate: new Date('2023-08-01T00:00:00+01:00'),
+    startDate: new Date('2023-08-01T00:00:00+01:00'), //Must start immediately after previous
     endDate: new Date('2023-08-16T23:59:59+01:00'),
   },
 ];

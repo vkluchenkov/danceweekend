@@ -29,5 +29,9 @@ export interface Step {
   id: StepId;
   prev: StepId | null;
   next: StepId | null;
-  showOn?: boolean;
+  showConditions?: boolean;
+}
+
+export interface StepProps {
+  onStepSubmit: (direction: 'next' | 'prev') => void;
 }

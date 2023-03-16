@@ -1,33 +1,19 @@
-import { FormInputField } from '@/src/ui-kit/input';
 import useTranslation from 'next-translate/useTranslation';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Button, FormControlLabel } from '@mui/material';
-import { schedule, Workshop } from '@/src/ulis/schedule';
 import { SupportedLangs } from '@/src/types';
 import { ispromoPeriod, workshopsPrice } from '@/src/ulis/price';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
-import { WorkshopsField } from './types';
+import { WorkshopsField, StepProps } from './types';
 import clsx from 'clsx';
-import { text } from 'stream/consumers';
-
-interface StepProps {
-  onStepSubmit: (direction: 'next' | 'prev') => void;
-}
 
 export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
   const { t, lang } = useTranslation('registration');
   const methods = useFormContext();
 
-  const {
-    handleSubmit,
-    setValue,
-    control,
-    watch,
-    formState: { errors },
-    setError,
-  } = methods;
+  const { handleSubmit, setValue, control, watch } = methods;
 
   const { fields } = useFieldArray({
     control,
@@ -104,18 +90,6 @@ export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
       <h2 className={textStyles.h2}>Workshops</h2>
 
       {workshops}
-
-      {/* <FormInputField
-        autoFocus
-        name='name'
-        label={t('form.personal.name')}
-        control={control}
-        rules={{
-          required: t('form.common.required'),
-        }}
-        error={!!errors.name}
-        helperText={errors?.name?.message as string | undefined}
-      /> */}
 
       <Button
         type='button'

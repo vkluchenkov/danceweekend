@@ -15,6 +15,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRef }) => {
   const mainRef = useRef<HTMLDivElement | null>(null);
+  const mainHomeRef = useRef<HTMLDivElement | null>(null);
   const lineRef = useRef<HTMLDivElement | null>(null);
 
   // Handle viewport changes on mobile (and not)
@@ -63,14 +64,14 @@ export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRe
       <div className={styles.imageDivider} ref={lineRef}>
         <Divider />
       </div>
-      <main ref={mainRef} className={styles.main}>
+      <main ref={mainHomeRef} className={styles.main}>
         {children}
         <Footer />
       </main>
     </>
   ) : (
     <>
-      <main className={clsx(styles.main, styles.main_notHome)}>
+      <main ref={mainRef} className={clsx(styles.main, styles.main_notHome)}>
         <div className={styles.contentWrapper}>{children}</div>
         <Footer />
       </main>
@@ -93,7 +94,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRe
         <meta name='og:image:height' content='1500' />
         <link rel='icon' href='images/favicon.png' />
       </Head>
-      <Header isHome={isHome} />
+      <Header isHome={isHome} mainHomeRef={mainHomeRef} mainRef={mainRef} />
       {Main}
     </>
   );

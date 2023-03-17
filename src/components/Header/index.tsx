@@ -12,9 +12,10 @@ interface HeaderProps {
   isHome?: boolean;
   mainRef: MutableRefObject<HTMLDivElement | null>;
   mainHomeRef: MutableRefObject<HTMLDivElement | null>;
+  lineRef?: MutableRefObject<HTMLDivElement | null>;
 }
 
-export const Header: React.FC<HeaderProps> = ({ isHome, mainRef, mainHomeRef }) => {
+export const Header: React.FC<HeaderProps> = ({ isHome, mainRef, mainHomeRef, lineRef }) => {
   const headerRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -35,6 +36,21 @@ export const Header: React.FC<HeaderProps> = ({ isHome, mainRef, mainHomeRef }) 
       return () => header.removeEventListener('wheel', handleWheel);
     }
   }, [mainRef, mainHomeRef]);
+
+  // Pass scroll on image divider to main
+  useEffect(() => {
+    const line = lineRef?.current;
+
+    const handleWheel = (e: WheelEvent) => {
+      const mainEl = mainRef.current || mainHomeRef.current;
+      if (mainEl) mainEl.scrollBy({ top: e.deltaY, left: 0, behavior: 'auto' });
+    };
+
+    if (isHome && line) {
+      line.addEventListener('wheel', handleWheel);
+      return () => line.removeEventListener('wheel', handleWheel);
+    }
+  }, [mainRef, mainHomeRef, lineRef, isHome]);
 
   return (
     <>

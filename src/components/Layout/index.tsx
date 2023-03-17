@@ -94,7 +94,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRe
         <meta name='og:image:height' content='1500' />
         <link rel='icon' href='images/favicon.png' />
       </Head>
-      <Header isHome={isHome} mainHomeRef={mainHomeRef} mainRef={mainRef} />
+      <Header isHome={isHome} mainHomeRef={mainHomeRef} mainRef={mainRef} lineRef={lineRef} />
       {Main}
     </>
   );

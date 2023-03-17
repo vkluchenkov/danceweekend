@@ -34,7 +34,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRe
   // Handle "sticky" line on Home page
   useEffect(() => {
     if (isHome) {
-      const mainEl = mainRef.current;
+      const mainEl = mainHomeRef.current;
       const imageEl = imageRef?.current;
       const lineEl = lineRef.current;
 

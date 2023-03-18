@@ -35,7 +35,7 @@ jobs:
           script: |
             docker login --username=${{ secrets.CANISTERLOGIN }} --password=${{ secrets.CANISTERPASS }} cloud.canister.io:5000
             docker pull cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev
-            docker stop Danceweekend-main
-            docker rm Danceweekend-main
-            docker run -d -p 49162:3000 --name=Danceweekend-main --restart=always --pull=always cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev
+            docker stop Danceweekend-dev
+            docker rm Danceweekend-dev
+            docker run -d -p 49162:3000 --name=Danceweekend-dev --restart=always --pull=always cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev
             docker system prune -f

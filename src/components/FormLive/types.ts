@@ -3,6 +3,8 @@ import { Workshop } from '@/src/ulis/schedule';
 
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
 
+export type WorkshopsType = 'fullPass' | 'single';
+
 export interface FormFields {
   isSoloPass: boolean;
   isFullPass: boolean;
@@ -16,6 +18,7 @@ export interface FormFields {
   city: string;
   tel: string;
   workshops: WorkshopsField;
+  workshopsType: WorkshopsType;
 }
 
 export type StepId =

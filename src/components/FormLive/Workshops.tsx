@@ -5,10 +5,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { SupportedLangs } from '@/src/types';
 import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
-import { StepProps, WorkshopsField, WorkshopsStepProps } from './types';
+import { StepProps, WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
 import { WorkshopsList } from './WorkshopsList';
-
-type WorkshopsType = 'fullPass' | 'single';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   onStepSubmit,
@@ -16,14 +14,13 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   currentPricePeriod,
   fullPassPrice,
 }) => {
-  const [workshopsType, setWorkshopsType] = useState<WorkshopsType | null>(null);
-
   const { t, lang } = useTranslation('registration');
   const methods = useFormContext();
 
   const { handleSubmit, setValue, control, watch } = methods;
 
   const isFullPass: boolean = watch('isFullPass');
+  const workshopsType: WorkshopsType = watch('workshopsType');
   const isWorkshops: WorkshopsField = watch('workshops');
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
@@ -39,16 +36,9 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
     }
   }, [selectedWorkshops, isFullPass, currentPricePeriod, fullPassPrice, setWsTotal]);
 
-  // Restore Full pass selection state
-  useEffect(() => {
-    const isSinglesSelected = isWorkshops.filter((ws) => ws.selected);
-    if (isFullPass) setWorkshopsType('fullPass');
-    else if (isSinglesSelected.length) setWorkshopsType('single');
-  }, [isFullPass, isWorkshops]);
-
   const handleFullPass = (event: React.ChangeEvent<HTMLInputElement>, value: WorkshopsType) => {
     setValue('isFullPass', value === 'fullPass', { shouldTouch: true });
-    setWorkshopsType(value);
+    setValue('workshopsType', value, { shouldTouch: true });
   };
 
   return (

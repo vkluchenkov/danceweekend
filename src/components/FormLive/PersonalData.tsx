@@ -53,7 +53,7 @@ export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
 
       <FormInputField
         name='age'
-        type='number'
+        type='tel'
         label={t('form.personal.age')}
         rules={{
           required: t('form.common.required'),

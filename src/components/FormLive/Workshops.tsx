@@ -5,12 +5,17 @@ import { useEffect, useMemo, useState } from 'react';
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { SupportedLangs } from '@/src/types';
 import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
-import { StepProps, WorkshopsField } from './types';
+import { StepProps, WorkshopsField, WorkshopsStepProps } from './types';
 import { WorkshopsList } from './WorkshopsList';
 
 type WorkshopsType = 'fullPass' | 'single';
 
-export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
+export const Workshops: React.FC<WorkshopsStepProps> = ({
+  onStepSubmit,
+  setWsTotal,
+  currentPricePeriod,
+  fullPassPrice,
+}) => {
   const [workshopsType, setWorkshopsType] = useState<WorkshopsType | null>(null);
 
   const { t, lang } = useTranslation('registration');
@@ -18,15 +23,21 @@ export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
 
   const { handleSubmit, setValue, control, watch } = methods;
 
-  const getCurrentPricePeriod = useMemo(() => {
-    const today = new Date();
-    if (ispromoPeriod) return workshopsPrice.find((i) => i.isPromo);
-    else return workshopsPrice.find((i) => i.startDate! <= today && today <= i.endDate!);
-  }, []);
-
   const isFullPass: boolean = watch('isFullPass');
   const isWorkshops: WorkshopsField = watch('workshops');
-  const age: number = watch('age');
+  const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
+
+  useEffect(() => {
+    if (isFullPass && fullPassPrice) setWsTotal(fullPassPrice);
+    else if (!selectedWorkshops) setWsTotal(0);
+    else {
+      const wsPrice = selectedWorkshops.reduce((prev, current) => {
+        const price = currentPricePeriod?.price.live[`${current.teachersPriceGroup!}Price`];
+        return prev + price!;
+      }, 0);
+      setWsTotal(wsPrice);
+    }
+  }, [selectedWorkshops, isFullPass, currentPricePeriod, fullPassPrice, setWsTotal]);
 
   // Restore Full pass selection state
   useEffect(() => {
@@ -39,11 +50,6 @@ export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
     setValue('isFullPass', value === 'fullPass', { shouldTouch: true });
     setWorkshopsType(value);
   };
-
-  const fullPassPrice =
-    age <= kidsMaxAge
-      ? getCurrentPricePeriod && getCurrentPricePeriod.price.live.fullPassPrice * kidsDiscount
-      : getCurrentPricePeriod?.price.live.fullPassPrice;
 
   return (
     <>
@@ -74,7 +80,7 @@ export const Workshops: React.FC<StepProps> = ({ onStepSubmit }) => {
         </RadioGroup>
       </FormControl>
 
-      {workshopsType === 'single' && <WorkshopsList currentPricePeriod={getCurrentPricePeriod} />}
+      {workshopsType === 'single' && <WorkshopsList currentPricePeriod={currentPricePeriod} />}
 
       <Button
         type='button'

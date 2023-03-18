@@ -1,3 +1,4 @@
+import { PricePeriod } from '@/src/types';
 import { Workshop } from '@/src/ulis/schedule';
 
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
@@ -35,3 +36,9 @@ export interface Step {
 export interface StepProps {
   onStepSubmit: (direction: 'next' | 'prev') => void;
 }
+
+export type WorkshopsStepProps = StepProps & {
+  currentPricePeriod: PricePeriod | undefined;
+  fullPassPrice: number | undefined;
+  setWsTotal: (wsTotal: number) => void;
+};

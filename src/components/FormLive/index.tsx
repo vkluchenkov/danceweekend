@@ -8,6 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { SupportedLangs } from '@/src/types';
 import { FormFields, Step, StepId, WorkshopsField } from './types';
 import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
+import { Collapse, Fade } from '@mui/material';
 
 const steps: Step[] = [
   {
@@ -53,6 +54,11 @@ export const FormLive: React.FC = () => {
     setValue('workshops', res);
   }, [setValue, currentLang]);
 
+  // Summarize step totals
+  useEffect(() => {
+    setTotal(wstotal);
+  }, [wstotal]);
+
   // Handle form submit
   const onSubmit = (data: any) => console.log(data);
 
@@ -78,24 +84,24 @@ export const FormLive: React.FC = () => {
       ? currentPricePeriod && currentPricePeriod.price.live.fullPassPrice * kidsDiscount
       : currentPricePeriod?.price.live.fullPassPrice;
 
-  const getCurrentComponent = () => {
-    if (currentStep === 'personal') return <PersonalData onStepSubmit={hanleSteps} />;
-    if (currentStep === 'workshops')
-      return (
-        <Workshops
-          onStepSubmit={hanleSteps}
-          currentPricePeriod={currentPricePeriod}
-          fullPassPrice={fullPassPrice}
-          setWsTotal={setWsTotal}
-        />
-      );
-  };
-
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        {wstotal > 0 && <p>Total: {wstotal}€</p>}
-        {getCurrentComponent()}
+        <p>Total: {total}€</p>
+
+        <Collapse in={currentStep === 'personal'}>
+          <PersonalData onStepSubmit={hanleSteps} />
+        </Collapse>
+
+        <Collapse in={currentStep === 'workshops'}>
+          <Workshops
+            onStepSubmit={hanleSteps}
+            currentPricePeriod={currentPricePeriod}
+            fullPassPrice={fullPassPrice}
+            setWsTotal={setWsTotal}
+          />
+        </Collapse>
+
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>
           Submit form
         </Button> */}

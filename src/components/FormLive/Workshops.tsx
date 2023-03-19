@@ -1,11 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
-import { useEffect, useMemo, useState } from 'react';
-import { Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { SupportedLangs } from '@/src/types';
-import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
-import { StepProps, WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
+import { useEffect } from 'react';
+import { Button, Collapse, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
 import { WorkshopsList } from './WorkshopsList';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
@@ -14,9 +12,9 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   currentPricePeriod,
   fullPassPrice,
 }) => {
-  const { t, lang } = useTranslation('registration');
-  const methods = useFormContext();
+  const { t } = useTranslation('registration');
 
+  const methods = useFormContext();
   const { handleSubmit, setValue, control, watch } = methods;
 
   const isFullPass: boolean = watch('isFullPass');
@@ -24,6 +22,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const isWorkshops: WorkshopsField = watch('workshops');
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
+  // Set step total
   useEffect(() => {
     if (isFullPass && fullPassPrice) setWsTotal(fullPassPrice);
     else if (!selectedWorkshops) setWsTotal(0);
@@ -70,7 +69,9 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
         </RadioGroup>
       </FormControl>
 
-      {workshopsType === 'single' && <WorkshopsList currentPricePeriod={currentPricePeriod} />}
+      <Collapse in={workshopsType === 'single'}>
+        <WorkshopsList currentPricePeriod={currentPricePeriod} />
+      </Collapse>
 
       <Button
         type='button'

@@ -8,6 +8,7 @@ import { useMemo, useState } from 'react';
 import { Switcher } from '@/src/ui-kit/Switcher';
 import { FormLive } from '@/src/components/FormLive';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { montserrat } from '@/src/ulis/font';
 
 const Registration: NextPage = () => {
   const { t, lang } = useTranslation('registration');
@@ -36,6 +37,9 @@ const Registration: NextPage = () => {
         main: '#eec571',
       },
       mode: 'dark',
+    },
+    typography: {
+      fontFamily: montserrat.style.fontFamily,
     },
   });
 

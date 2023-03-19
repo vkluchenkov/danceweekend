@@ -1,11 +1,6 @@
+import { montserrat } from '@/src/ulis/font';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { Montserrat } from '@next/font/google';
-
-const montserrat = Montserrat({
-  subsets: ['latin', 'cyrillic', 'latin-ext', 'cyrillic-ext'],
-  display: 'swap',
-});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -14,6 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
         html {
           font-family: ${montserrat.style.fontFamily};
         }
+
         button {
           font-family: ${montserrat.style.fontFamily};
         }

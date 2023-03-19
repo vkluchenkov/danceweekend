@@ -2,19 +2,12 @@ import { createStyles } from '@/src/types/emotion-styles';
 
 export const styles = createStyles({
   input: {
-    border: 0,
-    outline: '1px solid #ccc',
-    borderRadius: '5px',
-    boxSizing: 'border-box',
-    width: '100%',
-    height: '40px',
-    padding: '0 10px',
-    fontSize: '16px',
-    color: 'black',
-    fontWeight: 400,
-    margin: '15px 0 0',
-    '&:focus': {
-      outline: '2px solid #1a73e8',
+    '& input': {
+      '&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus': {
+        WebkitBoxShadow: 'none !important',
+        backgroundColor: `rgba(0, 0, 0, 0.01) !important`,
+        transition: 'background-color 1s ease-in-out 5000000s',
+      },
     },
   },
 

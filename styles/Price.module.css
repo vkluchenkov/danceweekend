@@ -39,8 +39,20 @@
   color: var(--main-text-color);
 }
 
+.period__singleTitle {
+  margin: 0;
+  padding: 10px 0 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--main-text-color);
+}
+
 .period__description {
   font-weight: 200;
+  text-align: center;
 }
 
 .period__fullPass {

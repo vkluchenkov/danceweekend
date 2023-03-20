@@ -4,6 +4,7 @@
   "online": "Online version",
   "workshops": {
     "title": "Workshops",
+    "singleTitle": "Single Workshops",
     "description": "It’s possible to buy workshops as a package — FULL PASS (all the festival workshops) or single workshops of your choice.",
     "promo": "Promo*",
     "promoDescription": "*first 10 packages",

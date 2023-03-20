@@ -89,6 +89,12 @@ const Price: NextPage = () => {
           {`${t('workshops.fullPass')}: ${period.price[version].fullPassPrice}€`}
         </p>
 
+        {period.description && (
+          <p className={clsx(textStyles.p, styles.period__description)}>
+            {t(`workshops.${period.description}`)}
+          </p>
+        )}
+        <h5 className={styles.period__singleTitle}>{t('workshops.singleTitle')}:</h5>
         <p className={textStyles.p}>
           {group1Names}:
           <span className={textStyles.accent}> {period.price[version].group1Price}€</span>
@@ -98,12 +104,6 @@ const Price: NextPage = () => {
           {group2Names}:
           <span className={textStyles.accent}> {period.price[version].group2Price}€</span>
         </p>
-
-        {period.description && (
-          <p className={clsx(textStyles.p, styles.period__description)}>
-            {t(`workshops.${period.description}`)}
-          </p>
-        )}
       </div>
     );
   });

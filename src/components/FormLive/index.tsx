@@ -9,6 +9,7 @@ import { SupportedLangs } from '@/src/types';
 import { FormFields, Step, StepId, WorkshopsField } from './types';
 import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
 import { Collapse, Fade } from '@mui/material';
+import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 
 const steps: Step[] = [
   {
@@ -18,6 +19,11 @@ const steps: Step[] = [
   },
   {
     id: 'workshops',
+    prev: 'personal',
+    next: 'constestSolo',
+  },
+  {
+    id: 'constestSolo',
     prev: 'personal',
     next: null,
   },
@@ -71,7 +77,11 @@ export const FormLive: React.FC = () => {
     [currentStep]
   );
 
-  const age: number = watch('age');
+  const age: number | undefined = watch('age');
+
+  const ageGroup = useMemo(() => {
+    return age ? getAgeGroup(age) : null;
+  }, [age]);
 
   const currentPricePeriod = useMemo(() => {
     const today = new Date();

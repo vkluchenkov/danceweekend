@@ -31,3 +31,5 @@ export interface ContestSoloPrice {
     };
   };
 }
+
+export type AgeGroup = 'baby' | 'kids' | 'juniors' | 'adults' | 'seniors';

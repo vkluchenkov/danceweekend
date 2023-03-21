@@ -1,4 +1,4 @@
-import { SupportedLangs } from '@/src/types';
+import { SupportedLangs, AgeGroup } from '@/src/types';
 
 type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
 type CategoryType = 'live' | 'online';
@@ -13,6 +13,7 @@ interface Category {
 }
 
 interface ContestCategory {
+  ageGroups: AgeGroup[];
   description?: string;
   age: string;
   levels: Level[];
@@ -177,6 +178,7 @@ const groupSet: Category[] = [
 export const contestCategories: ContestCategory[] = [
   {
     age: '4-6',
+    ageGroups: ['baby'],
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -204,6 +206,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '7-11',
+    ageGroups: ['kids'],
     levels: ['beginners', 'intermediate'],
     types: ['live', 'online'],
     translations: {
@@ -219,6 +222,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '7-11',
+    ageGroups: ['kids'],
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -268,6 +272,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '7-11',
+    ageGroups: ['kids'],
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -350,6 +355,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '12-15',
+    ageGroups: ['juniors'],
     description: 'descriptionJuniors',
     levels: ['risingStar', 'professionals'],
     types: ['live', 'online'],
@@ -366,6 +372,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '12-15',
+    ageGroups: ['juniors'],
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -381,6 +388,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '12-15',
+    ageGroups: ['juniors'],
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -396,6 +404,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '12+',
+    ageGroups: ['adults', 'juniors', 'seniors'],
     description: 'descriptionQueen',
     levels: ['openLevel'],
     types: ['live'],
@@ -411,6 +420,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '16+',
+    ageGroups: ['juniors', 'adults', 'seniors'],
     levels: ['risingStar', 'professionals'],
     types: ['live', 'online'],
     translations: {
@@ -426,6 +436,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '16+',
+    ageGroups: ['juniors', 'adults', 'seniors'],
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -441,6 +452,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '16+',
+    ageGroups: ['juniors', 'adults', 'seniors'],
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -456,6 +468,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '40+',
+    ageGroups: ['seniors'],
     description: 'descriptionSeniors',
     levels: ['openLevel'],
     types: ['live', 'online'],

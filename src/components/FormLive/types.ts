@@ -5,6 +5,8 @@ export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
 
 export type WorkshopsType = 'fullPass' | 'single';
 
+export type FullPassDiscount = '30%' | '50%' | 'free' | 'none';
+
 export interface FormFields {
   isSoloPass: boolean;
   isFullPass: boolean;
@@ -19,6 +21,9 @@ export interface FormFields {
   tel: string;
   workshops: WorkshopsField;
   workshopsType: WorkshopsType;
+  fullPassDiscount: FullPassDiscount;
+  fullPassDiscountSource: string;
+  fullPassGroupName: string;
 }
 
 export type StepId =
@@ -44,4 +49,5 @@ export type WorkshopsStepProps = StepProps & {
   currentPricePeriod: PricePeriod | undefined;
   fullPassPrice: number | undefined;
   setWsTotal: (wsTotal: number) => void;
+  fullPassDiscountList: FullPassDiscount[];
 };

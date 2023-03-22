@@ -1,18 +1,32 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
+import styles from '@/styles/Registration.module.css';
 import { useEffect } from 'react';
-import { Button, Collapse, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
+import {
+  Button,
+  Collapse,
+  FormControl,
+  FormControlLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+} from '@mui/material';
+import { FullPassDiscount, WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
 import { WorkshopsList } from './WorkshopsList';
+import { FormInputSelect } from '@/src/ui-kit/input';
+import { schedule } from '@/src/ulis/schedule';
+import { SupportedLangs } from '@/src/types';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   onStepSubmit,
   setWsTotal,
   currentPricePeriod,
   fullPassPrice,
+  fullPassDiscountList,
 }) => {
-  const { t } = useTranslation('registration');
+  const { t, lang } = useTranslation('registration');
+  const currentLang = lang as SupportedLangs;
 
   const methods = useFormContext();
   const { handleSubmit, setValue, control, watch } = methods;
@@ -28,7 +42,8 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
     else if (!selectedWorkshops) setWsTotal(0);
     else {
       const wsPrice = selectedWorkshops.reduce((prev, current) => {
-        const price = currentPricePeriod?.price.live[`${current.teachersPriceGroup!}Price`];
+        const price: number | undefined =
+          currentPricePeriod?.price.live[`${current.teachersPriceGroup!}Price`];
         return prev + price!;
       }, 0);
       setWsTotal(wsPrice);
@@ -38,6 +53,18 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const handleFullPass = (event: React.ChangeEvent<HTMLInputElement>, value: WorkshopsType) => {
     setValue('isFullPass', value === 'fullPass', { shouldTouch: true });
     setValue('workshopsType', value, { shouldTouch: true });
+
+    // Reset selection if option has changed
+    if (value === 'fullPass') {
+      const res: WorkshopsField = [];
+      schedule.forEach((day) => {
+        day.dayEvents.forEach((event) => {
+          event.type === 'workshop' &&
+            res.push({ ...event, selected: false, day: day.translations[currentLang].dayTitle });
+        });
+      });
+      setValue('workshops', res);
+    } else setValue('fullPassDiscount', 'none', { shouldTouch: true });
   };
 
   return (
@@ -71,6 +98,19 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
 
       <Collapse in={workshopsType === 'single'}>
         <WorkshopsList currentPricePeriod={currentPricePeriod} />
+      </Collapse>
+
+      <Collapse in={workshopsType === 'fullPass'}>
+        <div className={styles.form}>
+          <h4 className={textStyles.h4}>{t('form.workshops.discounts.title')}</h4>
+          <FormInputSelect name='fullPassDiscount' control={control}>
+            {fullPassDiscountList.map((i) => (
+              <MenuItem key={i} value={i}>
+                {t(`form.workshops.discounts.${i}`)}
+              </MenuItem>
+            ))}
+          </FormInputSelect>
+        </div>
       </Collapse>
 
       <Button

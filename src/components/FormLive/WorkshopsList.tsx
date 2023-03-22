@@ -6,6 +6,7 @@ import { PricePeriod, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { WorkshopsField } from './types';
 import clsx from 'clsx';
+import React from 'react';
 
 interface WorkshopsSingleProps {
   currentPricePeriod: PricePeriod | undefined;
@@ -71,12 +72,12 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = ({ currentPricePeri
     });
 
     return (
-      <>
+      <React.Fragment key={day}>
         <h3 className={clsx(textStyles.h2, textStyles.accent)} key={day}>
           {day}
         </h3>
         {workshopsInputs}
-      </>
+      </React.Fragment>
     );
   });
 

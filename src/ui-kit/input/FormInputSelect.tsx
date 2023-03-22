@@ -1,14 +1,14 @@
 import React from 'react';
 import { Control, useController, UseControllerProps } from 'react-hook-form';
-import { InputCheckbox, InputCheckboxProps } from './InputCheckbox';
+import { InputSelect, InputSelectProps } from './InputSelect';
 
-type FormInputCheckboxProps = InputCheckboxProps & {
+type FormInputSelectProps = InputSelectProps & {
   control: Control<any>;
   name: string;
   rules?: UseControllerProps['rules'];
 };
 
-export const FormInputCheckbox: React.FC<FormInputCheckboxProps> = ({
+export const FormInputSelect: React.FC<FormInputSelectProps> = ({
   control,
   name,
   rules,
@@ -24,7 +24,7 @@ export const FormInputCheckbox: React.FC<FormInputCheckboxProps> = ({
   });
 
   return (
-    <InputCheckbox
+    <InputSelect
       {...props}
       required={!!rules?.required}
       onChange={onChange}

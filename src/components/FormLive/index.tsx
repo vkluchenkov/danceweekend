@@ -6,7 +6,7 @@ import { Workshops } from './Workshops';
 import { schedule, Workshop } from '@/src/ulis/schedule';
 import useTranslation from 'next-translate/useTranslation';
 import { SupportedLangs } from '@/src/types';
-import { FormFields, Step, StepId, WorkshopsField } from './types';
+import { FormFields, FullPassDiscount, Step, StepId, WorkshopsField } from './types';
 import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
 import { Collapse, Fade } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
@@ -33,6 +33,7 @@ const defaultValues: Partial<FormFields> = {
   isFullPass: false,
   isSoloPass: false,
   workshops: [],
+  fullPassDiscount: 'none',
 };
 
 export const FormLive: React.FC = () => {
@@ -73,11 +74,13 @@ export const FormLive: React.FC = () => {
     (direction: 'next' | 'prev') => {
       const isStep = steps.find((step) => step.id === currentStep);
       if (isStep && isStep[direction]) setCurrentStep(isStep[direction]!);
+      console.log;
     },
     [currentStep]
   );
 
   const age: number | undefined = watch('age');
+  const fullPassDiscount: FullPassDiscount = watch('fullPassDiscount');
 
   const ageGroup = useMemo(() => {
     return age ? getAgeGroup(age) : null;
@@ -89,10 +92,20 @@ export const FormLive: React.FC = () => {
     else return workshopsPrice.find((i) => i.startDate! <= today && today <= i.endDate!);
   }, []);
 
-  const fullPassPrice =
-    age <= kidsMaxAge
-      ? currentPricePeriod && currentPricePeriod.price.live.fullPassPrice * kidsDiscount
-      : currentPricePeriod?.price.live.fullPassPrice;
+  const fullPassPrice = useMemo(() => {
+    const basePrice =
+      age <= kidsMaxAge
+        ? currentPricePeriod && currentPricePeriod.price.live.fullPassPrice * kidsDiscount
+        : currentPricePeriod?.price.live.fullPassPrice;
+
+    if (fullPassDiscount === '30%' && basePrice) return basePrice * 0.3;
+    if (fullPassDiscount === '50%' && basePrice) return basePrice * 0.5;
+    if (fullPassDiscount === 'free' && basePrice) return 0;
+    else return basePrice;
+  }, [age, currentPricePeriod, fullPassDiscount]);
+
+  const fullPassDiscountList: FullPassDiscount[] =
+    ageGroup === 'baby' || ageGroup === 'kids' ? ['none', 'free'] : ['none', '30%', '50%', 'free'];
 
   return (
     <FormProvider {...methods}>
@@ -108,6 +121,7 @@ export const FormLive: React.FC = () => {
             onStepSubmit={hanleSteps}
             currentPricePeriod={currentPricePeriod}
             fullPassPrice={fullPassPrice}
+            fullPassDiscountList={fullPassDiscountList}
             setWsTotal={setWsTotal}
           />
         </Collapse>

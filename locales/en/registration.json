@@ -24,7 +24,14 @@
       "title": "Workshops",
       "selectTitle": "I want to take workshops as:",
       "fullPass": "Full Pass",
-      "singleWs": "Single workshops"
+      "singleWs": "Single workshops",
+      "discounts": {
+        "title": "Full Pass discounts?",
+        "30%": "30%",
+        "50%": "50%",
+        "free": "Free Full Pass",
+        "none": "Don't have any discounts"
+      }
     }
   }
 }

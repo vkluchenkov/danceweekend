@@ -126,16 +126,19 @@ export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
           error={!!errors.tel}
           helperText={errors?.tel?.message as string | undefined}
         />
-        <Button
-          type='button'
-          variant='contained'
-          size='large'
-          disableElevation
-          fullWidth
-          onClick={handleSubmit(() => onStepSubmit('next'))}
-        >
-          {t('form.common.next')}
-        </Button>
+        <div className={styles.naviWrapper}>
+          <div></div>
+          <Button
+            type='button'
+            variant='outlined'
+            size='large'
+            disableElevation
+            fullWidth
+            onClick={handleSubmit(() => onStepSubmit('next'))}
+          >
+            {t('form.common.next')}
+          </Button>
+        </div>
       </div>
     </>
   );

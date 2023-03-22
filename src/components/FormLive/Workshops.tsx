@@ -170,26 +170,28 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
         </div>
       </Collapse>
 
-      <Button
-        type='button'
-        variant='text'
-        size='large'
-        disableElevation
-        fullWidth
-        onClick={handleSubmit(() => onStepSubmit('prev'))}
-      >
-        {t('form.common.prev')}
-      </Button>
-      <Button
-        type='button'
-        variant='contained'
-        size='large'
-        disableElevation
-        fullWidth
-        onClick={handleSubmit(() => onStepSubmit('next'))}
-      >
-        {t('form.common.next')}
-      </Button>
+      <div className={styles.naviWrapper}>
+        <Button
+          type='button'
+          variant='outlined'
+          size='large'
+          disableElevation
+          fullWidth
+          onClick={handleSubmit(() => onStepSubmit('prev'))}
+        >
+          {t('form.common.prev')}
+        </Button>
+        <Button
+          type='button'
+          variant='outlined'
+          size='large'
+          disableElevation
+          fullWidth
+          onClick={handleSubmit(() => onStepSubmit('next'))}
+        >
+          {t('form.common.next')}
+        </Button>
+      </div>
     </div>
   );
 };

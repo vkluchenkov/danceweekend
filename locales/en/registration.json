@@ -6,7 +6,8 @@
     "common": {
       "required": "This field is required",
       "prev": "← Back",
-      "next": "Next →"
+      "next": "Next →",
+      "total": "Total"
     },
     "personal": {
       "title": "Tell us about yourself",
@@ -26,7 +27,7 @@
       "fullPass": "Full Pass",
       "singleWs": "Single workshops",
       "discounts": {
-        "title": "Full Pass / group discounts",
+        "title": "Full Pass / group discounts:",
         "group": "Group discount 20%",
         "groupName": "Group name",
         "30%": "Certificate 30%",

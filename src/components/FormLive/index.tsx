@@ -1,6 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { PersonalData } from './PersonalData';
 import styles from '@/styles/Registration.module.css';
+import textStyles from '@/styles/Text.module.css';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Workshops } from './Workshops';
 import { schedule, Workshop } from '@/src/ulis/schedule';
@@ -37,7 +38,7 @@ const defaultValues: Partial<FormFields> = {
 };
 
 export const FormLive: React.FC = () => {
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 
   const methods = useForm<FormFields>({
@@ -72,9 +73,9 @@ export const FormLive: React.FC = () => {
   // Handle steps navigation
   const hanleSteps = useCallback(
     (direction: 'next' | 'prev') => {
+      console.log(direction);
       const isStep = steps.find((step) => step.id === currentStep);
       if (isStep && isStep[direction]) setCurrentStep(isStep[direction]!);
-      console.log;
     },
     [currentStep]
   );
@@ -95,7 +96,7 @@ export const FormLive: React.FC = () => {
   const fullPassPrice = useMemo(() => {
     // Kids discount
     const basePrice =
-      age <= kidsMaxAge
+      ageGroup === 'baby' || ageGroup === 'kids'
         ? currentPricePeriod && currentPricePeriod.price.live.fullPassPrice * kidsDiscount
         : currentPricePeriod?.price.live.fullPassPrice;
 
@@ -104,9 +105,9 @@ export const FormLive: React.FC = () => {
     if (fullPassDiscount === '50%' && basePrice) return basePrice * 0.5;
     if (fullPassDiscount === 'free' && basePrice) return 0;
     else return basePrice;
-  }, [age, currentPricePeriod, fullPassDiscount]);
+  }, [ageGroup, currentPricePeriod, fullPassDiscount]);
 
-  // Kids and baby can't have less than 50% discount
+  // Kids and baby can't have less than 100% discount
   const fullPassDiscountList: FullPassDiscount[] =
     ageGroup === 'baby' || ageGroup === 'kids'
       ? ['none', 'free']
@@ -114,9 +115,10 @@ export const FormLive: React.FC = () => {
 
   return (
     <FormProvider {...methods}>
+      <p className={textStyles.p}>
+        {t('form.common.total')}: {total}€
+      </p>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <p>Total: {total}€</p>
-
         <Collapse in={currentStep === 'personal'}>
           <PersonalData onStepSubmit={hanleSteps} />
         </Collapse>

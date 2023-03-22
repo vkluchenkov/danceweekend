@@ -11,3 +11,9 @@
   flex-direction: column;
   gap: 15px;
 }
+
+.naviWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}

@@ -11,6 +11,8 @@ import { FormFields, FullPassDiscount, Step, StepId, WorkshopsField } from './ty
 import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
 import { Collapse, Fade } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
+import { ContestSolo } from './ContestSolo';
+import { minWsAdults, minWsKids } from '@/src/ulis/constants';
 
 const steps: Step[] = [
   {
@@ -25,7 +27,7 @@ const steps: Step[] = [
   },
   {
     id: 'constestSolo',
-    prev: 'personal',
+    prev: 'workshops',
     next: null,
   },
 ];
@@ -80,7 +82,10 @@ export const FormLive: React.FC = () => {
   );
 
   const age: number | undefined = watch('age');
+  const isFullPass: boolean = watch('isFullPass');
   const fullPassDiscount: FullPassDiscount = watch('fullPassDiscount');
+  const isWorkshops: WorkshopsField = watch('workshops');
+  const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
   const ageGroup = useMemo(() => {
     return age ? getAgeGroup(age) : null;
@@ -112,6 +117,16 @@ export const FormLive: React.FC = () => {
       ? ['none', 'free']
       : ['none', 'group', '30%', '50%', 'free'];
 
+  const isEligible = useMemo(() => {
+    if (ageGroup === 'baby' || ageGroup === 'kids') {
+      if (isFullPass || selectedWorkshops.length >= minWsKids) return true;
+      else return false;
+    } else {
+      if (isFullPass || selectedWorkshops.length >= minWsAdults) return true;
+      else return false;
+    }
+  }, [ageGroup, isFullPass, selectedWorkshops]);
+
   return (
     <FormProvider {...methods}>
       <p className={textStyles.p}>
@@ -128,7 +143,16 @@ export const FormLive: React.FC = () => {
             currentPricePeriod={currentPricePeriod}
             fullPassPrice={fullPassPrice}
             fullPassDiscountList={fullPassDiscountList}
-            setWsTotal={setWsTotal}
+            setStepTotal={setWsTotal}
+          />
+        </Collapse>
+
+        <Collapse in={currentStep === 'constestSolo'} unmountOnExit>
+          <ContestSolo
+            onStepSubmit={hanleSteps}
+            currentPricePeriod={currentPricePeriod}
+            setStepTotal={setWsTotal}
+            isEligible={isEligible}
           />
         </Collapse>
 

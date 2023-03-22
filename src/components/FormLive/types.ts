@@ -1,4 +1,4 @@
-import { PricePeriod } from '@/src/types';
+import { AgeGroup, PricePeriod } from '@/src/types';
 import { Workshop } from '@/src/ulis/schedule';
 
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
@@ -48,6 +48,12 @@ export interface StepProps {
 export type WorkshopsStepProps = StepProps & {
   currentPricePeriod: PricePeriod | undefined;
   fullPassPrice: number | undefined;
-  setWsTotal: (wsTotal: number) => void;
+  setStepTotal: (wsTotal: number) => void;
   fullPassDiscountList: FullPassDiscount[];
+};
+
+export type ContestSoloStepProps = StepProps & {
+  currentPricePeriod: PricePeriod | undefined;
+  setStepTotal: (wsTotal: number) => void;
+  isEligible: boolean;
 };

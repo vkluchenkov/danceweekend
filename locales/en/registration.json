@@ -36,6 +36,10 @@
         "none": "Don't have any discounts",
         "details": "How did you acquire your certificate?"
       }
+    },
+    "contest": {
+      "title": "Competition",
+      "checkboxLabel": "I want to take part in competition"
     }
   }
 }

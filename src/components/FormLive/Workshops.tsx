@@ -20,7 +20,7 @@ import { SupportedLangs } from '@/src/types';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   onStepSubmit,
-  setWsTotal,
+  setStepTotal: setWsTotal,
   currentPricePeriod,
   fullPassPrice,
   fullPassDiscountList,

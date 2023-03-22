@@ -34,6 +34,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
     setValue,
     control,
     watch,
+    trigger,
     formState: { errors },
   } = methods;
 
@@ -128,46 +129,48 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
       </FormControl>
 
       <Collapse in={workshopsType === 'single'}>
-        <WorkshopsList currentPricePeriod={currentPricePeriod} />
+        {workshopsType === 'single' && <WorkshopsList currentPricePeriod={currentPricePeriod} />}
       </Collapse>
 
       <Collapse in={workshopsType === 'fullPass'}>
-        <div className={styles.form}>
-          <h4 className={textStyles.h4}>{t('form.workshops.discounts.title')}</h4>
-          <FormInputSelect name='fullPassDiscount' control={control}>
-            {fullPassDiscountList.map((i) => (
-              <MenuItem key={i} value={i}>
-                {t(`form.workshops.discounts.${i}`)}
-              </MenuItem>
-            ))}
-          </FormInputSelect>
+        {workshopsType === 'fullPass' && (
+          <div className={styles.form}>
+            <h4 className={textStyles.h4}>{t('form.workshops.discounts.title')}</h4>
+            <FormInputSelect name='fullPassDiscount' control={control}>
+              {fullPassDiscountList.map((i) => (
+                <MenuItem key={i} value={i}>
+                  {t(`form.workshops.discounts.${i}`)}
+                </MenuItem>
+              ))}
+            </FormInputSelect>
 
-          <Collapse in={isDiscount}>
-            <FormInputField
-              name='fullPassDiscountSource'
-              label={t('form.workshops.discounts.details')}
-              control={control}
-              rules={{
-                required: t('form.common.required'),
-              }}
-              error={!!errors.fullPassDiscountSource}
-              helperText={errors?.fullPassDiscountSource?.message as string | undefined}
-            />
-          </Collapse>
+            <Collapse in={isDiscount}>
+              <FormInputField
+                name='fullPassDiscountSource'
+                label={t('form.workshops.discounts.details')}
+                control={control}
+                rules={{
+                  required: t('form.common.required'),
+                }}
+                error={!!errors.fullPassDiscountSource}
+                helperText={errors?.fullPassDiscountSource?.message as string | undefined}
+              />
+            </Collapse>
 
-          <Collapse in={isGroup}>
-            <FormInputField
-              name='fullPassGroupName'
-              label={t('form.workshops.discounts.groupName')}
-              control={control}
-              rules={{
-                required: t('form.common.required'),
-              }}
-              error={!!errors.fullPassDiscountSource}
-              helperText={errors?.fullPassDiscountSource?.message as string | undefined}
-            />
-          </Collapse>
-        </div>
+            <Collapse in={isGroup}>
+              <FormInputField
+                name='fullPassGroupName'
+                label={t('form.workshops.discounts.groupName')}
+                control={control}
+                rules={{
+                  required: t('form.common.required'),
+                }}
+                error={!!errors.fullPassDiscountSource}
+                helperText={errors?.fullPassDiscountSource?.message as string | undefined}
+              />
+            </Collapse>
+          </div>
+        )}
       </Collapse>
 
       <div className={styles.naviWrapper}>
@@ -177,7 +180,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
           size='large'
           disableElevation
           fullWidth
-          onClick={handleSubmit(() => onStepSubmit('prev'))}
+          onClick={() => onStepSubmit('prev')}
         >
           {t('form.common.prev')}
         </Button>
@@ -187,7 +190,10 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
           size='large'
           disableElevation
           fullWidth
-          onClick={handleSubmit(() => onStepSubmit('next'))}
+          onClick={async () => {
+            const isValid = await trigger();
+            if (isValid) onStepSubmit('next');
+          }}
         >
           {t('form.common.next')}
         </Button>

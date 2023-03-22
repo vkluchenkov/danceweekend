@@ -13,6 +13,7 @@ export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
   const {
     handleSubmit,
     control,
+    trigger,
     formState: { errors },
   } = methods;
 
@@ -134,7 +135,10 @@ export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
             size='large'
             disableElevation
             fullWidth
-            onClick={handleSubmit(() => onStepSubmit('next'))}
+            onClick={async () => {
+              const isValid = await trigger();
+              if (isValid) onStepSubmit('next');
+            }}
           >
             {t('form.common.next')}
           </Button>

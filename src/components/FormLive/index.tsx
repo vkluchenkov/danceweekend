@@ -73,7 +73,6 @@ export const FormLive: React.FC = () => {
   // Handle steps navigation
   const hanleSteps = useCallback(
     (direction: 'next' | 'prev') => {
-      console.log(direction);
       const isStep = steps.find((step) => step.id === currentStep);
       if (isStep && isStep[direction]) setCurrentStep(isStep[direction]!);
     },
@@ -120,17 +119,19 @@ export const FormLive: React.FC = () => {
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Collapse in={currentStep === 'personal'}>
-          <PersonalData onStepSubmit={hanleSteps} />
+          {currentStep === 'personal' && <PersonalData onStepSubmit={hanleSteps} />}
         </Collapse>
 
         <Collapse in={currentStep === 'workshops'}>
-          <Workshops
-            onStepSubmit={hanleSteps}
-            currentPricePeriod={currentPricePeriod}
-            fullPassPrice={fullPassPrice}
-            fullPassDiscountList={fullPassDiscountList}
-            setWsTotal={setWsTotal}
-          />
+          {currentStep === 'workshops' && (
+            <Workshops
+              onStepSubmit={hanleSteps}
+              currentPricePeriod={currentPricePeriod}
+              fullPassPrice={fullPassPrice}
+              fullPassDiscountList={fullPassDiscountList}
+              setWsTotal={setWsTotal}
+            />
+          )}
         </Collapse>
 
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>

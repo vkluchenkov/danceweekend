@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Collapse,
@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { FullPassDiscount, WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
 import { WorkshopsList } from './WorkshopsList';
-import { FormInputSelect } from '@/src/ui-kit/input';
+import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { schedule } from '@/src/ulis/schedule';
 import { SupportedLangs } from '@/src/types';
 
@@ -29,12 +29,37 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const currentLang = lang as SupportedLangs;
 
   const methods = useFormContext();
-  const { handleSubmit, setValue, control, watch } = methods;
+  const {
+    handleSubmit,
+    setValue,
+    control,
+    watch,
+    formState: { errors },
+  } = methods;
+
+  const [isDiscount, setIsDiscount] = useState(false);
+  const [isGroup, setIsGroup] = useState(false);
 
   const isFullPass: boolean = watch('isFullPass');
+  const isFullPassDiscount: FullPassDiscount = watch('fullPassDiscount');
   const workshopsType: WorkshopsType = watch('workshopsType');
   const isWorkshops: WorkshopsField = watch('workshops');
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
+
+  useEffect(() => {
+    if (isFullPassDiscount != 'none' && isFullPassDiscount != 'group') {
+      setIsDiscount(true);
+      setIsGroup(false);
+    }
+    if (isFullPassDiscount === 'group') {
+      setIsDiscount(false);
+      setIsGroup(true);
+    }
+    if (isFullPassDiscount === 'none') {
+      setIsDiscount(false);
+      setIsGroup(false);
+    }
+  }, [isFullPassDiscount]);
 
   // Set step total
   useEffect(() => {
@@ -64,11 +89,15 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
         });
       });
       setValue('workshops', res);
-    } else setValue('fullPassDiscount', 'none', { shouldTouch: true });
+    } else {
+      setValue('fullPassDiscount', 'none', { shouldTouch: true });
+      setValue('fullPassDiscountSource', '');
+      setValue('fullPassGroupName', '');
+    }
   };
 
   return (
-    <>
+    <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.workshops.title')}</h2>
 
       <FormControl component='fieldset'>
@@ -84,14 +113,16 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
             control={<Radio />}
             label={
               <span>
-                {t('form.workshops.fullPass')} {fullPassPrice}€
+                {fullPassPrice === 0
+                  ? t('form.workshops.fullPass')
+                  : t('form.workshops.fullPass') + ' ' + fullPassPrice + '€'}
               </span>
             }
           />
           <FormControlLabel
             value='single'
             control={<Radio />}
-            label={<span>{t('form.workshops.singleWs')} </span>}
+            label={<span>{t('form.workshops.singleWs')}</span>}
           />
         </RadioGroup>
       </FormControl>
@@ -110,6 +141,32 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
               </MenuItem>
             ))}
           </FormInputSelect>
+
+          <Collapse in={isDiscount}>
+            <FormInputField
+              name='fullPassDiscountSource'
+              label={t('form.workshops.discounts.details')}
+              control={control}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors.fullPassDiscountSource}
+              helperText={errors?.fullPassDiscountSource?.message as string | undefined}
+            />
+          </Collapse>
+
+          <Collapse in={isGroup}>
+            <FormInputField
+              name='fullPassGroupName'
+              label={t('form.workshops.discounts.groupName')}
+              control={control}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors.fullPassDiscountSource}
+              helperText={errors?.fullPassDiscountSource?.message as string | undefined}
+            />
+          </Collapse>
         </div>
       </Collapse>
 
@@ -133,6 +190,6 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
       >
         {t('form.common.next')}
       </Button>
-    </>
+    </div>
   );
 };

@@ -93,19 +93,24 @@ export const FormLive: React.FC = () => {
   }, []);
 
   const fullPassPrice = useMemo(() => {
+    // Kids discount
     const basePrice =
       age <= kidsMaxAge
         ? currentPricePeriod && currentPricePeriod.price.live.fullPassPrice * kidsDiscount
         : currentPricePeriod?.price.live.fullPassPrice;
 
+    // additional discounts (certificates, etc.)
     if (fullPassDiscount === '30%' && basePrice) return basePrice * 0.3;
     if (fullPassDiscount === '50%' && basePrice) return basePrice * 0.5;
     if (fullPassDiscount === 'free' && basePrice) return 0;
     else return basePrice;
   }, [age, currentPricePeriod, fullPassDiscount]);
 
+  // Kids and baby can't have less than 50% discount
   const fullPassDiscountList: FullPassDiscount[] =
-    ageGroup === 'baby' || ageGroup === 'kids' ? ['none', 'free'] : ['none', '30%', '50%', 'free'];
+    ageGroup === 'baby' || ageGroup === 'kids'
+      ? ['none', 'free']
+      : ['none', 'group', '30%', '50%', 'free'];
 
   return (
     <FormProvider {...methods}>

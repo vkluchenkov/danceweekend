@@ -26,11 +26,14 @@
       "fullPass": "Full Pass",
       "singleWs": "Single workshops",
       "discounts": {
-        "title": "Full Pass discounts?",
-        "30%": "30%",
-        "50%": "50%",
-        "free": "Free Full Pass",
-        "none": "Don't have any discounts"
+        "title": "Full Pass / group discounts",
+        "group": "Group discount 20%",
+        "groupName": "Group name",
+        "30%": "Certificate 30%",
+        "50%": "Certificate 50%",
+        "free": "Certificate Free Full Pass",
+        "none": "Don't have any discounts",
+        "details": "How did you acquire your certificate?"
       }
     }
   }

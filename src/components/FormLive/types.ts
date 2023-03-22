@@ -5,7 +5,7 @@ export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
 
 export type WorkshopsType = 'fullPass' | 'single';
 
-export type FullPassDiscount = '30%' | '50%' | 'free' | 'none';
+export type FullPassDiscount = 'group' | '30%' | '50%' | 'free' | 'none';
 
 export interface FormFields {
   isSoloPass: boolean;

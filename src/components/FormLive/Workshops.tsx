@@ -128,49 +128,47 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
         </RadioGroup>
       </FormControl>
 
-      <Collapse in={workshopsType === 'single'}>
-        {workshopsType === 'single' && <WorkshopsList currentPricePeriod={currentPricePeriod} />}
+      <Collapse in={workshopsType === 'single'} unmountOnExit>
+        <WorkshopsList currentPricePeriod={currentPricePeriod} />
       </Collapse>
 
-      <Collapse in={workshopsType === 'fullPass'}>
-        {workshopsType === 'fullPass' && (
-          <div className={styles.form}>
-            <h4 className={textStyles.h4}>{t('form.workshops.discounts.title')}</h4>
-            <FormInputSelect name='fullPassDiscount' control={control}>
-              {fullPassDiscountList.map((i) => (
-                <MenuItem key={i} value={i}>
-                  {t(`form.workshops.discounts.${i}`)}
-                </MenuItem>
-              ))}
-            </FormInputSelect>
+      <Collapse in={workshopsType === 'fullPass'} unmountOnExit>
+        <div className={styles.form}>
+          <h4 className={textStyles.h4}>{t('form.workshops.discounts.title')}</h4>
+          <FormInputSelect name='fullPassDiscount' control={control}>
+            {fullPassDiscountList.map((i) => (
+              <MenuItem key={i} value={i}>
+                {t(`form.workshops.discounts.${i}`)}
+              </MenuItem>
+            ))}
+          </FormInputSelect>
 
-            <Collapse in={isDiscount}>
-              <FormInputField
-                name='fullPassDiscountSource'
-                label={t('form.workshops.discounts.details')}
-                control={control}
-                rules={{
-                  required: t('form.common.required'),
-                }}
-                error={!!errors.fullPassDiscountSource}
-                helperText={errors?.fullPassDiscountSource?.message as string | undefined}
-              />
-            </Collapse>
+          <Collapse in={isDiscount} unmountOnExit>
+            <FormInputField
+              name='fullPassDiscountSource'
+              label={t('form.workshops.discounts.details')}
+              control={control}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors.fullPassDiscountSource}
+              helperText={errors?.fullPassDiscountSource?.message as string | undefined}
+            />
+          </Collapse>
 
-            <Collapse in={isGroup}>
-              <FormInputField
-                name='fullPassGroupName'
-                label={t('form.workshops.discounts.groupName')}
-                control={control}
-                rules={{
-                  required: t('form.common.required'),
-                }}
-                error={!!errors.fullPassDiscountSource}
-                helperText={errors?.fullPassDiscountSource?.message as string | undefined}
-              />
-            </Collapse>
-          </div>
-        )}
+          <Collapse in={isGroup} unmountOnExit>
+            <FormInputField
+              name='fullPassGroupName'
+              label={t('form.workshops.discounts.groupName')}
+              control={control}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors.fullPassDiscountSource}
+              helperText={errors?.fullPassDiscountSource?.message as string | undefined}
+            />
+          </Collapse>
+        </div>
       </Collapse>
 
       <div className={styles.naviWrapper}>

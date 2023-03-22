@@ -106,8 +106,8 @@ export const FormLive: React.FC = () => {
     else return basePrice;
   }, [ageGroup, currentPricePeriod, fullPassDiscount]);
 
-  // Kids and baby can't have less than 100% discount
   const fullPassDiscountList: FullPassDiscount[] =
+    // Kids and baby can't have less than 100% discount
     ageGroup === 'baby' || ageGroup === 'kids'
       ? ['none', 'free']
       : ['none', 'group', '30%', '50%', 'free'];
@@ -118,20 +118,18 @@ export const FormLive: React.FC = () => {
         {t('form.common.total')}: {total}€
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <Collapse in={currentStep === 'personal'}>
-          {currentStep === 'personal' && <PersonalData onStepSubmit={hanleSteps} />}
+        <Collapse in={currentStep === 'personal'} unmountOnExit>
+          <PersonalData onStepSubmit={hanleSteps} />
         </Collapse>
 
-        <Collapse in={currentStep === 'workshops'}>
-          {currentStep === 'workshops' && (
-            <Workshops
-              onStepSubmit={hanleSteps}
-              currentPricePeriod={currentPricePeriod}
-              fullPassPrice={fullPassPrice}
-              fullPassDiscountList={fullPassDiscountList}
-              setWsTotal={setWsTotal}
-            />
-          )}
+        <Collapse in={currentStep === 'workshops'} unmountOnExit>
+          <Workshops
+            onStepSubmit={hanleSteps}
+            currentPricePeriod={currentPricePeriod}
+            fullPassPrice={fullPassPrice}
+            fullPassDiscountList={fullPassDiscountList}
+            setWsTotal={setWsTotal}
+          />
         </Collapse>
 
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>

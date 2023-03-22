@@ -40,12 +40,18 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
 
   const [isDiscount, setIsDiscount] = useState(false);
   const [isGroup, setIsGroup] = useState(false);
+  const [isNextDisabled, setIsNextDisabled] = useState(true);
 
   const isFullPass: boolean = watch('isFullPass');
   const isFullPassDiscount: FullPassDiscount = watch('fullPassDiscount');
   const workshopsType: WorkshopsType = watch('workshopsType');
   const isWorkshops: WorkshopsField = watch('workshops');
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
+
+  useEffect(() => {
+    if (isFullPass || selectedWorkshops.length) setIsNextDisabled(false);
+    else setIsNextDisabled(true);
+  }, [isFullPass, selectedWorkshops]);
 
   useEffect(() => {
     if (isFullPassDiscount != 'none' && isFullPassDiscount != 'group') {
@@ -188,6 +194,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
           size='large'
           disableElevation
           fullWidth
+          disabled={isNextDisabled}
           onClick={async () => {
             const isValid = await trigger();
             if (isValid) onStepSubmit('next');

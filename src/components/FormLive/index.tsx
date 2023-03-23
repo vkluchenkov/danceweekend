@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Workshops } from './Workshops';
 import { schedule, Workshop } from '@/src/ulis/schedule';
 import useTranslation from 'next-translate/useTranslation';
-import { SupportedLangs } from '@/src/types';
+import { AgeGroup, SupportedLangs } from '@/src/types';
 import { FormFields, FullPassDiscount, Step, StepId, WorkshopsField } from './types';
 import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
 import { Collapse, Fade } from '@mui/material';
@@ -48,6 +48,9 @@ export const FormLive: React.FC = () => {
   });
   const { handleSubmit, getValues, setValue, watch } = methods;
 
+  const age: number | undefined = watch('age');
+  const ageGroup: AgeGroup | null = watch('ageGroup');
+
   const [currentStep, setCurrentStep] = useState<StepId>('personal');
   const [total, setTotal] = useState(0);
   const [wstotal, setWsTotal] = useState(0);
@@ -63,6 +66,14 @@ export const FormLive: React.FC = () => {
     });
     setValue('workshops', res);
   }, [setValue, currentLang]);
+
+  // Map solo contest categories into form state
+
+  // Write initial age groups into form state
+  useEffect(() => {
+    setValue('contestAgeGroup', age ? getAgeGroup(age) : null);
+    setValue('ageGroup', age ? getAgeGroup(age) : null);
+  }, [age, setValue]);
 
   // Summarize step totals
   useEffect(() => {
@@ -81,15 +92,10 @@ export const FormLive: React.FC = () => {
     [currentStep]
   );
 
-  const age: number | undefined = watch('age');
   const isFullPass: boolean = watch('isFullPass');
   const fullPassDiscount: FullPassDiscount = watch('fullPassDiscount');
   const isWorkshops: WorkshopsField = watch('workshops');
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
-
-  const ageGroup = useMemo(() => {
-    return age ? getAgeGroup(age) : null;
-  }, [age]);
 
   const currentPricePeriod = useMemo(() => {
     const today = new Date();

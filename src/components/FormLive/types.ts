@@ -24,6 +24,8 @@ export interface FormFields {
   fullPassDiscount: FullPassDiscount;
   fullPassDiscountSource: string;
   fullPassGroupName: string;
+  ageGroup: AgeGroup | null;
+  contestAgeGroup: AgeGroup | null;
 }
 
 export type StepId =

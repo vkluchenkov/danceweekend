@@ -39,7 +39,17 @@
     },
     "contest": {
       "title": "Competition",
-      "checkboxLabel": "I want to take part in competition"
+      "checkboxLabel": "I want to take part in competition",
+      "soloPassTitle": "Solo Pass",
+      "solosPassDescription": "With the Solo pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
+      "ageGroups": {
+        "title": "Select your competition age group",
+        "baby": "Baby",
+        "kids": "Kids",
+        "juniors": "Juniors",
+        "adults": "Adults",
+        "seniors": "Seniors"
+      }
     }
   }
 }

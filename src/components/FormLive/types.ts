@@ -1,7 +1,9 @@
 import { AgeGroup, PricePeriod } from '@/src/types';
+import { Category, ContestCategory } from '@/src/ulis/contestCategories';
 import { Workshop } from '@/src/ulis/schedule';
 
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
+export type SoloContestField = (Category & { selected: boolean })[];
 
 export type WorkshopsType = 'fullPass' | 'single';
 
@@ -26,6 +28,7 @@ export interface FormFields {
   fullPassGroupName: string;
   ageGroup: AgeGroup | null;
   contestAgeGroup: AgeGroup | null;
+  soloContest: SoloContestField;
 }
 
 export type StepId =

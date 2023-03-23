@@ -3,7 +3,7 @@ import { SupportedLangs, AgeGroup } from '@/src/types';
 type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
 type CategoryType = 'live' | 'online';
 
-interface Category {
+export interface Category {
   translations: {
     [lang in SupportedLangs]: {
       categoryTitle: string;
@@ -14,8 +14,9 @@ interface Category {
   isSoloPass?: boolean;
 }
 
-interface ContestCategory {
+export interface ContestCategory {
   ageGroup: AgeGroup;
+  ageGroups?: AgeGroup[];
   description?: string;
   age: string;
   levels: Level[];
@@ -355,6 +356,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '12+',
     ageGroup: 'adults',
+    ageGroups: ['adults', 'juniors', 'seniors'],
     description: 'descriptionQueen',
     levels: ['openLevel'],
     types: ['live'],
@@ -372,10 +374,10 @@ export const contestCategories: ContestCategory[] = [
         isSolo: true,
         translations: {
           en: {
-            categoryTitle: 'Tabla solo live',
+            categoryTitle: 'Queen of live tabla solo',
           },
           ru: {
-            categoryTitle: 'Табла соло live',
+            categoryTitle: 'Королева live табла соло',
           },
         },
       },

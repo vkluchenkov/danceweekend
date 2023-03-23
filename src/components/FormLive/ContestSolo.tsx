@@ -4,7 +4,7 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useState } from 'react';
 import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
-import { ContestSoloStepProps } from './types';
+import { ContestSoloStepProps, SoloContestField } from './types';
 import { AgeGroup, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormInputSelect } from '@/src/ui-kit/input';
@@ -34,6 +34,9 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   const contestAgeGroup: AgeGroup | null = watch('contestAgeGroup');
   const ageGroup: AgeGroup | null = watch('ageGroup');
+  const soloContest: SoloContestField = watch('soloContest');
+
+  console.log(soloContest);
 
   const ageGroupList = getContestAgeGroupsList(ageGroup);
 
@@ -43,7 +46,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.contest.title')}</h2>
-      {!isEligible && <p>Ooops...</p>}
+      {!isEligible && <p>{t('form.contest.oops')}</p>}
       {isEligible && (
         <FormControlLabel
           control={<InputCheckbox checked={isCompetition} onChange={handleCompetition} />}

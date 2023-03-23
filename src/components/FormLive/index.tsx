@@ -4,15 +4,23 @@ import styles from '@/styles/Registration.module.css';
 import textStyles from '@/styles/Text.module.css';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Workshops } from './Workshops';
-import { schedule, Workshop } from '@/src/ulis/schedule';
+import { schedule } from '@/src/ulis/schedule';
 import useTranslation from 'next-translate/useTranslation';
 import { AgeGroup, SupportedLangs } from '@/src/types';
-import { FormFields, FullPassDiscount, Step, StepId, WorkshopsField } from './types';
-import { ispromoPeriod, kidsDiscount, kidsMaxAge, workshopsPrice } from '@/src/ulis/price';
-import { Collapse, Fade } from '@mui/material';
+import {
+  FormFields,
+  FullPassDiscount,
+  SoloContestField,
+  Step,
+  StepId,
+  WorkshopsField,
+} from './types';
+import { ispromoPeriod, kidsDiscount, workshopsPrice } from '@/src/ulis/price';
+import { Collapse } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { minWsAdults, minWsKids } from '@/src/ulis/constants';
+import { contestCategories } from '@/src/ulis/contestCategories';
 
 const steps: Step[] = [
   {
@@ -37,6 +45,7 @@ const defaultValues: Partial<FormFields> = {
   isSoloPass: false,
   workshops: [],
   fullPassDiscount: 'none',
+  soloContest: [],
 };
 
 export const FormLive: React.FC = () => {
@@ -46,14 +55,21 @@ export const FormLive: React.FC = () => {
   const methods = useForm<FormFields>({
     defaultValues: defaultValues,
   });
-  const { handleSubmit, getValues, setValue, watch } = methods;
+  const { handleSubmit, setValue, watch } = methods;
 
   const age: number | undefined = watch('age');
   const ageGroup: AgeGroup | null = watch('ageGroup');
+  const contestAgeGroup: AgeGroup | null = watch('contestAgeGroup');
 
   const [currentStep, setCurrentStep] = useState<StepId>('personal');
   const [total, setTotal] = useState(0);
   const [wstotal, setWsTotal] = useState(0);
+
+  // Write initial age groups into form state
+  useEffect(() => {
+    setValue('contestAgeGroup', age ? getAgeGroup(age) : null);
+    setValue('ageGroup', age ? getAgeGroup(age) : null);
+  }, [age, setValue]);
 
   // Map workshops data into form state
   useEffect(() => {
@@ -67,13 +83,23 @@ export const FormLive: React.FC = () => {
     setValue('workshops', res);
   }, [setValue, currentLang]);
 
-  // Map solo contest categories into form state
-
-  // Write initial age groups into form state
+  // Map solo contest styles into form state
   useEffect(() => {
-    setValue('contestAgeGroup', age ? getAgeGroup(age) : null);
-    setValue('ageGroup', age ? getAgeGroup(age) : null);
-  }, [age, setValue]);
+    const res: SoloContestField = [];
+    // Filter by age
+    const filteredByAgeGroup = contestCategories.filter(
+      (cat) => cat.ageGroup === contestAgeGroup || cat.ageGroups?.includes(contestAgeGroup!)
+    );
+
+    // Add only solo styles from with live type
+    filteredByAgeGroup.forEach((cat) => {
+      cat.categories.forEach((style) => {
+        style.isSolo && style.types.includes('live') && res.push({ ...style, selected: false });
+      });
+    });
+
+    setValue('soloContest', res);
+  }, [contestAgeGroup, setValue]);
 
   // Summarize step totals
   useEffect(() => {

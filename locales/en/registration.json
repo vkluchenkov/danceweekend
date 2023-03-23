@@ -40,10 +40,11 @@
     "contest": {
       "title": "Competition",
       "checkboxLabel": "I want to take part in competition",
+      "oops": "In order to take part in competition all the participants are required to have at least one workshop or Full pass for Baby and Kids, 3 workshops or Full Pass for Juniors and older.",
       "soloPassTitle": "Solo Pass",
       "solosPassDescription": "With the Solo pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
       "ageGroups": {
-        "title": "Select your competition age group",
+        "title": "Your competition age group",
         "baby": "Baby",
         "kids": "Kids",
         "juniors": "Juniors",

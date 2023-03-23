@@ -1,6 +1,6 @@
 import { SupportedLangs, AgeGroup } from '@/src/types';
 
-type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
+export type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
 type CategoryType = 'live' | 'online';
 
 export interface Category {

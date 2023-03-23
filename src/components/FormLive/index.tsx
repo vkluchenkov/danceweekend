@@ -20,7 +20,7 @@ import { Collapse } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { minWsAdults, minWsKids } from '@/src/ulis/constants';
-import { contestCategories } from '@/src/ulis/contestCategories';
+import { contestCategories, Level } from '@/src/ulis/contestCategories';
 
 const steps: Step[] = [
   {
@@ -60,6 +60,7 @@ export const FormLive: React.FC = () => {
   const age: number | undefined = watch('age');
   const ageGroup: AgeGroup | null = watch('ageGroup');
   const contestAgeGroup: AgeGroup | null = watch('contestAgeGroup');
+  const contestLevels: Level[] = watch('contestLevels');
 
   const [currentStep, setCurrentStep] = useState<StepId>('personal');
   const [total, setTotal] = useState(0);
@@ -92,13 +93,24 @@ export const FormLive: React.FC = () => {
     );
 
     // Add only solo styles from with live type
-    filteredByAgeGroup.forEach((cat) => {
+    const levels: Level[] = [];
+
+    filteredByAgeGroup.forEach((cat, index) => {
+      cat.levels.forEach((level) => {
+        if (level !== 'openLevel') {
+          const isLevel = levels.includes(level);
+          if (!isLevel) levels.push(level);
+        }
+      });
+
       cat.categories.forEach((style) => {
         style.isSolo && style.types.includes('live') && res.push({ ...style, selected: false });
       });
     });
 
     setValue('soloContest', res);
+    setValue('contestLevels', levels);
+    setValue('contestLevel', levels[0]);
   }, [contestAgeGroup, setValue]);
 
   // Summarize step totals

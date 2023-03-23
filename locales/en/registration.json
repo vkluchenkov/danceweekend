@@ -44,12 +44,20 @@
       "soloPassTitle": "Solo Pass",
       "solosPassDescription": "With the Solo pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
       "ageGroups": {
-        "title": "Your competition age group",
+        "title": "Competition age group",
         "baby": "Baby",
         "kids": "Kids",
         "juniors": "Juniors",
         "adults": "Adults",
         "seniors": "Seniors"
+      },
+      "levels": {
+        "title": "Level",
+        "beginners": "Beginners",
+        "intermediate": "Intermediate",
+        "risingStar": "Rising star (intermediate)",
+        "professionals": "Professionals",
+        "openLevel": "Open level"
       }
     }
   }

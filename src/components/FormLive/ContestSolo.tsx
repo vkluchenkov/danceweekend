@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
 import { ContestSoloStepProps, SoloContestField } from './types';
 import { AgeGroup, SupportedLangs } from '@/src/types';
@@ -10,6 +10,7 @@ import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormInputSelect } from '@/src/ui-kit/input';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { getContestAgeGroupsList } from './helpers';
+import { Level } from '@/src/ulis/contestCategories';
 
 export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   onStepSubmit,
@@ -34,9 +35,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   const contestAgeGroup: AgeGroup | null = watch('contestAgeGroup');
   const ageGroup: AgeGroup | null = watch('ageGroup');
-  const soloContest: SoloContestField = watch('soloContest');
-
-  console.log(soloContest);
+  const contestLevels: Level[] = watch('contestLevels');
 
   const ageGroupList = getContestAgeGroupsList(ageGroup);
 
@@ -56,14 +55,31 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
       <Collapse in={isCompetition} unmountOnExit>
         <div className={styles.form}>
-          <h4 className={textStyles.h4}>{t('form.contest.ageGroups.title')}</h4>
-          <FormInputSelect name='contestAgeGroup' control={control}>
-            {ageGroupList.map((group) => (
-              <MenuItem key={group} value={group}>
-                {t(`form.contest.ageGroups.${group}`)}
-              </MenuItem>
-            ))}
-          </FormInputSelect>
+          {ageGroupList.length > 1 && (
+            <>
+              <h4 className={textStyles.h4}>{t('form.contest.ageGroups.title')}:</h4>
+              <FormInputSelect name='contestAgeGroup' control={control}>
+                {ageGroupList.map((group) => (
+                  <MenuItem key={group} value={group}>
+                    {t(`form.contest.ageGroups.${group}`)}
+                  </MenuItem>
+                ))}
+              </FormInputSelect>
+            </>
+          )}
+
+          {contestLevels.length > 0 && (
+            <>
+              <h4 className={textStyles.h4}>{t('form.contest.levels.title')}:</h4>
+              <FormInputSelect name='contestLevel' control={control}>
+                {contestLevels.map((level) => (
+                  <MenuItem key={level} value={level}>
+                    {t(`form.contest.levels.${level}`)}
+                  </MenuItem>
+                ))}
+              </FormInputSelect>
+            </>
+          )}
         </div>
       </Collapse>
 

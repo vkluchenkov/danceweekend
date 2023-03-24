@@ -12,6 +12,7 @@ export interface Category {
   types: CategoryType[];
   isSolo?: boolean;
   isSoloPass?: boolean;
+  isQueen?: boolean;
 }
 
 export interface ContestCategory {
@@ -372,6 +373,7 @@ export const contestCategories: ContestCategory[] = [
       {
         types: ['live'],
         isSolo: true,
+        isQueen: true,
         translations: {
           en: {
             categoryTitle: 'Queen of live tabla solo',

@@ -1,3 +1,4 @@
+import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
@@ -5,9 +6,13 @@ import { FormControlLabel } from '@mui/material';
 import { AgeGroup, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { SoloContestField } from './types';
-import React from 'react';
 import { Level } from '@/src/ulis/contestCategories';
 import { contestSoloPrice } from '@/src/ulis/price';
+
+interface CategoryCheckboxProps {
+  price: number;
+  catId: string;
+}
 
 export const ContestSoloList: React.FC = () => {
   const { t, lang } = useTranslation('registration');
@@ -37,12 +42,14 @@ export const ContestSoloList: React.FC = () => {
   });
 
   const handleChange = (
-    catId: string,
+    args: CategoryCheckboxProps,
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
+    const { catId, price } = args;
     const index = soloContest.findIndex((cat) => cat.id === catId);
     setValue(`soloContest.${index}.selected`, checked, { shouldTouch: true });
+    setValue(`soloContest.${index}.price`, price, { shouldTouch: true });
   };
 
   const getCategoryPrice = (isCategorySoloPass: boolean, isQueen: boolean): number => {
@@ -74,7 +81,10 @@ export const ContestSoloList: React.FC = () => {
       <div key={cat.id}>
         <FormControlLabel
           control={
-            <InputCheckbox checked={cat.selected} onChange={handleChange.bind(null, cat.id)} />
+            <InputCheckbox
+              checked={cat.selected}
+              onChange={handleChange.bind(null, { price: price, catId: cat.id })}
+            />
           }
           label={
             <p className={textStyles.p}>

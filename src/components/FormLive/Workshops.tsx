@@ -20,7 +20,7 @@ import { SupportedLangs } from '@/src/types';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   onStepSubmit,
-  setStepTotal: setWsTotal,
+  setStepTotal,
   currentPricePeriod,
   fullPassPrice,
   fullPassDiscountList,
@@ -70,17 +70,17 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
 
   // Set step total
   useEffect(() => {
-    if (isFullPass && fullPassPrice) setWsTotal(fullPassPrice);
-    else if (!selectedWorkshops) setWsTotal(0);
+    if (isFullPass && fullPassPrice) setStepTotal(fullPassPrice);
+    else if (!selectedWorkshops) setStepTotal(0);
     else {
       const wsPrice = selectedWorkshops.reduce((prev, current) => {
         const price: number | undefined =
           currentPricePeriod?.price.live[`${current.teachersPriceGroup!}Price`];
         return prev + price!;
       }, 0);
-      setWsTotal(wsPrice);
+      setStepTotal(wsPrice);
     }
-  }, [selectedWorkshops, isFullPass, currentPricePeriod, fullPassPrice, setWsTotal]);
+  }, [selectedWorkshops, isFullPass, currentPricePeriod, fullPassPrice, setStepTotal]);
 
   const handleFullPass = (event: React.ChangeEvent<HTMLInputElement>, value: WorkshopsType) => {
     setValue('isFullPass', value === 'fullPass', { shouldTouch: true });

@@ -2,14 +2,14 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
-import { ContestSoloStepProps } from './types';
+import { ContestSoloStepProps, SoloContestField } from './types';
 import { AgeGroup, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormInputSelect } from '@/src/ui-kit/input';
 import { getContestAgeGroupsList } from './helpers';
-import { contestCategories, Level } from '@/src/ulis/contestCategories';
+import { Level } from '@/src/ulis/contestCategories';
 import { ContestSoloList } from './ContestSoloList';
 import { contestSoloPrice } from '@/src/ulis/price';
 
@@ -17,9 +17,9 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   onStepSubmit,
   setStepTotal,
   isEligible,
+  soloPassPrice,
 }) => {
   const { t, lang } = useTranslation('registration');
-  const currentLang = lang as SupportedLangs;
 
   const [isCompetition, setIsCompetition] = useState(false);
 
@@ -28,9 +28,20 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   const ageGroup: AgeGroup | null = watch('ageGroup');
   const contestLevels: Level[] = watch('contestLevels');
-  const contestLevel: Level = watch('contestLevel');
   const isSoloPass: boolean = watch('isSoloPass');
-  const isFullPass: boolean = watch('isFullPass');
+  const soloContest: SoloContestField = watch('soloContest');
+  const soloContestSelected = soloContest.filter((cat) => cat.selected);
+
+  // Set step total
+  useEffect(() => {
+    let total = 0;
+    if (isSoloPass) total = total + soloPassPrice;
+    if (soloContestSelected) {
+      const catsPrice = soloContestSelected.reduce((prev, current) => prev + current.price, 0);
+      total = total + catsPrice;
+    }
+    setStepTotal(total);
+  }, [isSoloPass, soloPassPrice, soloContestSelected, setStepTotal]);
 
   const ageGroupList = getContestAgeGroupsList(ageGroup);
 
@@ -39,22 +50,6 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   const handleSoloPass = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
     setValue('isSoloPass', checked);
-
-  const getSoloPassPrice = useMemo((): number => {
-    const priceKids = contestSoloPrice.soloPassKids.price.live;
-    const priceRisingStar = contestSoloPrice.soloPassRisingStar.price.live;
-    const priceProfessionals = contestSoloPrice.soloPassProfessionals.price.live;
-
-    // Price for Kids and Baby
-    if (ageGroup === 'baby' || ageGroup === 'kids')
-      return isFullPass ? priceKids.priceDiscounted : priceKids.priceNormal;
-    // Price for everyone else
-    else {
-      if (contestLevel === 'professionals')
-        return isFullPass ? priceProfessionals.priceDiscounted : priceProfessionals.priceNormal;
-      else return isFullPass ? priceRisingStar.priceDiscounted : priceRisingStar.priceNormal;
-    }
-  }, [ageGroup, contestLevel, isFullPass]);
 
   return (
     <div className={styles.form}>
@@ -105,7 +100,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
                 <p className={textStyles.p}>
                   {t('form.contest.soloPassLabel')}
                   {': '}
-                  <span className={textStyles.accent}>{getSoloPassPrice}€</span>
+                  <span className={textStyles.accent}>{soloPassPrice}€</span>
                 </p>
               }
             />

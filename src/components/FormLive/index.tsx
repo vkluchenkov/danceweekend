@@ -15,7 +15,7 @@ import {
   StepId,
   WorkshopsField,
 } from './types';
-import { ispromoPeriod, kidsDiscount, workshopsPrice } from '@/src/ulis/price';
+import { contestSoloPrice, ispromoPeriod, kidsDiscount, workshopsPrice } from '@/src/ulis/price';
 import { Collapse } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
@@ -65,6 +65,7 @@ export const FormLive: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<StepId>('personal');
   const [total, setTotal] = useState(0);
   const [wstotal, setWsTotal] = useState(0);
+  const [contestSoloTotal, setContestSoloTotal] = useState(0);
 
   // Write initial age groups into form state
   useEffect(() => {
@@ -106,7 +107,12 @@ export const FormLive: React.FC = () => {
       cat.categories.forEach((style) => {
         style.isSolo &&
           style.types.includes('live') &&
-          res.push({ ...style, selected: false, id: style.translations.en.categoryTitle });
+          res.push({
+            ...style,
+            selected: false,
+            id: style.translations.en.categoryTitle,
+            price: 0,
+          });
       });
     });
 
@@ -117,8 +123,8 @@ export const FormLive: React.FC = () => {
 
   // Summarize step totals
   useEffect(() => {
-    setTotal(wstotal);
-  }, [wstotal]);
+    setTotal(wstotal + contestSoloTotal);
+  }, [wstotal, contestSoloTotal]);
 
   // Handle form submit
   const onSubmit = (data: any) => console.log(data);
@@ -136,6 +142,7 @@ export const FormLive: React.FC = () => {
   const fullPassDiscount: FullPassDiscount = watch('fullPassDiscount');
   const isWorkshops: WorkshopsField = watch('workshops');
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
+  const contestLevel: Level = watch('contestLevel');
 
   const currentPricePeriod = useMemo(() => {
     const today = new Date();
@@ -173,6 +180,22 @@ export const FormLive: React.FC = () => {
     }
   }, [ageGroup, isFullPass, selectedWorkshops]);
 
+  const soloPassPrice = useMemo((): number => {
+    const priceKids = contestSoloPrice.soloPassKids.price.live;
+    const priceRisingStar = contestSoloPrice.soloPassRisingStar.price.live;
+    const priceProfessionals = contestSoloPrice.soloPassProfessionals.price.live;
+
+    // Price for Kids and Baby
+    if (ageGroup === 'baby' || ageGroup === 'kids')
+      return isFullPass ? priceKids.priceDiscounted : priceKids.priceNormal;
+    // Price for everyone else
+    else {
+      if (contestLevel === 'professionals')
+        return isFullPass ? priceProfessionals.priceDiscounted : priceProfessionals.priceNormal;
+      else return isFullPass ? priceRisingStar.priceDiscounted : priceRisingStar.priceNormal;
+    }
+  }, [ageGroup, contestLevel, isFullPass]);
+
   return (
     <FormProvider {...methods}>
       <p className={textStyles.p}>
@@ -196,8 +219,9 @@ export const FormLive: React.FC = () => {
         <Collapse in={currentStep === 'constestSolo'} unmountOnExit>
           <ContestSolo
             onStepSubmit={hanleSteps}
-            setStepTotal={setWsTotal}
+            setStepTotal={setContestSoloTotal}
             isEligible={isEligible}
+            soloPassPrice={soloPassPrice}
           />
         </Collapse>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
@@ -8,11 +8,6 @@ import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { SoloContestField } from './types';
 import { Level } from '@/src/ulis/contestCategories';
 import { contestSoloPrice } from '@/src/ulis/price';
-
-interface CategoryCheckboxProps {
-  price: number;
-  catId: string;
-}
 
 export const ContestSoloList: React.FC = () => {
   const { t, lang } = useTranslation('registration');
@@ -42,48 +37,61 @@ export const ContestSoloList: React.FC = () => {
   });
 
   const handleChange = (
-    args: CategoryCheckboxProps,
+    catId: string,
+    price: number,
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
-    const { catId, price } = args;
     const index = soloContest.findIndex((cat) => cat.id === catId);
     setValue(`soloContest.${index}.selected`, checked, { shouldTouch: true });
     setValue(`soloContest.${index}.price`, price, { shouldTouch: true });
   };
 
-  const getCategoryPrice = (isCategorySoloPass: boolean, isQueen: boolean): number => {
-    const priceKids = contestSoloPrice.kids.price.live;
-    const pricerRisingStar = contestSoloPrice.risingStar.price.live;
-    const pricerProfessionals = contestSoloPrice.professionals.price.live;
+  const getCategoryPrice = useCallback(
+    (isCategorySoloPass: boolean, isQueen: boolean): number => {
+      const priceKids = contestSoloPrice.kids.price.live;
+      const pricerRisingStar = contestSoloPrice.risingStar.price.live;
+      const pricerProfessionals = contestSoloPrice.professionals.price.live;
 
-    // If category is included in Solo Pass
-    if (isCategorySoloPass && isSoloPass) return 0;
-    // If category is not included in Solo Pass
-    else {
-      // Price for Kids
-      if (contestAgeGroup === 'kids' || contestAgeGroup === 'baby')
-        return isFullPass ? priceKids.priceDiscounted : priceKids.priceNormal;
-      // Price for everyone else
+      // If category is included in Solo Pass
+      if (isCategorySoloPass && isSoloPass) return 0;
+      // If category is not included in Solo Pass
       else {
-        // Price for Professionals and Queen
-        if (contestLevel === 'professionals' || isQueen)
-          return isFullPass ? pricerProfessionals.priceDiscounted : pricerProfessionals.priceNormal;
-        // Price for Rising star / open level
-        return isFullPass ? pricerRisingStar.priceDiscounted : pricerRisingStar.priceNormal;
+        // Price for Kids
+        if (contestAgeGroup === 'kids' || contestAgeGroup === 'baby')
+          return isFullPass ? priceKids.priceDiscounted : priceKids.priceNormal;
+        // Price for everyone else
+        else {
+          // Price for Professionals and Queen
+          if (contestLevel === 'professionals' || isQueen)
+            return isFullPass
+              ? pricerProfessionals.priceDiscounted
+              : pricerProfessionals.priceNormal;
+          // Price for Rising star / open level
+          return isFullPass ? pricerRisingStar.priceDiscounted : pricerRisingStar.priceNormal;
+        }
       }
-    }
-  };
+    },
+    [contestAgeGroup, isFullPass, isSoloPass, contestLevel]
+  );
+
+  // Re-set prices on Solo Pass / age group / and level change
+  useEffect(() => {
+    controlledFields.forEach((i) => {
+      const price = getCategoryPrice(!!i.isSoloPass, !!i.isQueen);
+      const index = soloContest.findIndex((cat) => cat.id === i.id);
+      setValue(`soloContest.${index}.price`, price, { shouldTouch: true });
+    });
+  }, [controlledFields, getCategoryPrice, setValue, soloContest]);
 
   const categories = controlledFields.map((cat) => {
-    const price = getCategoryPrice(!!cat.isSoloPass, !!cat.isQueen);
     return (
       <div key={cat.id}>
         <FormControlLabel
           control={
             <InputCheckbox
               checked={cat.selected}
-              onChange={handleChange.bind(null, { price: price, catId: cat.id })}
+              onChange={handleChange.bind(null, cat.id, cat.price)}
             />
           }
           label={
@@ -91,7 +99,7 @@ export const ContestSoloList: React.FC = () => {
               {cat.translations[currentLang].categoryTitle}:
               <span className={textStyles.accent}>
                 {' '}
-                {price > 0 ? price + '€' : t('form.contest.free')}
+                {cat.price > 0 ? cat.price + '€' : t('form.contest.free')}
               </span>
             </p>
           }

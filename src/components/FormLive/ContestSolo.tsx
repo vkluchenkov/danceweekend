@@ -2,20 +2,19 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
-import { ContestSoloStepProps, SoloContestField } from './types';
+import { ContestSoloStepProps } from './types';
 import { AgeGroup, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormInputSelect } from '@/src/ui-kit/input';
-import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { getContestAgeGroupsList } from './helpers';
 import { Level } from '@/src/ulis/contestCategories';
+import { ContestSoloList } from './ContestSoloList';
 
 export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   onStepSubmit,
   setStepTotal,
-  currentPricePeriod,
   isEligible,
 }) => {
   const { t, lang } = useTranslation('registration');
@@ -24,16 +23,8 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   const [isCompetition, setIsCompetition] = useState(false);
 
   const methods = useFormContext();
-  const {
-    handleSubmit,
-    setValue,
-    control,
-    watch,
-    trigger,
-    formState: { errors },
-  } = methods;
+  const { control, watch, trigger } = methods;
 
-  const contestAgeGroup: AgeGroup | null = watch('contestAgeGroup');
   const ageGroup: AgeGroup | null = watch('ageGroup');
   const contestLevels: Level[] = watch('contestLevels');
 
@@ -80,6 +71,8 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
               </FormInputSelect>
             </>
           )}
+          <h4 className={textStyles.h4}>{t('form.contest.stylesTitle')}:</h4>
+          <ContestSoloList />
         </div>
       </Collapse>
 

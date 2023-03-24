@@ -104,7 +104,9 @@ export const FormLive: React.FC = () => {
       });
 
       cat.categories.forEach((style) => {
-        style.isSolo && style.types.includes('live') && res.push({ ...style, selected: false });
+        style.isSolo &&
+          style.types.includes('live') &&
+          res.push({ ...style, selected: false, id: style.translations.en.categoryTitle });
       });
     });
 
@@ -194,7 +196,6 @@ export const FormLive: React.FC = () => {
         <Collapse in={currentStep === 'constestSolo'} unmountOnExit>
           <ContestSolo
             onStepSubmit={hanleSteps}
-            currentPricePeriod={currentPricePeriod}
             setStepTotal={setWsTotal}
             isEligible={isEligible}
           />

@@ -3,7 +3,7 @@ import { Category, ContestCategory, Level } from '@/src/ulis/contestCategories';
 import { Workshop } from '@/src/ulis/schedule';
 
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
-export type SoloContestField = (Category & { selected: boolean })[];
+export type SoloContestField = (Category & { selected: boolean; id: string })[];
 
 export type WorkshopsType = 'fullPass' | 'single';
 
@@ -60,7 +60,6 @@ export type WorkshopsStepProps = StepProps & {
 };
 
 export type ContestSoloStepProps = StepProps & {
-  currentPricePeriod: PricePeriod | undefined;
   setStepTotal: (wsTotal: number) => void;
   isEligible: boolean;
 };

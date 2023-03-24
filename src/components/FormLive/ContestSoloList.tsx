@@ -75,14 +75,14 @@ export const ContestSoloList: React.FC = () => {
     [contestAgeGroup, isFullPass, isSoloPass, contestLevel]
   );
 
-  // Re-set prices on Solo Pass / age group / and level change
+  // Re-set prices when fields or Solo Pass change
   useEffect(() => {
     controlledFields.forEach((i) => {
       const price = getCategoryPrice(!!i.isSoloPass, !!i.isQueen);
       const index = soloContest.findIndex((cat) => cat.id === i.id);
       setValue(`soloContest.${index}.price`, price, { shouldTouch: true });
     });
-  }, [controlledFields, getCategoryPrice, setValue, soloContest]);
+  }, [soloContest, isSoloPass]);
 
   const categories = controlledFields.map((cat) => {
     return (

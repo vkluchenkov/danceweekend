@@ -8,6 +8,7 @@ import { Button, Collapse, FormControlLabel } from '@mui/material';
 import { ContestGroupStepProps, GroupContest } from './types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { ContestGroup } from './ContestGroup';
+import { contestGroupPrice } from '@/src/ulis/price';
 
 export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, setStepTotal }) => {
   const { t } = useTranslation('registration');
@@ -28,7 +29,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, s
       type: 'duo',
       qty: 2,
       name: '',
-      price: 0,
+      price: contestGroupPrice.live * 2, //qty
     };
   }, []);
 

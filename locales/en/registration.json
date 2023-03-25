@@ -23,26 +23,30 @@
     },
     "workshops": {
       "title": "Workshops",
-      "selectTitle": "I want to take workshops as:",
+      "selectTitle": "Full Pass or one by one?",
       "fullPass": "Full Pass",
+      "fullPassDescription1": "It’s possible to buy workshops as a package — Full Pass or single workshops of your choice. ",
+      "fullPassDescription2": "Full Pass unlocks all the workshops, discounts in competition and access to World Show. Also allows you to pay in installments (except Promo tariff). Kids and Baby have 50% discount.",
       "singleWs": "Single workshops",
       "discounts": {
         "title": "Full Pass / group discounts:",
         "group": "Group discount 20%",
         "groupName": "Group name",
+        "groupDescription": "20% discount on Full Pass for registration of 3+ participants as a group. Discount won't be summarized with personal discounts or discounts for kids.",
         "30%": "Certificate 30%",
         "50%": "Certificate 50%",
         "free": "Certificate Free Full Pass",
         "none": "Don't have any discounts",
-        "details": "How did you acquire your certificate?"
+        "details": "How did you acquire your certificate?",
+        "detailsDescription": "Please state where and when did you acquire your discount certificate. As all the certificates are personal, we will check your right to use it with the organizers of an event where you won it."
       }
     },
     "contest": {
-      "title": "Competition",
-      "checkboxLabel": "I want to take part in competition",
+      "soloTitle": "Competition Solo",
+      "checkboxLabel": "I want to take part in solo competition",
       "soloPassLabel": "I want to buy Solo Pass",
       "soloPassTitle": "Solo Pass",
-      "solosPassDescription": "With the Solo pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
+      "solosPassDescription": "With the Solo Pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
       "oops": "In order to take part in competition all the participants are required to have at least one workshop or Full pass for Baby and Kids, 3 workshops or Full Pass for Juniors and older.",
       "ageGroups": {
         "title": "Competition age group",

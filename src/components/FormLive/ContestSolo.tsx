@@ -53,7 +53,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   return (
     <div className={styles.form}>
-      <h2 className={textStyles.h2}>{t('form.contest.title')}</h2>
+      <h2 className={textStyles.h2}>{t('form.contest.soloTitle')}</h2>
       {!isEligible && <p>{t('form.contest.oops')}</p>}
       {isEligible && (
         <FormControlLabel
@@ -93,7 +93,6 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
           {/* Solo Pass selection */}
           <div>
             <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
-            <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
             <FormControlLabel
               control={<InputCheckbox checked={isSoloPass} onChange={handleSoloPass} />}
               label={
@@ -104,6 +103,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
                 </p>
               }
             />
+            <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
           </div>
 
           <h4 className={textStyles.h4}>{t('form.contest.stylesTitle')}:</h4>

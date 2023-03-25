@@ -106,6 +106,8 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.workshops.title')}</h2>
+      <p className={textStyles.p}>{t('form.workshops.fullPassDescription1')}</p>
+      <p className={textStyles.p}>{t('form.workshops.fullPassDescription2')}</p>
 
       <FormControl component='fieldset'>
         <h4 className={textStyles.h4}>{t('form.workshops.selectTitle')}</h4>
@@ -150,6 +152,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
           </FormInputSelect>
 
           <Collapse in={isDiscount} unmountOnExit>
+            <p className={textStyles.p}>{t('form.workshops.discounts.detailsDescription')}</p>
             <FormInputField
               name='fullPassDiscountSource'
               label={t('form.workshops.discounts.details')}
@@ -163,6 +166,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
           </Collapse>
 
           <Collapse in={isGroup} unmountOnExit>
+            <p className={textStyles.p}>{t('form.workshops.discounts.groupDescription')}</p>
             <FormInputField
               name='fullPassGroupName'
               label={t('form.workshops.discounts.groupName')}

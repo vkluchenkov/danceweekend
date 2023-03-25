@@ -4,14 +4,12 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useCallback, useEffect, useState } from 'react';
-import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
-import { GroupContest, StepProps } from './types';
+import { Button, Collapse, FormControlLabel } from '@mui/material';
+import { ContestGroupStepProps, GroupContest } from './types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
-import { FormInputSelect } from '@/src/ui-kit/input';
 import { ContestGroup } from './ContestGroup';
-import { contestGroupPrice } from '@/src/ulis/price';
 
-export const ContestGroups: React.FC<StepProps> = ({ onStepSubmit }) => {
+export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, setStepTotal }) => {
   const { t } = useTranslation('registration');
 
   const [isGroup, setIsGroup] = useState(false);
@@ -37,10 +35,12 @@ export const ContestGroups: React.FC<StepProps> = ({ onStepSubmit }) => {
   const groupContest: GroupContest[] = watch('groupContest');
 
   const controlledFields = fields.map((field, index) => {
+    const isLast: boolean = index === fields.length - 1;
     return {
       ...field,
       ...groupContest[index],
-      index: index,
+      index,
+      isLast,
     };
   });
 
@@ -49,21 +49,28 @@ export const ContestGroups: React.FC<StepProps> = ({ onStepSubmit }) => {
     else setValue('groupContest', []);
   }, [isGroup, setValue, defaultGroup]);
 
-  const groups = controlledFields.map((field) => <ContestGroup field={field} key={field.id} />);
+  const handleMore = useCallback(() => {
+    setValue('groupContest', [...groupContest, defaultGroup]);
+  }, [groupContest, setValue, defaultGroup]);
 
   const handleGroup = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
     setIsGroup(checked);
 
+  const groups = controlledFields.map((field) => (
+    <ContestGroup field={field} key={field.id} onMore={handleMore} isLast={field.isLast} />
+  ));
+
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.contest.groups.title')}</h2>
+
       <FormControlLabel
         control={<InputCheckbox checked={isGroup} onChange={handleGroup} />}
         label={<p className={textStyles.p}>{t('form.contest.groups.checkboxLabel')}</p>}
       />
 
       <Collapse in={isGroup} unmountOnExit>
-        {groups}
+        <div className={styles.form}>{groups}</div>
       </Collapse>
 
       <div className={styles.naviWrapper}>

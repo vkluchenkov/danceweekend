@@ -72,6 +72,7 @@ export const FormLive: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [wstotal, setWsTotal] = useState(0);
   const [contestSoloTotal, setContestSoloTotal] = useState(0);
+  const [contestGroupsTotal, setContestGroupsTotal] = useState(0);
 
   // Write initial age groups into form state
   useEffect(() => {
@@ -232,7 +233,7 @@ export const FormLive: React.FC = () => {
         </Collapse>
 
         <Collapse in={currentStep === 'contestGroups'} unmountOnExit>
-          <ContestGroups onStepSubmit={hanleSteps} />
+          <ContestGroups onStepSubmit={hanleSteps} setStepTotal={setContestGroupsTotal} />
         </Collapse>
 
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>

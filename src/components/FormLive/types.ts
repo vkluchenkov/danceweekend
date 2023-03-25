@@ -63,12 +63,16 @@ export interface StepProps {
 export type WorkshopsStepProps = StepProps & {
   currentPricePeriod: PricePeriod | undefined;
   fullPassPrice: number | undefined;
-  setStepTotal: (wsTotal: number) => void;
+  setStepTotal: (total: number) => void;
   fullPassDiscountList: FullPassDiscount[];
 };
 
 export type ContestSoloStepProps = StepProps & {
-  setStepTotal: (wsTotal: number) => void;
+  setStepTotal: (total: number) => void;
   isEligible: boolean;
   soloPassPrice: number;
+};
+
+export type ContestGroupStepProps = StepProps & {
+  setStepTotal: (total: number) => void;
 };

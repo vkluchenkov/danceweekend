@@ -74,7 +74,8 @@
         "group": "Group",
         "name": "Name",
         "qty": "Number of dancers",
-        "price": "Price"
+        "price": "Price",
+        "add": "Add another duo / group"
       }
     }
   }

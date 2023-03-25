@@ -11,3 +11,6 @@ export const adultsMaxAge = 39;
 // Minimum numbers of workshops to be eligible for compatition or World Show
 export const minWsKids = 1;
 export const minWsAdults = 3;
+
+// Maximum number of groups to register for one person
+export const maxGroups = 3;

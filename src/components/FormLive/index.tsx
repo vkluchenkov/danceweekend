@@ -130,8 +130,8 @@ export const FormLive: React.FC = () => {
 
   // Summarize step totals
   useEffect(() => {
-    setTotal(wstotal + contestSoloTotal);
-  }, [wstotal, contestSoloTotal]);
+    setTotal(wstotal + contestSoloTotal + contestGroupsTotal);
+  }, [wstotal, contestSoloTotal, contestGroupsTotal]);
 
   // Handle form submit
   const onSubmit = (data: any) => console.log(data);

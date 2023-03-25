@@ -21,6 +21,7 @@ import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { minWsAdults, minWsKids } from '@/src/ulis/constants';
 import { contestCategories, Level } from '@/src/ulis/contestCategories';
+import { ContestGroups } from './ContestGroups';
 
 const steps: Step[] = [
   {
@@ -31,11 +32,16 @@ const steps: Step[] = [
   {
     id: 'workshops',
     prev: 'personal',
-    next: 'constestSolo',
+    next: 'contestSolo',
   },
   {
-    id: 'constestSolo',
+    id: 'contestSolo',
     prev: 'workshops',
+    next: 'contestGroups',
+  },
+  {
+    id: 'contestGroups',
+    prev: 'contestSolo',
     next: null,
   },
 ];
@@ -216,13 +222,17 @@ export const FormLive: React.FC = () => {
           />
         </Collapse>
 
-        <Collapse in={currentStep === 'constestSolo'} unmountOnExit>
+        <Collapse in={currentStep === 'contestSolo'} unmountOnExit>
           <ContestSolo
             onStepSubmit={hanleSteps}
             setStepTotal={setContestSoloTotal}
             isEligible={isEligible}
             soloPassPrice={soloPassPrice}
           />
+        </Collapse>
+
+        <Collapse in={currentStep === 'contestGroups'} unmountOnExit>
+          <ContestGroups onStepSubmit={hanleSteps} />
         </Collapse>
 
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>

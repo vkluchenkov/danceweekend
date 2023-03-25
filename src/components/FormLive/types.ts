@@ -1,6 +1,13 @@
 import { AgeGroup, PricePeriod } from '@/src/types';
-import { Category, ContestCategory, Level } from '@/src/ulis/contestCategories';
+import { Category, Level } from '@/src/ulis/contestCategories';
 import { Workshop } from '@/src/ulis/schedule';
+
+export interface GroupContest {
+  type: 'duo' | 'group';
+  qty: number;
+  name: string;
+  price: number;
+}
 
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
 export type SoloContestField = (Category & { selected: boolean; id: string; price: number })[];
@@ -31,12 +38,13 @@ export interface FormFields {
   contestLevels: Level[];
   contestLevel: Level;
   soloContest: SoloContestField;
+  groupContest: GroupContest[];
 }
 
 export type StepId =
   | 'personal'
   | 'workshops'
-  | 'constestSolo'
+  | 'contestSolo'
   | 'contestGroups'
   | 'worldShow'
   | 'summary';

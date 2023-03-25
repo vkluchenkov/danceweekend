@@ -65,7 +65,17 @@
         "openLevel": "Open level"
       },
       "stylesTitle": "Styles",
-      "free": "free"
+      "free": "free",
+      "groups": {
+        "title": "Competition duos and groups",
+        "checkboxLabel": "I want to register a duo or a group",
+        "chooseType": "I register",
+        "duo": "Duo",
+        "group": "Group",
+        "name": "Name",
+        "qty": "Number of dancers",
+        "price": "Price"
+      }
     }
   }
 }

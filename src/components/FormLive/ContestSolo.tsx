@@ -2,16 +2,15 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
 import { ContestSoloStepProps, SoloContestField } from './types';
-import { AgeGroup, SupportedLangs } from '@/src/types';
+import { AgeGroup } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormInputSelect } from '@/src/ui-kit/input';
 import { getContestAgeGroupsList } from './helpers';
 import { Level } from '@/src/ulis/contestCategories';
 import { ContestSoloList } from './ContestSoloList';
-import { contestSoloPrice } from '@/src/ulis/price';
 
 export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   onStepSubmit,
@@ -19,7 +18,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   isEligible,
   soloPassPrice,
 }) => {
-  const { t, lang } = useTranslation('registration');
+  const { t } = useTranslation('registration');
 
   const [isCompetition, setIsCompetition] = useState(false);
 
@@ -132,6 +131,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
             const isValid = await trigger();
             if (isValid) onStepSubmit('next');
           }}
+          disabled={isCompetition && !soloContestSelected.length}
         >
           {t('form.common.next')}
         </Button>

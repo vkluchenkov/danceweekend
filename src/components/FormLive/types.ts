@@ -74,5 +74,6 @@ export type ContestSoloStepProps = StepProps & {
 };
 
 export type ContestGroupStepProps = StepProps & {
+  isEligible: boolean;
   setStepTotal: (total: number) => void;
 };

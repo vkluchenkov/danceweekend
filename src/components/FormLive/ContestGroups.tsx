@@ -12,7 +12,11 @@ import { ContestGroup } from './ContestGroup';
 import { contestGroupPrice } from '@/src/ulis/price';
 import { maxGroups } from '@/src/ulis/constants';
 
-export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, setStepTotal }) => {
+export const ContestGroups: React.FC<ContestGroupStepProps> = ({
+  onStepSubmit,
+  setStepTotal,
+  isEligible,
+}) => {
   const { t } = useTranslation('registration');
 
   const [isGroup, setIsGroup] = useState(false);
@@ -85,28 +89,33 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, s
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.contest.groups.title')}</h2>
+      {!isEligible && <p>{t('form.contest.oops')}</p>}
 
-      <FormControlLabel
-        control={<InputCheckbox checked={isGroup} onChange={handleGroup} />}
-        label={<p className={textStyles.p}>{t('form.contest.groups.checkboxLabel')}</p>}
-      />
+      {isEligible && (
+        <>
+          <FormControlLabel
+            control={<InputCheckbox checked={isGroup} onChange={handleGroup} />}
+            label={<p className={textStyles.p}>{t('form.contest.groups.checkboxLabel')}</p>}
+          />
 
-      <Collapse in={isGroup} unmountOnExit>
-        <div className={styles.form}>{groups}</div>
+          <Collapse in={isGroup} unmountOnExit>
+            <div className={styles.form}>{groups}</div>
 
-        {groupContest.length && groupContest.length < maxGroups && (
-          <Button
-            type='button'
-            variant='outlined'
-            fullWidth
-            size='large'
-            disableElevation
-            onClick={handleMore}
-          >
-            {t('form.contest.groups.add')}
-          </Button>
-        )}
-      </Collapse>
+            {groupContest.length && groupContest.length < maxGroups && (
+              <Button
+                type='button'
+                variant='outlined'
+                fullWidth
+                size='large'
+                disableElevation
+                onClick={handleMore}
+              >
+                {t('form.contest.groups.add')}
+              </Button>
+            )}
+          </Collapse>
+        </>
+      )}
 
       <div className={styles.naviWrapper}>
         <Button

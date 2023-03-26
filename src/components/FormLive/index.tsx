@@ -234,7 +234,11 @@ export const FormLive: React.FC = () => {
         </Collapse>
 
         <Collapse in={currentStep === 'contestGroups'} unmountOnExit>
-          <ContestGroups onStepSubmit={hanleSteps} setStepTotal={setContestGroupsTotal} />
+          <ContestGroups
+            onStepSubmit={hanleSteps}
+            isEligible={isEligible}
+            setStepTotal={setContestGroupsTotal}
+          />
         </Collapse>
 
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>

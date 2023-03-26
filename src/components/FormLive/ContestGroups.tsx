@@ -5,10 +5,12 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Collapse, FormControlLabel } from '@mui/material';
+
 import { ContestGroupStepProps, GroupContest } from './types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { ContestGroup } from './ContestGroup';
 import { contestGroupPrice } from '@/src/ulis/price';
+import { maxGroups } from '@/src/ulis/constants';
 
 export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, setStepTotal }) => {
   const { t } = useTranslation('registration');
@@ -36,12 +38,10 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, s
   const groupContest: GroupContest[] = watch('groupContest');
 
   const controlledFields = fields.map((field, index) => {
-    const isLast: boolean = index === fields.length - 1;
     return {
       ...field,
       ...groupContest[index],
       index,
-      isLast,
     };
   });
 
@@ -50,15 +50,28 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, s
     else setValue('groupContest', []);
   }, [isGroup, setValue, defaultGroup]);
 
-  const handleMore = useCallback(() => {
-    setValue('groupContest', [...groupContest, defaultGroup]);
-  }, [groupContest, setValue, defaultGroup]);
+  const handleMore = useCallback(async () => {
+    const isValid = await trigger();
+    if (isValid) setValue('groupContest', [...groupContest, defaultGroup]);
+  }, [groupContest, setValue, defaultGroup, trigger]);
+
+  const handleDelete = useCallback(
+    (id: string) => {
+      const copy = controlledFields.slice();
+      const index = copy.findIndex((i) => i.id === id);
+      if (index >= 0) {
+        copy.splice(index, 1);
+        setValue('groupContest', [...copy]);
+      }
+    },
+    [controlledFields, setValue]
+  );
 
   const handleGroup = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
     setIsGroup(checked);
 
   const groups = controlledFields.map((field) => (
-    <ContestGroup field={field} key={field.id} onMore={handleMore} isLast={field.isLast} />
+    <ContestGroup field={field} key={field.id} onDelete={() => handleDelete(field.id)} />
   ));
 
   return (
@@ -72,6 +85,19 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, s
 
       <Collapse in={isGroup} unmountOnExit>
         <div className={styles.form}>{groups}</div>
+
+        {groupContest.length && groupContest.length < maxGroups && (
+          <Button
+            type='button'
+            variant='outlined'
+            fullWidth
+            size='large'
+            disableElevation
+            onClick={handleMore}
+          >
+            {t('form.contest.groups.add')}
+          </Button>
+        )}
       </Collapse>
 
       <div className={styles.naviWrapper}>

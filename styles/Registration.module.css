@@ -18,6 +18,12 @@
   gap: 15px;
 }
 
+.group__header {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  gap: 15px;
+}
+
 .groupItem {
   padding: 15px 0;
 }

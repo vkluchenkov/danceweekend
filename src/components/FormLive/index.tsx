@@ -52,6 +52,7 @@ const defaultValues: Partial<FormFields> = {
   workshops: [],
   fullPassDiscount: 'none',
   soloContest: [],
+  groupContest: [],
 };
 
 export const FormLive: React.FC = () => {

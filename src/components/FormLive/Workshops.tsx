@@ -148,8 +148,11 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
 
       <Collapse in={workshopsType === 'fullPass'} unmountOnExit>
         <div className={styles.form}>
-          <h4 className={textStyles.h4}>{t('form.workshops.discounts.title')}</h4>
-          <FormInputSelect name='fullPassDiscount' control={control}>
+          <FormInputSelect
+            name='fullPassDiscount'
+            control={control}
+            label={t('form.workshops.discounts.title')}
+          >
             {fullPassDiscountList.map((i) => (
               <MenuItem key={i} value={i}>
                 {t(`form.workshops.discounts.${i}`)}

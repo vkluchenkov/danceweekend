@@ -63,8 +63,11 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
         <div className={styles.form}>
           {ageGroupList.length > 1 && (
             <>
-              <h4 className={textStyles.h4}>{t('form.contest.ageGroups.title')}:</h4>
-              <FormInputSelect name='contestAgeGroup' control={control}>
+              <FormInputSelect
+                name='contestAgeGroup'
+                control={control}
+                label={t('form.contest.ageGroups.title')}
+              >
                 {ageGroupList.map((group) => (
                   <MenuItem key={group} value={group}>
                     {t(`form.contest.ageGroups.${group}`)}
@@ -76,8 +79,11 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
           {contestLevels.length > 0 && (
             <>
-              <h4 className={textStyles.h4}>{t('form.contest.levels.title')}:</h4>
-              <FormInputSelect name='contestLevel' control={control}>
+              <FormInputSelect
+                name='contestLevel'
+                control={control}
+                label={t('form.contest.levels.title')}
+              >
                 {contestLevels.map((level) => (
                   <MenuItem key={level} value={level}>
                     {t(`form.contest.levels.${level}`)}

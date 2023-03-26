@@ -45,10 +45,18 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({ onStepSubmit, s
     };
   });
 
+  // Set first group fields and clear all group fields on checkbox change
   useEffect(() => {
     if (isGroup) setValue('groupContest', [defaultGroup]);
     else setValue('groupContest', []);
   }, [isGroup, setValue, defaultGroup]);
+
+  useEffect(() => {
+    const res = controlledFields.reduce((prev, current) => {
+      return prev + current.price;
+    }, 0);
+    setStepTotal(res);
+  }, [controlledFields, setStepTotal]);
 
   const handleMore = useCallback(async () => {
     const isValid = await trigger();

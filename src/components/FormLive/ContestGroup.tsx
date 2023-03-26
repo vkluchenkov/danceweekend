@@ -1,12 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { GroupContest } from './types';
+import { GroupContest, FormFields } from './types';
 import { Button, MenuItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { useFormContext } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { contestGroupPrice } from '@/src/ulis/price';
 import clsx from 'clsx';
 
@@ -25,18 +25,26 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
     formState: { errors },
   } = methods;
 
+  const [changed, setChanged] = useState(false);
+
   useEffect(() => {
     const price = field.qty * contestGroupPrice.live;
     setValue(`groupContest.${field.index}.price`, price);
   }, [setValue, field.qty, field.index]);
 
   useEffect(() => {
-    if (field.type === 'duo') setValue(`groupContest.${field.index}.qty`, 2);
+    if (field.type === 'duo') {
+      setValue(`groupContest.${field.index}.qty`, 2);
+      setChanged(false);
+    }
   }, [field.type, setValue, field.index]);
 
-  const fieldErros = errors.groupContest;
-
-  console.log(errors);
+  useEffect(() => {
+    if (field.type === 'group' && field.qty < 3 && !changed) {
+      setValue(`groupContest.${field.index}.qty`, 3);
+      setChanged(true);
+    }
+  }, [field.type, setValue, field.index, field.qty, changed]);
 
   return (
     <div className={clsx(styles.form)}>
@@ -80,11 +88,10 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
         control={control}
         label={t('form.contest.groups.name')}
         name={`groupContest.${field.index}.name`}
-        required
         rules={{
           required: t('form.common.required'),
         }}
-        // error={fieldErros && !!fieldErros[field.index].name}
+        // error={!!errors.groupContest[field.index as typeof keyof FormFields].name}
         // helperText={`errors.groupContest[${field.index}].name.message` as string | undefined}
       />
 

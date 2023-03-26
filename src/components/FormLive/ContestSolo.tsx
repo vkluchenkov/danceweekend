@@ -21,7 +21,13 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   const [isCompetition, setIsCompetition] = useState(false);
 
   const methods = useFormContext<FormFields>();
-  const { control, watch, trigger, setValue } = methods;
+  const {
+    control,
+    watch,
+    trigger,
+    setValue,
+    formState: { errors },
+  } = methods;
 
   const ageGroup = watch('ageGroup');
   const contestLevels = watch('contestLevels');
@@ -62,35 +68,41 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
       <Collapse in={isCompetition} unmountOnExit>
         <div className={styles.form}>
           {ageGroupList.length > 1 && (
-            <>
-              <FormInputSelect
-                name='contestAgeGroup'
-                control={control}
-                label={t('form.contest.ageGroups.title')}
-              >
-                {ageGroupList.map((group) => (
-                  <MenuItem key={group} value={group}>
-                    {t(`form.contest.ageGroups.${group}`)}
-                  </MenuItem>
-                ))}
-              </FormInputSelect>
-            </>
+            <FormInputSelect
+              name='contestAgeGroup'
+              control={control}
+              label={t('form.contest.ageGroups.title')}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors?.contestAgeGroup}
+              helperText={errors?.contestAgeGroup?.message as string | undefined}
+            >
+              {ageGroupList.map((group) => (
+                <MenuItem key={group} value={group}>
+                  {t(`form.contest.ageGroups.${group}`)}
+                </MenuItem>
+              ))}
+            </FormInputSelect>
           )}
 
           {contestLevels.length > 0 && (
-            <>
-              <FormInputSelect
-                name='contestLevel'
-                control={control}
-                label={t('form.contest.levels.title')}
-              >
-                {contestLevels.map((level) => (
-                  <MenuItem key={level} value={level}>
-                    {t(`form.contest.levels.${level}`)}
-                  </MenuItem>
-                ))}
-              </FormInputSelect>
-            </>
+            <FormInputSelect
+              name='contestLevel'
+              control={control}
+              label={t('form.contest.levels.title')}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors?.contestLevel}
+              helperText={errors?.contestLevel?.message as string | undefined}
+            >
+              {contestLevels.map((level) => (
+                <MenuItem key={level} value={level}>
+                  {t(`form.contest.levels.${level}`)}
+                </MenuItem>
+              ))}
+            </FormInputSelect>
           )}
 
           {/* Solo Pass selection */}

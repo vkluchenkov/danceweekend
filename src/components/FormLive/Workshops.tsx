@@ -68,7 +68,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
       setIsDiscount(false);
       setIsGroup(true);
     }
-    if (isFullPassDiscount === 'none') {
+    if (isFullPassDiscount === 'none' || !isFullPassDiscount) {
       setIsDiscount(false);
       setIsGroup(false);
     }
@@ -152,6 +152,11 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
             name='fullPassDiscount'
             control={control}
             label={t('form.workshops.discounts.title')}
+            rules={{
+              required: t('form.common.required'),
+            }}
+            error={!!errors.fullPassDiscount}
+            helperText={errors?.fullPassDiscount?.message as string | undefined}
           >
             {fullPassDiscountList.map((i) => (
               <MenuItem key={i} value={i}>

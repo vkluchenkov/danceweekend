@@ -30,10 +30,9 @@ export const FormInputSelect: React.FC<FormInputSelectProps> = ({
 
   return (
     <FormControl error={error}>
-      <InputLabel>{props.label}</InputLabel>
+      <InputLabel required={!!rules?.required}>{props.label}</InputLabel>
       <InputSelect
         {...props}
-        required={!!rules?.required}
         onChange={onChange}
         onBlur={onBlur}
         value={value}

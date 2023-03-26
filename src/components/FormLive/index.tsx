@@ -55,7 +55,6 @@ const defaultValues: Partial<FormFields> = {
   isFullPass: false,
   isSoloPass: false,
   workshops: [],
-  fullPassDiscount: 'none',
   soloContest: [],
   groupContest: [],
 };

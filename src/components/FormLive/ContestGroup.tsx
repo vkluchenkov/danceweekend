@@ -17,7 +17,7 @@ interface ContestGroupProps {
 
 export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) => {
   const { t } = useTranslation('registration');
-  const methods = useFormContext();
+  const methods = useFormContext<FormFields>();
   const {
     control,
     setValue,
@@ -26,6 +26,8 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
   } = methods;
 
   const [changed, setChanged] = useState(false);
+
+  const fieldErrors = errors.groupContest?.[field.index];
 
   useEffect(() => {
     const price = field.qty * contestGroupPrice.live;
@@ -79,8 +81,13 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
           name={`groupContest.${field.index}.qty`}
           rules={{
             required: t('form.common.required'),
-            min: 3,
+            min: {
+              value: 3,
+              message: t('form.contest.groups.qtyError'),
+            },
           }}
+          error={!!fieldErrors?.qty}
+          helperText={fieldErrors?.qty?.message as string | undefined}
         />
       )}
 
@@ -91,8 +98,8 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
         rules={{
           required: t('form.common.required'),
         }}
-        // error={!!errors.groupContest[field.index as typeof keyof FormFields].name}
-        // helperText={`errors.groupContest[${field.index}].name.message` as string | undefined}
+        error={!!fieldErrors?.name}
+        helperText={fieldErrors?.name?.message as string | undefined}
       />
 
       <p className={textStyles.p}>

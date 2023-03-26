@@ -4,14 +4,13 @@ import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { Button } from '@mui/material';
-import { StepProps } from './types';
+import { FormFields, StepProps } from './types';
 
 export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
   const { t } = useTranslation('registration');
 
-  const methods = useFormContext();
+  const methods = useFormContext<FormFields>();
   const {
-    handleSubmit,
     control,
     trigger,
     formState: { errors },
@@ -58,6 +57,14 @@ export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
           label={t('form.personal.age')}
           rules={{
             required: t('form.common.required'),
+            min: {
+              value: 4,
+              message: t('form.personal.ageError'),
+            },
+            max: {
+              value: 99,
+              message: t('form.personal.ageError'),
+            },
           }}
           control={control}
           error={!!errors.age}

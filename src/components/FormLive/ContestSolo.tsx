@@ -4,7 +4,7 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useEffect, useState } from 'react';
 import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
-import { ContestSoloStepProps, SoloContestField } from './types';
+import { ContestSoloStepProps, FormFields, SoloContestField } from './types';
 import { AgeGroup } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormInputSelect } from '@/src/ui-kit/input';
@@ -22,7 +22,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   const [isCompetition, setIsCompetition] = useState(false);
 
-  const methods = useFormContext();
+  const methods = useFormContext<FormFields>();
   const { control, watch, trigger, setValue } = methods;
 
   const ageGroup: AgeGroup | null = watch('ageGroup');

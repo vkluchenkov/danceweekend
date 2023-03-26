@@ -61,6 +61,7 @@ export const FormLive: React.FC = () => {
 
   const methods = useForm<FormFields>({
     defaultValues: defaultValues,
+    mode: 'onChange',
   });
   const { handleSubmit, setValue, watch } = methods;
 

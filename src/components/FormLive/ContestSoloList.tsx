@@ -5,13 +5,13 @@ import textStyles from '@/styles/Text.module.css';
 import { FormControlLabel } from '@mui/material';
 import { AgeGroup, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
-import { SoloContestField } from './types';
+import { FormFields, SoloContestField } from './types';
 import { Level } from '@/src/ulis/contestCategories';
 import { contestSoloPrice } from '@/src/ulis/price';
 
 export const ContestSoloList: React.FC = () => {
   const { t, lang } = useTranslation('registration');
-  const methods = useFormContext();
+  const methods = useFormContext<FormFields>();
 
   const { setValue, control, watch } = methods;
 
@@ -26,7 +26,7 @@ export const ContestSoloList: React.FC = () => {
   const soloContest: SoloContestField = watch('soloContest');
   const isFullPass: boolean = watch('isFullPass');
   const isSoloPass: boolean = watch('isSoloPass');
-  const contestAgeGroup: AgeGroup = watch('contestAgeGroup');
+  const contestAgeGroup: AgeGroup | null = watch('contestAgeGroup');
   const contestLevel: Level = watch('contestLevel');
 
   const controlledFields = fields.map((field, index) => {

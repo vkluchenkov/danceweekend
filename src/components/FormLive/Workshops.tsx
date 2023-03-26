@@ -12,7 +12,13 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { FullPassDiscount, WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
+import {
+  FormFields,
+  FullPassDiscount,
+  WorkshopsField,
+  WorkshopsStepProps,
+  WorkshopsType,
+} from './types';
 import { WorkshopsList } from './WorkshopsList';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { schedule } from '@/src/ulis/schedule';
@@ -28,9 +34,8 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 
-  const methods = useFormContext();
+  const methods = useFormContext<FormFields>();
   const {
-    handleSubmit,
     setValue,
     control,
     watch,

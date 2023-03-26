@@ -6,7 +6,7 @@ import styles from '@/styles/Registration.module.css';
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Collapse, FormControlLabel } from '@mui/material';
 
-import { ContestGroupStepProps, GroupContest } from './types';
+import { ContestGroupStepProps, FormFields, GroupContest } from './types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { ContestGroup } from './ContestGroup';
 import { contestGroupPrice } from '@/src/ulis/price';
@@ -21,8 +21,8 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
 
   const [isGroup, setIsGroup] = useState(false);
 
-  const methods = useFormContext();
-  const { control, watch, trigger, setValue } = methods;
+  const methods = useFormContext<FormFields>();
+  const { control, watch, trigger, setValue, clearErrors } = methods;
 
   const { fields } = useFieldArray({
     control,
@@ -49,11 +49,14 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
     };
   });
 
-  // Set first group fields and clear all group fields on checkbox change
+  // Set first group fields and clear all group fields and errors on checkbox change
   useEffect(() => {
     if (isGroup) setValue('groupContest', [defaultGroup]);
-    else setValue('groupContest', []);
-  }, [isGroup, setValue, defaultGroup]);
+    else {
+      setValue('groupContest', []);
+      clearErrors();
+    }
+  }, [isGroup, setValue, defaultGroup, clearErrors]);
 
   useEffect(() => {
     const res = controlledFields.reduce((prev, current) => {

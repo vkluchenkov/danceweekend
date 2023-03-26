@@ -16,6 +16,7 @@
       "surname": "Surname",
       "stageName": "Stage name (if exists)",
       "age": "Age (on festival start date)",
+      "ageError": "Age should be between 4 and 99",
       "social": "Social networks profile(s)",
       "country": "Country",
       "city": "City",
@@ -76,7 +77,8 @@
         "qty": "Number of dancers",
         "price": "Price",
         "add": "Add another duo / group",
-        "remove": "Remove"
+        "remove": "Remove",
+        "qtyError": "Number of dancers in a group can not be less than 3"
       }
     }
   }

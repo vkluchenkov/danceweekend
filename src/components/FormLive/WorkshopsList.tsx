@@ -4,7 +4,7 @@ import textStyles from '@/styles/Text.module.css';
 import { FormControlLabel } from '@mui/material';
 import { PricePeriod, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
-import { WorkshopsField } from './types';
+import { FormFields, WorkshopsField } from './types';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -14,8 +14,8 @@ interface WorkshopsSingleProps {
 
 export const WorkshopsList: React.FC<WorkshopsSingleProps> = ({ currentPricePeriod }) => {
   const { t, lang } = useTranslation('registration');
-  const methods = useFormContext();
 
+  const methods = useFormContext<FormFields>();
   const { setValue, control, watch } = methods;
 
   const { fields } = useFieldArray({

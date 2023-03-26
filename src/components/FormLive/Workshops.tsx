@@ -47,10 +47,11 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const [isGroup, setIsGroup] = useState(false);
   const [isNextDisabled, setIsNextDisabled] = useState(true);
 
-  const isFullPass: boolean = watch('isFullPass');
-  const isFullPassDiscount: FullPassDiscount = watch('fullPassDiscount');
-  const workshopsType: WorkshopsType = watch('workshopsType');
-  const isWorkshops: WorkshopsField = watch('workshops');
+  const isFullPass = watch('isFullPass');
+  const isFullPassDiscount = watch('fullPassDiscount');
+  const workshopsType = watch('workshopsType');
+  const isWorkshops = watch('workshops');
+
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
   useEffect(() => {

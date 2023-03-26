@@ -26,7 +26,7 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = ({ currentPricePeri
 
   const currentLang = lang as SupportedLangs;
 
-  const watchWorkshops: WorkshopsField = watch('workshops');
+  const watchWorkshops = watch('workshops');
 
   const controlledFields = fields.map((field, index) => {
     return {

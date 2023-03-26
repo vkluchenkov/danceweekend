@@ -4,12 +4,10 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useEffect, useState } from 'react';
 import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
-import { ContestSoloStepProps, FormFields, SoloContestField } from './types';
-import { AgeGroup } from '@/src/types';
+import { ContestSoloStepProps, FormFields } from './types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormInputSelect } from '@/src/ui-kit/input';
 import { getContestAgeGroupsList } from './helpers';
-import { Level } from '@/src/ulis/contestCategories';
 import { ContestSoloList } from './ContestSoloList';
 
 export const ContestSolo: React.FC<ContestSoloStepProps> = ({
@@ -25,10 +23,10 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   const methods = useFormContext<FormFields>();
   const { control, watch, trigger, setValue } = methods;
 
-  const ageGroup: AgeGroup | null = watch('ageGroup');
-  const contestLevels: Level[] = watch('contestLevels');
-  const isSoloPass: boolean = watch('isSoloPass');
-  const soloContest: SoloContestField = watch('soloContest');
+  const ageGroup = watch('ageGroup');
+  const contestLevels = watch('contestLevels');
+  const isSoloPass = watch('isSoloPass');
+  const soloContest = watch('soloContest');
   const soloContestSelected = soloContest.filter((cat) => cat.selected);
 
   // Set step total

@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Workshops } from './Workshops';
 import { schedule } from '@/src/ulis/schedule';
 import useTranslation from 'next-translate/useTranslation';
-import { AgeGroup, SupportedLangs } from '@/src/types';
+import { SupportedLangs } from '@/src/types';
 import {
   FormFields,
   FullPassDiscount,
@@ -70,16 +70,21 @@ export const FormLive: React.FC = () => {
   });
   const { handleSubmit, setValue, watch } = methods;
 
-  const age: number | undefined = watch('age');
-  const ageGroup: AgeGroup | null = watch('ageGroup');
-  const contestAgeGroup: AgeGroup | null = watch('contestAgeGroup');
-  const contestLevels: Level[] = watch('contestLevels');
-
   const [currentStep, setCurrentStep] = useState<StepId>('personal');
   const [total, setTotal] = useState(0);
   const [wstotal, setWsTotal] = useState(0);
   const [contestSoloTotal, setContestSoloTotal] = useState(0);
   const [contestGroupsTotal, setContestGroupsTotal] = useState(0);
+
+  const age = watch('age');
+  const ageGroup = watch('ageGroup');
+  const contestAgeGroup = watch('contestAgeGroup');
+  const isFullPass = watch('isFullPass');
+  const fullPassDiscount = watch('fullPassDiscount');
+  const isWorkshops = watch('workshops');
+  const contestLevel = watch('contestLevel');
+
+  const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
   // Write initial age groups into form state
   useEffect(() => {
@@ -151,12 +156,6 @@ export const FormLive: React.FC = () => {
     },
     [currentStep]
   );
-
-  const isFullPass: boolean = watch('isFullPass');
-  const fullPassDiscount: FullPassDiscount = watch('fullPassDiscount');
-  const isWorkshops: WorkshopsField = watch('workshops');
-  const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
-  const contestLevel: Level = watch('contestLevel');
 
   const currentPricePeriod = useMemo(() => {
     const today = new Date();

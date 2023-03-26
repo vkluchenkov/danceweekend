@@ -3,10 +3,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import { FormControlLabel } from '@mui/material';
-import { AgeGroup, SupportedLangs } from '@/src/types';
+import { SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
-import { FormFields, SoloContestField } from './types';
-import { Level } from '@/src/ulis/contestCategories';
+import { FormFields } from './types';
 import { contestSoloPrice } from '@/src/ulis/price';
 
 export const ContestSoloList: React.FC = () => {
@@ -23,11 +22,11 @@ export const ContestSoloList: React.FC = () => {
 
   const currentLang = lang as SupportedLangs;
 
-  const soloContest: SoloContestField = watch('soloContest');
-  const isFullPass: boolean = watch('isFullPass');
-  const isSoloPass: boolean = watch('isSoloPass');
-  const contestAgeGroup: AgeGroup | null = watch('contestAgeGroup');
-  const contestLevel: Level = watch('contestLevel');
+  const soloContest = watch('soloContest');
+  const isFullPass = watch('isFullPass');
+  const isSoloPass = watch('isSoloPass');
+  const contestAgeGroup = watch('contestAgeGroup');
+  const contestLevel = watch('contestLevel');
 
   const controlledFields = fields.map((field, index) => {
     return {

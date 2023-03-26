@@ -20,6 +20,8 @@ export interface ContestCategory {
   ageGroups?: AgeGroup[];
   description?: string;
   age: string;
+  isGroup?: boolean;
+  isDuo?: boolean;
   levels: Level[];
   types: CategoryType[];
   translations: {
@@ -242,6 +244,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '7-11',
     ageGroup: 'kids',
+    isDuo: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -292,6 +295,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '7-11',
     ageGroup: 'kids',
+    isGroup: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -325,6 +329,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '12-15',
     ageGroup: 'juniors',
+    isDuo: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -341,6 +346,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '12-15',
     ageGroup: 'juniors',
+    isGroup: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -405,6 +411,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '16+',
     ageGroup: 'adults',
+    isDuo: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -421,6 +428,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '16+',
     ageGroup: 'adults',
+    isGroup: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {

@@ -42,6 +42,11 @@ const steps: Step[] = [
   {
     id: 'contestGroups',
     prev: 'contestSolo',
+    next: 'worldShow',
+  },
+  {
+    id: 'worldShow',
+    prev: 'contestGroups',
     next: null,
   },
 ];
@@ -240,6 +245,10 @@ export const FormLive: React.FC = () => {
             isEligible={isEligible}
             setStepTotal={setContestGroupsTotal}
           />
+        </Collapse>
+
+        <Collapse in={currentStep === 'worldShow'} unmountOnExit>
+          <p>World show</p>
         </Collapse>
 
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>

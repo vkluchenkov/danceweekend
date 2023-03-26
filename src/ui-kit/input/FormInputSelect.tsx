@@ -1,3 +1,4 @@
+import { FormControl, FormHelperText, InputLabel } from '@mui/material';
 import React from 'react';
 import { Control, useController, UseControllerProps } from 'react-hook-form';
 import { InputSelect, InputSelectProps } from './InputSelect';
@@ -6,12 +7,16 @@ type FormInputSelectProps = InputSelectProps & {
   control: Control<any>;
   name: string;
   rules?: UseControllerProps['rules'];
+  error?: Boolean;
+  helperText?: string;
 };
 
 export const FormInputSelect: React.FC<FormInputSelectProps> = ({
   control,
   name,
   rules,
+  helperText,
+  error,
   ...props
 }) => {
   const {
@@ -24,14 +29,18 @@ export const FormInputSelect: React.FC<FormInputSelectProps> = ({
   });
 
   return (
-    <InputSelect
-      {...props}
-      required={!!rules?.required}
-      onChange={onChange}
-      onBlur={onBlur}
-      value={value}
-      name={name}
-      inputRef={ref}
-    />
+    <FormControl error={error}>
+      <InputLabel>{props.label}</InputLabel>
+      <InputSelect
+        {...props}
+        required={!!rules?.required}
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        name={name}
+        inputRef={ref}
+      />
+      {helperText && <FormHelperText>{helperText}</FormHelperText>}
+    </FormControl>
   );
 };

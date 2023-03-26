@@ -4,6 +4,7 @@ import { Workshop } from '@/src/ulis/schedule';
 
 export interface GroupContest {
   type: 'duo' | 'group';
+  style: string;
   qty: number;
   name: string;
   price: number;

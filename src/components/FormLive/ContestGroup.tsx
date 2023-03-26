@@ -9,14 +9,19 @@ import { useFormContext } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { contestGroupPrice } from '@/src/ulis/price';
 import clsx from 'clsx';
+import { Category } from '@/src/ulis/contestCategories';
+import { SupportedLangs } from '@/src/types';
 
 interface ContestGroupProps {
   field: GroupContest & { id: string; index: number };
   onDelete: () => void;
+  catStyles: Category[] | undefined;
 }
 
-export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) => {
-  const { t } = useTranslation('registration');
+export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, catStyles }) => {
+  const { t, lang } = useTranslation('registration');
+  const currentLang = lang as SupportedLangs;
+
   const methods = useFormContext<FormFields>();
   const {
     control,
@@ -25,15 +30,19 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
     formState: { errors },
   } = methods;
 
-  const [changed, setChanged] = useState(false);
-
   const fieldErrors = errors.groupContest?.[field.index];
 
-  useEffect(() => {
-    const price = field.qty * contestGroupPrice.live;
-    setValue(`groupContest.${field.index}.price`, price);
-  }, [setValue, field.qty, field.index]);
+  const [changed, setChanged] = useState(false);
 
+  // Set min number of group dancers after select change (once)
+  useEffect(() => {
+    if (field.type === 'group' && field.qty < 3 && !changed) {
+      setValue(`groupContest.${field.index}.qty`, 3);
+      setChanged(true);
+    }
+  }, [field.type, setValue, field.index, field.qty, changed]);
+
+  // Set number of dancers in duo to 2 after select change and reset change flag
   useEffect(() => {
     if (field.type === 'duo') {
       setValue(`groupContest.${field.index}.qty`, 2);
@@ -41,12 +50,11 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
     }
   }, [field.type, setValue, field.index]);
 
+  // Calculate selection price
   useEffect(() => {
-    if (field.type === 'group' && field.qty < 3 && !changed) {
-      setValue(`groupContest.${field.index}.qty`, 3);
-      setChanged(true);
-    }
-  }, [field.type, setValue, field.index, field.qty, changed]);
+    const price = field.qty * contestGroupPrice.live;
+    setValue(`groupContest.${field.index}.price`, price);
+  }, [setValue, field.qty, field.index]);
 
   return (
     <div className={clsx(styles.form)}>
@@ -68,9 +76,36 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
         )}
       </div>
 
-      <FormInputSelect control={control} fullWidth name={`groupContest.${field.index}.type`}>
+      <FormInputSelect
+        control={control}
+        label={t('form.contest.groups.groupOrDuo')}
+        fullWidth
+        name={`groupContest.${field.index}.type`}
+      >
         <MenuItem value='duo'>{t('form.contest.groups.duo')}</MenuItem>
         <MenuItem value='group'>{t('form.contest.groups.group')}</MenuItem>
+      </FormInputSelect>
+
+      <FormInputSelect
+        control={control}
+        label={t('form.contest.groups.style')}
+        fullWidth
+        name={`groupContest.${field.index}.style`}
+        rules={{
+          required: t('form.common.required'),
+        }}
+        error={!!fieldErrors?.style}
+        helperText={fieldErrors?.style?.message as string | undefined}
+      >
+        {catStyles?.map((style) => {
+          const id = style.translations.en.categoryTitle;
+          const title = style.translations[currentLang].categoryTitle;
+          return (
+            <MenuItem key={id} value={id}>
+              {title}
+            </MenuItem>
+          );
+        })}
       </FormInputSelect>
 
       {field.type !== 'duo' && (

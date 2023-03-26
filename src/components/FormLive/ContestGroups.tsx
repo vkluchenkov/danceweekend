@@ -11,6 +11,7 @@ import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { ContestGroup } from './ContestGroup';
 import { contestGroupPrice } from '@/src/ulis/price';
 import { maxGroups } from '@/src/ulis/constants';
+import { contestCategories } from '@/src/ulis/contestCategories';
 
 export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   onStepSubmit,
@@ -33,13 +34,16 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   const defaultGroup: GroupContest = useMemo(() => {
     return {
       type: 'duo',
+      styles: [],
+      style: '',
       qty: 2,
       name: '',
       price: contestGroupPrice.live * 2, //qty
     };
   }, []);
 
-  const groupContest: GroupContest[] = watch('groupContest');
+  const groupContest = watch('groupContest');
+  const contestAgeGroup = watch('contestAgeGroup');
 
   const controlledFields = fields.map((field, index) => {
     return {
@@ -48,6 +52,10 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
       index,
     };
   });
+
+  useEffect(() => {
+    contestAgeGroup === 'baby' && onStepSubmit('next');
+  }, []);
 
   // Set first group fields and clear all group fields and errors on checkbox change
   useEffect(() => {
@@ -85,9 +93,25 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   const handleGroup = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
     setIsGroup(checked);
 
-  const groups = controlledFields.map((field) => (
-    <ContestGroup field={field} key={field.id} onDelete={() => handleDelete(field.id)} />
-  ));
+  const groups = controlledFields.map((field) => {
+    const isDuo = field.type === 'duo';
+    const isGroup = field.type === 'group';
+
+    const contestCategory = contestCategories.find(
+      (cat) => (cat.ageGroup === contestAgeGroup && cat.isDuo === isDuo) || cat.isGroup === isGroup
+    );
+
+    const catStyles = contestCategory?.categories.filter((style) => style.types.includes('live'));
+
+    return (
+      <ContestGroup
+        field={field}
+        key={field.id}
+        catStyles={catStyles}
+        onDelete={() => handleDelete(field.id)}
+      />
+    );
+  });
 
   return (
     <div className={styles.form}>

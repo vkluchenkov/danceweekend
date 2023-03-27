@@ -54,7 +54,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   });
 
   useEffect(() => {
-    contestAgeGroup === 'baby' && onStepSubmit('next');
+    if (contestAgeGroup === 'baby' || !isEligible) onStepSubmit('next');
   }, []);
 
   // Set first group fields and clear all group fields and errors on checkbox change

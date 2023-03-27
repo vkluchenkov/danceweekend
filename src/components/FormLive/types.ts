@@ -10,6 +10,12 @@ export interface GroupContest {
   price: number;
 }
 
+export interface WorldShowGroup {
+  qty: number;
+  name: string;
+  price: number;
+}
+
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
 export type SoloContestField = (Category & { selected: boolean; id: string; price: number })[];
 
@@ -40,6 +46,8 @@ export interface FormFields {
   contestLevel: Level;
   soloContest: SoloContestField;
   groupContest: GroupContest[];
+  isWorldShowSolo: boolean;
+  worldShowGroup: WorldShowGroup | null;
 }
 
 export type StepId =

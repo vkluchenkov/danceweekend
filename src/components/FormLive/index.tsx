@@ -22,6 +22,7 @@ import { ContestSolo } from './ContestSolo';
 import { minWsAdults, minWsKids } from '@/src/ulis/constants';
 import { contestCategories, Level } from '@/src/ulis/contestCategories';
 import { ContestGroups } from './ContestGroups';
+import { WorldShow } from './WorldShow';
 
 const steps: Step[] = [
   {
@@ -74,6 +75,7 @@ export const FormLive: React.FC = () => {
   const [wstotal, setWsTotal] = useState(0);
   const [contestSoloTotal, setContestSoloTotal] = useState(0);
   const [contestGroupsTotal, setContestGroupsTotal] = useState(0);
+  const [worldShowTotal, setWorldShowTotal] = useState(0);
 
   const age = watch('age');
   const ageGroup = watch('ageGroup');
@@ -141,8 +143,8 @@ export const FormLive: React.FC = () => {
 
   // Summarize step totals
   useEffect(() => {
-    setTotal(wstotal + contestSoloTotal + contestGroupsTotal);
-  }, [wstotal, contestSoloTotal, contestGroupsTotal]);
+    setTotal(wstotal + contestSoloTotal + contestGroupsTotal + worldShowTotal);
+  }, [wstotal, contestSoloTotal, contestGroupsTotal, worldShowTotal]);
 
   // Handle form submit
   const onSubmit = (data: any) => console.log(data);
@@ -246,7 +248,11 @@ export const FormLive: React.FC = () => {
         </Collapse>
 
         <Collapse in={currentStep === 'worldShow'} unmountOnExit>
-          <p>World show</p>
+          <WorldShow
+            onStepSubmit={hanleSteps}
+            isEligible={isEligible}
+            setStepTotal={setWorldShowTotal}
+          />
         </Collapse>
 
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>

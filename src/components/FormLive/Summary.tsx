@@ -205,10 +205,10 @@ export const Summary: React.FC<SummaryStepProps> = ({
             {t('form.contest.groups.title')}:
           </h3>
 
-          <ul className={clsx(textStyles.list, textStyles.list_summary, styles.summary__group)}>
+          <ul className={clsx(textStyles.list, textStyles.list_summary)}>
             {form.groupContest.map((group, index) => {
               return (
-                <li key={group.name}>
+                <li key={group.name} className={styles.summary__group}>
                   <h4 className={clsx(textStyles.h4)}>
                     {t('form.contest.groups.group')}/{t('form.contest.groups.duo')} #{index + 1} :
                     <span className={textStyles.accent}> {group.price}€</span>
@@ -248,6 +248,16 @@ export const Summary: React.FC<SummaryStepProps> = ({
     else return <></>;
   }, [form, t]);
 
+  // WorldShow
+  const worldShowData = useMemo(() => {
+    if (form.isWorldShowSolo || form.worldShowGroup)
+      return (
+        <>
+          <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.worldShow.title')}:</h3>
+        </>
+      );
+  }, [form, t]);
+
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.summary.title')}</h2>
@@ -271,6 +281,9 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
       {/* Competition groups */}
       {contestGroupsData}
+
+      {/* World show */}
+      {worldShowData}
 
       <div className={styles.naviWrapper}>
         <Button

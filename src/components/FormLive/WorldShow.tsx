@@ -4,9 +4,8 @@ import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useEffect, useState } from 'react';
-import { Button, Collapse, FormControlLabel } from '@mui/material';
+import { Button, Collapse } from '@mui/material';
 import { WorldShowStepProps, FormFields } from './types';
-import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { worldShowPrice } from '@/src/ulis/price';
 import { FormInputCheckbox, FormInputField } from '@/src/ui-kit/input';
 
@@ -16,8 +15,6 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({
   isEligible,
 }) => {
   const { t } = useTranslation('registration');
-
-  const [isGroup, setIsGroup] = useState(false);
 
   const methods = useFormContext<FormFields>();
   const {
@@ -31,6 +28,7 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({
 
   const isFullPass = watch('isFullPass');
   const isWorldShowSolo = watch('isWorldShowSolo');
+  const isWorldShowGroup = watch('isWorldShowGroup');
   const worldShowGroup = watch('worldShowGroup');
 
   const soloPrice = useMemo(() => {
@@ -52,20 +50,17 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({
     setStepTotal(solo + group);
   }, [soloPrice, isWorldShowSolo, worldShowGroup?.price, setStepTotal]);
 
-  const handleGroup = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-    if (!checked) {
-      setValue('worldShowGroup', null);
-      setIsGroup(checked);
-      clearErrors('worldShowGroup');
-    } else {
+  // Set/delete default group values on checkbox change
+  useEffect(() => {
+    if (isWorldShowGroup && !worldShowGroup)
       setValue('worldShowGroup', {
         qty: 2,
         name: '',
         price: 0,
       });
-      setIsGroup(checked);
-    }
-  };
+
+    if (!isWorldShowGroup && worldShowGroup) setValue('worldShowGroup', null);
+  }, [isWorldShowGroup, worldShowGroup, setValue]);
 
   return (
     <div className={styles.form}>
@@ -85,8 +80,9 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({
             }
           />
 
-          <FormControlLabel
-            control={<InputCheckbox checked={isGroup} onChange={handleGroup} />}
+          <FormInputCheckbox
+            name='isWorldShowGroup'
+            control={control}
             label={
               <p className={textStyles.p}>
                 {t('form.worldShow.group')}:{' '}
@@ -97,7 +93,7 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({
             }
           />
 
-          <Collapse in={isGroup} unmountOnExit>
+          <Collapse in={isWorldShowGroup} unmountOnExit>
             <div className={styles.form}>
               <FormInputField
                 control={control}

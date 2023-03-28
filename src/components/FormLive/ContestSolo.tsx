@@ -108,21 +108,23 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
           )}
 
           {/* Solo Pass selection */}
-          <div>
-            <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
-            <FormInputCheckbox
-              name='isSoloPass'
-              control={control}
-              label={
-                <p className={textStyles.p}>
-                  {t('form.contest.soloPassLabel')}
-                  {': '}
-                  <span className={textStyles.accent}>{soloPassPrice}€</span>
-                </p>
-              }
-            />
-            <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
-          </div>
+          {ageGroup && ageGroup !== 'baby' && (
+            <div>
+              <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
+              <FormInputCheckbox
+                name='isSoloPass'
+                control={control}
+                label={
+                  <p className={textStyles.p}>
+                    {t('form.contest.soloPassLabel')}
+                    {': '}
+                    <span className={textStyles.accent}>{soloPassPrice}€</span>
+                  </p>
+                }
+              />
+              <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
+            </div>
+          )}
 
           <h4 className={textStyles.h4}>{t('form.contest.stylesTitle')}:</h4>
           <ContestSoloList />

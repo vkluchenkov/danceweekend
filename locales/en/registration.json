@@ -91,6 +91,10 @@
       "group": "I want to add duo or group",
       "perPerson": "per person",
       "qtyError": "Number of dancers in a group can not be less than 2"
+    },
+    "summary": {
+      "title": "Summary",
+      "personalTitle": "About you"
     }
   }
 }

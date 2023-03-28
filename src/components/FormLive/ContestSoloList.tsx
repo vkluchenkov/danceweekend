@@ -98,7 +98,7 @@ export const ContestSoloList: React.FC = () => {
               {cat.translations[currentLang].categoryTitle}
               {cat.price > 0 ? (
                 <>
-                  : <span className={textStyles.accent}>{cat.price} €</span>
+                  : <span className={textStyles.accent}>{cat.price}€</span>
                 </>
               ) : (
                 <></>

@@ -24,7 +24,6 @@ export type WorkshopsType = 'fullPass' | 'single';
 export type FullPassDiscount = 'group' | '30%' | '50%' | 'free' | 'none';
 
 export interface FormFields {
-  isSoloPass: boolean;
   isFullPass: boolean;
   name: string;
   surname: string;
@@ -41,13 +40,18 @@ export interface FormFields {
   fullPassDiscountSource: string;
   fullPassGroupName: string;
   ageGroup: AgeGroup | null;
+  isSoloContest: boolean;
   contestAgeGroup: AgeGroup | null;
+  isSoloPass: boolean;
   contestLevels: Level[];
   contestLevel: Level;
   soloContest: SoloContestField;
+  isGroupContest: boolean;
   groupContest: GroupContest[];
   isWorldShowSolo: boolean;
   worldShowGroup: WorldShowGroup | null;
+
+  currentStep: StepId;
 }
 
 export type StepId =
@@ -85,4 +89,12 @@ export type ContestSoloStepProps = StepProps & {
 export type ContestGroupStepProps = StepProps & {
   isEligible: boolean;
   setStepTotal: (total: number) => void;
+};
+
+export type WorldShowStepProps = ContestGroupStepProps;
+
+export type SummaryStepProps = StepProps & {
+  fullPassPrice: number | undefined;
+  soloPassPrice: number;
+  currentPricePeriod: PricePeriod | undefined;
 };

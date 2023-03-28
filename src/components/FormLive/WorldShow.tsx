@@ -1,20 +1,16 @@
 import React, { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Collapse, FormControlLabel } from '@mui/material';
-
-import { ContestGroupStepProps, FormFields, GroupContest } from './types';
+import { WorldShowStepProps, FormFields } from './types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
-import { ContestGroup } from './ContestGroup';
-import { contestGroupPrice, worldShowPrice } from '@/src/ulis/price';
-import { maxGroups } from '@/src/ulis/constants';
-import { contestCategories } from '@/src/ulis/contestCategories';
+import { worldShowPrice } from '@/src/ulis/price';
 import { FormInputCheckbox, FormInputField } from '@/src/ui-kit/input';
 
-export const WorldShow: React.FC<ContestGroupStepProps> = ({
+export const WorldShow: React.FC<WorldShowStepProps> = ({
   onStepSubmit,
   setStepTotal,
   isEligible,

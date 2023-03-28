@@ -127,11 +127,12 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
             value='fullPass'
             control={<Radio />}
             label={
-              <span>
-                {fullPassPrice === 0
-                  ? t('form.workshops.fullPass')
-                  : t('form.workshops.fullPass') + ' ' + fullPassPrice + '€'}
-              </span>
+              <p className={textStyles.p}>
+                {t('form.workshops.fullPass')}{' '}
+                <span className={textStyles.accent}>
+                  {fullPassPrice ? fullPassPrice + ' €' : ''}
+                </span>
+              </p>
             }
           />
           <FormControlLabel

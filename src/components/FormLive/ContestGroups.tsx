@@ -5,13 +5,13 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Collapse, FormControlLabel } from '@mui/material';
-
 import { ContestGroupStepProps, FormFields, GroupContest } from './types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { ContestGroup } from './ContestGroup';
 import { contestGroupPrice } from '@/src/ulis/price';
 import { maxGroups } from '@/src/ulis/constants';
 import { contestCategories } from '@/src/ulis/contestCategories';
+import { FormInputCheckbox } from '@/src/ui-kit/input';
 
 export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   onStepSubmit,
@@ -19,8 +19,6 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   isEligible,
 }) => {
   const { t } = useTranslation('registration');
-
-  const [isGroup, setIsGroup] = useState(false);
 
   const methods = useFormContext<FormFields>();
   const { control, watch, trigger, setValue, clearErrors } = methods;
@@ -44,6 +42,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
 
   const groupContest = watch('groupContest');
   const contestAgeGroup = watch('contestAgeGroup');
+  const isGroupContest = watch('isGroupContest');
 
   const controlledFields = fields.map((field, index) => {
     return {
@@ -59,12 +58,14 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
 
   // Set first group fields and clear all group fields and errors on checkbox change
   useEffect(() => {
-    if (isGroup) setValue('groupContest', [defaultGroup]);
-    else {
+    if (isGroupContest && groupContest.length === 0) {
+      setValue('groupContest', [defaultGroup]);
+    }
+    if (!isGroupContest && groupContest.length > 0) {
       setValue('groupContest', []);
       clearErrors();
     }
-  }, [isGroup, setValue, defaultGroup, clearErrors]);
+  }, [setValue, defaultGroup, clearErrors, groupContest, isGroupContest]);
 
   useEffect(() => {
     const res = controlledFields.reduce((prev, current) => {
@@ -90,15 +91,13 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
     [controlledFields, setValue]
   );
 
-  const handleGroup = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) =>
-    setIsGroup(checked);
-
   const groups = controlledFields.map((field) => {
-    const isDuo = field.type === 'duo';
-    const isGroup = field.type === 'group';
+    const isDuoType = field.type === 'duo';
+    const isGroupType = field.type === 'group';
 
     const contestCategory = contestCategories.find(
-      (cat) => (cat.ageGroup === contestAgeGroup && cat.isDuo === isDuo) || cat.isGroup === isGroup
+      (cat) =>
+        (cat.ageGroup === contestAgeGroup && cat.isDuo === isDuoType) || cat.isGroup === isGroupType
     );
 
     const catStyles = contestCategory?.categories.filter((style) => style.types.includes('live'));
@@ -120,12 +119,13 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
 
       {isEligible && (
         <>
-          <FormControlLabel
-            control={<InputCheckbox checked={isGroup} onChange={handleGroup} />}
+          <FormInputCheckbox
+            name='isGroupContest'
+            control={control}
             label={<p className={textStyles.p}>{t('form.contest.groups.checkboxLabel')}</p>}
           />
 
-          <Collapse in={isGroup} unmountOnExit>
+          <Collapse in={isGroupContest} unmountOnExit>
             <div className={styles.form}>{groups}</div>
 
             {groupContest.length && groupContest.length < maxGroups && (

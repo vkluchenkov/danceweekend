@@ -7,14 +7,7 @@ import { Workshops } from './Workshops';
 import { schedule } from '@/src/ulis/schedule';
 import useTranslation from 'next-translate/useTranslation';
 import { SupportedLangs } from '@/src/types';
-import {
-  FormFields,
-  FullPassDiscount,
-  SoloContestField,
-  Step,
-  StepId,
-  WorkshopsField,
-} from './types';
+import { FormFields, FullPassDiscount, SoloContestField, Step, WorkshopsField } from './types';
 import { contestSoloPrice, ispromoPeriod, kidsDiscount, workshopsPrice } from '@/src/ulis/price';
 import { Collapse } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
@@ -23,6 +16,7 @@ import { minWsAdults, minWsKids } from '@/src/ulis/constants';
 import { contestCategories, Level } from '@/src/ulis/contestCategories';
 import { ContestGroups } from './ContestGroups';
 import { WorldShow } from './WorldShow';
+import { Summary } from './Summary';
 
 const steps: Step[] = [
   {
@@ -48,6 +42,11 @@ const steps: Step[] = [
   {
     id: 'worldShow',
     prev: 'contestGroups',
+    next: 'summary',
+  },
+  {
+    id: 'summary',
+    prev: 'worldShow',
     next: null,
   },
 ];
@@ -56,8 +55,11 @@ const defaultValues: Partial<FormFields> = {
   isFullPass: false,
   isSoloPass: false,
   workshops: [],
+  isSoloContest: false,
   soloContest: [],
+  isGroupContest: false,
   groupContest: [],
+  currentStep: 'personal',
 };
 
 export const FormLive: React.FC = () => {
@@ -70,13 +72,16 @@ export const FormLive: React.FC = () => {
   });
   const { handleSubmit, setValue, watch } = methods;
 
-  const [currentStep, setCurrentStep] = useState<StepId>('personal');
   const [total, setTotal] = useState(0);
   const [wstotal, setWsTotal] = useState(0);
   const [contestSoloTotal, setContestSoloTotal] = useState(0);
   const [contestGroupsTotal, setContestGroupsTotal] = useState(0);
   const [worldShowTotal, setWorldShowTotal] = useState(0);
 
+  // Navigation and totals states
+  const currentStep = watch('currentStep');
+
+  // Form data
   const age = watch('age');
   const ageGroup = watch('ageGroup');
   const contestAgeGroup = watch('contestAgeGroup');
@@ -153,9 +158,9 @@ export const FormLive: React.FC = () => {
   const hanleSteps = useCallback(
     (direction: 'next' | 'prev') => {
       const isStep = steps.find((step) => step.id === currentStep);
-      if (isStep && isStep[direction]) setCurrentStep(isStep[direction]!);
+      if (isStep && isStep[direction]) setValue('currentStep', isStep[direction]!);
     },
-    [currentStep]
+    [setValue, currentStep]
   );
 
   const currentPricePeriod = useMemo(() => {
@@ -172,17 +177,24 @@ export const FormLive: React.FC = () => {
         : currentPricePeriod?.price.live.fullPassPrice;
 
     // additional discounts (certificates, etc.)
-    if (fullPassDiscount === '30%' && basePrice) return basePrice * 0.3;
-    if (fullPassDiscount === '50%' && basePrice) return basePrice * 0.5;
+    if (fullPassDiscount === 'group' && basePrice)
+      return Number.parseFloat((basePrice * 0.8).toFixed(2));
+
+    if (fullPassDiscount === '30%' && basePrice)
+      return Number.parseFloat((basePrice * 0.7).toFixed(2));
+
+    if (fullPassDiscount === '50%' && basePrice)
+      return Number.parseFloat((basePrice * 0.5).toFixed(2));
     if (fullPassDiscount === 'free' && basePrice) return 0;
     else return basePrice;
   }, [ageGroup, currentPricePeriod, fullPassDiscount]);
 
-  const fullPassDiscountList: FullPassDiscount[] =
+  const fullPassDiscountList: FullPassDiscount[] = useMemo(() => {
     // Kids and baby can't have less than 100% discount
-    ageGroup === 'baby' || ageGroup === 'kids'
+    return ageGroup === 'baby' || ageGroup === 'kids'
       ? ['none', 'free']
       : ['none', 'group', '30%', '50%', 'free'];
+  }, [ageGroup]);
 
   const isEligible = useMemo(() => {
     if (ageGroup === 'baby' || ageGroup === 'kids') {
@@ -194,7 +206,7 @@ export const FormLive: React.FC = () => {
     }
   }, [ageGroup, isFullPass, selectedWorkshops]);
 
-  const soloPassPrice = useMemo((): number => {
+  const soloPassPrice = useMemo(() => {
     const priceKids = contestSoloPrice.soloPassKids.price.live;
     const priceRisingStar = contestSoloPrice.soloPassRisingStar.price.live;
     const priceProfessionals = contestSoloPrice.soloPassProfessionals.price.live;
@@ -252,6 +264,15 @@ export const FormLive: React.FC = () => {
             onStepSubmit={hanleSteps}
             isEligible={isEligible}
             setStepTotal={setWorldShowTotal}
+          />
+        </Collapse>
+
+        <Collapse in={currentStep === 'summary'} unmountOnExit>
+          <Summary
+            onStepSubmit={hanleSteps}
+            fullPassPrice={fullPassPrice}
+            currentPricePeriod={currentPricePeriod}
+            soloPassPrice={soloPassPrice}
           />
         </Collapse>
 

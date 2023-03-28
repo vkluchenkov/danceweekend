@@ -64,7 +64,7 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = ({ currentPricePeri
                 <br />
                 {ws.translations[currentLang].title}: {ws.translations[currentLang].description}
                 <br />
-                {price}€
+                <span className={textStyles.accent}>{price}€</span>
               </p>
             }
           />

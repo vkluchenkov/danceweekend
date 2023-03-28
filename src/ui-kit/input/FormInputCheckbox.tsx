@@ -23,7 +23,7 @@ export const FormInputCheckbox: React.FC<FormInputCheckboxProps> = ({
     name,
     control,
     rules: rules,
-    defaultValue: '',
+    defaultValue: false,
   });
 
   return (
@@ -37,6 +37,7 @@ export const FormInputCheckbox: React.FC<FormInputCheckboxProps> = ({
           value={value}
           name={name}
           inputRef={ref}
+          checked={value}
         />
       }
       label={label}

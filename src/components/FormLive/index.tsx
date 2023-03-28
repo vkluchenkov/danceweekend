@@ -79,7 +79,9 @@ export const FormLive: React.FC = () => {
   const [contestGroupsTotal, setContestGroupsTotal] = useState(0);
   const [worldShowTotal, setWorldShowTotal] = useState(0);
 
-  // Navigation and totals states
+  const [lastDirection, setLastDirection] = useState<'prev' | 'next' | null>(null);
+
+  // Navigation form state
   const currentStep = watch('currentStep');
 
   // Form data
@@ -159,7 +161,10 @@ export const FormLive: React.FC = () => {
   const hanleSteps = useCallback(
     (direction: 'next' | 'prev') => {
       const isStep = steps.find((step) => step.id === currentStep);
-      if (isStep && isStep[direction]) setValue('currentStep', isStep[direction]!);
+      if (isStep && isStep[direction]) {
+        setValue('currentStep', isStep[direction]!);
+        setLastDirection(direction);
+      }
     },
     [setValue, currentStep]
   );
@@ -257,6 +262,7 @@ export const FormLive: React.FC = () => {
             onStepSubmit={hanleSteps}
             isEligible={isEligible}
             setStepTotal={setContestGroupsTotal}
+            lastDirection={lastDirection}
           />
         </Collapse>
 
@@ -265,6 +271,7 @@ export const FormLive: React.FC = () => {
             onStepSubmit={hanleSteps}
             isEligible={isEligible}
             setStepTotal={setWorldShowTotal}
+            lastDirection={lastDirection}
           />
         </Collapse>
 

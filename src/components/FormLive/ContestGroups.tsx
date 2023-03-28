@@ -17,6 +17,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   onStepSubmit,
   setStepTotal,
   isEligible,
+  lastDirection,
 }) => {
   const { t } = useTranslation('registration');
 
@@ -52,8 +53,16 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
     };
   });
 
+  // Skip step for baby age group or if not enough workshops
+  // Clean contest group competition state if not empty
   useEffect(() => {
-    if (contestAgeGroup === 'baby' || !isEligible) onStepSubmit('next');
+    if (contestAgeGroup === 'baby' || !isEligible) {
+      if (groupContest.length > 0) {
+        setValue('isGroupContest', false);
+        setValue('groupContest', []);
+      }
+      if (lastDirection) onStepSubmit(lastDirection);
+    }
   }, []);
 
   // Set first group fields and clear all group fields and errors on checkbox change

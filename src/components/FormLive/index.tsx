@@ -60,6 +60,7 @@ const defaultValues: Partial<FormFields> = {
   isGroupContest: false,
   groupContest: [],
   currentStep: 'personal',
+  rulesAccepted: false,
 };
 
 export const FormLive: React.FC = () => {
@@ -273,6 +274,7 @@ export const FormLive: React.FC = () => {
             fullPassPrice={fullPassPrice}
             currentPricePeriod={currentPricePeriod}
             soloPassPrice={soloPassPrice}
+            total={total}
           />
         </Collapse>
 

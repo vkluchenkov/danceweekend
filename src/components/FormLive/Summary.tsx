@@ -7,12 +7,15 @@ import { Button } from '@mui/material';
 import { SummaryStepProps, FormFields } from './types';
 import clsx from 'clsx';
 import { SupportedLangs } from '@/src/types';
+import { worldShowPrice } from '@/src/ulis/price';
+import { FormInputCheckbox } from '@/src/ui-kit/input';
 
 export const Summary: React.FC<SummaryStepProps> = ({
   onStepSubmit,
   fullPassPrice,
   soloPassPrice,
   currentPricePeriod,
+  total,
 }) => {
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
@@ -21,6 +24,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
   const {
     watch,
     trigger,
+    control,
     formState: { errors },
   } = methods;
 
@@ -162,7 +166,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
       return (
         <>
           <h3 className={clsx(textStyles.h3, textStyles.centered)}>
-            {t('form.contest.soloTitle')}:
+            {t('form.contest.soloTitle')}
           </h3>
 
           <ul className={clsx(textStyles.list, textStyles.list_summary)}>
@@ -202,7 +206,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
       return (
         <>
           <h3 className={clsx(textStyles.h3, textStyles.centered)}>
-            {t('form.contest.groups.title')}:
+            {t('form.contest.groups.title')}
           </h3>
 
           <ul className={clsx(textStyles.list, textStyles.list_summary)}>
@@ -250,13 +254,38 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
   // WorldShow
   const worldShowData = useMemo(() => {
-    if (form.isWorldShowSolo || form.worldShowGroup)
+    const soloPrice = isFullPass
+      ? worldShowPrice.soloPriceDicounted
+      : worldShowPrice.soloPriceNormal;
+
+    if (form.isWorldShowSolo || form.isWorldShowGroup)
       return (
         <>
-          <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.worldShow.title')}:</h3>
+          <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.worldShow.title')}</h3>
+
+          {form.isWorldShowSolo && (
+            <p className={textStyles.p}>
+              {t('form.worldShow.solo')}: <span className={textStyles.accent}>{soloPrice}€</span>
+            </p>
+          )}
+
+          {form.isWorldShowGroup && (
+            <>
+              <p className={textStyles.p}>
+                {t('form.summary.worldShowGroup')}:{' '}
+                <span className={textStyles.accent}>{form.worldShowGroup?.price}€</span>
+                <br />
+                {t('form.contest.groups.name')}:{' '}
+                <span className={textStyles.accent}>{form.worldShowGroup?.name}</span>
+                <br />
+                {t('form.contest.groups.qty')}:{' '}
+                <span className={textStyles.accent}>{form.worldShowGroup?.qty}</span>
+              </p>
+            </>
+          )}
         </>
       );
-  }, [form, t]);
+  }, [form, t, isFullPass]);
 
   return (
     <div className={styles.form}>
@@ -264,16 +293,16 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
       {/* Personal data */}
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>
-        {t('form.summary.personalTitle')}:
+        {t('form.summary.personalTitle')}
       </h3>
       <ul className={clsx(textStyles.list, textStyles.list_summary)}>{personalData}</ul>
 
       {/* Contacts */}
-      <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.personal.contacts')}:</h3>
+      <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.personal.contacts')}</h3>
       <ul className={clsx(textStyles.list, textStyles.list_summary)}>{contactsData}</ul>
 
       {/* Workshops */}
-      <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.workshops.title')}:</h3>
+      <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.workshops.title')}</h3>
       <ul className={clsx(textStyles.list, textStyles.list_summary)}>{workshopsData}</ul>
 
       {/* Competition solo */}
@@ -284,6 +313,37 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
       {/* World show */}
       {worldShowData}
+
+      {/* Finance options*/}
+      <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.summary.money.title')}</h3>
+      <h4 className={textStyles.h4}>
+        {t('form.summary.money.total')}: <span className={textStyles.accent}>{total}€</span>
+      </h4>
+      <p className={textStyles.p}>{t('form.summary.money.installmentsDetails')}</p>
+      <FormInputCheckbox
+        name='isInstallments'
+        control={control}
+        label={<p className={textStyles.p}>{t('form.summary.money.installments')}</p>}
+      />
+      {form.isInstallments && (
+        <>
+          <p className={textStyles.p}>
+            {t('form.summary.money.amountNow')}:{' '}
+            <span className={textStyles.accent}>{total / 2}€</span>
+            <br />
+            {t('form.summary.money.amountAfter')}:{' '}
+            <span className={textStyles.accent}>{total / 2}€</span>
+          </p>
+        </>
+      )}
+
+      {/* Rules */}
+      <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.summary.lastThing')}</h3>
+      <FormInputCheckbox
+        name='rulesAccepted'
+        control={control}
+        label={<p className={textStyles.p}>{t('form.summary.rulesCheckbox')}</p>}
+      />
 
       <div className={styles.naviWrapper}>
         <Button

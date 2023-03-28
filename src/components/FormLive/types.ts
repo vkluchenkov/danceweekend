@@ -49,7 +49,10 @@ export interface FormFields {
   isGroupContest: boolean;
   groupContest: GroupContest[];
   isWorldShowSolo: boolean;
+  isWorldShowGroup: boolean;
   worldShowGroup: WorldShowGroup | null;
+  rulesAccepted: boolean;
+  isInstallments: boolean;
 
   currentStep: StepId;
 }
@@ -97,4 +100,5 @@ export type SummaryStepProps = StepProps & {
   fullPassPrice: number | undefined;
   soloPassPrice: number;
   currentPricePeriod: PricePeriod | undefined;
+  total: number;
 };

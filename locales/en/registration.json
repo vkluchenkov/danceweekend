@@ -94,7 +94,18 @@
     },
     "summary": {
       "title": "Summary",
-      "personalTitle": "About you"
+      "personalTitle": "About you",
+      "worldShowGroup": "Group or duo",
+      "lastThing": "Last, but not least",
+      "rulesCheckbox": "I have read and accept festival's rules and conditions",
+      "money": {
+        "title": "Finances",
+        "total": "Your registration total",
+        "installments": "I want to pay with 2 installments",
+        "installmentsDetails": "There is a possibility to pay for your package in 2 installments. The first 50% should be paid right after the registration, the other 50% any time before 31.07.2023. In case if the second payment is failed to be transferred in due time, you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
+        "amountNow": "Amount to pay now",
+        "amountAfter": "Amount to pay till 31.07.2023"
+      }
     }
   }
 }

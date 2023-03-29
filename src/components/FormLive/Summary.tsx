@@ -387,17 +387,14 @@ export const Summary: React.FC<SummaryStepProps> = ({
           {t('form.common.prev')}
         </Button>
         <Button
-          type='button'
+          type='submit'
           variant='outlined'
           size='large'
           disableElevation
           fullWidth
-          onClick={async () => {
-            const isValid = await trigger();
-            if (isValid) onStepSubmit('next');
-          }}
+          disabled={!form.rulesAccepted}
         >
-          {t('form.common.next')}
+          {t('form.common.submit')}
         </Button>
       </div>
     </div>

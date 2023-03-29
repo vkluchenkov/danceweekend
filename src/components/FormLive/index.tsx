@@ -54,6 +54,7 @@ const steps: Step[] = [
 const defaultValues: Partial<FormFields> = {
   isFullPass: false,
   isSoloPass: false,
+  fullPassDiscount: 'none',
   workshops: [],
   isSoloContest: false,
   soloContest: [],
@@ -224,6 +225,7 @@ export const FormLive: React.FC = () => {
     else {
       if (contestLevel === 'professionals')
         return isFullPass ? priceProfessionals.priceDiscounted : priceProfessionals.priceNormal;
+      if (!contestLevel) return 0;
       else return isFullPass ? priceRisingStar.priceDiscounted : priceRisingStar.priceNormal;
     }
   }, [ageGroup, contestLevel, isFullPass]);

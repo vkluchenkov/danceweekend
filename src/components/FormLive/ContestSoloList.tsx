@@ -66,6 +66,7 @@ export const ContestSoloList: React.FC = () => {
             return isFullPass
               ? pricerProfessionals.priceDiscounted
               : pricerProfessionals.priceNormal;
+          if (!contestLevel) return 0;
           // Price for Rising star / open level
           return isFullPass ? pricerRisingStar.priceDiscounted : pricerRisingStar.priceNormal;
         }
@@ -81,7 +82,7 @@ export const ContestSoloList: React.FC = () => {
       const index = soloContest.findIndex((cat) => cat.id === i.id);
       setValue(`soloContest.${index}.price`, price, { shouldTouch: true });
     });
-  }, [soloContest, isSoloPass]);
+  }, [soloContest, isSoloPass, contestLevel]);
 
   const categories = controlledFields.map((cat) => {
     return (

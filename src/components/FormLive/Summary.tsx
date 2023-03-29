@@ -9,6 +9,8 @@ import clsx from 'clsx';
 import { SupportedLangs } from '@/src/types';
 import { worldShowPrice } from '@/src/ulis/price';
 import { FormInputCheckbox } from '@/src/ui-kit/input';
+import Trans from 'next-translate/Trans';
+import Link from 'next/link';
 
 export const Summary: React.FC<SummaryStepProps> = ({
   onStepSubmit,
@@ -29,6 +31,14 @@ export const Summary: React.FC<SummaryStepProps> = ({
   } = methods;
 
   const form = watch();
+
+  // translations with HTML
+  const acceptRules = (
+    <Trans
+      i18nKey='registration:summary.rulesCheckbox'
+      components={[<Link href='/price' key={1} />, <Link href='/competition/rules' key={2} />]}
+    />
+  );
 
   // Personal
   const personal = [
@@ -176,13 +186,14 @@ export const Summary: React.FC<SummaryStepProps> = ({
                 {t(`form.contest.ageGroups.${form.contestAgeGroup}`)}
               </span>
             </li>
-
-            <li>
-              {t('form.contest.levels.title')}:{' '}
-              <span className={textStyles.accent}>
-                {t(`form.contest.levels.${form.contestLevel}`)}
-              </span>
-            </li>
+            {form.contestLevel && (
+              <li>
+                {t('form.contest.levels.title')}:{' '}
+                <span className={textStyles.accent}>
+                  {t(`form.contest.levels.${form.contestLevel}`)}
+                </span>
+              </li>
+            )}
 
             {form.isSoloPass && (
               <li>
@@ -319,21 +330,25 @@ export const Summary: React.FC<SummaryStepProps> = ({
       <h4 className={textStyles.h4}>
         {t('form.summary.money.total')}: <span className={textStyles.accent}>{total}€</span>
       </h4>
-      <p className={textStyles.p}>{t('form.summary.money.installmentsDetails')}</p>
-      <FormInputCheckbox
-        name='isInstallments'
-        control={control}
-        label={<p className={textStyles.p}>{t('form.summary.money.installments')}</p>}
-      />
-      {form.isInstallments && (
+      {!currentPricePeriod?.isPromo && isFullPass && (
         <>
-          <p className={textStyles.p}>
-            {t('form.summary.money.amountNow')}:{' '}
-            <span className={textStyles.accent}>{total / 2}€</span>
-            <br />
-            {t('form.summary.money.amountAfter')}:{' '}
-            <span className={textStyles.accent}>{total / 2}€</span>
-          </p>
+          <p className={textStyles.p}>{t('form.summary.money.installmentsDetails')}</p>
+          <FormInputCheckbox
+            name='isInstallments'
+            control={control}
+            label={<p className={textStyles.p}>{t('form.summary.money.installments')}</p>}
+          />
+          {form.isInstallments && (
+            <>
+              <p className={textStyles.p}>
+                {t('form.summary.money.amountNow')}:{' '}
+                <span className={textStyles.accent}>{total / 2}€</span>
+                <br />
+                {t('form.summary.money.amountAfter')}:{' '}
+                <span className={textStyles.accent}>{total / 2}€</span>
+              </p>
+            </>
+          )}
         </>
       )}
 
@@ -342,7 +357,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
       <FormInputCheckbox
         name='rulesAccepted'
         control={control}
-        label={<p className={textStyles.p}>{t('form.summary.rulesCheckbox')}</p>}
+        label={<p className={textStyles.p}>{acceptRules}</p>}
       />
 
       <div className={styles.naviWrapper}>

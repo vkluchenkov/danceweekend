@@ -97,7 +97,7 @@
       "personalTitle": "About you",
       "worldShowGroup": "Group or duo",
       "lastThing": "Last, but not least",
-      "rulesCheckbox": "I have read and accept festival's rules and conditions",
+      "rulesCheckbox": "I have read and accept festival's <0>prices and conditions</0> as well as <1>competition rules</1>",
       "money": {
         "title": "Finances",
         "total": "Your registration total",

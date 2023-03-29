@@ -24,6 +24,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     watch,
     trigger,
     setValue,
+    resetField,
     formState: { errors },
   } = methods;
 
@@ -39,8 +40,9 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     if (!isSoloContest && soloContest.length > 0) {
       soloContest.forEach((i) => (i.selected = false));
       setValue('isSoloPass', false);
+      resetField('contestLevel');
     }
-  }, [isSoloContest, soloContest, setValue]);
+  }, [isSoloContest, soloContest, setValue, resetField]);
 
   // Set step total
   useEffect(() => {
@@ -118,7 +120,9 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
                   <p className={textStyles.p}>
                     {t('form.contest.soloPassLabel')}
                     {': '}
-                    <span className={textStyles.accent}>{soloPassPrice}€</span>
+                    <span className={textStyles.accent}>
+                      {soloPassPrice > 0 ? soloPassPrice + '€' : ''}
+                    </span>
                   </p>
                 }
               />

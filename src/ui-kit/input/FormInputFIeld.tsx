@@ -34,7 +34,6 @@ export const FormInputField: React.FC<FormInputFieldProps> = ({
       value={value}
       name={name}
       inputRef={ref}
-      // InputProps={props.InputProps}
       InputProps={{ ...props.InputProps, required: false }}
     />
   );

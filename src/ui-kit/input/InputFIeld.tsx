@@ -8,6 +8,7 @@ export const InputField: React.FC<TextFieldProps> = (props) => {
     <TextField
       {...props}
       InputProps={{
+        ...props.InputProps,
         sx: styles.input,
       }}
     />

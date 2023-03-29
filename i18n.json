@@ -14,6 +14,7 @@
     "/info/bazaar": ["bazaar"],
     "/info/faq": ["faq"],
     "/shows/arabic-dreams": ["arabicDreams"],
-    "/shows/world-show": ["worldShow"]
+    "/shows/world-show": ["worldShow"],
+    "/payment": ["payment"]
   }
 }

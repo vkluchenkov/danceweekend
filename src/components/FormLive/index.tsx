@@ -9,7 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { SupportedLangs } from '@/src/types';
 import { FormFields, FullPassDiscount, SoloContestField, Step, WorkshopsField } from './types';
 import { contestSoloPrice, ispromoPeriod, kidsDiscount, workshopsPrice } from '@/src/ulis/price';
-import { Collapse } from '@mui/material';
+import { Collapse, Snackbar } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { minWsAdults, minWsKids } from '@/src/ulis/constants';
@@ -17,6 +17,7 @@ import { contestCategories, Level } from '@/src/ulis/contestCategories';
 import { ContestGroups } from './ContestGroups';
 import { WorldShow } from './WorldShow';
 import { Summary } from './Summary';
+import clsx from 'clsx';
 
 const steps: Step[] = [
   {
@@ -75,6 +76,7 @@ export const FormLive: React.FC = () => {
   const { handleSubmit, setValue, watch } = methods;
 
   const [total, setTotal] = useState(0);
+  const [isTotalOpen, setIsTotalOpen] = useState(false);
   const [wstotal, setWsTotal] = useState(0);
   const [contestSoloTotal, setContestSoloTotal] = useState(0);
   const [contestGroupsTotal, setContestGroupsTotal] = useState(0);
@@ -95,6 +97,11 @@ export const FormLive: React.FC = () => {
   const contestLevel = watch('contestLevel');
 
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
+
+  // open Total snackbar on change
+  useEffect(() => {
+    total > 0 && setIsTotalOpen(true);
+  }, [total]);
 
   // Write initial age groups into form state
   useEffect(() => {
@@ -232,9 +239,9 @@ export const FormLive: React.FC = () => {
 
   return (
     <FormProvider {...methods}>
-      <p className={textStyles.p}>
+      {/* <p className={textStyles.p}>
         {t('form.common.total')}: {total}€
-      </p>
+      </p> */}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Collapse in={currentStep === 'personal'} unmountOnExit>
           <PersonalData onStepSubmit={hanleSteps} />
@@ -285,6 +292,12 @@ export const FormLive: React.FC = () => {
             soloPassPrice={soloPassPrice}
             total={total}
           />
+        </Collapse>
+
+        <Collapse in={isTotalOpen && currentStep !== 'summary'} unmountOnExit>
+          <h2 className={clsx(textStyles.h2)}>
+            {t('form.common.total')}: <span className={textStyles.accent}>{total}€</span>
+          </h2>
         </Collapse>
 
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>

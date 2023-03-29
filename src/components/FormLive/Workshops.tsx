@@ -138,7 +138,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
           <FormControlLabel
             value='single'
             control={<Radio />}
-            label={<span>{t('form.workshops.singleWs')}</span>}
+            label={<p className={textStyles.p}>{t('form.workshops.singleWs')}</p>}
           />
         </RadioGroup>
       </FormControl>

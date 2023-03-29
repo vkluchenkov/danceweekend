@@ -152,32 +152,6 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
           </Collapse>
         </>
       )}
-
-      <div className={styles.naviWrapper}>
-        <Button
-          type='button'
-          variant='outlined'
-          size='large'
-          disableElevation
-          fullWidth
-          onClick={() => onStepSubmit('prev')}
-        >
-          {t('form.common.prev')}
-        </Button>
-        <Button
-          type='button'
-          variant='outlined'
-          size='large'
-          disableElevation
-          fullWidth
-          onClick={async () => {
-            const isValid = await trigger();
-            if (isValid) onStepSubmit('next');
-          }}
-        >
-          {t('form.common.next')}
-        </Button>
-      </div>
     </div>
   );
 };

@@ -35,6 +35,11 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   const soloContest = watch('soloContest');
   const soloContestSelected = soloContest.filter((cat) => cat.selected);
 
+  useEffect(() => {
+    if (isSoloContest && !soloContestSelected.length) setValue('isNextDisabled', true);
+    if (isSoloContest && soloContestSelected.length) setValue('isNextDisabled', false);
+  }, [isSoloContest, soloContestSelected, setValue]);
+
   // Clear all contest entries on checkbox disable
   useEffect(() => {
     if (!isSoloContest && soloContest.length > 0) {
@@ -134,33 +139,6 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
           <ContestSoloList />
         </div>
       </Collapse>
-
-      <div className={styles.naviWrapper}>
-        <Button
-          type='button'
-          variant='outlined'
-          size='large'
-          disableElevation
-          fullWidth
-          onClick={() => onStepSubmit('prev')}
-        >
-          {t('form.common.prev')}
-        </Button>
-        <Button
-          type='button'
-          variant='outlined'
-          size='large'
-          disableElevation
-          fullWidth
-          onClick={async () => {
-            const isValid = await trigger();
-            if (isValid) onStepSubmit('next');
-          }}
-          disabled={isSoloContest && !soloContestSelected.length}
-        >
-          {t('form.common.next')}
-        </Button>
-      </div>
     </div>
   );
 };

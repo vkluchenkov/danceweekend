@@ -18,6 +18,7 @@ import { ContestGroups } from './ContestGroups';
 import { WorldShow } from './WorldShow';
 import { Summary } from './Summary';
 import clsx from 'clsx';
+import { StepsNavigation } from './StepsNavigation';
 
 const steps: Step[] = [
   {
@@ -98,6 +99,10 @@ export const FormLive: React.FC = () => {
 
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
+  const isStep = useMemo(() => {
+    return steps.find((step) => step.id === currentStep);
+  }, [currentStep]);
+
   // open Total snackbar on change
   useEffect(() => {
     total > 0 && setIsTotalOpen(true);
@@ -168,13 +173,12 @@ export const FormLive: React.FC = () => {
   // Handle steps navigation
   const hanleSteps = useCallback(
     (direction: 'next' | 'prev') => {
-      const isStep = steps.find((step) => step.id === currentStep);
       if (isStep && isStep[direction]) {
         setValue('currentStep', isStep[direction]!);
         setLastDirection(direction);
       }
     },
-    [setValue, currentStep]
+    [setValue, isStep]
   );
 
   const currentPricePeriod = useMemo(() => {
@@ -303,6 +307,7 @@ export const FormLive: React.FC = () => {
         {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>
           Submit form
         </Button> */}
+        <StepsNavigation currentStep={isStep} onStepSubmit={hanleSteps} />
       </form>
     </FormProvider>
   );

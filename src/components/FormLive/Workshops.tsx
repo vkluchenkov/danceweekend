@@ -21,7 +21,7 @@ import {
 } from './types';
 import { WorkshopsList } from './WorkshopsList';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
-import { schedule } from '@/src/ulis/schedule';
+import { schedule, Workshop } from '@/src/ulis/schedule';
 import { SupportedLangs } from '@/src/types';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
@@ -53,6 +53,10 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const isWorkshops = watch('workshops');
 
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
+
+  useEffect(() => {
+    setValue('isNextDisabled', isNextDisabled);
+  }, [isNextDisabled, setValue]);
 
   useEffect(() => {
     if (isFullPass || selectedWorkshops.length) setIsNextDisabled(false);
@@ -167,61 +171,38 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
           </FormInputSelect>
 
           <Collapse in={isDiscount} unmountOnExit>
-            <p className={textStyles.p}>{t('form.workshops.discounts.detailsDescription')}</p>
-            <FormInputField
-              name='fullPassDiscountSource'
-              label={t('form.workshops.discounts.details')}
-              control={control}
-              rules={{
-                required: t('form.common.required'),
-              }}
-              error={!!errors.fullPassDiscountSource}
-              helperText={errors?.fullPassDiscountSource?.message as string | undefined}
-            />
+            <div className={styles.form}>
+              <p className={textStyles.p}>{t('form.workshops.discounts.detailsDescription')}</p>
+              <FormInputField
+                name='fullPassDiscountSource'
+                label={t('form.workshops.discounts.details')}
+                control={control}
+                rules={{
+                  required: t('form.common.required'),
+                }}
+                error={!!errors.fullPassDiscountSource}
+                helperText={errors?.fullPassDiscountSource?.message as string | undefined}
+              />
+            </div>
           </Collapse>
 
           <Collapse in={isGroup} unmountOnExit>
-            <p className={textStyles.p}>{t('form.workshops.discounts.groupDescription')}</p>
-            <FormInputField
-              name='fullPassGroupName'
-              label={t('form.workshops.discounts.groupName')}
-              control={control}
-              rules={{
-                required: t('form.common.required'),
-              }}
-              error={!!errors.fullPassDiscountSource}
-              helperText={errors?.fullPassDiscountSource?.message as string | undefined}
-            />
+            <div className={styles.form}>
+              <p className={textStyles.p}>{t('form.workshops.discounts.groupDescription')}</p>
+              <FormInputField
+                name='fullPassGroupName'
+                label={t('form.workshops.discounts.groupName')}
+                control={control}
+                rules={{
+                  required: t('form.common.required'),
+                }}
+                error={!!errors.fullPassDiscountSource}
+                helperText={errors?.fullPassDiscountSource?.message as string | undefined}
+              />
+            </div>
           </Collapse>
         </div>
       </Collapse>
-
-      <div className={styles.naviWrapper}>
-        <Button
-          type='button'
-          variant='outlined'
-          size='large'
-          disableElevation
-          fullWidth
-          onClick={() => onStepSubmit('prev')}
-        >
-          {t('form.common.prev')}
-        </Button>
-        <Button
-          type='button'
-          variant='outlined'
-          size='large'
-          disableElevation
-          fullWidth
-          disabled={isNextDisabled}
-          onClick={async () => {
-            const isValid = await trigger();
-            if (isValid) onStepSubmit('next');
-          }}
-        >
-          {t('form.common.next')}
-        </Button>
-      </div>
     </div>
   );
 };

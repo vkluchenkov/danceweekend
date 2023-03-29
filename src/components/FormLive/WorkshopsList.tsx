@@ -6,7 +6,7 @@ import { PricePeriod, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormFields, WorkshopsField } from './types';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 interface WorkshopsSingleProps {
   currentPricePeriod: PricePeriod | undefined;
@@ -35,14 +35,13 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = ({ currentPricePeri
     };
   });
 
-  const handleChange = (
-    wsId: number,
-    event: React.ChangeEvent<HTMLInputElement>,
-    checked: boolean
-  ) => {
-    const wsIndex = watchWorkshops.findIndex((ws) => ws.id === wsId);
-    setValue(`workshops.${wsIndex}.selected`, checked, { shouldTouch: true });
-  };
+  const handleChange = useCallback(
+    (wsId: number, event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+      const wsIndex = watchWorkshops.findIndex((ws) => ws.id === wsId);
+      setValue(`workshops.${wsIndex}.selected`, checked, { shouldTouch: true });
+    },
+    [setValue, watchWorkshops]
+  );
 
   // Sort workshops by day
   const days = controlledFields.map((ws) => ws.day);

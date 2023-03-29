@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
@@ -23,10 +23,20 @@ export const Summary: React.FC<SummaryStepProps> = ({
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
   const methods = useFormContext<FormFields>();
-  const { watch, trigger, control } = methods;
+  const { watch, trigger, control, setValue } = methods;
 
   const form = watch();
+
+  useEffect(() => {
+    setValue('isNextDisabled', isSubmitDisabled);
+  }, [isSubmitDisabled, setValue]);
+
+  useEffect(() => {
+    setIsSubmitDisabled(!form.rulesAccepted);
+  }, [setIsSubmitDisabled, form]);
 
   // translations with HTML
   const acceptRules = (
@@ -40,59 +50,37 @@ export const Summary: React.FC<SummaryStepProps> = ({
   );
 
   // Personal
-  const personal = [
-    {
-      key: 'name',
-      value: form.name,
-    },
-    {
-      key: 'surname',
-      value: form.surname,
-    },
-    {
-      key: 'stageName',
-      value: form.stageName,
-    },
-    {
-      key: 'age',
-      value: form.age,
-    },
-  ];
+  const personal = useMemo(() => {
+    return ['name', 'surname', 'stageName', 'age'].map((i) => ({
+      key: i,
+      value: form[i as keyof FormFields],
+    }));
+  }, [form]);
 
   const personalData = personal.map((i) => {
     if (!i.value) return <></>;
     return (
       <li key={i.key}>
-        {t(`form.personal.${i.key}`)}: <span className={textStyles.accent}>{i.value}</span>
+        {t(`form.personal.${i.key}`)}:{' '}
+        <span className={textStyles.accent}>{i.value as string}</span>
       </li>
     );
   });
 
   // Contacts
-  const contacts = [
-    {
-      key: 'social',
-      value: form.social,
-    },
-    {
-      key: 'country',
-      value: form.country,
-    },
-    {
-      key: 'city',
-      value: form.city,
-    },
-    {
-      key: 'tel',
-      value: form.tel,
-    },
-  ];
+  const contacts = useMemo(() => {
+    return ['social', 'country', 'city', 'tel'].map((i) => ({
+      key: i,
+      value: form[i as keyof FormFields],
+    }));
+  }, [form]);
 
   const contactsData = contacts.map((i) => {
     if (!i.value) return <></>;
     return (
       <li key={i.key}>
-        {t(`form.personal.${i.key}`)}: <span className={textStyles.accent}>{i.value}</span>
+        {t(`form.personal.${i.key}`)}:{' '}
+        <span className={textStyles.accent}>{i.value as string}</span>
       </li>
     );
   });
@@ -374,29 +362,6 @@ export const Summary: React.FC<SummaryStepProps> = ({
         control={control}
         label={<p className={textStyles.p}>{acceptRules}</p>}
       />
-
-      <div className={styles.naviWrapper}>
-        <Button
-          type='button'
-          variant='outlined'
-          size='large'
-          disableElevation
-          fullWidth
-          onClick={() => onStepSubmit('prev')}
-        >
-          {t('form.common.prev')}
-        </Button>
-        <Button
-          type='submit'
-          variant='outlined'
-          size='large'
-          disableElevation
-          fullWidth
-          disabled={!form.rulesAccepted}
-        >
-          {t('form.common.submit')}
-        </Button>
-      </div>
     </div>
   );
 };

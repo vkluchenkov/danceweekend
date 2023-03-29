@@ -97,12 +97,10 @@ export const ContestSoloList: React.FC = () => {
           label={
             <p className={textStyles.p}>
               {cat.translations[currentLang].categoryTitle}
-              {cat.price > 0 ? (
+              {cat.price > 0 && (
                 <>
                   : <span className={textStyles.accent}>{cat.price}€</span>
                 </>
-              ) : (
-                <></>
               )}
             </p>
           }

@@ -55,6 +55,8 @@ export interface FormFields {
   isInstallments: boolean;
 
   currentStep: StepId;
+  isPrevDisabled: boolean;
+  isNextDisabled: boolean;
 }
 
 export type StepId =
@@ -69,7 +71,6 @@ export interface Step {
   id: StepId;
   prev: StepId | null;
   next: StepId | null;
-  showConditions?: boolean;
 }
 
 export interface StepProps {

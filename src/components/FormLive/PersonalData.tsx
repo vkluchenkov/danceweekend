@@ -5,6 +5,7 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { Button } from '@mui/material';
 import { FormFields, StepProps } from './types';
+import { StepsNavigation } from './StepsNavigation';
 
 export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
   const { t } = useTranslation('registration');
@@ -134,22 +135,6 @@ export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
           error={!!errors.tel}
           helperText={errors?.tel?.message as string | undefined}
         />
-        <div className={styles.naviWrapper}>
-          <div></div>
-          <Button
-            type='button'
-            variant='outlined'
-            size='large'
-            disableElevation
-            fullWidth
-            onClick={async () => {
-              const isValid = await trigger();
-              if (isValid) onStepSubmit('next');
-            }}
-          >
-            {t('form.common.next')}
-          </Button>
-        </div>
       </div>
     </>
   );

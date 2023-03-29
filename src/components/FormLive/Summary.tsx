@@ -11,6 +11,7 @@ import { worldShowPrice } from '@/src/ulis/price';
 import { FormInputCheckbox } from '@/src/ui-kit/input';
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
+import { contestCategories } from '@/src/ulis/contestCategories';
 
 export const Summary: React.FC<SummaryStepProps> = ({
   onStepSubmit,
@@ -23,20 +24,18 @@ export const Summary: React.FC<SummaryStepProps> = ({
   const currentLang = lang as SupportedLangs;
 
   const methods = useFormContext<FormFields>();
-  const {
-    watch,
-    trigger,
-    control,
-    formState: { errors },
-  } = methods;
+  const { watch, trigger, control } = methods;
 
   const form = watch();
 
   // translations with HTML
   const acceptRules = (
     <Trans
-      i18nKey='registration:summary.rulesCheckbox'
-      components={[<Link href='/price' key={1} />, <Link href='/competition/rules' key={2} />]}
+      i18nKey='registration:form.summary.rulesCheckbox'
+      components={[
+        <Link href='/price' key={1} target='_blank' />,
+        <Link href='/competition/rules' key={2} target='_blank' />,
+      ]}
     />
   );
 
@@ -222,6 +221,20 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
           <ul className={clsx(textStyles.list, textStyles.list_summary)}>
             {form.groupContest.map((group, index) => {
+              // Category style translation
+              const isDuoType = group.type === 'duo';
+              const isGroupType = group.type === 'group';
+              const contestCategory = contestCategories.find(
+                (cat) =>
+                  (cat.ageGroup === form.contestAgeGroup && cat.isDuo === isDuoType) ||
+                  cat.isGroup === isGroupType
+              );
+              const catStyle = contestCategory?.categories.find(
+                (style) =>
+                  style.types.includes('live') &&
+                  style.translations.en.categoryTitle === group.style
+              );
+
               return (
                 <li key={group.name} className={styles.summary__group}>
                   <h4 className={clsx(textStyles.h4)}>
@@ -239,7 +252,9 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
                     <li>
                       {t('form.contest.groups.style')}:{' '}
-                      <span className={textStyles.accent}>{group.style}</span>
+                      <span className={textStyles.accent}>
+                        {catStyle?.translations[currentLang].categoryTitle}
+                      </span>
                     </li>
 
                     <li>
@@ -261,7 +276,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
         </>
       );
     else return <></>;
-  }, [form, t]);
+  }, [form, t, currentLang]);
 
   // WorldShow
   const worldShowData = useMemo(() => {

@@ -60,7 +60,7 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, cat
     <div className={clsx(styles.form)}>
       <div className={styles.group__header}>
         <h3 className={textStyles.h3}>
-          {t('form.contest.groups.group')}/{t('form.contest.groups.duo')} #{field.index + 1} :
+          {t('form.contest.groups.group')} / {t('form.contest.groups.duo')} #{field.index + 1} :
         </h3>
         {field.index > 0 && (
           <Button

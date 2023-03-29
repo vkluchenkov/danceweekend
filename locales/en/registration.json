@@ -37,7 +37,7 @@
         "30%": "Certificate 30%",
         "50%": "Certificate 50%",
         "free": "Certificate Free Full Pass",
-        "none": "Don't have any discounts",
+        "none": "No discounts",
         "details": "How did you acquire your certificate?",
         "detailsDescription": "Please state where and when did you acquire your discount certificate. As all the certificates are personal, we will check your right to use it with the organizers of an event where you won it."
       }
@@ -70,7 +70,6 @@
       "groups": {
         "title": "Competition duos and groups",
         "checkboxLabel": "I want to register a duo or a group",
-        "chooseType": "I register",
         "groupOrDuo": "Group or duo?",
         "style": "Style",
         "duo": "Duo",

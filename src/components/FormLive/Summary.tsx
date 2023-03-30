@@ -3,7 +3,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { Button } from '@mui/material';
 import { SummaryStepProps, FormFields } from './types';
 import clsx from 'clsx';
 import { SupportedLangs } from '@/src/types';
@@ -69,7 +68,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
   // Contacts
   const contacts = useMemo(() => {
-    return ['social', 'country', 'city', 'tel'].map((i) => ({
+    return ['social', 'country', 'city', 'tel', 'email'].map((i) => ({
       key: i,
       value: form[i as keyof FormFields],
     }));

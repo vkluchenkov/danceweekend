@@ -18,6 +18,7 @@
       <mj-class name="h1" font-size="24px" line-height="1.2" font-weight="600" align="center" />
       <mj-class name="h2" font-size="21px" line-height="1.2" font-weight="500" align="center" />
       <mj-class name="h3" font-size="18px" line-height="1.2" font-weight="500" align="center" />
+      <mj-class name="h4" font-size="18px" line-height="1.2" font-weight="600" padding="0" />
       <mj-class
         name="text"
         font-size="16px"
@@ -39,6 +40,8 @@
 
   <!-- Body -->
   <mj-body background-color="#000">
+    <!-- Divider -->
+    <mj-section padding="10px"></mj-section>
     <!-- Header -->
     <mj-section
       background-url="http://localhost:3000/images/email-header1.jpg"
@@ -66,7 +69,7 @@
         <mj-text mj-class="h2">Here is what you ordered:</mj-text>
 
         <!-- Workshops breakdown -->
-        <mj-text mj-class="h3">Workshops:</mj-text>
+        <mj-text mj-class="h4">Workshops:</mj-text>
         <mj-text mj-class="text">
           <ul style="list-style: none; padding: 0; line-height: 1.5">
             <li>Name: <span style="color: #eec571">Vladimir</span></li>

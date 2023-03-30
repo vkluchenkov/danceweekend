@@ -7,9 +7,14 @@ import { FormFields, Step } from './types';
 interface StepsNavigationProps {
   onStepSubmit: (direction: 'next' | 'prev') => void;
   currentStep: Step | undefined;
+  onFormSubmit: () => void;
 }
 
-export const StepsNavigation: React.FC<StepsNavigationProps> = ({ onStepSubmit, currentStep }) => {
+export const StepsNavigation: React.FC<StepsNavigationProps> = ({
+  onStepSubmit,
+  onFormSubmit,
+  currentStep,
+}) => {
   const { t } = useTranslation('registration');
 
   const methods = useFormContext<FormFields>();
@@ -51,12 +56,13 @@ export const StepsNavigation: React.FC<StepsNavigationProps> = ({ onStepSubmit, 
 
   const submitBtn = (
     <Button
-      type='submit'
+      type='button'
       variant='outlined'
       size='large'
       disableElevation
       fullWidth
       disabled={isNextDisabled}
+      onClick={onFormSubmit}
     >
       {t('form.common.submit')}
     </Button>
@@ -81,8 +87,6 @@ export const StepsNavigation: React.FC<StepsNavigationProps> = ({ onStepSubmit, 
       </>
     );
   };
-
-  // console.log(currentStep);
 
   return <div className={styles.naviWrapper}>{render()}</div>;
 };

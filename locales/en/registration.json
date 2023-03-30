@@ -21,7 +21,8 @@
       "social": "Social networks profile(s)",
       "country": "Country",
       "city": "City",
-      "tel": "Phone number"
+      "tel": "Phone number",
+      "email": "Email"
     },
     "workshops": {
       "title": "Workshops",
@@ -107,5 +108,16 @@
         "amountAfter": "Amount to pay till 31.07.2023"
       }
     }
+  },
+  "email": {
+    "title": "We received your registration!",
+    "intro": "Thank you for your registration to Dance Weekend in Warsaw! We will contact you with payment confirmation and additional info as soon as we process your payment.",
+    "orderTitle": "Here is what you sent us",
+    "paymentNote1": "For your registration to be accepted you need to make a payment on",
+    "paymentNote2": "this page.",
+    "photoNote1": "If you wish to receive a personal participant's poster, please send us your photo at",
+    "photoNote2": "danceweekend@aliah.dance",
+    "copyright": "©Dance Weekend in Warsaw",
+    "userSubj": "Welcome to Dance Weekend in Warsaw!"
   }
 }

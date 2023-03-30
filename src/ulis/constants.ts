@@ -14,3 +14,10 @@ export const minWsAdults = 3;
 
 // Maximum number of groups to register for one person
 export const maxGroups = 3;
+
+// Default website url
+export const defaultUrl = 'https://danceweekend.art';
+
+// emails
+export const senderEmail = 'danceweekend@aliah.dance';
+export const senderName = 'Dance Weekend in Warsaw festival';

@@ -1,4 +1,4 @@
-import { AgeGroup, PricePeriod } from '@/src/types';
+import { AgeGroup, PricePeriod, SupportedLangs } from '@/src/types';
 import { Category, Level } from '@/src/ulis/contestCategories';
 import { Workshop } from '@/src/ulis/schedule';
 
@@ -102,5 +102,13 @@ export type SummaryStepProps = StepProps & {
   fullPassPrice: number | undefined;
   soloPassPrice: number;
   currentPricePeriod: PricePeriod | undefined;
+  total: number;
+};
+
+export type OrderPayload = FormFields & {
+  fullPassPrice: number | undefined;
+  currentPricePeriod: PricePeriod | undefined;
+  currentLang: SupportedLangs;
+  soloPassPrice: number;
   total: number;
 };

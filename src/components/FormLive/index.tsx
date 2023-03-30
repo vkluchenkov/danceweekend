@@ -7,9 +7,16 @@ import { Workshops } from './Workshops';
 import { schedule } from '@/src/ulis/schedule';
 import useTranslation from 'next-translate/useTranslation';
 import { SupportedLangs } from '@/src/types';
-import { FormFields, FullPassDiscount, SoloContestField, Step, WorkshopsField } from './types';
+import {
+  FormFields,
+  FullPassDiscount,
+  OrderPayload,
+  SoloContestField,
+  Step,
+  WorkshopsField,
+} from './types';
 import { contestSoloPrice, ispromoPeriod, kidsDiscount, workshopsPrice } from '@/src/ulis/price';
-import { Collapse, Snackbar } from '@mui/material';
+import { Collapse } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { minWsAdults, minWsKids } from '@/src/ulis/constants';
@@ -19,6 +26,7 @@ import { WorldShow } from './WorldShow';
 import { Summary } from './Summary';
 import clsx from 'clsx';
 import { StepsNavigation } from './StepsNavigation';
+import axios from 'axios';
 
 const steps: Step[] = [
   {
@@ -168,7 +176,20 @@ export const FormLive: React.FC = () => {
   }, [wstotal, contestSoloTotal, contestGroupsTotal, worldShowTotal]);
 
   // Handle form submit
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (data: FormFields) => {
+    const payload: OrderPayload = {
+      ...data,
+      fullPassPrice: fullPassPrice,
+      currentPricePeriod: currentPricePeriod,
+      currentLang: currentLang,
+      soloPassPrice: soloPassPrice,
+      total: total,
+    };
+    await axios
+      .post('/api/reg-submit', payload)
+      .then((res) => console.log(res.data))
+      .catch((error: any) => console.log(error));
+  };
 
   // Handle steps navigation
   const hanleSteps = useCallback(
@@ -243,10 +264,7 @@ export const FormLive: React.FC = () => {
 
   return (
     <FormProvider {...methods}>
-      {/* <p className={textStyles.p}>
-        {t('form.common.total')}: {total}€
-      </p> */}
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <form className={styles.form}>
         <Collapse in={currentStep === 'personal'} unmountOnExit>
           <PersonalData onStepSubmit={hanleSteps} />
         </Collapse>
@@ -304,10 +322,11 @@ export const FormLive: React.FC = () => {
           </h2>
         </Collapse>
 
-        {/* <Button type='submit' variant='contained' size='large' disableElevation fullWidth>
-          Submit form
-        </Button> */}
-        <StepsNavigation currentStep={isStep} onStepSubmit={hanleSteps} />
+        <StepsNavigation
+          currentStep={isStep}
+          onStepSubmit={hanleSteps}
+          onFormSubmit={handleSubmit(onSubmit)}
+        />
       </form>
     </FormProvider>
   );

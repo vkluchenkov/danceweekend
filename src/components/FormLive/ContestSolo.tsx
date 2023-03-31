@@ -40,14 +40,15 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     } else setIsNextDisabled(false);
   }, [isSoloContest, soloContestSelected, setIsNextDisabled]);
 
-  // Clear all contest entries on checkbox disable
+  // Clear all contest entries on checkbox disable or if not eligible
   useEffect(() => {
-    if (!isSoloContest && soloContest.length > 0) {
+    if ((!isSoloContest && soloContest.length > 0) || (!isEligible && soloContest.length > 0)) {
       soloContest.forEach((i) => (i.selected = false));
       setValue('isSoloPass', false);
       resetField('contestLevel');
+      if (!isEligible && soloContest) setValue('isSoloContest', false);
     }
-  }, [isSoloContest, soloContest, setValue, resetField]);
+  }, [isSoloContest, soloContest, isEligible, setValue, resetField]);
 
   // Set step total
   useEffect(() => {

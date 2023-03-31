@@ -64,7 +64,7 @@
         "title": "Уровень",
         "beginners": "Начинающие",
         "intermediate": "Продолжающие",
-        "risingStar": "Rising star (начинающие)",
+        "risingStar": "Rising star (начинающие + продолжающие)",
         "professionals": "Профессионалы",
         "openLevel": "Все уровни"
       },

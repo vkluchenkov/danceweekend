@@ -19,7 +19,8 @@ FROM node:16-alpine AS builder
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules 
-COPY $GITHUB_WORKSPACE/.env ./.env
+# COPY $GITHUB_WORKSPACE/.env ./.env
+COPY ./.env ./
 COPY . .
 RUN cat .env
 

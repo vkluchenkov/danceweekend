@@ -16,6 +16,7 @@ RUN \
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
+
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -32,13 +33,6 @@ FROM node:16-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-# ENV DEPLOY_URL=https://dev.danceweekend.art
-ENV NEXT_PUBLIC_PAYPAL_CLIENT_ID ${{ secrets.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
-# ENV PAYPAL_SECRET=${{ secrets.PAYPAL_SECRET }}
-# ENV PAYPAL_API_URL=${{ secrets.PAYPAL_API_URL }}
-# ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
-# ENV STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
-# ENV SENDINBLUE_SECRET= ${{ secrets.SENDINBLUE_SECRET }}
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1

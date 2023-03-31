@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create .env file
-        uses: ozaytsev86/create-env-file@v1
-        with:
-          # ENV_DEPLOY_URL: 'https://dev.danceweekend.art'
+      - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+          ENV_DEPLOY_URL: 'https://dev.danceweekend.art'
           ENV_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
           ENV_PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
           ENV_PAYPAL_API_URL: ${{ secrets.PAYPAL_API_URL }}

@@ -19,7 +19,7 @@ FROM node:16-alpine AS builder
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules 
-COPY --from=deps /github/workspace/.env ./.env
+COPY --from=deps /app/github/workspace/.env ./.env
 COPY . .
 RUN cat .env
 

@@ -6,6 +6,16 @@ on:
   pull_request:
     branches: ['dev']
 
+env:
+  DEPLOY_URL: https://dev.danceweekend.art
+
+  NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
+  PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
+  PAYPAL_API_URL: ${{ secrets.PAYPAL_API_URL }}
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+  STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+  SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
+
 jobs:
   build:
     runs-on: ubuntu-latest

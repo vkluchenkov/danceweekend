@@ -15,6 +15,8 @@ export default function Home() {
   const { t } = useTranslation();
   const imageRef = useRef<HTMLDivElement | null>(null);
 
+  console.log(process.env.DEPLOY_URL);
+
   // Translations with HTML
   const welcomeTitle = <Trans i18nKey='home:welcomeTitle' components={[<br key={1} />]} />;
   const welcomeText = (

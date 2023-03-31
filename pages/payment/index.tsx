@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
 import textStyles from '@/styles/Text.module.css';
@@ -14,6 +15,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
+import { Loader } from '@/src/components/Loader';
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripeKey);
@@ -34,6 +36,8 @@ const Payment: NextPage = () => {
     formState: { errors },
   } = methods;
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = watch();
   const qty = watch('qty');
   const method = watch('method');
@@ -52,18 +56,21 @@ const Payment: NextPage = () => {
 
   const onSubmit = async (data: PaymentFormFields) => {
     if (method === 'stripe') {
+      setIsLoading(true);
       await axios
-        .post('api/stripe-session', data)
+        .post('/api/stripe-session', data)
         .then((res) => window.open(res.data.url as string, '_self'))
         .catch((error: any) => {
           // setSubmitError(true);
           // setIsBtnDisabled(false);
-        });
-      // .finally(() => setIsLoader(false));
+        })
+        .finally(() => setIsLoading(false));
     }
 
     if (method === 'paypal') router.push('/payment/thank-you');
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <Layout title={t('pageTitle')}>

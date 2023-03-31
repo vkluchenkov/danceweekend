@@ -323,7 +323,22 @@ export const contestCategories: ContestCategory[] = [
         title: 'Юниоры',
       },
     },
-    categories: soloSet,
+    categories: [
+      ...soloSet,
+      {
+        types: ['live', 'online'],
+        isSolo: true,
+        isSoloPass: true,
+        translations: {
+          en: {
+            categoryTitle: 'Tribal fusion',
+          },
+          ru: {
+            categoryTitle: 'Трайбл фьюжн',
+          },
+        },
+      },
+    ],
   },
 
   {
@@ -405,7 +420,22 @@ export const contestCategories: ContestCategory[] = [
         title: 'Взрослые',
       },
     },
-    categories: soloSet,
+    categories: [
+      ...soloSet,
+      {
+        types: ['live', 'online'],
+        isSolo: true,
+        isSoloPass: true,
+        translations: {
+          en: {
+            categoryTitle: 'Tribal fusion',
+          },
+          ru: {
+            categoryTitle: 'Трайбл фьюжн',
+          },
+        },
+      },
+    ],
   },
 
   {
@@ -456,6 +486,21 @@ export const contestCategories: ContestCategory[] = [
         title: 'Сеньоры',
       },
     },
-    categories: soloSet,
+    categories: [
+      ...soloSet,
+      {
+        types: ['live', 'online'],
+        isSolo: true,
+        isSoloPass: true,
+        translations: {
+          en: {
+            categoryTitle: 'Tribal fusion',
+          },
+          ru: {
+            categoryTitle: 'Трайбл фьюжн',
+          },
+        },
+      },
+    ],
   },
 ];

@@ -9,6 +9,7 @@ import { Switcher } from '@/src/ui-kit/Switcher';
 import { FormLive } from '@/src/components/FormLive';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { montserrat } from '@/src/ulis/font';
+import clsx from 'clsx';
 
 const Registration: NextPage = () => {
   const { t, lang } = useTranslation('registration');
@@ -49,6 +50,9 @@ const Registration: NextPage = () => {
       {switcher}
       <section className={styles.section}>
         <ThemeProvider theme={darkTheme}>{version === 'live' && <FormLive />}</ThemeProvider>
+        {version === 'online' && (
+          <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('onlineWarning')}</h2>
+        )}
       </section>
     </Layout>
   );

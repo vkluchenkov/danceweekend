@@ -2,6 +2,7 @@
   "pageTitle": "Registration",
   "live": "Live festival",
   "online": "Online festival",
+  "onlineWarning": "Registration to online festival will be open later.",
   "form": {
     "common": {
       "required": "This field is required",

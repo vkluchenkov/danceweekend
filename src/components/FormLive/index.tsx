@@ -31,6 +31,13 @@ import { Loader } from '../Loader';
 import { useRouter } from 'next/router';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const motionVariants = {
+  hidden: { opacity: 0 },
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 const steps: Step[] = [
   {
@@ -214,11 +221,14 @@ export const FormLive: React.FC = () => {
   // Handle steps navigation
   const hanleSteps = useCallback(
     (direction: 'next' | 'prev') => {
-      setIsNextDisabled(false);
       if (isStep && isStep[direction]) {
         setValue('currentStep', isStep[direction]!);
         setLastDirection(direction);
       }
+      // Wait for prev step to transition out
+      setTimeout(() => {
+        setIsNextDisabled(false);
+      }, 400);
     },
     [setValue, isStep]
   );
@@ -294,49 +304,116 @@ export const FormLive: React.FC = () => {
   return (
     <FormProvider {...methods}>
       <form className={styles.form}>
-        {currentStep === 'personal' && <PersonalData />}
+        {currentStep === 'personal' && (
+          <AnimatePresence>
+            <motion.div
+              key={'personal'}
+              initial='hidden'
+              animate='enter'
+              exit='exit'
+              variants={motionVariants}
+              transition={{ type: 'linear', duration: 0.3 }}
+            >
+              <PersonalData />
+            </motion.div>
+          </AnimatePresence>
+        )}
 
         {currentStep === 'workshops' && (
-          <Workshops
-            // onStepSubmit={hanleSteps}
-            currentPricePeriod={currentPricePeriod}
-            fullPassPrice={fullPassPrice}
-            fullPassDiscountList={fullPassDiscountList}
-            setStepTotal={setWsTotal}
-            setIsNextDisabled={setIsNextDisabled}
-          />
+          <AnimatePresence>
+            <motion.div
+              key={'workshops'}
+              initial='hidden'
+              animate='enter'
+              exit='exit'
+              variants={motionVariants}
+              transition={{ type: 'linear', duration: 0.3 }}
+            >
+              <Workshops
+                currentPricePeriod={currentPricePeriod}
+                fullPassPrice={fullPassPrice}
+                fullPassDiscountList={fullPassDiscountList}
+                setStepTotal={setWsTotal}
+                setIsNextDisabled={setIsNextDisabled}
+              />
+            </motion.div>
+          </AnimatePresence>
         )}
 
         {currentStep === 'contestSolo' && (
-          <ContestSolo
-            setStepTotal={setContestSoloTotal}
-            isEligible={isEligible}
-            soloPassPrice={soloPassPrice}
-            setIsNextDisabled={setIsNextDisabled}
-          />
+          <AnimatePresence>
+            <motion.div
+              key={'workshops'}
+              initial='hidden'
+              animate='enter'
+              exit='exit'
+              variants={motionVariants}
+              transition={{ type: 'linear', duration: 0.3 }}
+            >
+              <ContestSolo
+                setStepTotal={setContestSoloTotal}
+                isEligible={isEligible}
+                soloPassPrice={soloPassPrice}
+                setIsNextDisabled={setIsNextDisabled}
+              />
+            </motion.div>
+          </AnimatePresence>
         )}
 
         {currentStep === 'contestGroups' && (
-          <ContestGroups
-            isEligible={isEligible}
-            setStepTotal={setContestGroupsTotal}
-            lastDirection={lastDirection}
-            onStepSubmit={hanleSteps}
-          />
+          <AnimatePresence>
+            <motion.div
+              key={'workshops'}
+              initial='hidden'
+              animate='enter'
+              exit='exit'
+              variants={motionVariants}
+              transition={{ type: 'linear', duration: 0.3 }}
+            >
+              <ContestGroups
+                isEligible={isEligible}
+                setStepTotal={setContestGroupsTotal}
+                lastDirection={lastDirection}
+                onStepSubmit={hanleSteps}
+              />
+            </motion.div>
+          </AnimatePresence>
         )}
 
         {currentStep === 'worldShow' && (
-          <WorldShow isEligible={isEligible} setStepTotal={setWorldShowTotal} />
+          <AnimatePresence>
+            <motion.div
+              key={'workshops'}
+              initial='hidden'
+              animate='enter'
+              exit='exit'
+              variants={motionVariants}
+              transition={{ type: 'linear', duration: 0.3 }}
+            >
+              <WorldShow isEligible={isEligible} setStepTotal={setWorldShowTotal} />
+            </motion.div>
+          </AnimatePresence>
         )}
 
         {currentStep === 'summary' && (
-          <Summary
-            fullPassPrice={fullPassPrice}
-            currentPricePeriod={currentPricePeriod}
-            soloPassPrice={soloPassPrice}
-            total={total}
-            setIsNextDisabled={setIsNextDisabled}
-          />
+          <AnimatePresence>
+            <motion.div
+              key={'workshops'}
+              initial='hidden'
+              animate='enter'
+              exit='exit'
+              variants={motionVariants}
+              transition={{ type: 'linear', duration: 0.3 }}
+            >
+              <Summary
+                fullPassPrice={fullPassPrice}
+                currentPricePeriod={currentPricePeriod}
+                soloPassPrice={soloPassPrice}
+                total={total}
+                setIsNextDisabled={setIsNextDisabled}
+              />
+            </motion.div>
+          </AnimatePresence>
         )}
 
         <Collapse in={isTotalOpen && currentStep !== 'summary'} unmountOnExit>
@@ -362,6 +439,7 @@ export const FormLive: React.FC = () => {
           </Alert>
         </Snackbar>
       </form>
+
       {isLoading && <Loader />}
     </FormProvider>
   );

@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import { FormFields, Step } from './types';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface StepsNavigationProps {
   onStepSubmit: (direction: 'next' | 'prev') => void;
@@ -10,6 +11,12 @@ interface StepsNavigationProps {
   onFormSubmit: () => void;
   isNextDisabled: boolean;
 }
+
+const motionVariants = {
+  hidden: { opacity: 0 },
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 export const StepsNavigation: React.FC<StepsNavigationProps> = ({
   onStepSubmit,
@@ -86,5 +93,16 @@ export const StepsNavigation: React.FC<StepsNavigationProps> = ({
     );
   };
 
-  return <div className={styles.naviWrapper}>{render()}</div>;
+  return (
+    <motion.div
+      className={styles.naviWrapper}
+      initial='hidden'
+      animate='enter'
+      exit='exit'
+      variants={motionVariants}
+      transition={{ type: 'linear', duration: 0.3 }}
+    >
+      {render()}
+    </motion.div>
+  );
 };

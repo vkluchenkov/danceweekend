@@ -23,8 +23,8 @@ jobs:
           envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
 
       - name: LS
-        run: |
-          ls -la /home
+        run: ls -la $GITHUB_WORKSPACE
+        # run: ls -la /home/runner/work/_temp/_github_home
 
       # - uses: actions/checkout@v3
       # - name: Build the Docker image

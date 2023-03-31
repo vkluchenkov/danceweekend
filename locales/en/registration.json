@@ -118,6 +118,9 @@
     "photoNote1": "If you wish to receive a personal participant's poster, please send us your photo at",
     "photoNote2": "danceweekend@aliah.dance",
     "copyright": "©Dance Weekend in Warsaw",
-    "userSubj": "Welcome to Dance Weekend in Warsaw!"
+    "userSubj": "Welcome to Dance Weekend in Warsaw!",
+    "adminSubj": "New registration from",
+    "adminTitle": "New registration from",
+    "adminOrderTitle": "Registration detials"
   }
 }

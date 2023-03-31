@@ -27,6 +27,8 @@ import { Summary } from './Summary';
 import clsx from 'clsx';
 import { StepsNavigation } from './StepsNavigation';
 import axios from 'axios';
+import { Loader } from '../Loader';
+import { useRouter } from 'next/router';
 
 const steps: Step[] = [
   {
@@ -78,6 +80,8 @@ export const FormLive: React.FC = () => {
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 
+  const router = useRouter();
+
   const methods = useForm<FormFields>({
     defaultValues: defaultValues,
     mode: 'onChange',
@@ -90,6 +94,8 @@ export const FormLive: React.FC = () => {
   const [contestSoloTotal, setContestSoloTotal] = useState(0);
   const [contestGroupsTotal, setContestGroupsTotal] = useState(0);
   const [worldShowTotal, setWorldShowTotal] = useState(0);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [lastDirection, setLastDirection] = useState<'prev' | 'next' | null>(null);
 
@@ -177,6 +183,8 @@ export const FormLive: React.FC = () => {
 
   // Handle form submit
   const onSubmit = async (data: FormFields) => {
+    setIsLoading(true);
+
     const payload: OrderPayload = {
       ...data,
       fullPassPrice: fullPassPrice,
@@ -187,8 +195,14 @@ export const FormLive: React.FC = () => {
     };
     await axios
       .post('/api/reg-submit', payload)
-      .then((res) => console.log(res.data))
-      .catch((error: any) => console.log(error));
+      .then((res) => {
+        console.log(res.data);
+        router.push('/thank-you');
+      })
+      .catch((error: any) => {
+        console.log(error);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   // Handle steps navigation
@@ -261,6 +275,8 @@ export const FormLive: React.FC = () => {
       else return isFullPass ? priceRisingStar.priceDiscounted : priceRisingStar.priceNormal;
     }
   }, [ageGroup, contestLevel, isFullPass]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <FormProvider {...methods}>

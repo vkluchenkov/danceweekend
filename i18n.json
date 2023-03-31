@@ -16,6 +16,7 @@
     "/shows/arabic-dreams": ["arabicDreams"],
     "/shows/world-show": ["worldShow"],
     "/payment": ["payment"],
-    "/payment/thank-you": ["payment"]
+    "/payment/thank-you": ["payment"],
+    "/thank-you": ["thank-you"]
   }
 }

@@ -33,8 +33,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   };
   // console.log(userEmailErrors);
   // console.log(userEmailContent);
-  sendMail(userMailPayload);
-  sendMail(adminMailPayload);
+  // sendMail(userMailPayload);
+  // sendMail(adminMailPayload);
 
   res.status(200).send('Ok');
 }

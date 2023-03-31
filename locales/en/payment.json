@@ -10,5 +10,9 @@
     "stripe": "Credit / debit cards",
     "qtyMinError": "Minimum payment amount is 10€",
     "stripeBtn": "Pay with card"
+  },
+  "thanks": {
+    "pageTitle": "Thank you!",
+    "subtitle": "Your payment has been received and being processed"
   }
 }

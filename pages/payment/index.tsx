@@ -11,15 +11,16 @@ import { montserrat } from '@/src/ulis/font';
 
 import { PayPalButtons } from '@paypal/react-paypal-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { FormFields } from '@/src/components/FormLive/types';
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/router';
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripeKey);
 
 const Payment: NextPage = () => {
   const { t, lang } = useTranslation('payment');
+  const router = useRouter();
 
   const methods = useForm<PaymentFormFields>({
     mode: 'onChange',
@@ -60,6 +61,8 @@ const Payment: NextPage = () => {
         });
       // .finally(() => setIsLoader(false));
     }
+
+    if (method === 'paypal') router.push('/payment/thank-you');
   };
 
   return (

@@ -107,7 +107,8 @@
         "amountNow": "Amount to pay now",
         "amountAfter": "Amount to pay till 31.07.2023"
       }
-    }
+    },
+    "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue."
   },
   "email": {
     "title": "We received your registration!",

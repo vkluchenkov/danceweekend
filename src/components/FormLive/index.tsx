@@ -29,6 +29,9 @@ import { StepsNavigation } from './StepsNavigation';
 import axios from 'axios';
 import { Loader } from '../Loader';
 import { useRouter } from 'next/router';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const steps: Step[] = [
   {
@@ -96,6 +99,7 @@ export const FormLive: React.FC = () => {
   const [worldShowTotal, setWorldShowTotal] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
 
   const [lastDirection, setLastDirection] = useState<'prev' | 'next' | null>(null);
 
@@ -200,6 +204,7 @@ export const FormLive: React.FC = () => {
         router.push('/thank-you');
       })
       .catch((error: any) => {
+        setIsSnackBarOpen(true);
         console.log(error);
       })
       .finally(() => setIsLoading(false));
@@ -215,6 +220,14 @@ export const FormLive: React.FC = () => {
     },
     [setValue, isStep]
   );
+
+  // Handle snackbar close
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsSnackBarOpen(false);
+  };
 
   const currentPricePeriod = useMemo(() => {
     const today = new Date();
@@ -275,8 +288,6 @@ export const FormLive: React.FC = () => {
       else return isFullPass ? priceRisingStar.priceDiscounted : priceRisingStar.priceNormal;
     }
   }, [ageGroup, contestLevel, isFullPass]);
-
-  if (isLoading) return <Loader />;
 
   return (
     <FormProvider {...methods}>
@@ -343,7 +354,18 @@ export const FormLive: React.FC = () => {
           onStepSubmit={hanleSteps}
           onFormSubmit={handleSubmit(onSubmit)}
         />
+
+        <Snackbar
+          open={isSnackBarOpen}
+          onClose={handleClose}
+          anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+        >
+          <Alert severity='warning' onClose={handleClose} variant='filled'>
+            {t('form.error')}
+          </Alert>
+        </Snackbar>
       </form>
+      {isLoading && <Loader />}
     </FormProvider>
   );
 };

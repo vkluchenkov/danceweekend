@@ -331,10 +331,10 @@ export const contestCategories: ContestCategory[] = [
         isSoloPass: true,
         translations: {
           en: {
-            categoryTitle: 'Tribal fusion',
+            categoryTitle: 'Tribal',
           },
           ru: {
-            categoryTitle: 'Трайбл фьюжн',
+            categoryTitle: 'Трайбл',
           },
         },
       },
@@ -428,10 +428,10 @@ export const contestCategories: ContestCategory[] = [
         isSoloPass: true,
         translations: {
           en: {
-            categoryTitle: 'Tribal fusion',
+            categoryTitle: 'Tribal',
           },
           ru: {
-            categoryTitle: 'Трайбл фьюжн',
+            categoryTitle: 'Трайбл',
           },
         },
       },
@@ -494,10 +494,10 @@ export const contestCategories: ContestCategory[] = [
         isSoloPass: true,
         translations: {
           en: {
-            categoryTitle: 'Tribal fusion',
+            categoryTitle: 'Tribal',
           },
           ru: {
-            categoryTitle: 'Трайбл фьюжн',
+            categoryTitle: 'Трайбл',
           },
         },
       },

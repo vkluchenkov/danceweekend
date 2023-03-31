@@ -3,11 +3,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { Button } from '@mui/material';
 import { FormFields, StepProps } from './types';
-import { StepsNavigation } from './StepsNavigation';
 
-export const PersonalData: React.FC<StepProps> = ({ onStepSubmit }) => {
+export const PersonalData: React.FC<StepProps> = () => {
   const { t } = useTranslation('registration');
 
   const methods = useFormContext<FormFields>();

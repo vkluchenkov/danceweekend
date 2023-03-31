@@ -8,20 +8,19 @@ interface StepsNavigationProps {
   onStepSubmit: (direction: 'next' | 'prev') => void;
   currentStep: Step | undefined;
   onFormSubmit: () => void;
+  isNextDisabled: boolean;
 }
 
 export const StepsNavigation: React.FC<StepsNavigationProps> = ({
   onStepSubmit,
   onFormSubmit,
   currentStep,
+  isNextDisabled,
 }) => {
   const { t } = useTranslation('registration');
 
   const methods = useFormContext<FormFields>();
-  const { trigger, watch } = methods;
-
-  const isNextDisabled = watch('isNextDisabled');
-  const isPrevDisabled = watch('isPrevDisabled');
+  const { trigger } = methods;
 
   const nextBtn = (
     <Button
@@ -32,7 +31,7 @@ export const StepsNavigation: React.FC<StepsNavigationProps> = ({
       fullWidth
       disabled={isNextDisabled}
       onClick={async () => {
-        const isValid = await trigger();
+        const isValid = await trigger(undefined, { shouldFocus: true });
         if (isValid) onStepSubmit('next');
       }}
     >
@@ -47,7 +46,6 @@ export const StepsNavigation: React.FC<StepsNavigationProps> = ({
       size='large'
       disableElevation
       fullWidth
-      disabled={isPrevDisabled}
       onClick={() => onStepSubmit('prev')}
     >
       {t('form.common.prev')}

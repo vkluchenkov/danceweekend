@@ -9,11 +9,7 @@ import { WorldShowStepProps, FormFields } from './types';
 import { worldShowPrice } from '@/src/ulis/price';
 import { FormInputCheckbox, FormInputField } from '@/src/ui-kit/input';
 
-export const WorldShow: React.FC<WorldShowStepProps> = ({
-  onStepSubmit,
-  setStepTotal,
-  isEligible,
-}) => {
+export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligible }) => {
   const { t } = useTranslation('registration');
 
   const methods = useFormContext<FormFields>();

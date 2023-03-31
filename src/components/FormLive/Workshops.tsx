@@ -4,7 +4,6 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useEffect, useState } from 'react';
 import {
-  Button,
   Collapse,
   FormControl,
   FormControlLabel,
@@ -12,24 +11,18 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import {
-  FormFields,
-  FullPassDiscount,
-  WorkshopsField,
-  WorkshopsStepProps,
-  WorkshopsType,
-} from './types';
+import { FormFields, WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
 import { WorkshopsList } from './WorkshopsList';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
-import { schedule, Workshop } from '@/src/ulis/schedule';
+import { schedule } from '@/src/ulis/schedule';
 import { SupportedLangs } from '@/src/types';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
-  onStepSubmit,
   setStepTotal,
   currentPricePeriod,
   fullPassPrice,
   fullPassDiscountList,
+  setIsNextDisabled,
 }) => {
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
@@ -45,7 +38,6 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
 
   const [isDiscount, setIsDiscount] = useState(false);
   const [isGroup, setIsGroup] = useState(false);
-  const [isNextDisabled, setIsNextDisabled] = useState(true);
 
   const isFullPass = watch('isFullPass');
   const isFullPassDiscount = watch('fullPassDiscount');
@@ -55,13 +47,9 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
   useEffect(() => {
-    setValue('isNextDisabled', isNextDisabled);
-  }, [isNextDisabled, setValue]);
-
-  useEffect(() => {
     if (isFullPass || selectedWorkshops.length) setIsNextDisabled(false);
     else setIsNextDisabled(true);
-  }, [isFullPass, selectedWorkshops]);
+  });
 
   useEffect(() => {
     if (isFullPassDiscount != 'none' && isFullPassDiscount != 'group') {

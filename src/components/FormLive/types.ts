@@ -55,8 +55,6 @@ export interface FormFields {
   isInstallments: boolean;
 
   currentStep: StepId;
-  isPrevDisabled: boolean;
-  isNextDisabled: boolean;
 }
 
 export type StepId =
@@ -74,7 +72,7 @@ export interface Step {
 }
 
 export interface StepProps {
-  onStepSubmit: (direction: 'next' | 'prev') => void;
+  // onStepSubmit: (direction: 'next' | 'prev') => void;
 }
 
 export type WorkshopsStepProps = StepProps & {
@@ -82,27 +80,34 @@ export type WorkshopsStepProps = StepProps & {
   fullPassPrice: number | undefined;
   setStepTotal: (total: number) => void;
   fullPassDiscountList: FullPassDiscount[];
+  setIsNextDisabled: (state: boolean) => void;
 };
 
 export type ContestSoloStepProps = StepProps & {
   setStepTotal: (total: number) => void;
   isEligible: boolean;
   soloPassPrice: number;
+  setIsNextDisabled: (state: boolean) => void;
 };
 
 export type ContestGroupStepProps = StepProps & {
   isEligible: boolean;
   setStepTotal: (total: number) => void;
   lastDirection: 'prev' | 'next' | null;
+  onStepSubmit: (direction: 'next' | 'prev') => void;
 };
 
-export type WorldShowStepProps = ContestGroupStepProps;
+export type WorldShowStepProps = StepProps & {
+  isEligible: boolean;
+  setStepTotal: (total: number) => void;
+};
 
 export type SummaryStepProps = StepProps & {
   fullPassPrice: number | undefined;
   soloPassPrice: number;
   currentPricePeriod: PricePeriod | undefined;
   total: number;
+  setIsNextDisabled: (state: boolean) => void;
 };
 
 export type OrderPayload = FormFields & {

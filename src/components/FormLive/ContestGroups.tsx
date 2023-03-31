@@ -3,10 +3,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useCallback, useEffect, useState } from 'react';
-import { Button, Collapse, FormControlLabel } from '@mui/material';
+import { useCallback, useEffect } from 'react';
+import { Button, Collapse } from '@mui/material';
 import { ContestGroupStepProps, FormFields, GroupContest } from './types';
-import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { ContestGroup } from './ContestGroup';
 import { contestGroupPrice } from '@/src/ulis/price';
 import { maxGroups } from '@/src/ulis/constants';
@@ -14,10 +13,10 @@ import { contestCategories } from '@/src/ulis/contestCategories';
 import { FormInputCheckbox } from '@/src/ui-kit/input';
 
 export const ContestGroups: React.FC<ContestGroupStepProps> = ({
-  onStepSubmit,
   setStepTotal,
   isEligible,
   lastDirection,
+  onStepSubmit,
 }) => {
   const { t } = useTranslation('registration');
 
@@ -63,7 +62,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
       }
       if (lastDirection) onStepSubmit(lastDirection);
     }
-  }, []);
+  });
 
   // Set first group fields and clear all group fields and errors on checkbox change
   useEffect(() => {

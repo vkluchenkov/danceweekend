@@ -2,19 +2,18 @@ import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useEffect, useState } from 'react';
-import { Button, Collapse, FormControlLabel, MenuItem } from '@mui/material';
+import { useEffect } from 'react';
+import { Collapse, MenuItem } from '@mui/material';
 import { ContestSoloStepProps, FormFields } from './types';
-import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormInputCheckbox, FormInputSelect } from '@/src/ui-kit/input';
 import { getContestAgeGroupsList } from './helpers';
 import { ContestSoloList } from './ContestSoloList';
 
 export const ContestSolo: React.FC<ContestSoloStepProps> = ({
-  onStepSubmit,
   setStepTotal,
   isEligible,
   soloPassPrice,
+  setIsNextDisabled,
 }) => {
   const { t } = useTranslation('registration');
 
@@ -36,9 +35,10 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   const soloContestSelected = soloContest.filter((cat) => cat.selected);
 
   useEffect(() => {
-    if (isSoloContest && !soloContestSelected.length) setValue('isNextDisabled', true);
-    if (isSoloContest && soloContestSelected.length) setValue('isNextDisabled', false);
-  }, [isSoloContest, soloContestSelected, setValue]);
+    if (isSoloContest && !soloContestSelected.length) {
+      setIsNextDisabled(true);
+    } else setIsNextDisabled(false);
+  }, [isSoloContest, soloContestSelected, setIsNextDisabled]);
 
   // Clear all contest entries on checkbox disable
   useEffect(() => {

@@ -31,7 +31,6 @@ import { Loader } from '../Loader';
 import { useRouter } from 'next/router';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 
 const steps: Step[] = [
   {
@@ -102,6 +101,8 @@ export const FormLive: React.FC = () => {
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
 
   const [lastDirection, setLastDirection] = useState<'prev' | 'next' | null>(null);
+
+  const [isNextDisabled, setIsNextDisabled] = useState(false);
 
   // Navigation form state
   const currentStep = watch('currentStep');
@@ -213,6 +214,7 @@ export const FormLive: React.FC = () => {
   // Handle steps navigation
   const hanleSteps = useCallback(
     (direction: 'next' | 'prev') => {
+      setIsNextDisabled(false);
       if (isStep && isStep[direction]) {
         setValue('currentStep', isStep[direction]!);
         setLastDirection(direction);
@@ -292,56 +294,50 @@ export const FormLive: React.FC = () => {
   return (
     <FormProvider {...methods}>
       <form className={styles.form}>
-        <Collapse in={currentStep === 'personal'} unmountOnExit>
-          <PersonalData onStepSubmit={hanleSteps} />
-        </Collapse>
+        {currentStep === 'personal' && <PersonalData />}
 
-        <Collapse in={currentStep === 'workshops'} unmountOnExit>
+        {currentStep === 'workshops' && (
           <Workshops
-            onStepSubmit={hanleSteps}
+            // onStepSubmit={hanleSteps}
             currentPricePeriod={currentPricePeriod}
             fullPassPrice={fullPassPrice}
             fullPassDiscountList={fullPassDiscountList}
             setStepTotal={setWsTotal}
+            setIsNextDisabled={setIsNextDisabled}
           />
-        </Collapse>
+        )}
 
-        <Collapse in={currentStep === 'contestSolo'} unmountOnExit>
+        {currentStep === 'contestSolo' && (
           <ContestSolo
-            onStepSubmit={hanleSteps}
             setStepTotal={setContestSoloTotal}
             isEligible={isEligible}
             soloPassPrice={soloPassPrice}
+            setIsNextDisabled={setIsNextDisabled}
           />
-        </Collapse>
+        )}
 
-        <Collapse in={currentStep === 'contestGroups'} unmountOnExit>
+        {currentStep === 'contestGroups' && (
           <ContestGroups
-            onStepSubmit={hanleSteps}
             isEligible={isEligible}
             setStepTotal={setContestGroupsTotal}
             lastDirection={lastDirection}
-          />
-        </Collapse>
-
-        <Collapse in={currentStep === 'worldShow'} unmountOnExit>
-          <WorldShow
             onStepSubmit={hanleSteps}
-            isEligible={isEligible}
-            setStepTotal={setWorldShowTotal}
-            lastDirection={lastDirection}
           />
-        </Collapse>
+        )}
 
-        <Collapse in={currentStep === 'summary'} unmountOnExit>
+        {currentStep === 'worldShow' && (
+          <WorldShow isEligible={isEligible} setStepTotal={setWorldShowTotal} />
+        )}
+
+        {currentStep === 'summary' && (
           <Summary
-            onStepSubmit={hanleSteps}
             fullPassPrice={fullPassPrice}
             currentPricePeriod={currentPricePeriod}
             soloPassPrice={soloPassPrice}
             total={total}
+            setIsNextDisabled={setIsNextDisabled}
           />
-        </Collapse>
+        )}
 
         <Collapse in={isTotalOpen && currentStep !== 'summary'} unmountOnExit>
           <h2 className={clsx(textStyles.h2)}>
@@ -353,6 +349,7 @@ export const FormLive: React.FC = () => {
           currentStep={isStep}
           onStepSubmit={hanleSteps}
           onFormSubmit={handleSubmit(onSubmit)}
+          isNextDisabled={isNextDisabled}
         />
 
         <Snackbar

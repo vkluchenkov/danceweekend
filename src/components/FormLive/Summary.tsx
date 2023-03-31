@@ -13,29 +13,23 @@ import Link from 'next/link';
 import { contestCategories } from '@/src/ulis/contestCategories';
 
 export const Summary: React.FC<SummaryStepProps> = ({
-  onStepSubmit,
   fullPassPrice,
   soloPassPrice,
   currentPricePeriod,
   total,
+  setIsNextDisabled,
 }) => {
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-
   const methods = useFormContext<FormFields>();
-  const { watch, trigger, control, setValue } = methods;
+  const { watch, control } = methods;
 
   const form = watch();
 
   useEffect(() => {
-    setValue('isNextDisabled', isSubmitDisabled);
-  }, [isSubmitDisabled, setValue]);
-
-  useEffect(() => {
-    setIsSubmitDisabled(!form.rulesAccepted);
-  }, [setIsSubmitDisabled, form]);
+    setIsNextDisabled(!form.rulesAccepted);
+  }, [setIsNextDisabled, form]);
 
   // translations with HTML
   const acceptRules = (

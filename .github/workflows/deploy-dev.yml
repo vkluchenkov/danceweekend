@@ -24,12 +24,6 @@ jobs:
           envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
 
-      # - name: LS
-      #   run: ls
-
-      # - name: cat
-      #   run: cat .env
-
       - name: Build the Docker image
         run: docker build -t cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev .
 

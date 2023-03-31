@@ -24,7 +24,7 @@ jobs:
 
       - name: LS
         run: |
-          ls
+          ls -la /
 
       # - uses: actions/checkout@v3
       # - name: Build the Docker image

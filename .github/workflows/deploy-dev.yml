@@ -24,6 +24,8 @@ jobs:
 
       - name: LS
         run: ls -la $GITHUB_WORKSPACE
+      - name: cat
+        run: cat $GITHUB_WORKSPACE/.env
         # run: ls -la /home/runner/work/_temp/_github_home
 
       # - uses: actions/checkout@v3

@@ -6,14 +6,14 @@ on:
   pull_request:
     branches: ['dev']
 
-jobs:
-  create_env_file_job:
+  build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Create .env file
         uses: ozaytsev86/create-env-file@v1
         with:
-          ENV_DEPLOY_URL: https://dev.danceweekend.art
+          ENV_DEPLOY_URL: 'https://dev.danceweekend.art'
           ENV_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
           ENV_PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
           ENV_PAYPAL_API_URL: ${{ secrets.PAYPAL_API_URL }}
@@ -21,10 +21,6 @@ jobs:
           ENV_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           ENV_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
 
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
         run: docker build -t cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev .

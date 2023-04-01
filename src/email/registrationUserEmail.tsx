@@ -380,6 +380,12 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
             {/* Order title */}
             <MjmlText mj-class='h2'>{t('email.orderTitle')}:</MjmlText>
 
+            {/* Festival version */}
+            <MjmlText mj-class='h3'>
+              {t('form.summary.versionTitle')}:{' '}
+              <span style={{ color: accentColor }}>{form.version}</span>
+            </MjmlText>
+
             {/* Personal data*/}
             <MjmlText mj-class='h3'>{t('form.summary.personalTitle')}</MjmlText>
             <MjmlText mj-class='text'>

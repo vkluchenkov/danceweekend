@@ -27,6 +27,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     formState: { errors },
   } = methods;
 
+  const version = watch('version');
   const ageGroup = watch('ageGroup');
   const contestLevels = watch('contestLevels');
   const isSoloPass = watch('isSoloPass');
@@ -116,7 +117,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
           )}
 
           {/* Solo Pass selection */}
-          {ageGroup && ageGroup !== 'baby' && (
+          {ageGroup && ageGroup !== 'baby' && version === 'live' && (
             <div>
               <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
               <FormInputCheckbox

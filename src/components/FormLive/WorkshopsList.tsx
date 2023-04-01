@@ -4,7 +4,7 @@ import textStyles from '@/styles/Text.module.css';
 import { FormControlLabel } from '@mui/material';
 import { PricePeriod, SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
-import { FormFields, WorkshopsField } from './types';
+import { FormFields } from './types';
 import clsx from 'clsx';
 import React, { useCallback } from 'react';
 
@@ -27,6 +27,7 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = ({ currentPricePeri
   const currentLang = lang as SupportedLangs;
 
   const watchWorkshops = watch('workshops');
+  const version = watch('version');
 
   const controlledFields = fields.map((field, index) => {
     return {
@@ -49,7 +50,7 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = ({ currentPricePeri
 
   const workshops = uniqueDays.map((day) => {
     const workshopsInputs = controlledFields.map((ws) => {
-      const price = currentPricePeriod?.price.live[`${ws.teachersPriceGroup!}Price`];
+      const price = currentPricePeriod?.price[version][`${ws.teachersPriceGroup!}Price`];
       if (ws.day === day)
         return (
           <FormControlLabel

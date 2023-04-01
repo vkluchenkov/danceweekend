@@ -97,6 +97,7 @@
     "summary": {
       "title": "Summary",
       "personalTitle": "About you",
+      "versionTitle": "Festival version",
       "worldShowGroup": "Group or duo",
       "lastThing": "Last, but not least",
       "rulesCheckbox": "I have read and accept festival's <0>prices and conditions</0> as well as <1>competition rules</1>",

@@ -49,10 +49,10 @@ const Registration: NextPage = () => {
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
       <section className={styles.section}>
-        <ThemeProvider theme={darkTheme}>{version === 'live' && <FormLive />}</ThemeProvider>
-        {version === 'online' && (
-          <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('onlineWarning')}</h2>
-        )}
+        <ThemeProvider theme={darkTheme}>
+          {version === 'live' && <FormLive version={version} />}
+          {version === 'online' && <FormLive version={version} />}
+        </ThemeProvider>
       </section>
     </Layout>
   );

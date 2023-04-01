@@ -29,6 +29,11 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
     keyName: 'id',
   });
 
+  const groupContest = watch('groupContest');
+  const contestAgeGroup = watch('contestAgeGroup');
+  const isGroupContest = watch('isGroupContest');
+  const version = watch('version');
+
   const defaultGroup: GroupContest = useMemo(() => {
     return {
       type: 'duo',
@@ -36,13 +41,9 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
       style: '',
       qty: 2,
       name: '',
-      price: contestGroupPrice.live * 2, //qty
+      price: contestGroupPrice[version] * 2, //qty
     };
-  }, []);
-
-  const groupContest = watch('groupContest');
-  const contestAgeGroup = watch('contestAgeGroup');
-  const isGroupContest = watch('isGroupContest');
+  }, [version]);
 
   const controlledFields = fields.map((field, index) => {
     return {
@@ -108,7 +109,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
         (cat.ageGroup === contestAgeGroup && cat.isDuo === isDuoType) || cat.isGroup === isGroupType
     );
 
-    const catStyles = contestCategory?.categories.filter((style) => style.types.includes('live'));
+    const catStyles = contestCategory?.categories.filter((style) => style.types.includes(version));
 
     return (
       <ContestGroup

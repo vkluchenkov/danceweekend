@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Workshops } from './Workshops';
 import { schedule } from '@/src/ulis/schedule';
 import useTranslation from 'next-translate/useTranslation';
-import { SupportedLangs } from '@/src/types';
+import { SupportedLangs, Version } from '@/src/types';
 import {
   FormFields,
   FullPassDiscount,
@@ -15,7 +15,13 @@ import {
   Step,
   WorkshopsField,
 } from './types';
-import { contestSoloPrice, ispromoPeriod, kidsDiscount, workshopsPrice } from '@/src/ulis/price';
+import {
+  contestSoloPrice,
+  isOnlinePromoPeriod,
+  ispromoPeriod,
+  kidsDiscount,
+  workshopsPrice,
+} from '@/src/ulis/price';
 import { Collapse } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
@@ -39,7 +45,7 @@ const motionVariants = {
   exit: { opacity: 0 },
 };
 
-const steps: Step[] = [
+const liveSteps: Step[] = [
   {
     id: 'personal',
     prev: null,
@@ -72,7 +78,36 @@ const steps: Step[] = [
   },
 ];
 
+const onlineSteps: Step[] = [
+  {
+    id: 'personal',
+    prev: null,
+    next: 'workshops',
+  },
+  {
+    id: 'workshops',
+    prev: 'personal',
+    next: 'contestSolo',
+  },
+  {
+    id: 'contestSolo',
+    prev: 'workshops',
+    next: 'contestGroups',
+  },
+  {
+    id: 'contestGroups',
+    prev: 'contestSolo',
+    next: 'summary',
+  },
+  {
+    id: 'summary',
+    prev: 'contestGroups',
+    next: null,
+  },
+];
+
 const defaultValues: Partial<FormFields> = {
+  version: 'live',
   isFullPass: false,
   isSoloPass: false,
   fullPassDiscount: 'none',
@@ -85,7 +120,11 @@ const defaultValues: Partial<FormFields> = {
   rulesAccepted: false,
 };
 
-export const FormLive: React.FC = () => {
+interface FormLiveProps {
+  version: Version;
+}
+
+export const FormLive: React.FC<FormLiveProps> = ({ version }) => {
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 
@@ -126,8 +165,14 @@ export const FormLive: React.FC = () => {
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
   const isStep = useMemo(() => {
+    const steps = version === 'live' ? liveSteps : onlineSteps;
     return steps.find((step) => step.id === currentStep);
-  }, [currentStep]);
+  }, [currentStep, version]);
+
+  // Set version from props
+  useEffect(() => {
+    setValue('version', version);
+  }, [version, setValue]);
 
   // open Total snackbar on change
   useEffect(() => {
@@ -160,7 +205,7 @@ export const FormLive: React.FC = () => {
       (cat) => cat.ageGroup === contestAgeGroup || cat.ageGroups?.includes(contestAgeGroup!)
     );
 
-    // Add only solo styles from with live type
+    // Add only solo styles from with props "version" type
     const levels: Level[] = [];
 
     filteredByAgeGroup.forEach((cat, index) => {
@@ -173,7 +218,7 @@ export const FormLive: React.FC = () => {
 
       cat.categories.forEach((style) => {
         style.isSolo &&
-          style.types.includes('live') &&
+          style.types.includes(version) &&
           res.push({
             ...style,
             selected: false,
@@ -186,7 +231,7 @@ export const FormLive: React.FC = () => {
     setValue('soloContest', res);
     setValue('contestLevels', levels);
     setValue('contestLevel', levels[0]);
-  }, [contestAgeGroup, setValue]);
+  }, [contestAgeGroup, setValue, version]);
 
   // Summarize step totals
   useEffect(() => {
@@ -225,7 +270,7 @@ export const FormLive: React.FC = () => {
         setValue('currentStep', isStep[direction]!);
         setLastDirection(direction);
       }
-      // Wait for prev step to transition out
+      // Wait for the prev step to transition out
       setTimeout(() => {
         setIsNextDisabled(false);
       }, 400);
@@ -235,24 +280,24 @@ export const FormLive: React.FC = () => {
 
   // Handle snackbar close
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+    if (reason === 'clickaway') return;
     setIsSnackBarOpen(false);
   };
 
   const currentPricePeriod = useMemo(() => {
+    const isPromo = version === 'live' ? ispromoPeriod : isOnlinePromoPeriod;
+
     const today = new Date();
-    if (ispromoPeriod) return workshopsPrice.find((i) => i.isPromo);
+    if (isPromo) return workshopsPrice.find((i) => i.isPromo);
     else return workshopsPrice.find((i) => i.startDate! <= today && today <= i.endDate!);
-  }, []);
+  }, [version]);
 
   const fullPassPrice = useMemo(() => {
-    // Kids discount
+    // Kids discount for live version
     const basePrice =
-      ageGroup === 'baby' || ageGroup === 'kids'
-        ? currentPricePeriod && currentPricePeriod.price.live.fullPassPrice * kidsDiscount
-        : currentPricePeriod?.price.live.fullPassPrice;
+      version === 'live' && (ageGroup === 'baby' || ageGroup === 'kids')
+        ? currentPricePeriod && currentPricePeriod.price[version].fullPassPrice * kidsDiscount
+        : currentPricePeriod?.price[version].fullPassPrice;
 
     // additional discounts (certificates, etc.)
     if (fullPassDiscount === 'group' && basePrice)
@@ -265,14 +310,17 @@ export const FormLive: React.FC = () => {
       return Number.parseFloat((basePrice * 0.5).toFixed(2));
     if (fullPassDiscount === 'free' && basePrice) return 0;
     else return basePrice;
-  }, [ageGroup, currentPricePeriod, fullPassDiscount]);
+  }, [ageGroup, currentPricePeriod, fullPassDiscount, version]);
 
   const fullPassDiscountList: FullPassDiscount[] = useMemo(() => {
-    // Kids and baby can't have less than 100% discount
-    return ageGroup === 'baby' || ageGroup === 'kids'
-      ? ['none', 'free']
-      : ['none', 'group', '30%', '50%', 'free'];
-  }, [ageGroup]);
+    // Kids and baby can't have less than 100% discount in live version
+    if (version === 'live')
+      return ageGroup === 'baby' || ageGroup === 'kids'
+        ? ['none', 'free']
+        : ['none', 'group', '30%', '50%', 'free'];
+    // No group discounts for online
+    else return ['none', '30%', '50%', 'free'];
+  }, [ageGroup, version]);
 
   const isEligible = useMemo(() => {
     if (ageGroup === 'baby' || ageGroup === 'kids') {
@@ -285,9 +333,9 @@ export const FormLive: React.FC = () => {
   }, [ageGroup, isFullPass, selectedWorkshops]);
 
   const soloPassPrice = useMemo(() => {
-    const priceKids = contestSoloPrice.soloPassKids.price.live;
-    const priceRisingStar = contestSoloPrice.soloPassRisingStar.price.live;
-    const priceProfessionals = contestSoloPrice.soloPassProfessionals.price.live;
+    const priceKids = contestSoloPrice.soloPassKids.price[version];
+    const priceRisingStar = contestSoloPrice.soloPassRisingStar.price[version];
+    const priceProfessionals = contestSoloPrice.soloPassProfessionals.price[version];
 
     // Price for Kids and Baby
     if (ageGroup === 'baby' || ageGroup === 'kids')
@@ -299,7 +347,7 @@ export const FormLive: React.FC = () => {
       if (!contestLevel) return 0;
       else return isFullPass ? priceRisingStar.priceDiscounted : priceRisingStar.priceNormal;
     }
-  }, [ageGroup, contestLevel, isFullPass]);
+  }, [ageGroup, contestLevel, isFullPass, version]);
 
   return (
     <FormProvider {...methods}>

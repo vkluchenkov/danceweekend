@@ -43,6 +43,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const isFullPassDiscount = watch('fullPassDiscount');
   const workshopsType = watch('workshopsType');
   const isWorkshops = watch('workshops');
+  const version = watch('version');
 
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
@@ -73,12 +74,12 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
     else {
       const wsPrice = selectedWorkshops.reduce((prev, current) => {
         const price: number | undefined =
-          currentPricePeriod?.price.live[`${current.teachersPriceGroup!}Price`];
+          currentPricePeriod?.price[version][`${current.teachersPriceGroup!}Price`];
         return prev + price!;
       }, 0);
       setStepTotal(wsPrice);
     }
-  }, [selectedWorkshops, isFullPass, currentPricePeriod, fullPassPrice, setStepTotal]);
+  }, [selectedWorkshops, isFullPass, currentPricePeriod, fullPassPrice, setStepTotal, version]);
 
   const handleFullPass = (event: React.ChangeEvent<HTMLInputElement>, value: WorkshopsType) => {
     setValue('isFullPass', value === 'fullPass', { shouldTouch: true });

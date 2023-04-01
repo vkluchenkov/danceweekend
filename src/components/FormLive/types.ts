@@ -1,4 +1,4 @@
-import { AgeGroup, PricePeriod, SupportedLangs } from '@/src/types';
+import { AgeGroup, PricePeriod, SupportedLangs, Version } from '@/src/types';
 import { Category, Level } from '@/src/ulis/contestCategories';
 import { Workshop } from '@/src/ulis/schedule';
 
@@ -24,6 +24,7 @@ export type WorkshopsType = 'fullPass' | 'single';
 export type FullPassDiscount = 'group' | '30%' | '50%' | 'free' | 'none';
 
 export interface FormFields {
+  version: Version;
   isFullPass: boolean;
   name: string;
   surname: string;

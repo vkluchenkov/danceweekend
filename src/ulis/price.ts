@@ -42,7 +42,7 @@ export const workshopsPrice: PricePeriod[] = [
         group2Price: 20,
       },
     },
-    startDate: new Date('2023-03-10T00:00:00+01:00'), //Must start before current date
+    startDate: new Date('2023-04-01T00:00:00+01:00'), //Must start before current date
     endDate: new Date('2023-05-31T23:59:59+01:00'),
   },
   {

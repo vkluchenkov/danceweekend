@@ -11,6 +11,7 @@ import {
   contestGroupPrice,
   contestSoloPrice,
   ispromoPeriod,
+  isOnlinePromoPeriod,
   teachersWsGroups,
   workshopsPrice,
   worldShowPrice,
@@ -70,17 +71,19 @@ const Price: NextPage = () => {
     const isNow =
       period.endDate && period.startDate && today <= period.endDate && today >= period.startDate;
 
+    const isPromo = version === 'live' ? ispromoPeriod : isOnlinePromoPeriod;
+
     return (
       <div
         key={period.price[version].fullPassPrice + index}
         className={clsx(
           styles.period,
           // Promo styles
-          period.isPromo && ispromoPeriod && styles.period_active,
-          period.isPromo && !ispromoPeriod && styles.period_expired,
+          period.isPromo && isPromo && styles.period_active,
+          period.isPromo && !isPromo && styles.period_expired,
           // Date based styles, ignored if promo is active
-          !period.isPromo && !ispromoPeriod && isPast && styles.period_expired,
-          !period.isPromo && !ispromoPeriod && isNow && styles.period_active
+          !period.isPromo && !isPromo && isPast && styles.period_expired,
+          !period.isPromo && !isPromo && isNow && styles.period_active
         )}
       >
         <h4 className={styles.period__title}>{getTitle()}</h4>

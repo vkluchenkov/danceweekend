@@ -1,0 +1,119 @@
+<mjml>
+  <mj-head>
+    <mj-font
+      name="Montserrat"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600"
+    />
+    <mj-attributes>
+      <mj-all
+        font-family="Montserrat, Helvetica, Arial, sans-serif"
+        font-weight="400"
+        color="white"
+      />
+
+      <!-- Classes -->
+      <mj-class name="accent" color="#eec571" />
+      <mj-class name="divider" border-width="1px" padding="25px 0 25px" border-color="white" />
+
+      <mj-class name="h1" font-size="24px" line-height="1.2" font-weight="600" align="center" />
+      <mj-class name="h2" font-size="21px" line-height="1.2" font-weight="500" align="center" />
+      <mj-class name="h3" font-size="18px" line-height="1.2" font-weight="500" align="center" />
+      <mj-class name="h4" font-size="18px" line-height="1.2" font-weight="600" padding="0" />
+      <mj-class
+        name="text"
+        font-size="16px"
+        line-height="1.2"
+        font-weight="400"
+        padding="10px 0 5px"
+      />
+
+      <mj-class
+        name="copyright"
+        font-size="14px"
+        align="center"
+        line-height="1.2"
+        font-weight="400"
+        padding="0"
+      />
+    </mj-attributes>
+  </mj-head>
+
+  <!-- Body -->
+  <mj-body background-color="#000">
+    <!-- Divider -->
+    <mj-section padding="10px"></mj-section>
+    <!-- Header -->
+    <mj-section
+      background-url="http://localhost:3000/images/email-header1.jpg"
+      background-size="cover"
+      background-repeat="no-repeat"
+      border-radius="15px"
+      padding-bottom="190px"
+    >
+    </mj-section>
+
+    <!-- Divider -->
+    <mj-section padding="10px"></mj-section>
+
+    <!-- Main section -->
+    <mj-section background-color="#231d2f" padding="20px 30px 30px" border-radius="15px">
+      <mj-column>
+        <!-- Title -->
+        <mj-text mj-class="h1 accent">We received your registration!</mj-text>
+
+        <mj-text mj-class="text"
+          >Thank you for your registration to Dance Weekend in Warsaw! We will contact you with
+          payment confirmation and additional info as soon as we process your payment.</mj-text
+        >
+
+        <mj-text mj-class="h2">Here is what you ordered:</mj-text>
+
+        <!-- Workshops breakdown -->
+        <mj-text mj-class="h4">Workshops:</mj-text>
+        <mj-text mj-class="text">
+          <ul style="list-style: none; padding: 0; line-height: 1.5">
+            <li>Name: <span style="color: #eec571">Vladimir</span></li>
+          </ul>
+        </mj-text>
+
+        <mj-text mj-class="h3">Workshops:</mj-text>
+        <mj-text mj-class="text">
+          <ul style="list-style: none; padding: 0; line-height: 1.5">
+            <li>Name: <span style="color: #eec571">Vladimir</span></li>
+          </ul>
+        </mj-text>
+        <mj-text mj-class="text">
+          <ul style="list-style: none; padding: 0; line-height: 1.5">
+            <li>Name: <span style="color: #eec571">Vladimir</span></li>
+          </ul>
+        </mj-text>
+
+        <mj-divider mj-class="divider" />
+
+        <mj-text mj-class="text"
+          >For your registration to be accepted you need to make a payment on
+          <a href="https://danceweekend.art/thank-you" target="_blank" style="color: #eec571"
+            >this page.</a
+          ></mj-text
+        >
+
+        <mj-text mj-class="text"
+          >If you wish to receive a personal participant's poster, please send us your photo at
+          <a href="mailto: danceweekend@aliah.dance" target="_blank" style="color: #eec571"
+            >danceweekend@aliah.dance</a
+          ></mj-text
+        >
+      </mj-column>
+    </mj-section>
+
+    <!-- Divider -->
+    <mj-section padding="10px"></mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#231d2f" padding="20px 10px" border-radius="15px">
+      <mj-column>
+        <mj-text mj-class="copyright"> ©Dance Weekend in Warsaw </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

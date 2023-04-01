@@ -29,8 +29,6 @@ const FAQ: NextPage = () => {
     <Trans i18nKey='faq:a3' components={[<Link href='/price/' target='_blank' key={1} />]} />
   );
 
-  const content = <></>;
-
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>

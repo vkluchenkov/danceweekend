@@ -48,6 +48,7 @@
   margin: 10px 0 15px;
   transition: all 0.3s;
   cursor: pointer;
+  opacity: 1;
 }
 
 @media screen and (min-width: 768px) {
@@ -87,16 +88,15 @@
   .cta__subtitle {
     font-size: 26px;
   }
+
+  .cta__button:hover {
+    opacity: 0.8;
+  }
 }
 
 @media screen and (min-width: 1280px) {
   .cta__button {
     margin: 10px 0 -10px;
-    opacity: 1;
-  }
-
-  .cta__button:hover {
-    opacity: 0.8;
   }
 }
 

@@ -3,8 +3,6 @@ name: Deploy main
 on:
   push:
     branches: ['main']
-  pull_request:
-    branches: ['main']
 
 jobs:
   build:
@@ -12,6 +10,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_DEPLOY_URL: 'https://danceweekend.art'
+          envkey_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
+          envkey_PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
+          envkey_PAYPAL_API_URL: ${{ secrets.PAYPAL_API_URL }}
+          envkey_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
+          envkey_NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+
       - name: Build the Docker image
         run: docker build -t cloud.canister.io:5000/vkluchenkov/danceweekend:latest-main .
 

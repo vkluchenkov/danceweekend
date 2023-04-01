@@ -1,0 +1,129 @@
+{
+  "pageTitle": "Registration",
+  "live": "Live festival",
+  "online": "Online festival",
+  "onlineWarning": "Registration to online festival will be open later.",
+  "form": {
+    "common": {
+      "required": "This field is required",
+      "prev": "← Back",
+      "next": "Next →",
+      "total": "Total",
+      "submit": "Submit!"
+    },
+    "personal": {
+      "title": "Tell us about yourself",
+      "contacts": "Contact data",
+      "name": "Name",
+      "surname": "Surname",
+      "stageName": "Stage name (if exists)",
+      "age": "Age (on festival start date)",
+      "ageError": "Age should be between 4 and 99",
+      "social": "Social networks profile(s)",
+      "country": "Country",
+      "city": "City",
+      "tel": "Phone number",
+      "email": "Email"
+    },
+    "workshops": {
+      "title": "Workshops",
+      "selectTitle": "Full Pass or one by one?",
+      "fullPass": "Full Pass",
+      "fullPassDescription1": "It’s possible to buy workshops as a package — Full Pass or single workshops of your choice. ",
+      "fullPassDescription2": "Full Pass unlocks all the workshops, discounts in competition and access to World Show. Also allows you to pay in installments (except Promo tariff). Kids and Baby have 50% discount.",
+      "singleWs": "Single workshops",
+      "discounts": {
+        "title": "Full Pass / group discounts",
+        "group": "Group discount 20%",
+        "groupName": "Group name",
+        "groupDescription": "20% discount on Full Pass for registration of 3+ participants as a group. Discount won't be summarized with personal discounts or discounts for kids.",
+        "30%": "Certificate 30%",
+        "50%": "Certificate 50%",
+        "free": "Certificate Free Full Pass",
+        "none": "No discounts",
+        "details": "How did you acquire your certificate?",
+        "detailsDescription": "Please state where and when did you acquire your discount certificate. As all the certificates are personal, we will check your right to use it with the organizers of an event where you won it."
+      }
+    },
+    "contest": {
+      "soloTitle": "Competition Solo",
+      "checkboxLabel": "I want to take part in solo competition",
+      "soloPassLabel": "I want to buy Solo Pass",
+      "soloPassTitle": "Solo Pass",
+      "solosPassDescription": "With the Solo Pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
+      "oops": "In order to take part in the competition all the participants are required to have at least one workshop or Full pass for Baby and Kids, 3 workshops or Full Pass for Juniors and older.",
+      "ageGroups": {
+        "title": "Competition age group",
+        "baby": "Baby",
+        "kids": "Kids",
+        "juniors": "Juniors",
+        "adults": "Adults",
+        "seniors": "Seniors"
+      },
+      "levels": {
+        "title": "Level",
+        "beginners": "Beginners",
+        "intermediate": "Intermediate",
+        "risingStar": "Rising star (beginners + intermediate)",
+        "professionals": "Professionals",
+        "openLevel": "Open level"
+      },
+      "stylesTitle": "Styles",
+      "free": "free",
+      "groups": {
+        "title": "Competition duos and groups",
+        "checkboxLabel": "I want to register a duo or a group",
+        "groupOrDuo": "Group or duo?",
+        "style": "Style",
+        "duo": "Duo",
+        "group": "Group",
+        "name": "Group / duo name",
+        "qty": "Number of dancers",
+        "price": "Price",
+        "add": "Add another duo / group",
+        "remove": "Remove",
+        "qtyError": "Number of dancers in a group can not be less than 3"
+      }
+    },
+    "worldShow": {
+      "title": "World show",
+      "description": "You have a unique opportunity to perform on the main festival’s stage during the World Show, which will take place on the last day of the festival.",
+      "oops": "In order to take part in the World Show all the participants are required to have at least one workshop or Full pass for Baby and Kids, 3 workshops or Full Pass for Juniors and older.",
+      "solo": "I want to perform solo",
+      "group": "I want to add duo or group",
+      "perPerson": "per person",
+      "qtyError": "Number of dancers in a group can not be less than 2"
+    },
+    "summary": {
+      "title": "Summary",
+      "personalTitle": "About you",
+      "versionTitle": "Festival version",
+      "worldShowGroup": "Group or duo",
+      "lastThing": "Last, but not least",
+      "rulesCheckbox": "I have read and accept festival's <0>prices and conditions</0> as well as <1>competition rules</1>",
+      "money": {
+        "title": "Finances",
+        "total": "Your registration total",
+        "installments": "I want to pay with 2 installments",
+        "installmentsDetails": "There is a possibility to pay for your package in 2 installments. The first 50% should be paid right after the registration, the other 50% any time before 31.07.2023. In case if the second payment is failed to be transferred in due time, you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
+        "amountNow": "Amount to pay now",
+        "amountAfter": "Amount to pay till 31.07.2023"
+      }
+    },
+    "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue."
+  },
+  "email": {
+    "title": "We received your registration!",
+    "intro": "Thank you for your registration to Dance Weekend in Warsaw! We will contact you with payment confirmation and additional info as soon as we process your payment.",
+    "orderTitle": "Here is what you sent us",
+    "paymentNote1": "For your registration to be accepted you need to make a payment on",
+    "paymentNote2": "this page.",
+    "photoNote1": "If you wish to receive a personal participant's poster, please send us your photo at",
+    "photoNote2": "danceweekend@aliah.dance",
+    "copyright": "©Dance Weekend in Warsaw",
+    "userSubj": "Welcome to Dance Weekend in Warsaw!",
+    "adminSubj": "New registration from",
+    "adminTitle": "New registration from",
+    "adminOrderTitle": "Registration detials"
+  }
+}

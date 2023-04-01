@@ -45,6 +45,10 @@
   color: var(--accent-text-color);
 }
 
+.centered {
+  text-align: center;
+}
+
 .p,
 .list {
   font-style: normal;
@@ -63,6 +67,11 @@
   flex-direction: column;
   gap: 2px;
   padding: 5px 0 5px 30px;
+}
+
+.list_summary {
+  list-style: none;
+  padding: 5px 0;
 }
 
 @media screen and (min-width: 768px) {

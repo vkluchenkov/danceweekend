@@ -5,6 +5,7 @@
   "pages": {
     "*": ["common"],
     "/": ["home", "cta"],
+    "/registration": ["registration"],
     "/price": ["price"],
     "/404": ["errors"],
     "/competition/rules": ["competitionRules"],
@@ -13,6 +14,9 @@
     "/info/bazaar": ["bazaar"],
     "/info/faq": ["faq"],
     "/shows/arabic-dreams": ["arabicDreams"],
-    "/shows/world-show": ["worldShow"]
+    "/shows/world-show": ["worldShow"],
+    "/payment": ["payment"],
+    "/payment/thank-you": ["payment"],
+    "/thank-you": ["thank-you"]
   }
 }

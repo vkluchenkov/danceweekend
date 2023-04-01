@@ -1,20 +1,27 @@
-import { SupportedLangs } from '@/src/types';
+import { SupportedLangs, AgeGroup } from '@/src/types';
 
-type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
+export type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
 type CategoryType = 'live' | 'online';
 
-interface Category {
+export interface Category {
   translations: {
     [lang in SupportedLangs]: {
       categoryTitle: string;
     };
   };
   types: CategoryType[];
+  isSolo?: boolean;
+  isSoloPass?: boolean;
+  isQueen?: boolean;
 }
 
-interface ContestCategory {
+export interface ContestCategory {
+  ageGroup: AgeGroup;
+  ageGroups?: AgeGroup[];
   description?: string;
   age: string;
+  isGroup?: boolean;
+  isDuo?: boolean;
   levels: Level[];
   types: CategoryType[];
   translations: {
@@ -22,12 +29,14 @@ interface ContestCategory {
       title: string;
     };
   };
-  categories?: Category[];
+  categories: Category[];
 }
 
 const soloSet: Category[] = [
   {
     types: ['live', 'online'],
+    isSolo: true,
+    isSoloPass: true,
     translations: {
       en: {
         categoryTitle: 'Classic',
@@ -39,6 +48,8 @@ const soloSet: Category[] = [
   },
   {
     types: ['live', 'online'],
+    isSolo: true,
+    isSoloPass: true,
     translations: {
       en: {
         categoryTitle: 'Folk',
@@ -50,6 +61,8 @@ const soloSet: Category[] = [
   },
   {
     types: ['live', 'online'],
+    isSolo: true,
+    isSoloPass: true,
     translations: {
       en: {
         categoryTitle: 'Tabla solo CD',
@@ -61,6 +74,7 @@ const soloSet: Category[] = [
   },
   {
     types: ['live'],
+    isSolo: true,
     translations: {
       en: {
         categoryTitle: 'Tabla solo live',
@@ -72,6 +86,8 @@ const soloSet: Category[] = [
   },
   {
     types: ['live', 'online'],
+    isSolo: true,
+    isSoloPass: true,
     translations: {
       en: {
         categoryTitle: 'Show/fusion',
@@ -83,6 +99,8 @@ const soloSet: Category[] = [
   },
   {
     types: ['live', 'online'],
+    isSolo: true,
+    isSoloPass: true,
     translations: {
       en: {
         categoryTitle: 'Bollywood',
@@ -94,6 +112,8 @@ const soloSet: Category[] = [
   },
   {
     types: ['live', 'online'],
+    isSolo: true,
+    isSoloPass: true,
     translations: {
       en: {
         categoryTitle: 'Pop song',
@@ -177,6 +197,7 @@ const groupSet: Category[] = [
 export const contestCategories: ContestCategory[] = [
   {
     age: '4-6',
+    ageGroup: 'baby',
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -190,6 +211,8 @@ export const contestCategories: ContestCategory[] = [
     categories: [
       {
         types: ['live', 'online'],
+        isSolo: true,
+        isSoloPass: true,
         translations: {
           en: {
             categoryTitle: 'All styles',
@@ -204,6 +227,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '7-11',
+    ageGroup: 'kids',
     levels: ['beginners', 'intermediate'],
     types: ['live', 'online'],
     translations: {
@@ -219,6 +243,8 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '7-11',
+    ageGroup: 'kids',
+    isDuo: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -268,6 +294,8 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '7-11',
+    ageGroup: 'kids',
+    isGroup: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -278,64 +306,29 @@ export const contestCategories: ContestCategory[] = [
         title: 'Дети группы',
       },
     },
+    categories: groupSet,
+  },
+
+  {
+    age: '12-15',
+    ageGroup: 'juniors',
+    description: 'descriptionJuniors',
+    levels: ['risingStar', 'professionals'],
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        title: 'Juniors',
+      },
+      ru: {
+        title: 'Юниоры',
+      },
+    },
     categories: [
+      ...soloSet,
       {
         types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'Oriental',
-          },
-          ru: {
-            categoryTitle: 'Ориентал',
-          },
-        },
-      },
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'Folklore',
-          },
-          ru: {
-            categoryTitle: 'Фольклор',
-          },
-        },
-      },
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'Tabla solo CD',
-          },
-          ru: {
-            categoryTitle: 'Табла соло CD',
-          },
-        },
-      },
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'Show/fusion',
-          },
-          ru: {
-            categoryTitle: 'Щоу/фьюжн',
-          },
-        },
-      },
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'Bollywood',
-          },
-          ru: {
-            categoryTitle: 'Болливуд',
-          },
-        },
-      },
-      {
-        types: ['live', 'online'],
+        isSolo: true,
+        isSoloPass: true,
         translations: {
           en: {
             categoryTitle: 'Tribal',
@@ -350,22 +343,8 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '12-15',
-    description: 'descriptionJuniors',
-    levels: ['risingStar', 'professionals'],
-    types: ['live', 'online'],
-    translations: {
-      en: {
-        title: 'Juniors',
-      },
-      ru: {
-        title: 'Юниоры',
-      },
-    },
-    categories: soloSet,
-  },
-
-  {
-    age: '12-15',
+    ageGroup: 'juniors',
+    isDuo: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -381,6 +360,8 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '12-15',
+    ageGroup: 'juniors',
+    isGroup: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -396,6 +377,8 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '12+',
+    ageGroup: 'adults',
+    ageGroups: ['adults', 'juniors', 'seniors'],
     description: 'descriptionQueen',
     levels: ['openLevel'],
     types: ['live'],
@@ -407,10 +390,26 @@ export const contestCategories: ContestCategory[] = [
         title: 'Королева live табла соло',
       },
     },
+    categories: [
+      {
+        types: ['live'],
+        isSolo: true,
+        isQueen: true,
+        translations: {
+          en: {
+            categoryTitle: 'Queen of live tabla solo',
+          },
+          ru: {
+            categoryTitle: 'Королева live табла соло',
+          },
+        },
+      },
+    ],
   },
 
   {
     age: '16+',
+    ageGroup: 'adults',
     levels: ['risingStar', 'professionals'],
     types: ['live', 'online'],
     translations: {
@@ -421,11 +420,28 @@ export const contestCategories: ContestCategory[] = [
         title: 'Взрослые',
       },
     },
-    categories: soloSet,
+    categories: [
+      ...soloSet,
+      {
+        types: ['live', 'online'],
+        isSolo: true,
+        isSoloPass: true,
+        translations: {
+          en: {
+            categoryTitle: 'Tribal',
+          },
+          ru: {
+            categoryTitle: 'Трайбл',
+          },
+        },
+      },
+    ],
   },
 
   {
     age: '16+',
+    ageGroup: 'adults',
+    isDuo: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -441,6 +457,8 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '16+',
+    ageGroup: 'adults',
+    isGroup: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -456,6 +474,7 @@ export const contestCategories: ContestCategory[] = [
 
   {
     age: '40+',
+    ageGroup: 'seniors',
     description: 'descriptionSeniors',
     levels: ['openLevel'],
     types: ['live', 'online'],
@@ -467,6 +486,21 @@ export const contestCategories: ContestCategory[] = [
         title: 'Сеньоры',
       },
     },
-    categories: soloSet,
+    categories: [
+      ...soloSet,
+      {
+        types: ['live', 'online'],
+        isSolo: true,
+        isSoloPass: true,
+        translations: {
+          en: {
+            categoryTitle: 'Tribal',
+          },
+          ru: {
+            categoryTitle: 'Трайбл',
+          },
+        },
+      },
+    ],
   },
 ];

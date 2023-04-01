@@ -77,6 +77,23 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
           </a>
         </li>
       );
+    if (i.key === 'social')
+      return (
+        <li key={i.key}>
+          {t(`form.personal.${i.key}`)}:{' '}
+          <a
+            href='#'
+            style={{
+              color: accentColor,
+              cursor: 'default',
+              textDecoration: 'none',
+              pointerEvents: 'none',
+            }}
+          >
+            {i.value as string}
+          </a>
+        </li>
+      );
     return (
       <li key={i.key}>
         {t(`form.personal.${i.key}`)}:{' '}

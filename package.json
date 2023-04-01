@@ -30,6 +30,7 @@
     "mjml": "^4.13.0",
     "next": "13.1.6",
     "next-translate": "^2.0.1",
+    "nextjs-google-analytics": "^2.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.5",

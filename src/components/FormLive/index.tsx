@@ -344,7 +344,6 @@ export const FormLive: React.FC<FormLiveProps> = ({ version }) => {
     else {
       if (contestLevel === 'professionals')
         return isFullPass ? priceProfessionals.priceDiscounted : priceProfessionals.priceNormal;
-      if (!contestLevel) return 0;
       else return isFullPass ? priceRisingStar.priceDiscounted : priceRisingStar.priceNormal;
     }
   }, [ageGroup, contestLevel, isFullPass, version]);

@@ -230,9 +230,7 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
                     cat.isGroup === isGroupType
                 );
                 const catStyle = contestCategory?.categories.find(
-                  (style) =>
-                    style.types.includes('live') &&
-                    style.translations.en.categoryTitle === group.style
+                  (style) => style.translations.en.categoryTitle === group.style
                 );
 
                 return (

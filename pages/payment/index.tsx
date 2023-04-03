@@ -7,7 +7,15 @@ import useTranslation from 'next-translate/useTranslation';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { FormProvider, useForm } from 'react-hook-form';
 import { PaymentFormFields } from '@/src/types/payment.types';
-import { createTheme, ThemeProvider, MenuItem, InputAdornment, Collapse } from '@mui/material';
+import {
+  createTheme,
+  ThemeProvider,
+  MenuItem,
+  InputAdornment,
+  Collapse,
+  Snackbar,
+  Alert,
+} from '@mui/material';
 import { montserrat } from '@/src/ulis/font';
 
 import { PayPalButtons } from '@paypal/react-paypal-js';
@@ -37,6 +45,7 @@ const Payment: NextPage = () => {
   } = methods;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
 
   const form = watch();
   const qty = watch('qty');
@@ -54,23 +63,30 @@ const Payment: NextPage = () => {
     },
   });
 
-  const onSubmit = async (data: PaymentFormFields) => {
-    if (method === 'stripe') {
-      setIsLoading(true);
-      await axios
-        .post('/api/stripe-session', data)
-        .then((res) => window.open(res.data.url as string, '_self'))
-        .catch((error: any) => {
-          // setSubmitError(true);
-          // setIsBtnDisabled(false);
-        })
-        .finally(() => setIsLoading(false));
-    }
-
-    if (method === 'paypal') router.push('/payment/thank-you');
+  // Handle snackbar close
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') return;
+    setIsSnackBarOpen(false);
   };
 
-  if (isLoading) return <Loader />;
+  const onSubmit = async (data: PaymentFormFields) => {
+    setIsLoading(true);
+
+    try {
+      await axios.post('/api/payment-submit', data);
+
+      if (method === 'stripe') {
+        await axios
+          .post('/api/stripe-session', data)
+          .then((res) => window.open(res.data.url as string, '_self'));
+      }
+
+      if (method === 'paypal') router.push('/payment/thank-you');
+    } catch (error) {
+      setIsLoading(false);
+      setIsSnackBarOpen(true);
+    }
+  };
 
   return (
     <Layout title={t('pageTitle')}>
@@ -173,7 +189,18 @@ const Payment: NextPage = () => {
                   {t('form.stripeBtn')}
                 </Button>
               </Collapse>
+
+              <Snackbar
+                open={isSnackBarOpen}
+                onClose={handleClose}
+                anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+              >
+                <Alert severity='warning' onClose={handleClose} variant='filled'>
+                  {t('form.error')}
+                </Alert>
+              </Snackbar>
             </form>
+            {isLoading && <Loader />}
           </FormProvider>
         </ThemeProvider>
       </section>

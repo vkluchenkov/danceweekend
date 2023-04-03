@@ -64,6 +64,10 @@ export const PersonalData: React.FC<StepProps> = () => {
               value: 99,
               message: t('form.personal.ageError'),
             },
+            pattern: {
+              value: /[0-9]{1,2}/gm,
+              message: t('form.common.numbersError'),
+            },
           }}
           control={control}
           error={!!errors.age}

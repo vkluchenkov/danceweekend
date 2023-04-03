@@ -22,7 +22,7 @@ import {
   kidsDiscount,
   workshopsPrice,
 } from '@/src/ulis/price';
-import { Collapse } from '@mui/material';
+import { Collapse, Snackbar, Alert } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { minWsAdults, minWsKids } from '@/src/ulis/constants';
@@ -35,8 +35,6 @@ import { StepsNavigation } from './StepsNavigation';
 import axios from 'axios';
 import { Loader } from '../Loader';
 import { useRouter } from 'next/router';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const motionVariants = {
@@ -253,7 +251,6 @@ export const FormLive: React.FC<FormLiveProps> = ({ version }) => {
     await axios
       .post('/api/reg-submit', payload)
       .then((res) => {
-        console.log(res.data);
         router.push('/thank-you');
       })
       .catch((error: any) => {

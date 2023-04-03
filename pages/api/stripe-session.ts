@@ -26,19 +26,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === 'POST') {
     try {
-      await axios
-        .post(`${req.headers.origin}/api/payment-submit`, orderPayload)
-        .then(async (result) => {
-          const session = await stripe.checkout.sessions.create({
-            customer_email: email,
-            line_items: [item],
-            mode: 'payment',
-            success_url: `${req.headers.origin}/payment/thank-you`,
-            cancel_url: `${req.headers.origin}/payment`,
-            payment_method_types: [],
-          });
-          res.status(200).send({ url: session.url });
-        });
+      const session = await stripe.checkout.sessions.create({
+        customer_email: email,
+        line_items: [item],
+        mode: 'payment',
+        success_url: `${req.headers.origin}/payment/thank-you`,
+        cancel_url: `${req.headers.origin}/payment`,
+        payment_method_types: [],
+      });
+      res.status(200).send({ url: session.url });
     } catch (err: any) {
       res.status(err.statusCode || 500).json(err.message);
     }

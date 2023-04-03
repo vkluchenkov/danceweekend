@@ -46,10 +46,10 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
 
   const personalData = personal.map((i) => {
     if (!i.value) return <></>;
+    const value = i.value as string;
     return (
       <li key={i.key}>
-        {t(`form.personal.${i.key}`)}:{' '}
-        <span style={{ color: accentColor }}>{i.value as string}</span>
+        {t(`form.personal.${i.key}`)}: <span style={{ color: accentColor }}>{value.trim()}</span>
       </li>
     );
   });
@@ -61,18 +61,19 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
   }));
 
   const contactsData = contacts.map((i) => {
+    const value = i.value as string;
     if (!i.value) return <></>;
     if (i.key === 'email')
       return (
         <li key={i.key}>
           {t(`form.personal.${i.key}`)}:{' '}
           <a
-            href={`mailto: ${i.value as string}`}
+            href={`mailto: ${value.trim()}`}
             target='_blank'
             rel='noreferrer'
             style={{ color: accentColor }}
           >
-            {i.value as string}
+            {value.trim()}
           </a>
         </li>
       );
@@ -89,14 +90,13 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
               pointerEvents: 'none',
             }}
           >
-            {i.value as string}
+            {value.trim()}
           </a>
         </li>
       );
     return (
       <li key={i.key}>
-        {t(`form.personal.${i.key}`)}:{' '}
-        <span style={{ color: accentColor }}>{i.value as string}</span>
+        {t(`form.personal.${i.key}`)}: <span style={{ color: accentColor }}>{value.trim()}</span>
       </li>
     );
   });

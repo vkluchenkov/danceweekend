@@ -40,7 +40,7 @@ export const paymentAdminEmail = (props: registrationUserEmailProps) => {
         <li key={i.key}>
           {t(`form.${i.key}`)}:{' '}
           <a
-            href={`mailto: ${value.trim()}`}
+            href={`mailto:${value.trim()}`}
             target='_blank'
             rel='noreferrer'
             style={{ color: accentColor }}

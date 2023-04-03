@@ -10,6 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const t = await getT('en', 'payment');
 
   const adminEmailContent = paymentAdminEmail({ form: orderPayload, t: t }).html;
+  const adminEmailErrors = paymentAdminEmail({ form: orderPayload, t: t }).errors;
 
   const adminMailPayload = {
     senderEmail: senderEmail,
@@ -20,8 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     mailContent: adminEmailContent,
   };
 
-  // sendMail(adminMailPayload);
-  console.log('11');
+  sendMail(adminMailPayload);
 
-  res.status(200).send('Ok');
+  res.status(200).send({ message: 'Ok' });
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
 import textStyles from '@/styles/Text.module.css';
@@ -69,24 +69,28 @@ const Payment: NextPage = () => {
     setIsSnackBarOpen(false);
   };
 
-  const onSubmit = async (data: PaymentFormFields) => {
-    setIsLoading(true);
+  const onSubmit = useCallback(
+    async (data: PaymentFormFields) => {
+      setIsLoading(true);
 
-    try {
-      await axios.post('/api/payment-submit', data);
+      try {
+        await axios.post('/api/payment-submit', data);
 
-      if (method === 'stripe') {
-        await axios
-          .post('/api/stripe-session', data)
-          .then((res) => window.open(res.data.url as string, '_self'));
+        if (method === 'stripe') {
+          await axios.post('/api/stripe-session', data).then((res) => {
+            window.open(res.data.url as string, '_self');
+          });
+        }
+
+        if (method === 'paypal') router.push('/payment/thank-you');
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+        setIsSnackBarOpen(true);
       }
-
-      if (method === 'paypal') router.push('/payment/thank-you');
-    } catch (error) {
-      setIsLoading(false);
-      setIsSnackBarOpen(true);
-    }
-  };
+    },
+    [router, method]
+  );
 
   return (
     <Layout title={t('pageTitle')}>

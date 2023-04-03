@@ -7,7 +7,7 @@
     "qty": "Amount",
     "method": "Payment method",
     "paypal": "PayPal",
-    "stripe": "Credit / debit cards",
+    "stripe": "Credit / debit card",
     "qtyMinError": "Minimum payment amount is 10€",
     "stripeBtn": "Pay with card",
     "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue."

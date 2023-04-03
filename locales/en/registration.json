@@ -6,6 +6,7 @@
   "form": {
     "common": {
       "required": "This field is required",
+      "numbersError": "This field is for numbers only",
       "prev": "← Back",
       "next": "Next →",
       "total": "Total",

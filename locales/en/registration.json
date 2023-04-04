@@ -125,6 +125,8 @@
     "userSubj": "Welcome to Dance Weekend in Warsaw!",
     "adminSubj": "New registration from",
     "adminTitle": "New registration from",
-    "adminOrderTitle": "Registration detials"
+    "adminOrderTitle": "Registration detials",
+    "telegram1": "Join our telegram group for participants to follow all the festival news and announcements by following ",
+    "telegram2": "this link."
   }
 }

@@ -8,5 +8,7 @@
   "beneficiary": "Beneficiary: <0>Alla Kluchenkova</0>",
   "bankName": "Bank name: <0>Santander Bank Polska S.A.</0>",
   "bic": "BIC / Swift: <0>WBKPPLPP</0>",
-  "iban": "IBAN: <0>PL72 1090 1030 0000 0001 3166 3893</0>"
+  "iban": "IBAN: <0>PL72 1090 1030 0000 0001 3166 3893</0>",
+  "telegramTitle": "Join our Telegram group",
+  "telegram": "Join our telegram group for participants to follow all the festival news and announcements by following <0>this link</0>."
 }

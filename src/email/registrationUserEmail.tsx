@@ -14,7 +14,7 @@ import {
 import { Translate } from 'next-translate';
 import Trans from 'next-translate/Trans';
 import { OrderPayload } from '../components/FormLive/types';
-import { defaultUrl } from '../ulis/constants';
+import { defaultUrl, telegramUrl } from '../ulis/constants';
 import { contestCategories } from '../ulis/contestCategories';
 import { worldShowPrice } from '../ulis/price';
 
@@ -470,6 +470,13 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
                 style={{ color: accentColor }}
               >
                 {t('email.photoNote2')}
+              </a>
+            </MjmlText>
+
+            <MjmlText mj-class='text'>
+              {t('email.telegram1')}{' '}
+              <a href={telegramUrl} target='_blank' rel='noreferrer' style={{ color: accentColor }}>
+                {t('email.telegram2')}
               </a>
             </MjmlText>
           </MjmlColumn>

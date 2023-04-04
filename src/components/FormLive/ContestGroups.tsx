@@ -56,7 +56,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   // Skip step for baby age group or if not enough workshops
   // Clean contest group competition state if not empty
   useEffect(() => {
-    if (contestAgeGroup === 'baby' || !isEligible) {
+    if (contestAgeGroup === 'baby' || contestAgeGroup === 'seniors' || !isEligible) {
       if (groupContest.length > 0) {
         setValue('isGroupContest', false);
         setValue('groupContest', []);

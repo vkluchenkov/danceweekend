@@ -69,7 +69,7 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
         <li key={i.key}>
           {t(`form.personal.${i.key}`)}:{' '}
           <a
-            href={`mailto: ${value.trim()}`}
+            href={`mailto:${value.trim()}`}
             target='_blank'
             rel='noreferrer'
             style={{ color: accentColor }}
@@ -230,9 +230,7 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
                     cat.isGroup === isGroupType
                 );
                 const catStyle = contestCategory?.categories.find(
-                  (style) =>
-                    style.types.includes('live') &&
-                    style.translations.en.categoryTitle === group.style
+                  (style) => style.translations.en.categoryTitle === group.style
                 );
 
                 return (

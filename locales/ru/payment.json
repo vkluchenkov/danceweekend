@@ -18,6 +18,7 @@
   },
   "email": {
     "title": "Новый платеж от",
-    "subtitle": "Детали платежа"
+    "subtitle": "Детали платежа",
+    "copyright": "©Dance Weekend in Warsaw"
   }
 }

@@ -22,6 +22,9 @@ jobs:
           envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
           envkey_NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+          envkey_NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          envkey_NOTION_DATABASE_LIVE: ${{ secrets.NOTION_DATABASE_LIVE }}
+          envkey_NOTION_DATABASE_ONLINE: ${{ secrets.NOTION_DATABASE_ONLINE }}
 
       - name: Build the Docker image
         run: docker build -t cloud.canister.io:5000/vkluchenkov/danceweekend:latest-main .

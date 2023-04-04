@@ -10,6 +10,8 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Rules.module.css';
 import clsx from 'clsx';
 import { Version, SupportedLangs } from '@/src/types';
+import { AnimatePresence, motion } from 'framer-motion';
+import { motionVariants } from '@/src/ulis/constants';
 
 const ContestRules: NextPage = () => {
   const { t, lang } = useTranslation('competitionRules');
@@ -133,7 +135,7 @@ const ContestRules: NextPage = () => {
       <p className={textStyles.p}>{t('limitationsText')}</p>
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>4. {t('videoSpecTitle')}</h2>
-      <p className={textStyles.p}>{videoSpecText}</p>
+      {videoSpecText}
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>5. {t('prizesTitle')}</h2>
       <p className={textStyles.p}>{t('onlinePrizesMain')}</p>
@@ -149,8 +151,33 @@ const ContestRules: NextPage = () => {
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
       <section className={styles.section}>
-        {version === 'live' && liveContent}
-        {version === 'online' && onlineContent}
+        {version === 'live' && (
+          <AnimatePresence>
+            <motion.div
+              initial='hidden'
+              animate='enter'
+              exit='exit'
+              variants={motionVariants}
+              transition={{ type: 'linear', duration: 0.3 }}
+            >
+              {liveContent}
+            </motion.div>
+          </AnimatePresence>
+        )}
+
+        {version === 'online' && (
+          <AnimatePresence>
+            <motion.div
+              initial='hidden'
+              animate='enter'
+              exit='exit'
+              variants={motionVariants}
+              transition={{ type: 'linear', duration: 0.3 }}
+            >
+              {onlineContent}
+            </motion.div>
+          </AnimatePresence>
+        )}
       </section>
     </Layout>
   );

@@ -17,6 +17,8 @@ import {
   worldShowPrice,
 } from '@/src/ulis/price';
 import Trans from 'next-translate/Trans';
+import { motion, AnimatePresence } from 'framer-motion';
+import { motionVariants } from '@/src/ulis/constants';
 
 const Price: NextPage = () => {
   const { t, lang } = useTranslation('price');
@@ -335,17 +337,49 @@ const Price: NextPage = () => {
     </>
   );
 
+  const liveContent = (
+    <AnimatePresence>
+      <motion.section
+        className={styles.section}
+        initial='hidden'
+        animate='enter'
+        exit='exit'
+        variants={motionVariants}
+        transition={{ type: 'linear', duration: 0.3 }}
+      >
+        {workshopsContent}
+        {competitionContent}
+        {worldShowContent}
+        {paymentContent}
+        {privacyPolicy}
+      </motion.section>
+    </AnimatePresence>
+  );
+
+  const onlineContent = (
+    <AnimatePresence>
+      <motion.section
+        className={styles.section}
+        initial='hidden'
+        animate='enter'
+        exit='exit'
+        variants={motionVariants}
+        transition={{ type: 'linear', duration: 0.3 }}
+      >
+        {workshopsContent}
+        {competitionContent}
+        {paymentContent}
+        {privacyPolicy}
+      </motion.section>
+    </AnimatePresence>
+  );
+
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
-      <section className={styles.section}>
-        {workshopsContent}
-        {competitionContent}
-        {version === 'live' && worldShowContent}
-        {paymentContent}
-        {privacyPolicy}
-      </section>
+      {version === 'live' && liveContent}
+      {version === 'online' && onlineContent}
     </Layout>
   );
 };

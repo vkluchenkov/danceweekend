@@ -25,7 +25,7 @@ import {
 import { Collapse, Snackbar, Alert } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
-import { minWsAdults, minWsKids } from '@/src/ulis/constants';
+import { minWsAdults, minWsKids, motionVariants } from '@/src/ulis/constants';
 import { contestCategories, Level } from '@/src/ulis/contestCategories';
 import { ContestGroups } from './ContestGroups';
 import { WorldShow } from './WorldShow';
@@ -36,12 +36,6 @@ import axios from 'axios';
 import { Loader } from '../Loader';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const motionVariants = {
-  hidden: { opacity: 0 },
-  enter: { opacity: 1 },
-  exit: { opacity: 0 },
-};
 
 const liveSteps: Step[] = [
   {

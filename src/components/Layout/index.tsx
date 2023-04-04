@@ -4,7 +4,9 @@ import Head from 'next/head';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { Footer } from '../Footer';
 import { Header } from '../Header';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './layout.module.css';
+import { motionVariants } from '@/src/ulis/constants';
 
 interface LayoutProps {
   children: any;
@@ -64,15 +66,40 @@ export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRe
       <div className={styles.imageDivider} ref={lineRef}>
         <Divider />
       </div>
-      <main ref={mainHomeRef} className={styles.main}>
-        {children}
-        <Footer />
-      </main>
+      <AnimatePresence>
+        <motion.main
+          ref={mainHomeRef}
+          className={styles.main}
+          key={'main'}
+          initial='hidden'
+          animate='enter'
+          exit='exit'
+          variants={motionVariants}
+          transition={{ type: 'linear', duration: 0.3 }}
+        >
+          {children}
+          <Footer />
+        </motion.main>
+      </AnimatePresence>
+      {/* <main ref={mainHomeRef} className={styles.main}>
+      </main> */}
     </>
   ) : (
     <>
       <main ref={mainRef} className={clsx(styles.main, styles.main_notHome)}>
-        <div className={styles.contentWrapper}>{children}</div>
+        <AnimatePresence>
+          <motion.div
+            className={styles.contentWrapper}
+            key={'main'}
+            initial='hidden'
+            animate='enter'
+            exit='exit'
+            variants={motionVariants}
+            transition={{ type: 'linear', duration: 0.3 }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
         <Footer />
       </main>
     </>

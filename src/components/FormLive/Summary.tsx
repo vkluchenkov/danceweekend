@@ -330,27 +330,30 @@ export const Summary: React.FC<SummaryStepProps> = ({
       <h4 className={textStyles.h4}>
         {t('form.summary.money.total')}: <span className={textStyles.accent}>{total}€</span>
       </h4>
-      {!currentPricePeriod?.isPromo && form.version === 'live' && isFullPass && (
-        <>
-          <p className={textStyles.p}>{t('form.summary.money.installmentsDetails')}</p>
-          <FormInputCheckbox
-            name='isInstallments'
-            control={control}
-            label={<p className={textStyles.p}>{t('form.summary.money.installments')}</p>}
-          />
-          {form.isInstallments && (
-            <>
-              <p className={textStyles.p}>
-                {t('form.summary.money.amountNow')}:{' '}
-                <span className={textStyles.accent}>{total / 2}€</span>
-                <br />
-                {t('form.summary.money.amountAfter')}:{' '}
-                <span className={textStyles.accent}>{total / 2}€</span>
-              </p>
-            </>
-          )}
-        </>
-      )}
+      {!currentPricePeriod?.isPromo &&
+        form.version === 'live' &&
+        isFullPass &&
+        form.fullPassDiscount !== 'free' && (
+          <>
+            <p className={textStyles.p}>{t('form.summary.money.installmentsDetails')}</p>
+            <FormInputCheckbox
+              name='isInstallments'
+              control={control}
+              label={<p className={textStyles.p}>{t('form.summary.money.installments')}</p>}
+            />
+            {form.isInstallments && (
+              <>
+                <p className={textStyles.p}>
+                  {t('form.summary.money.amountNow')}:{' '}
+                  <span className={textStyles.accent}>{total / 2}€</span>
+                  <br />
+                  {t('form.summary.money.amountAfter')}:{' '}
+                  <span className={textStyles.accent}>{total / 2}€</span>
+                </p>
+              </>
+            )}
+          </>
+        )}
 
       {/* Rules */}
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.summary.lastThing')}</h3>

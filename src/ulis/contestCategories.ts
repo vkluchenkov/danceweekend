@@ -77,10 +77,10 @@ const soloSet: Category[] = [
     isSolo: true,
     translations: {
       en: {
-        categoryTitle: 'Tabla solo live',
+        categoryTitle: 'Tabla solo live improvisation',
       },
       ru: {
-        categoryTitle: 'Табла соло live',
+        categoryTitle: 'Табла соло live импровизация',
       },
     },
   },
@@ -384,10 +384,10 @@ export const contestCategories: ContestCategory[] = [
     types: ['live'],
     translations: {
       en: {
-        title: 'Queen of live tabla solo',
+        title: 'Queen of live tabla solo improvisation',
       },
       ru: {
-        title: 'Королева live табла соло',
+        title: 'Королева live табла соло импровизации',
       },
     },
     categories: [
@@ -397,10 +397,10 @@ export const contestCategories: ContestCategory[] = [
         isQueen: true,
         translations: {
           en: {
-            categoryTitle: 'Queen of live tabla solo',
+            categoryTitle: 'Queen of live tabla solo improvisation',
           },
           ru: {
-            categoryTitle: 'Королева live табла соло',
+            categoryTitle: 'Королева live табла соло импровизации',
           },
         },
       },

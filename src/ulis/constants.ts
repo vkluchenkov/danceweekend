@@ -22,5 +22,12 @@ export const defaultUrl = 'https://danceweekend.art';
 export const senderEmail = 'danceweekend@aliah.dance';
 export const senderName = 'Dance Weekend in Warsaw festival';
 
-// talagram
+// talegram
 export const telegramUrl = 'https://t.me/+isxRvGCBaf9jMjQ0';
+
+// Animation preset for all transitions
+export const motionVariants = {
+  hidden: { opacity: 0 },
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+};

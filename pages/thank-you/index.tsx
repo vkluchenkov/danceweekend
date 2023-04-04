@@ -70,8 +70,8 @@ const ThankYou: NextPage = () => {
           {iban}
         </p>
 
-        <h3 className={textStyles.h3}>{t('telegramTitle')}</h3>
-        <p className={textStyles.p}>{telegram}</p>
+        {/* <h3 className={textStyles.h3}>{t('telegramTitle')}</h3>
+        <p className={textStyles.p}>{telegram}</p> */}
       </section>
     </Layout>
   );

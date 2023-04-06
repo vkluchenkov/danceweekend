@@ -5,7 +5,7 @@ import styles from '@/styles/Thanks.module.css';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import Trans from 'next-translate/Trans';
-import { telegramUrl } from '@/src/ulis/constants';
+import { revolutUrl, telegramUrl } from '@/src/ulis/constants';
 
 const ThankYou: NextPage = () => {
   const { t, lang } = useTranslation('thank-you');
@@ -32,11 +32,11 @@ const ThankYou: NextPage = () => {
     <Trans i18nKey='thank-you:iban' components={[<span className={textStyles.accent} key={1} />]} />
   );
 
-  const telegram = (
+  const revolut = (
     <Trans
-      i18nKey='thank-you:telegram'
+      i18nKey='thank-you:revolutText'
       components={[
-        <Link href={telegramUrl} target='_blank' className={textStyles.accent} key={1} />,
+        <Link href={revolutUrl} target='_blank' className={textStyles.accent} key={1} />,
       ]}
     />
   );
@@ -59,6 +59,9 @@ const ThankYou: NextPage = () => {
           </span>
         </p>
 
+        <h3 className={textStyles.h3}>{t('revolutTitle')}</h3>
+        <p className={textStyles.p}>{revolut}</p>
+
         <h3 className={textStyles.h3}>{t('bank')}</h3>
         <p className={textStyles.p}>
           {beneficiary}
@@ -69,9 +72,6 @@ const ThankYou: NextPage = () => {
           <br />
           {iban}
         </p>
-
-        {/* <h3 className={textStyles.h3}>{t('telegramTitle')}</h3>
-        <p className={textStyles.p}>{telegram}</p> */}
       </section>
     </Layout>
   );

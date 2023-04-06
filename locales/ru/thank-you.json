@@ -9,6 +9,6 @@
   "bankName": "Bank name: <0>Santander Bank Polska S.A.</0>",
   "bic": "BIC / Swift: <0>WBKPPLPP</0>",
   "iban": "IBAN: <0>PL72 1090 1030 0000 0001 3166 3893</0>",
-  "telegramTitle": "Присоединяйтесь к нашему Telegram",
-  "telegram": "Присоединяйтесь к нашей группе для участниц в Telegram, чтобы быть в курсе всех новостей и объявлений <0>по этой ссылке</0>."
+  "revolutTitle": "Revolut",
+  "revolutText": "Как альтернатива оплате картой, вы можете отправить перевод любой картой на наш Revolut счет <0>по этой ссылке</0> или напрямую пользователю @aliahbellydance из вашего приложения Revolut."
 }

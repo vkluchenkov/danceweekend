@@ -25,6 +25,9 @@ export const senderName = 'Dance Weekend in Warsaw festival';
 // talegram
 export const telegramUrl = 'https://t.me/+isxRvGCBaf9jMjQ0';
 
+// Revolut payment link
+export const revolutUrl = 'https://revolut.me/aliahbellydance/eur/';
+
 // Animation preset for all transitions
 export const motionVariants = {
   hidden: { opacity: 0 },

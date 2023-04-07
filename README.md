@@ -15,6 +15,7 @@ https://danceweekend.art
 - TypeScript
 - Next.js
 - MJML
+- Material UI (MUI)
 - React Hook Form
 - i18n with NextTranslate
 - Docker

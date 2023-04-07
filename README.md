@@ -16,6 +16,7 @@ https://danceweekend.art
 - Next.js
 - MJML
 - React Hook Form
+- i18n with NextTranslate
 - Docker
 - Notion API
 - PayPal API

@@ -7,17 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { FormProvider, useForm } from 'react-hook-form';
 import { PaymentFormFields } from '@/src/types/payment.types';
-import {
-  createTheme,
-  ThemeProvider,
-  MenuItem,
-  InputAdornment,
-  Collapse,
-  Snackbar,
-  Alert,
-} from '@mui/material';
-import { montserrat } from '@/src/ulis/font';
-
+import { ThemeProvider, MenuItem, InputAdornment, Collapse, Snackbar, Alert } from '@mui/material';
 import { PayPalButtons } from '@paypal/react-paypal-js';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
@@ -30,7 +20,7 @@ const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripeKey);
 
 const Payment: NextPage = () => {
-  const { t, lang } = useTranslation('payment');
+  const { t } = useTranslation('payment');
   const router = useRouter();
 
   const methods = useForm<PaymentFormFields>({
@@ -38,7 +28,6 @@ const Payment: NextPage = () => {
   });
   const {
     handleSubmit,
-    setValue,
     watch,
     trigger,
     control,
@@ -48,7 +37,6 @@ const Payment: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
 
-  const form = watch();
   const qty = watch('qty');
   const method = watch('method');
 

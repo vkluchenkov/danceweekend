@@ -5,18 +5,19 @@
   "pages": {
     "*": ["common"],
     "/": ["home", "cta"],
-    "/registration": ["registration"],
-    "/price": ["price"],
     "/404": ["errors"],
     "/competition/rules": ["competitionRules"],
     "/competition/judging": ["competitionJudging"],
     "/info/photo-video": ["photoVideo"],
     "/info/bazaar": ["bazaar"],
     "/info/faq": ["faq"],
-    "/shows/arabic-dreams": ["arabicDreams"],
-    "/shows/world-show": ["worldShow"],
+    "/music": ["music"],
+    "/price": ["price"],
     "/payment": ["payment"],
     "/payment/thank-you": ["payment"],
+    "/registration": ["registration"],
+    "/shows/arabic-dreams": ["arabicDreams"],
+    "/shows/world-show": ["worldShow"],
     "/thank-you": ["thank-you"]
   }
 }

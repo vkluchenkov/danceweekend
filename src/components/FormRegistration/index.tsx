@@ -112,11 +112,11 @@ const defaultValues: Partial<FormFields> = {
   rulesAccepted: false,
 };
 
-interface FormLiveProps {
+interface FormRegistrationProps {
   version: Version;
 }
 
-export const FormLive: React.FC<FormLiveProps> = ({ version }) => {
+export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) => {
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 

@@ -12,7 +12,7 @@ import {
   MjmlDivider,
 } from '@faire/mjml-react';
 import { Translate } from 'next-translate';
-import { OrderPayload } from '../components/FormLive/types';
+import { OrderPayload } from '../components/FormRegistration/types';
 import { defaultUrl } from '../ulis/constants';
 import { contestCategories } from '../ulis/contestCategories';
 import { worldShowPrice } from '../ulis/price';

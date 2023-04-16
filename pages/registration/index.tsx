@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { Version } from '@/src/types';
 import { useMemo, useState } from 'react';
 import { Switcher } from '@/src/ui-kit/Switcher';
-import { FormLive } from '@/src/components/FormLive';
+import { FormRegistration } from '@/src/components/FormRegistration';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { montserrat } from '@/src/ulis/font';
 import clsx from 'clsx';
@@ -50,8 +50,8 @@ const Registration: NextPage = () => {
       {switcher}
       <section className={styles.section}>
         <ThemeProvider theme={darkTheme}>
-          {version === 'live' && <FormLive version={version} />}
-          {version === 'online' && <FormLive version={version} />}
+          {version === 'live' && <FormRegistration version={version} />}
+          {version === 'online' && <FormRegistration version={version} />}
         </ThemeProvider>
       </section>
     </Layout>

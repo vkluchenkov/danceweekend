@@ -1,3 +1,6 @@
+import { createTheme } from '@mui/material';
+import { montserrat } from '@/src/ulis/font';
+
 // Age groups
 export const babyMinAge = 4;
 export const babyMaxAge = 6;
@@ -34,3 +37,16 @@ export const motionVariants = {
   enter: { opacity: 1 },
   exit: { opacity: 0 },
 };
+
+// Forms theme
+export const darkTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#eec571',
+    },
+    mode: 'dark',
+  },
+  typography: {
+    fontFamily: montserrat.style.fontFamily,
+  },
+});

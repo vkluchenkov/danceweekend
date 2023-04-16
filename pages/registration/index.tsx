@@ -7,9 +7,8 @@ import { Version } from '@/src/types';
 import { useMemo, useState } from 'react';
 import { Switcher } from '@/src/ui-kit/Switcher';
 import { FormRegistration } from '@/src/components/FormRegistration';
-import { createTheme, ThemeProvider } from '@mui/material';
-import { montserrat } from '@/src/ulis/font';
-import clsx from 'clsx';
+import { ThemeProvider } from '@mui/material';
+import { darkTheme } from '@/src/ulis/constants';
 
 const Registration: NextPage = () => {
   const { t, lang } = useTranslation('registration');
@@ -31,18 +30,6 @@ const Registration: NextPage = () => {
       />
     );
   }, [t, version]);
-
-  const darkTheme = createTheme({
-    palette: {
-      primary: {
-        main: '#eec571',
-      },
-      mode: 'dark',
-    },
-    typography: {
-      fontFamily: montserrat.style.fontFamily,
-    },
-  });
 
   return (
     <Layout title={t('pageTitle')}>

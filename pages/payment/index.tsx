@@ -24,6 +24,7 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
 import { Loader } from '@/src/components/Loader';
+import { darkTheme } from '@/src/ulis/constants';
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripeKey);
@@ -50,18 +51,6 @@ const Payment: NextPage = () => {
   const form = watch();
   const qty = watch('qty');
   const method = watch('method');
-
-  const darkTheme = createTheme({
-    palette: {
-      primary: {
-        main: '#eec571',
-      },
-      mode: 'dark',
-    },
-    typography: {
-      fontFamily: montserrat.style.fontFamily,
-    },
-  });
 
   // Handle snackbar close
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {

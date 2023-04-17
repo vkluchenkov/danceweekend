@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import useTranslation from 'next-translate/useTranslation';
-import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
+import { FormInputField, FormInputSelect, InputField } from '@/src/ui-kit/input';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { ThemeProvider, MenuItem, InputAdornment, Collapse, Snackbar, Alert } from '@mui/material';
 import axios from 'axios';
@@ -16,7 +16,6 @@ import { MusicFormFields } from '@/src/types/music.types';
 
 const Music: NextPage = () => {
   const { t } = useTranslation('music');
-  const router = useRouter();
 
   const methods = useForm<MusicFormFields>({
     mode: 'onChange',
@@ -31,6 +30,18 @@ const Music: NextPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
+  const [audioLength, setAudioLenght] = useState(0);
+
+  const file = watch('file');
+
+  // useEffect(() => {
+  //   if (file) {
+  //     console.log(typeof file);
+  //     // const url = URL.createObjectURL(file);
+  //     // const audio = new Audio(url);
+  //     // console.log(audio.duration);
+  //   }
+  // }, [file]);
 
   // Handle snackbar close
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -38,7 +49,15 @@ const Music: NextPage = () => {
     setIsSnackBarOpen(false);
   };
 
-  const onSubmit = useCallback(async (data: MusicFormFields) => {}, []);
+  const onSubmit = useCallback(async (data: MusicFormFields) => {
+    const formData = new FormData();
+
+    for (const [key, value] of Object.entries(data)) formData.append(key, value);
+
+    axios.post('/api/music-submit', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  }, []);
 
   return (
     <Layout title={t('pageTitle')}>
@@ -82,7 +101,23 @@ const Music: NextPage = () => {
                 helperText={errors.email?.message as string | undefined}
               />
 
-              <FormInputField
+              <Controller
+                control={control}
+                name='file'
+                render={({ field: { onChange } }) => {
+                  return (
+                    <input
+                      type='file'
+                      accept='audio/*'
+                      onChange={(event) => {
+                        onChange(event.target.files?.[0]);
+                      }}
+                    />
+                  );
+                }}
+              />
+
+              {/* <FormInputField
                 name='file'
                 type='file'
                 accept='.mp3, .wav, .mp4a'
@@ -93,7 +128,7 @@ const Music: NextPage = () => {
                 // label={t('form.file')}
                 error={!!errors.file}
                 helperText={errors.file?.message as string | undefined}
-              />
+              /> */}
 
               <FormInputSelect
                 name='event'

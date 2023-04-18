@@ -2,20 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import formidable, { File } from 'formidable';
 import path from 'path';
 import { promises as fs } from 'fs';
-
-type ProcessedFile = File;
-
-interface FormFields {
-  name: string;
-  surname: string;
-  email: string;
-  event: 'contest' | 'gala' | 'worldShow';
-}
-
-interface FormData {
-  fields: FormFields;
-  file: ProcessedFile;
-}
+import { FormFields, FormData } from '@/src/types/music.types';
 
 export const config = {
   api: {
@@ -30,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const form = new formidable.IncomingForm();
 
   const formData = await new Promise<FormData | undefined>((resolve, reject) => {
-    let file: ProcessedFile;
+    let file: File;
 
     const fields: FormFields = {
       name: '',

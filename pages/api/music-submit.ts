@@ -31,8 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     form.on('field', (field, value) => {
-      if (field != 'event') fields[field as keyof Omit<FormFields, 'event'>] = value;
-      else fields.event = value as FormFields['event'];
+      (fields as any)[field] = value;
     });
 
     form.on('end', () => resolve({ file, fields }));
@@ -51,25 +50,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   if (formData) {
+    // @ts-ignore
+    const { event, name, surname, type, groupName, ageGroup, level, category } = formData.fields;
+
     /* Create directory for uploads */
-    const targetPath = path.join(process.cwd(), `/uploads/`);
+    const uploadDir = () => {
+      if (event === 'worldShow') {
+        if (type === 'solo') return path.join(process.cwd(), `/uploads/world_show/solo/`);
+        else return path.join(process.cwd(), `/uploads/world_show/groups/`);
+      }
+
+      if (event === 'contest') {
+        if (ageGroup === 'baby' || ageGroup === 'seniors')
+          return path.join(process.cwd(), `/uploads/contest/${ageGroup}`);
+        else
+          return path.join(
+            process.cwd(),
+            `/uploads/contest/${ageGroup}/${level}/${category.replace('/', '_')}/`
+          );
+      }
+      return '';
+    };
+
     try {
-      await fs.access(targetPath);
+      await fs.access(uploadDir());
     } catch (e) {
-      await fs.mkdir(targetPath);
+      await fs.mkdir(uploadDir(), { recursive: true });
     }
 
     /* Move uploaded file to directory */
     const tempPath = formData.file.filepath;
     const extName = path.extname(formData.file.originalFilename!);
-    const fileName =
-      formData.fields.name +
-      ' ' +
-      formData.fields.surname +
-      ' – ' +
-      formData.fields.event +
-      extName;
-    await fs.rename(tempPath, targetPath + fileName);
+    const fileName = () => {
+      if (type === 'group' && event === 'worldShow')
+        return groupName + '(' + name + '_' + surname + ')' + extName;
+      return name + '_' + surname + extName;
+    };
+    await fs.rename(tempPath, uploadDir() + fileName());
   }
 
   res.status(status).json(resultBody);

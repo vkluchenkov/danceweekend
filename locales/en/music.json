@@ -9,18 +9,33 @@
     "btnFile": "Select music file",
     "file": "Music file",
     "contest": "Competition",
-    "gala": "Arabic Dreams gala show",
     "worldShow": "World Show",
     "submit": "Submit",
-    "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue."
-  },
-  "thanks": {
-    "pageTitle": "Thank you!",
-    "subtitle": "Your payment has been received and being processed"
-  },
-  "email": {
-    "title": "New payment from",
-    "subtitle": "Payment details",
-    "copyright": "©Dance Weekend in Warsaw"
+    "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue.",
+    "ageGroups": {
+      "title": "Competition age group",
+      "baby": "Baby",
+      "kids": "Kids",
+      "juniors": "Juniors",
+      "adults": "Adults",
+      "seniors": "Seniors"
+    },
+    "levels": {
+      "title": "Level",
+      "beginners": "Beginners",
+      "intermediate": "Intermediate",
+      "risingStar": "Rising star (beginners + intermediate)",
+      "professionals": "Professionals",
+      "openLevel": "Open level"
+    },
+    "stylesTitle": "Style",
+    "duo": "Duos",
+    "group": "Groups",
+    "solo": "Solo",
+    "worldShowFields": {
+      "type": "Solo or group?",
+      "group": "Group / duo",
+      "groupName": "Group / duo name"
+    }
   }
 }

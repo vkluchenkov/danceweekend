@@ -222,7 +222,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
 
     setValue('soloContest', res);
     setValue('contestLevels', levels);
-    setValue('contestLevel', levels[0]);
+    // setValue('contestLevel', levels[0]);
   }, [contestAgeGroup, setValue, version]);
 
   // Summarize step totals

@@ -266,7 +266,7 @@ export const FormMusic: React.FC<FormMusicProps> = ({
         size='large'
         disableElevation
         fullWidth
-        disabled={!isDurationCorrect}
+        disabled={!isDurationCorrect && audioLength > 0}
       >
         {t('form.submit')}
       </Button>

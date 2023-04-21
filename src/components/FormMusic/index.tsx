@@ -249,7 +249,7 @@ export const FormMusic: React.FC<FormMusicProps> = ({
             }}
           />
 
-          {!isDurationCorrect && (
+          {!isDurationCorrect && audioLength > 0 && (
             <FormHelperText error>
               {t('form.audio1') +
                 formatTime(audioLength) +

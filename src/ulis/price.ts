@@ -1,7 +1,7 @@
 import { PricePeriod, SoloPriceCats, ContestSoloPrice } from '@/src/types';
 
 export const ispromoPeriod = false;
-export const isOnlinePromoPeriod = true;
+export const isOnlinePromoPeriod = false;
 
 //Translation keys for Price page
 export const teachersWsGroups = {

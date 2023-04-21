@@ -3,6 +3,7 @@ import formidable, { File } from 'formidable';
 import path from 'path';
 import { promises as fs } from 'fs';
 import { FormFields, FormData } from '@/src/types/music.types';
+import * as ftp from 'basic-ftp';
 
 export const config = {
   api: {
@@ -20,10 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let file: File;
 
     const fields: FormFields = {
-      name: '',
-      surname: '',
-      email: '',
       event: 'contest',
+      type: 'solo',
+      audioLength: 0,
     };
 
     form.on('file', (field, formFile) => {
@@ -31,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     form.on('field', (field, value) => {
-      (fields as any)[field] = value;
+      (fields as any)[field] = value === 'undefined' ? undefined : value;
     });
 
     form.on('end', () => resolve({ file, fields }));
@@ -50,43 +50,91 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   if (formData) {
-    // @ts-ignore
-    const { event, name, surname, type, groupName, ageGroup, level, category } = formData.fields;
+    const { event, name, surname, type, groupName, ageGroup, level, category, audioLength } =
+      formData.fields;
 
     /* Create directory for uploads */
-    const uploadDir = () => {
+    // const uploadDir = () => {
+    //   if (event === 'worldShow') {
+    //     if (type === 'solo') return path.join(process.cwd(), `/uploads/World Show/solo/`);
+    //     else return path.join(process.cwd(), `/uploads/World Show/Groups and Duos/`);
+    //   }
+
+    //   if (event === 'contest') {
+    //     const isCategory = !!category;
+    //     const safeCategory = category!.replace('/', '_');
+    //     return path.join(
+    //       process.cwd(),
+    //       `/uploads/Contest/`,
+    //       ageGroup! + '/',
+    //       level != undefined ? level + '/' : '',
+    //       isCategory ? safeCategory + '/' : ''
+    //     );
+    //   }
+    //   return '';
+    // };
+
+    // try {
+    //   await fs.access(uploadDir());
+    // } catch (e) {
+    //   await fs.mkdir(uploadDir(), { recursive: true });
+    // }
+
+    const tempPath = formData.file.filepath;
+    const extName = path.extname(formData.file.originalFilename!);
+    const fileName = () => {
+      if (type === 'duo' || type === 'group')
+        return groupName + '_' + Math.round(audioLength) + 'sec' + extName;
+      else return name + ' ' + surname + '_' + Math.round(audioLength) + 'sec' + extName;
+    };
+
+    /* Move uploaded file to directory */
+    // await fs.rename(tempPath, uploadDir() + fileName());
+
+    // FTP
+    const ftpClient = new ftp.Client();
+    // ftpClient.ftp.verbose = true;
+
+    const ftpDir = process.env.FTP_DIR!;
+
+    const ftpUploadDir = () => {
       if (event === 'worldShow') {
-        if (type === 'solo') return path.join(process.cwd(), `/uploads/world_show/solo/`);
-        else return path.join(process.cwd(), `/uploads/world_show/groups/`);
+        if (type === 'solo') return `/World Show/solo/`;
+        else return `/World Show/Groups and Duos/`;
       }
 
       if (event === 'contest') {
-        if (ageGroup === 'baby' || ageGroup === 'seniors')
-          return path.join(process.cwd(), `/uploads/contest/${ageGroup}`);
-        else
-          return path.join(
-            process.cwd(),
-            `/uploads/contest/${ageGroup}/${level}/${category.replace('/', '_')}/`
-          );
+        const isCategory = !!category;
+        const safeCategory = category!.replace('/', '_');
+        return (
+          '/Contest/' +
+          ageGroup! +
+          '/' +
+          (level != undefined ? level + '/' : '') +
+          (isCategory ? safeCategory + '/' : '')
+        );
       }
       return '';
     };
 
     try {
-      await fs.access(uploadDir());
-    } catch (e) {
-      await fs.mkdir(uploadDir(), { recursive: true });
-    }
+      await ftpClient.access({
+        host: process.env.FTP_HOST,
+        user: process.env.FTP_USER,
+        password: process.env.FTP_PASSWORD,
+        secure: false,
+      });
 
-    /* Move uploaded file to directory */
-    const tempPath = formData.file.filepath;
-    const extName = path.extname(formData.file.originalFilename!);
-    const fileName = () => {
-      if (type === 'group' && event === 'worldShow')
-        return groupName + '(' + name + '_' + surname + ')' + extName;
-      return name + '_' + surname + extName;
-    };
-    await fs.rename(tempPath, uploadDir() + fileName());
+      await ftpClient.ensureDir(ftpDir + ftpUploadDir());
+      await ftpClient.uploadFrom(tempPath, fileName());
+    } catch (error) {
+      console.log(error);
+      status = 500;
+      resultBody = {
+        status: 'fail',
+        message: 'FTP Upload error',
+      };
+    }
   }
 
   res.status(status).json(resultBody);

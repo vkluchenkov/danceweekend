@@ -4,14 +4,14 @@
     "required": "This field is required",
     "name": "Participant name",
     "surname": "Participant surname",
-    "email": "Email",
+    "groupName": "Group / duo name",
     "event": "Event",
-    "btnFile": "Select music file",
     "file": "Music file",
     "contest": "Competition",
     "worldShow": "World Show",
     "submit": "Submit",
     "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue.",
+    "success": "Congrats! Your file was successfully sent.",
     "ageGroups": {
       "title": "Competition age group",
       "baby": "Baby",
@@ -32,10 +32,12 @@
     "duo": "Duos",
     "group": "Groups",
     "solo": "Solo",
-    "worldShowFields": {
-      "type": "Solo or group?",
-      "group": "Group / duo",
-      "groupName": "Group / duo name"
-    }
+    "type": {
+      "title": "Type of performance",
+      "group": "Group",
+      "duo": "Duo"
+    },
+    "audio1": "Your audio duration: ",
+    "audio2": " exceeds the limit of "
   }
 }

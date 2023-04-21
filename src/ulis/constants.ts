@@ -18,6 +18,11 @@ export const minWsAdults = 3;
 // Maximum number of groups to register for one person
 export const maxGroups = 3;
 
+// Music limits (sec)
+export const soloLimit = 180;
+export const groupsLimit = 210;
+export const margin = 1.1; //percent
+
 // Default website url
 export const defaultUrl = 'https://danceweekend.art';
 

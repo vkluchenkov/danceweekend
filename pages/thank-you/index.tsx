@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import Trans from 'next-translate/Trans';
 import { revolutUrl, telegramUrl } from '@/src/ulis/constants';
+import clsx from 'clsx';
 
 const ThankYou: NextPage = () => {
   const { t, lang } = useTranslation('thank-you');
@@ -41,6 +42,13 @@ const ThankYou: NextPage = () => {
     />
   );
 
+  const music = (
+    <Trans
+      i18nKey='thank-you:musicDescription'
+      components={[<Link href='/music' target='_blank' className={textStyles.accent} key={1} />]}
+    />
+  );
+
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
@@ -48,7 +56,8 @@ const ThankYou: NextPage = () => {
       <section className={styles.section}>
         <p className={textStyles.p}>{t('intro')}</p>
 
-        <p className={textStyles.p}>{t('paymentTitle')}</p>
+        <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('paymentTitle')}</h2>
+        <p className={textStyles.p}>{t('paymentDescription')}</p>
         <h3 className={textStyles.h3}>{t('online')}</h3>
 
         <p className={textStyles.p}>
@@ -72,6 +81,9 @@ const ThankYou: NextPage = () => {
           <br />
           {iban}
         </p>
+
+        <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('musicTitle')}</h2>
+        <p className={textStyles.p}>{music}</p>
       </section>
     </Layout>
   );

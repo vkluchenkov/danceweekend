@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { AgeGroup, SupportedLangs } from '@/src/types';
 import { MusicFormFields } from '@/src/types/music.types';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
@@ -118,6 +118,10 @@ export const FormMusic: React.FC<FormMusicProps> = ({
             control={control}
             rules={{
               required: t('form.required'),
+              pattern: {
+                value: /^[a-zA-Z0-9\s\-]+$/,
+                message: t('form.patternError'),
+              },
             }}
             label={t('form.name')}
             error={!!errors.name}
@@ -129,6 +133,10 @@ export const FormMusic: React.FC<FormMusicProps> = ({
             control={control}
             rules={{
               required: t('form.required'),
+              pattern: {
+                value: /^[a-zA-Z0-9\s\-]+$/,
+                message: t('form.patternError'),
+              },
             }}
             label={t('form.surname')}
             error={!!errors.surname}
@@ -145,6 +153,10 @@ export const FormMusic: React.FC<FormMusicProps> = ({
             control={control}
             rules={{
               required: t('form.required'),
+              pattern: {
+                value: /^[a-zA-Z0-9\s\-]+$/,
+                message: t('form.patternError'),
+              },
             }}
             label={t('form.groupName')}
             error={!!errors.groupName}

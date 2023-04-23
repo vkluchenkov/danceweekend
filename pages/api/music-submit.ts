@@ -4,6 +4,7 @@ import path from 'path';
 import { promises as fs } from 'fs';
 import { FormFields, FormData } from '@/src/types/music.types';
 import * as ftp from 'basic-ftp';
+import sanitize from 'sanitize-filename';
 
 export const config = {
   api: {
@@ -84,8 +85,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const extName = path.extname(formData.file.originalFilename!);
     const fileName = () => {
       if (type === 'duo' || type === 'group')
-        return groupName + '_' + Math.round(audioLength) + 'sec' + extName;
-      else return name + ' ' + surname + '_' + Math.round(audioLength) + 'sec' + extName;
+        return sanitize(groupName!) + '_' + Math.round(audioLength) + 'sec' + extName;
+      else
+        return (
+          sanitize(name!) +
+          ' ' +
+          sanitize(surname!) +
+          '_' +
+          Math.round(audioLength) +
+          'sec' +
+          extName
+        );
     };
 
     /* Move uploaded file to directory */
@@ -105,7 +115,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (event === 'contest') {
         const isCategory = !!category;
-        const safeCategory = category!.replace('/', '_');
+        const safeCategory = sanitize(category!);
         return (
           '/Contest/' +
           ageGroup! +

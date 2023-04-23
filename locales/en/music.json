@@ -10,6 +10,9 @@
     "contest": "Competition",
     "worldShow": "World Show",
     "submit": "Submit",
+    "patternError": "This field can contain only Latin characters and numbers.",
+    "tooLongError": "The input is too long",
+    "tooShortError": "The input is too short",
     "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue.",
     "success": "Congrats! Your file was successfully sent.",
     "ageGroups": {

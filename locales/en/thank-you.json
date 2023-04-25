@@ -1,7 +1,8 @@
 {
   "pageTitle": "Thank you",
   "intro": "for your registration to Dance Weekend in Warsaw. Email with all the registration details was sent to you upon completion of the registration.",
-  "paymentTitle": "For your registration to be accepted you need to make a payment using one of the following ways:",
+  "paymentTitle": "Payments",
+  "paymentDescription": "For your registration to be accepted you need to make a payment using one of the following ways:",
   "online": "You may pay with PayPal or credit/debit cards",
   "online2": "Click here to make the payment",
   "bank": "You can send bank transfer in EURO to the following account:",
@@ -10,5 +11,7 @@
   "bic": "BIC / Swift: <0>WBKPPLPP</0>",
   "iban": "IBAN: <0>PL72 1090 1030 0000 0001 3166 3893</0>",
   "revolutTitle": "Revolut",
-  "revolutText": "As an alternative to card payment, you can send transfer to our Revolut account with <0>this payment link</0> using any card, or directly to user @aliahbellydance from your Revolut app"
+  "revolutText": "As an alternative to card payment, you can send transfer to our Revolut account with <0>this payment link</0> using any card, or directly to user @aliahbellydance from your Revolut app",
+  "musicTitle": "Music upload",
+  "musicDescription": "You can upload music for your performances by filling out <0>this form</0>."
 }

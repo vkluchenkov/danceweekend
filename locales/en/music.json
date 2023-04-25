@@ -1,0 +1,46 @@
+{
+  "pageTitle": "Music upload",
+  "form": {
+    "required": "This field is required",
+    "name": "Participant name",
+    "surname": "Participant surname",
+    "groupName": "Group / duo name",
+    "event": "Event",
+    "file": "Music file",
+    "contest": "Competition",
+    "worldShow": "World Show",
+    "submit": "Submit",
+    "patternError": "This field can contain only Latin characters and numbers.",
+    "tooLongError": "The input is too long",
+    "tooShortError": "The input is too short",
+    "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue.",
+    "success": "Congrats! Your file was successfully sent.",
+    "ageGroups": {
+      "title": "Competition age group",
+      "baby": "Baby",
+      "kids": "Kids",
+      "juniors": "Juniors",
+      "adults": "Adults",
+      "seniors": "Seniors"
+    },
+    "levels": {
+      "title": "Level",
+      "beginners": "Beginners",
+      "intermediate": "Intermediate",
+      "risingStar": "Rising star (beginners + intermediate)",
+      "professionals": "Professionals",
+      "openLevel": "Open level"
+    },
+    "stylesTitle": "Style",
+    "duo": "Duos",
+    "group": "Groups",
+    "solo": "Solo",
+    "type": {
+      "title": "Type of performance",
+      "group": "Group",
+      "duo": "Duo"
+    },
+    "audio1": "Your audio duration: ",
+    "audio2": " exceeds the limit of "
+  }
+}

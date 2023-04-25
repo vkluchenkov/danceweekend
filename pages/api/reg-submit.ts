@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { OrderPayload } from '@/src/components/FormLive/types';
+import { OrderPayload } from '@/src/components/FormRegistration/types';
 import getT from 'next-translate/getT';
 import { registrationUserEmail } from '@/src/email/registrationUserEmail';
 import { sendMail } from '@/src/email/sendMail';

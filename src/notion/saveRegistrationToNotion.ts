@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client';
-import { OrderPayload } from '../components/FormLive/types';
+import { OrderPayload } from '../components/FormRegistration/types';
 import { contestCategories } from '../ulis/contestCategories';
 import { Translate } from 'next-translate';
 import { CreatePageParameters } from '@notionhq/client/build/src/api-endpoints';
@@ -53,8 +53,8 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
     const isGroupType = group.type === 'group';
     const contestCategory = contestCategories.find(
       (cat) =>
-        (cat.ageGroup === form.contestAgeGroup && cat.isDuo === isDuoType) ||
-        cat.isGroup === isGroupType
+        (cat.ageGroup === form.contestAgeGroup && cat.isDuoCategory === isDuoType) ||
+        cat.isGroupCategory === isGroupType
     );
     const catStyle = contestCategory?.categories.find(
       (style) => style.translations.en.categoryTitle === group.style

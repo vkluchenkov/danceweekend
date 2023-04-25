@@ -6,12 +6,14 @@ type FormInputFieldProps = InputFieldProps & {
   control: Control<any>;
   name: string;
   rules?: UseControllerProps['rules'];
+  accept?: string;
 };
 
 export const FormInputField: React.FC<FormInputFieldProps> = ({
   control,
   name,
   rules,
+  accept,
   ...props
 }) => {
   const {
@@ -35,6 +37,7 @@ export const FormInputField: React.FC<FormInputFieldProps> = ({
       name={name}
       inputRef={ref}
       InputProps={{ ...props.InputProps, required: false }}
+      inputProps={{ accept }}
     />
   );
 };

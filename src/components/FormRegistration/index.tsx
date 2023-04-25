@@ -112,11 +112,11 @@ const defaultValues: Partial<FormFields> = {
   rulesAccepted: false,
 };
 
-interface FormLiveProps {
+interface FormRegistrationProps {
   version: Version;
 }
 
-export const FormLive: React.FC<FormLiveProps> = ({ version }) => {
+export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) => {
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 
@@ -222,7 +222,7 @@ export const FormLive: React.FC<FormLiveProps> = ({ version }) => {
 
     setValue('soloContest', res);
     setValue('contestLevels', levels);
-    setValue('contestLevel', levels[0]);
+    // setValue('contestLevel', levels[0]);
   }, [contestAgeGroup, setValue, version]);
 
   // Summarize step totals

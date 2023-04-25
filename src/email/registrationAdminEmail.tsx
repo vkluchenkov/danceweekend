@@ -12,7 +12,7 @@ import {
   MjmlDivider,
 } from '@faire/mjml-react';
 import { Translate } from 'next-translate';
-import { OrderPayload } from '../components/FormLive/types';
+import { OrderPayload } from '../components/FormRegistration/types';
 import { defaultUrl } from '../ulis/constants';
 import { contestCategories } from '../ulis/contestCategories';
 import { worldShowPrice } from '../ulis/price';
@@ -225,8 +225,8 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
                 const isGroupType = group.type === 'group';
                 const contestCategory = contestCategories.find(
                   (cat) =>
-                    (cat.ageGroup === form.contestAgeGroup && cat.isDuo === isDuoType) ||
-                    cat.isGroup === isGroupType
+                    (cat.ageGroup === form.contestAgeGroup && cat.isDuoCategory === isDuoType) ||
+                    cat.isGroupCategory === isGroupType
                 );
                 const catStyle = contestCategory?.categories.find(
                   (style) =>

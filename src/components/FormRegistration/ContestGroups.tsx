@@ -106,7 +106,8 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
 
     const contestCategory = contestCategories.find(
       (cat) =>
-        (cat.ageGroup === contestAgeGroup && cat.isDuo === isDuoType) || cat.isGroup === isGroupType
+        (cat.ageGroup === contestAgeGroup && cat.isDuoCategory === isDuoType) ||
+        cat.isGroupCategory === isGroupType
     );
 
     const catStyles = contestCategory?.categories.filter((style) => style.types.includes(version));

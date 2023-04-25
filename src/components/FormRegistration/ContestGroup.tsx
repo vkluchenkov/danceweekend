@@ -9,13 +9,13 @@ import { useFormContext } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { contestGroupPrice } from '@/src/ulis/price';
 import clsx from 'clsx';
-import { Category } from '@/src/ulis/contestCategories';
+import { Style } from '@/src/ulis/contestCategories';
 import { SupportedLangs } from '@/src/types';
 
 interface ContestGroupProps {
   field: GroupContest & { id: string; index: number };
   onDelete: () => void;
-  catStyles: Category[] | undefined;
+  catStyles: Style[] | undefined;
 }
 
 export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, catStyles }) => {

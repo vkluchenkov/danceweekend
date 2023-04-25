@@ -3,7 +3,7 @@ import { SupportedLangs, AgeGroup } from '@/src/types';
 export type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
 type CategoryType = 'live' | 'online';
 
-export interface Category {
+export interface Style {
   translations: {
     [lang in SupportedLangs]: {
       categoryTitle: string;
@@ -11,6 +11,7 @@ export interface Category {
   };
   types: CategoryType[];
   isSolo?: boolean;
+  isImprovisation?: boolean;
   isSoloPass?: boolean;
   isQueen?: boolean;
 }
@@ -20,8 +21,8 @@ export interface ContestCategory {
   ageGroups?: AgeGroup[];
   description?: string;
   age: string;
-  isGroup?: boolean;
-  isDuo?: boolean;
+  isGroupCategory?: boolean;
+  isDuoCategory?: boolean;
   levels: Level[];
   types: CategoryType[];
   translations: {
@@ -29,10 +30,10 @@ export interface ContestCategory {
       title: string;
     };
   };
-  categories: Category[];
+  categories: Style[];
 }
 
-const soloSet: Category[] = [
+const soloSet: Style[] = [
   {
     types: ['live', 'online'],
     isSolo: true,
@@ -75,6 +76,7 @@ const soloSet: Category[] = [
   {
     types: ['live'],
     isSolo: true,
+    isImprovisation: true,
     translations: {
       en: {
         categoryTitle: 'Tabla solo live improvisation',
@@ -125,7 +127,7 @@ const soloSet: Category[] = [
   },
 ];
 
-const groupSet: Category[] = [
+const groupSet: Style[] = [
   {
     types: ['live', 'online'],
     translations: {
@@ -244,7 +246,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '7-11',
     ageGroup: 'kids',
-    isDuo: true,
+    isDuoCategory: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -295,7 +297,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '7-11',
     ageGroup: 'kids',
-    isGroup: true,
+    isGroupCategory: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -344,7 +346,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '12-15',
     ageGroup: 'juniors',
-    isDuo: true,
+    isDuoCategory: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -361,7 +363,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '12-15',
     ageGroup: 'juniors',
-    isGroup: true,
+    isGroupCategory: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -394,6 +396,7 @@ export const contestCategories: ContestCategory[] = [
       {
         types: ['live'],
         isSolo: true,
+        isImprovisation: true,
         isQueen: true,
         translations: {
           en: {
@@ -441,7 +444,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '16+',
     ageGroup: 'adults',
-    isDuo: true,
+    isDuoCategory: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {
@@ -458,7 +461,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '16+',
     ageGroup: 'adults',
-    isGroup: true,
+    isGroupCategory: true,
     levels: ['openLevel'],
     types: ['live', 'online'],
     translations: {

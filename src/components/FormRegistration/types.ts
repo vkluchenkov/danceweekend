@@ -1,5 +1,5 @@
 import { AgeGroup, PricePeriod, SupportedLangs, Version } from '@/src/types';
-import { Category, Level } from '@/src/ulis/contestCategories';
+import { Style, Level } from '@/src/ulis/contestCategories';
 import { Workshop } from '@/src/ulis/schedule';
 
 export interface GroupContest {
@@ -17,7 +17,7 @@ export interface WorldShowGroup {
 }
 
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
-export type SoloContestField = (Category & { selected: boolean; id: string; price: number })[];
+export type SoloContestField = (Style & { selected: boolean; id: string; price: number })[];
 
 export type WorkshopsType = 'fullPass' | 'single';
 

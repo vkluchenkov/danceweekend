@@ -48,14 +48,14 @@ export const FormMusic: React.FC<FormMusicProps> = ({
     const filtered = ageGroups.filter((group) => {
       if (type === 'duo') {
         const isFound = contestCategories.find(
-          (category) => category.isDuo && category.ageGroup === group
+          (category) => category.isDuoCategory && category.ageGroup === group
         );
         if (!!isFound) return true;
       }
 
       if (type === 'group') {
         const isFound = contestCategories.find(
-          (category) => category.isGroup && category.ageGroup === group
+          (category) => category.isGroupCategory && category.ageGroup === group
         );
         if (!!isFound) return true;
       }

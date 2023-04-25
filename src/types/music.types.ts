@@ -1,6 +1,6 @@
 import { File as formidableFile } from 'formidable';
 import { AgeGroup } from '.';
-import { Category, Level } from '../ulis/contestCategories';
+import { Style, Level } from '../ulis/contestCategories';
 
 export interface MusicFormFields {
   type: 'group' | 'duo' | 'solo';
@@ -11,7 +11,7 @@ export interface MusicFormFields {
   ageGroup?: AgeGroup;
   levels?: Level[];
   level?: Level;
-  categories?: (Category & { isDuo: boolean; isGroup: boolean })[];
+  categories?: (Style & { isDuo: boolean; isGroup: boolean })[];
   category?: string;
   audioLength: number;
   file: File | null;

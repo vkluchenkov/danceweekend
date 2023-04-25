@@ -10,7 +10,7 @@ import axios from 'axios';
 import { Loader } from '@/src/components/Loader';
 import { darkTheme, groupsLimit, margin, soloLimit } from '@/src/ulis/constants';
 import { MusicFormFields } from '@/src/types/music.types';
-import { Category, Level, contestCategories } from '@/src/ulis/contestCategories';
+import { Style, Level, contestCategories } from '@/src/ulis/contestCategories';
 import { FormMusic } from '@/src/components/FormMusic';
 
 const Music: NextPage = () => {
@@ -53,7 +53,7 @@ const Music: NextPage = () => {
   // Map contest levels and styles by age group and type
   useEffect(() => {
     if (ageGroup) {
-      const categories: (Category & { isDuo: boolean; isGroup: boolean })[] = [];
+      const categories: (Style & { isDuo: boolean; isGroup: boolean })[] = [];
       const levels: Level[] = [];
 
       // Filter by age
@@ -63,9 +63,9 @@ const Music: NextPage = () => {
 
       // filter by type
       const filteredByType = filteredByAgeGroup.filter((cat) => {
-        if (type === 'solo') return !cat.isDuo && !cat.isGroup;
-        if (type === 'duo') return cat.isDuo;
-        if (type === 'group') return cat.isGroup;
+        if (type === 'solo') return !cat.isDuoCategory && !cat.isGroupCategory;
+        if (type === 'duo') return cat.isDuoCategory;
+        if (type === 'group') return cat.isGroupCategory;
       });
 
       // Fill categories from filtered
@@ -77,12 +77,14 @@ const Music: NextPage = () => {
           }
         });
 
-        cat.categories.forEach((style) =>
-          categories.push({
-            ...style,
-            isDuo: !!cat.isDuo,
-            isGroup: !!cat.isGroup,
-          })
+        cat.categories.forEach(
+          (style) =>
+            !style.isImprovisation &&
+            categories.push({
+              ...style,
+              isDuo: !!cat.isDuoCategory,
+              isGroup: !!cat.isGroupCategory,
+            })
         );
       });
 

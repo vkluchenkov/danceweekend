@@ -23,7 +23,8 @@
       "country": "Страна",
       "city": "Город",
       "tel": "Телефон",
-      "email": "Email"
+      "email": "Email",
+      "emailError": "Введен некорректный email"
     },
     "workshops": {
       "title": "Мастер-классы",

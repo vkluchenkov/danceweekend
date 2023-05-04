@@ -86,6 +86,11 @@ export const PersonalData: React.FC<StepProps> = () => {
           control={control}
           rules={{
             required: t('form.common.required'),
+            pattern: {
+              value:
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+              message: t('form.personal.emailError'),
+            },
           }}
           error={!!errors.email}
           helperText={errors?.email?.message as string | undefined}

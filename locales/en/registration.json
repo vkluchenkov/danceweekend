@@ -24,7 +24,8 @@
       "country": "Country",
       "city": "City",
       "tel": "Phone number",
-      "email": "Email"
+      "email": "Email",
+      "emailError": "Email is not valid"
     },
     "workshops": {
       "title": "Workshops",

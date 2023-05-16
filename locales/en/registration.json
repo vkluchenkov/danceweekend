@@ -33,6 +33,7 @@
       "fullPass": "Full Pass",
       "fullPassDescription1": "It’s possible to buy workshops as a package — Full Pass or single workshops of your choice. ",
       "fullPassDescription2": "Full Pass unlocks all the workshops, discounts in competition and access to World Show. Also allows you to pay in installments (except Promo tariff). Kids and Baby have 50% discount.",
+      "fullPassDescriptionSoldOut": "Full Pass for this edition of our festival has been sold out. It is only possible to buy single workshops.",
       "singleWs": "Single workshops",
       "discounts": {
         "title": "Full Pass / group discounts",

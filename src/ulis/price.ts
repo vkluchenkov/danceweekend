@@ -1,6 +1,8 @@
 import { PricePeriod, SoloPriceCats, ContestSoloPrice } from '@/src/types';
 
 export const ispromoPeriod = false;
+export const isFullPassSoldOut = true;
+export const isOnlineFullPassSoldOut = false;
 export const isOnlinePromoPeriod = false;
 
 //Translation keys for Price page

@@ -38,6 +38,7 @@ const Payment: NextPage = () => {
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
 
   const qty = watch('qty');
+  const name = watch('name');
   const method = watch('method');
 
   // Handle snackbar close
@@ -146,6 +147,7 @@ const Payment: NextPage = () => {
                         purchase_units: [
                           {
                             amount: { value: value },
+                            description: 'Registration payment for' + name,
                           },
                         ],
                         application_context: {},

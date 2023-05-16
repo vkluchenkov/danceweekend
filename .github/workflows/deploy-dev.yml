@@ -17,9 +17,9 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_DEPLOY_URL: 'https://dev.danceweekend.art'
-          envkey_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
-          envkey_PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
-          envkey_PAYPAL_API_URL: ${{ secrets.PAYPAL_API_URL }}
+          envkey_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.TEST_NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
+          envkey_PAYPAL_SECRET: ${{ secrets.TEST_PAYPAL_SECRET }}
+          envkey_PAYPAL_API_URL: ${{ secrets.TEST_PAYPAL_API_URL }}
           envkey_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
           envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}

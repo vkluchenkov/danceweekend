@@ -9,6 +9,7 @@
     "promo": "Promo*",
     "promoDescription": "*first 10 packages",
     "fullPass": "Full Pass",
+    "soldOut": "sold out",
     "teachers": {
       "pablo": "Pablo",
       "diana": "Diana",

@@ -19,14 +19,10 @@ export const sendMail = (props: SendMailProps) => {
   const { senderEmail, senderName, recipientEmail, recipientName, recipientSubj, mailContent } =
     props;
 
-  apiInstance
-    .sendTransacEmail({
-      sender: { email: senderEmail, name: senderName },
-      subject: recipientSubj,
-      to: [{ name: recipientName, email: recipientEmail }],
-      htmlContent: mailContent,
-    })
-    .then((data) => {
-      console.log(data.body);
-    });
+  apiInstance.sendTransacEmail({
+    sender: { email: senderEmail, name: senderName },
+    subject: recipientSubj,
+    to: [{ name: recipientName, email: recipientEmail }],
+    htmlContent: mailContent,
+  });
 };

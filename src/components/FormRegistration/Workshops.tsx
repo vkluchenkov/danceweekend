@@ -16,6 +16,7 @@ import { WorkshopsList } from './WorkshopsList';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { schedule } from '@/src/ulis/schedule';
 import { SupportedLangs } from '@/src/types';
+import { isFullPassSoldOut, isOnlineFullPassSoldOut } from '@/src/ulis/price';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   setStepTotal,
@@ -30,6 +31,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const methods = useFormContext<FormFields>();
   const {
     setValue,
+    resetField,
     control,
     watch,
     trigger,
@@ -45,8 +47,18 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const isWorkshops = watch('workshops');
   const version = watch('version');
 
+  const isSoldOut =
+    (isFullPassSoldOut && version === 'live') || (isOnlineFullPassSoldOut && version === 'online');
+
   const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
+  // Handle Full Pass sold out
+  useEffect(() => {
+    if (isSoldOut) setValue('workshopsType', 'single');
+    else resetField('workshopsType');
+  }, [setValue, resetField, isSoldOut]);
+
+  // Handle group discounts and discounts
   useEffect(() => {
     if (isFullPass || selectedWorkshops.length) setIsNextDisabled(false);
     else setIsNextDisabled(true);
@@ -102,39 +114,52 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
     }
   };
 
+  const workshopsDescription = isSoldOut ? (
+    <>
+      <p className={textStyles.p}>{t('form.workshops.fullPassDescriptionSoldOut')}</p>
+    </>
+  ) : (
+    <>
+      <p className={textStyles.p}>{t('form.workshops.fullPassDescription1')}</p>
+      <p className={textStyles.p}>{t('form.workshops.fullPassDescription2')}</p>
+    </>
+  );
+
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.workshops.title')}</h2>
-      <p className={textStyles.p}>{t('form.workshops.fullPassDescription1')}</p>
-      <p className={textStyles.p}>{t('form.workshops.fullPassDescription2')}</p>
+      {workshopsDescription}
 
-      <FormControl component='fieldset'>
-        <h4 className={textStyles.h4}>{t('form.workshops.selectTitle')}</h4>
-        <RadioGroup
-          row
-          name='workshops-selection'
-          value={workshopsType || ''}
-          onChange={(event, value) => handleFullPass(event, value as WorkshopsType)}
-        >
-          <FormControlLabel
-            value='fullPass'
-            control={<Radio />}
-            label={
-              <p className={textStyles.p}>
-                {t('form.workshops.fullPass')}{' '}
-                <span className={textStyles.accent}>
-                  {fullPassPrice ? fullPassPrice + ' €' : ''}
-                </span>
-              </p>
-            }
-          />
-          <FormControlLabel
-            value='single'
-            control={<Radio />}
-            label={<p className={textStyles.p}>{t('form.workshops.singleWs')}</p>}
-          />
-        </RadioGroup>
-      </FormControl>
+      {/* Show radio group only if full pass available */}
+      {!isSoldOut && (
+        <FormControl component='fieldset'>
+          <h4 className={textStyles.h4}>{t('form.workshops.selectTitle')}</h4>
+          <RadioGroup
+            row
+            name='workshops-selection'
+            value={workshopsType || ''}
+            onChange={(event, value) => handleFullPass(event, value as WorkshopsType)}
+          >
+            <FormControlLabel
+              value='fullPass'
+              control={<Radio />}
+              label={
+                <p className={textStyles.p}>
+                  {t('form.workshops.fullPass')}{' '}
+                  <span className={textStyles.accent}>
+                    {fullPassPrice ? fullPassPrice + ' €' : ''}
+                  </span>
+                </p>
+              }
+            />
+            <FormControlLabel
+              value='single'
+              control={<Radio />}
+              label={<p className={textStyles.p}>{t('form.workshops.singleWs')}</p>}
+            />
+          </RadioGroup>
+        </FormControl>
+      )}
 
       <Collapse in={workshopsType === 'single'} unmountOnExit>
         <WorkshopsList currentPricePeriod={currentPricePeriod} />

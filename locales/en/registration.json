@@ -3,6 +3,8 @@
   "live": "Live festival",
   "online": "Online festival",
   "onlineWarning": "Registration to online festival will be open later.",
+  "liveClosed": "Registration to live festival is closed, everything is sold out. See you next year!",
+  "allClosed": "Registration to this edition of the festival is closed, everything is sold out. See you next year!",
   "form": {
     "common": {
       "required": "This field is required",
@@ -33,6 +35,7 @@
       "fullPass": "Full Pass",
       "fullPassDescription1": "It’s possible to buy workshops as a package — Full Pass or single workshops of your choice. ",
       "fullPassDescription2": "Full Pass unlocks all the workshops, discounts in competition and access to World Show. Also allows you to pay in installments (except Promo tariff). Kids and Baby have 50% discount.",
+      "fullPassDescriptionSoldOut": "Full Pass for this edition of our festival has been sold out. It is only possible to buy single workshops.",
       "singleWs": "Single workshops",
       "discounts": {
         "title": "Full Pass / group discounts",

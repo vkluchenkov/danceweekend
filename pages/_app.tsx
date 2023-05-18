@@ -1,7 +1,6 @@
 import { montserrat } from '@/src/ulis/font';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 
 export default function App({ Component, pageProps }: AppProps) {

@@ -3,6 +3,9 @@ import { PricePeriod, SoloPriceCats, ContestSoloPrice } from '@/src/types';
 export const ispromoPeriod = false;
 export const isOnlinePromoPeriod = false;
 
+export const isFullPassSoldOut = false;
+export const isOnlineFullPassSoldOut = false;
+
 //Translation keys for Price page
 export const teachersWsGroups = {
   group1: ['pablo', 'diana', 'alexey', 'leandro', 'chronis', 'aliahChronis'],

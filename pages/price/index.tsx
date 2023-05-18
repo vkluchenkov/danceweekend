@@ -15,6 +15,8 @@ import {
   teachersWsGroups,
   workshopsPrice,
   worldShowPrice,
+  isFullPassSoldOut,
+  isOnlineFullPassSoldOut,
 } from '@/src/ulis/price';
 import Trans from 'next-translate/Trans';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -24,6 +26,9 @@ const Price: NextPage = () => {
   const { t, lang } = useTranslation('price');
 
   const [version, setVersion] = useState<Version>('live');
+
+  const isSoldOut =
+    (isFullPassSoldOut && version === 'live') || (isOnlineFullPassSoldOut && version === 'online');
 
   // HTML translations
   const contestAttention = (
@@ -91,7 +96,9 @@ const Price: NextPage = () => {
         <h4 className={styles.period__title}>{getTitle()}</h4>
 
         <p className={clsx(textStyles.p, styles.period__fullPass)}>
-          {`${t('workshops.fullPass')}: ${period.price[version].fullPassPrice}€`}
+          {isSoldOut
+            ? `${t('workshops.fullPass')}: ${t('workshops.soldOut')}`
+            : `${t('workshops.fullPass')}: ${period.price[version].fullPassPrice}€`}
         </p>
 
         {period.description && (

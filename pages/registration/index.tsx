@@ -12,7 +12,7 @@ import { darkTheme } from '@/src/ulis/constants';
 
 const Registration: NextPage = () => {
   const { t, lang } = useTranslation('registration');
-  const [version, setVersion] = useState<Version>('live');
+  const [version, setVersion] = useState<Version>('online');
 
   const switcher = useMemo(() => {
     return (
@@ -37,7 +37,8 @@ const Registration: NextPage = () => {
       {switcher}
       <section className={styles.section}>
         <ThemeProvider theme={darkTheme}>
-          {version === 'live' && <FormRegistration version={version} />}
+          {/* {version === 'live' && <FormRegistration version={version} />} */}
+          {version === 'live' && <h1>{t('liveClosed')}</h1>}
           {version === 'online' && <FormRegistration version={version} />}
         </ThemeProvider>
       </section>

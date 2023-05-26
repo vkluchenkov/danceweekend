@@ -25,6 +25,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
   const methods = useFormContext<FormFields>();
   const { watch, control } = methods;
 
+  const version = watch('version');
   const form = watch();
 
   useEffect(() => {
@@ -114,7 +115,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
       );
     }
     return workshops.map((ws) => {
-      const price = currentPricePeriod?.price.live[`${ws.teachersPriceGroup!}Price`];
+      const price = currentPricePeriod?.price[version][`${ws.teachersPriceGroup!}Price`];
       return (
         <li key={ws.id} className={styles.summary__group}>
           <span className={textStyles.accent}>{ws.translations[currentLang].title}</span>
@@ -125,7 +126,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
         </li>
       );
     });
-  }, [fullPassPrice, isFullPass, t, workshops, currentLang, currentPricePeriod, form]);
+  }, [fullPassPrice, isFullPass, t, workshops, currentLang, currentPricePeriod, form, version]);
 
   // Contest solo
   const contestSoloData = useMemo(() => {

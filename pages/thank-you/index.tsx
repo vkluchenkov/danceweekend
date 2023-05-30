@@ -49,6 +49,15 @@ const ThankYou: NextPage = () => {
     />
   );
 
+  const photo = (
+    <Trans
+      i18nKey='thank-you:photoDescription'
+      components={[
+        <Link href='/registration/photo' target='_blank' className={textStyles.accent} key={1} />,
+      ]}
+    />
+  );
+
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
@@ -84,6 +93,8 @@ const ThankYou: NextPage = () => {
 
         <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('musicTitle')}</h2>
         <p className={textStyles.p}>{music}</p>
+        <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('photoTitle')}</h2>
+        <p className={textStyles.p}>{photo}</p>
       </section>
     </Layout>
   );

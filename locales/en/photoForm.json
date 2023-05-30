@@ -1,0 +1,13 @@
+{
+  "pageTitle": "Photo upload",
+  "form": {
+    "required": "This field is required",
+    "name": "Name on the poster",
+    "file": "Photo file*",
+    "submit": "Submit",
+    "patternError": "This field can contain only Latin characters and numbers.",
+    "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue.",
+    "success": "Congrats! Your file was successfully sent.",
+    "sizeError": "Selected file exceeds the limit of 10Mb"
+  }
+}

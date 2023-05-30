@@ -462,18 +462,6 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
             </MjmlText>
 
             <MjmlText mj-class='text'>
-              {t('email.photoNote1')}{' '}
-              <a
-                href='mailto: danceweekend@aliah.dance'
-                target='_blank'
-                rel='noreferrer'
-                style={{ color: accentColor }}
-              >
-                {t('email.photoNote2')}
-              </a>
-            </MjmlText>
-
-            <MjmlText mj-class='text'>
               {t('email.telegram1')}{' '}
               <a href={telegramUrl} target='_blank' rel='noreferrer' style={{ color: accentColor }}>
                 {t('email.telegram2')}

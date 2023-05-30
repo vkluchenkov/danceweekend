@@ -29,6 +29,7 @@ jobs:
           envkey_FTP_USER: ${{ secrets.FTP_USER_LIVE }}
           envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD_LIVE }}
           envkey_FTP_DIR: ${{ secrets.FTP_DIR_LIVE }}
+          envkey_FTP_PHOTO_DIR: ${{ secrets.FTP_PHOTO_DIR }}
 
       - name: Build the Docker image
         run: docker build -t cloud.canister.io:5000/vkluchenkov/danceweekend:latest-main .

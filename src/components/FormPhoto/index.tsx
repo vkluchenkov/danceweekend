@@ -41,7 +41,7 @@ export const FormPhoto: React.FC<FormPhotoProps> = ({
           rules={{
             required: t('form.required'),
             pattern: {
-              value: /^[a-zA-Z0-9\s\-]+$/,
+              value: /^[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\s\-]+$/, //Latin + Polish
               message: t('form.patternError'),
             },
           }}

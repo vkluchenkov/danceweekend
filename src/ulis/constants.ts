@@ -23,6 +23,9 @@ export const soloLimit = 180;
 export const groupsLimit = 210;
 export const margin = 1.1; //percent
 
+// Photo file size limit in bytes
+export const photoFileSizeLimit = 10485760;
+
 // Default website url
 export const defaultUrl = 'https://danceweekend.art';
 

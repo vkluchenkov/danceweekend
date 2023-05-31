@@ -138,7 +138,7 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
       );
     }
     return workshops.map((ws) => {
-      const price = form.currentPricePeriod?.price.live[`${ws.teachersPriceGroup!}Price`];
+      const price = form.currentPricePeriod?.price[form.version][`${ws.teachersPriceGroup!}Price`];
       return (
         <li key={ws.id}>
           <span style={{ color: accentColor }}>{ws.translations[form.currentLang].title}</span>

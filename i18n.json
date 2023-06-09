@@ -16,6 +16,7 @@
     "/payment": ["payment"],
     "/payment/thank-you": ["payment"],
     "/registration": ["registration"],
+    "/h3s5d4r5dff": ["registration"],
     "/registration/photo": ["photoForm"],
     "/shows/arabic-dreams": ["arabicDreams"],
     "/shows/world-show": ["worldShow"],

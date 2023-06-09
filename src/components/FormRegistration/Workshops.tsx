@@ -130,7 +130,6 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
       <h2 className={textStyles.h2}>{t('form.workshops.title')}</h2>
       {workshopsDescription}
 
-      {/* Show radio group only if full pass available */}
       {!isSoldOut && (
         <FormControl component='fieldset'>
           <h4 className={textStyles.h4}>{t('form.workshops.selectTitle')}</h4>
@@ -153,6 +152,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
               }
             />
             <FormControlLabel
+              disabled //temp
               value='single'
               control={<Radio />}
               label={<p className={textStyles.p}>{t('form.workshops.singleWs')}</p>}

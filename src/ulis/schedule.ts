@@ -70,12 +70,12 @@ export const schedule: Day[] = [
         teachersPriceGroup: 'group1',
         translations: {
           en: {
-            title: 'Aleksey Riaboshapka',
-            description: 'Classical oriental choreography',
+            title: 'Diana Gnatchenko',
+            description: 'Mejanse choreography',
           },
           ru: {
-            title: 'Алексей Рябошапка',
-            description: 'Хореография Classical oriental',
+            title: 'Диана Гнатченко',
+            description: 'Хореография Mejanse',
           },
         },
       },
@@ -283,12 +283,12 @@ export const schedule: Day[] = [
         teachersPriceGroup: 'group1',
         translations: {
           en: {
-            title: 'Aleksey Riaboshapka',
-            description: 'Dabke choreography',
+            title: 'Leandro Ferreyra',
+            description: 'Classical oriental choreography',
           },
           ru: {
-            title: 'Алексей Рябошапка',
-            description: 'Хореография Dabke',
+            title: 'Leandro Ferreyra',
+            description: 'Хореография Classical oriental',
           },
         },
       },

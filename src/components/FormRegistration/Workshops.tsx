@@ -152,7 +152,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
               }
             />
             <FormControlLabel
-              disabled //temp
+              disabled={version === 'live'} //temp
               value='single'
               control={<Radio />}
               label={<p className={textStyles.p}>{t('form.workshops.singleWs')}</p>}

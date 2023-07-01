@@ -7,5 +7,6 @@
   "conditionsSolo": "Price for solo performance:",
   "conditionsSoloFullPass": "Price for solo performance (Full Pass holders):",
   "conditionsGroup": "Price for group performance:",
-  "perPerson": "per person"
+  "perPerson": "per person.",
+  "musicLimit": "Music limit for the participants:"
 }

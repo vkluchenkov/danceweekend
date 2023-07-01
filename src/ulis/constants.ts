@@ -21,6 +21,7 @@ export const maxGroups = 3;
 // Music limits (sec)
 export const soloLimit = 180;
 export const groupsLimit = 210;
+export const worldShowLimit = 240;
 export const margin = 1.1; //percent
 
 // Photo file size limit in bytes

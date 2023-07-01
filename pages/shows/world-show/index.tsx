@@ -7,9 +7,16 @@ import worldShowLogo from '/public/images/world_show_logo.png';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { worldShowPrice } from '@/src/ulis/price';
+import { worldShowLimit } from '@/src/ulis/constants';
 
 const WorldShow: NextPage = () => {
   const { t, lang } = useTranslation('worldShow');
+
+  const formatTime = (time: number) => {
+    const min = Math.floor(time / 60);
+    const sec = Math.round(time % 60);
+    return `${min}:${sec < 10 ? '0' + sec : sec}`;
+  };
 
   const content = (
     <>
@@ -24,15 +31,18 @@ const WorldShow: NextPage = () => {
       <p className={textStyles.p}>{t('conditionsGeneral')}</p>
       <p className={textStyles.p}>
         {t('conditionsSolo')}
-        <span className={textStyles.accent}> {worldShowPrice.soloPriceNormal}€</span>
+        <span className={textStyles.accent}> {worldShowPrice.soloPriceNormal}€</span>.
       </p>
       <p className={textStyles.p}>
         {t('conditionsSoloFullPass')}{' '}
-        <span className={textStyles.accent}> {worldShowPrice.soloPriceDicounted}€</span>
+        <span className={textStyles.accent}> {worldShowPrice.soloPriceDicounted}€</span>.
       </p>
       <p className={textStyles.p}>
         {t('conditionsGroup')} <span className={textStyles.accent}> {worldShowPrice.groups}€</span>{' '}
-        {t('perPerson')}
+        {t('perPerson')}.
+      </p>
+      <p className={textStyles.p}>
+        {t('musicLimit')} <span className={textStyles.accent}> {formatTime(worldShowLimit)}</span>.
       </p>
     </>
   );

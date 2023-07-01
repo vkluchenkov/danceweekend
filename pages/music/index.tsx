@@ -8,7 +8,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { ThemeProvider } from '@mui/material';
 import axios from 'axios';
 import { Loader } from '@/src/components/Loader';
-import { darkTheme, groupsLimit, margin, soloLimit } from '@/src/ulis/constants';
+import { darkTheme, groupsLimit, margin, soloLimit, worldShowLimit } from '@/src/ulis/constants';
 import { MusicFormFields } from '@/src/types/music.types';
 import { Style, Level, contestCategories } from '@/src/ulis/contestCategories';
 import { FormMusic } from '@/src/components/FormMusic';
@@ -31,6 +31,7 @@ const Music: NextPage = () => {
   const ageGroup = watch('ageGroup');
   const type = watch('type');
   const audioLength = watch('audioLength');
+  const event = watch('event');
 
   // Get audio duration
   useEffect(() => {
@@ -42,8 +43,9 @@ const Music: NextPage = () => {
   }, [file, setValue]);
 
   const audioLimit = useMemo(() => {
-    return type === 'group' || type === 'duo' ? groupsLimit : soloLimit;
-  }, [type]);
+    if (event === 'worldShow') return worldShowLimit;
+    else return type === 'group' || type === 'duo' ? groupsLimit : soloLimit;
+  }, [type, event]);
 
   // Check if audio is within limits
   useEffect(() => {

@@ -7,5 +7,6 @@
   "conditionsSolo": "Стоимость сольного выступления:",
   "conditionsSoloFullPass": "Стоимость сольного выступления для держателей Full Pass:",
   "conditionsGroup": "Стоимость группового выступления:",
-  "perPerson": "/ чел."
+  "perPerson": "/ чел.",
+  "musicLimit": "Лимит продолжительности музыки:"
 }

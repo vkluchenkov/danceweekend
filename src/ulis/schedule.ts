@@ -345,7 +345,7 @@ export const schedule: Day[] = [
       },
       {
         id: 17,
-        start: '19:00',
+        start: '19:30',
         type: 'show',
         translations: {
           en: {

@@ -53,7 +53,7 @@ const soloSet: Style[] = [
     isSoloPass: true,
     translations: {
       en: {
-        categoryTitle: 'Folk',
+        categoryTitle: 'Folklore',
       },
       ru: {
         categoryTitle: 'Фольклор',

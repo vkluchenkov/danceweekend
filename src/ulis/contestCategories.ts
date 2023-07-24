@@ -204,10 +204,10 @@ export const contestCategories: ContestCategory[] = [
     types: ['live', 'online'],
     translations: {
       en: {
-        title: 'Baby',
+        title: 'Baby solo',
       },
       ru: {
-        title: 'Беби',
+        title: 'Беби соло',
       },
     },
     categories: [
@@ -215,6 +215,62 @@ export const contestCategories: ContestCategory[] = [
         types: ['live', 'online'],
         isSolo: true,
         isSoloPass: true,
+        translations: {
+          en: {
+            categoryTitle: 'All styles',
+          },
+          ru: {
+            categoryTitle: 'Все стили',
+          },
+        },
+      },
+    ],
+  },
+  {
+    age: '4-6',
+    ageGroup: 'baby',
+    isGroupCategory: true,
+    levels: ['openLevel'],
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        title: 'Baby groups',
+      },
+      ru: {
+        title: 'Беби группы',
+      },
+    },
+    categories: [
+      {
+        types: ['live', 'online'],
+        translations: {
+          en: {
+            categoryTitle: 'All styles',
+          },
+          ru: {
+            categoryTitle: 'Все стили',
+          },
+        },
+      },
+    ],
+  },
+  {
+    age: '4-6',
+    ageGroup: 'baby',
+    isDuoCategory: true,
+    levels: ['openLevel'],
+    types: ['live', 'online'],
+    translations: {
+      en: {
+        title: 'Baby duos',
+      },
+      ru: {
+        title: 'Беби дуэты',
+      },
+    },
+    categories: [
+      {
+        types: ['live', 'online'],
         translations: {
           en: {
             categoryTitle: 'All styles',

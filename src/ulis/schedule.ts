@@ -208,7 +208,7 @@ export const schedule: Day[] = [
       },
       {
         id: 10,
-        start: '16:45',
+        start: '15:45',
         end: '18:15',
         type: 'workshop',
         teachersPriceGroup: 'group1',

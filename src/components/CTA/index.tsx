@@ -19,13 +19,13 @@ export const Cta: React.FC = () => {
     <section className={styles.cta}>
       <h2 className={styles.cta__title}>{t('title')}</h2>
       <p className={styles.cta__subtitle}>{subtitle}</p>
-      <button
+      {/* <button
         type='button'
         className={styles.cta__button}
         onClick={() => router.push('registration')}
       >
         {t('button')}
-      </button>
+      </button> */}
       <Divider inverted />
     </section>
   );

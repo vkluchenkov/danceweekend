@@ -39,7 +39,8 @@ const Registration: NextPage = () => {
         <ThemeProvider theme={darkTheme}>
           {/* {version === 'live' && <FormRegistration version={version} />} */}
           {version === 'live' && <h1>{t('liveClosed')}</h1>}
-          {version === 'online' && <FormRegistration version={version} />}
+          {/* {version === 'online' && <FormRegistration version={version} />} */}
+          {version === 'online' && <h1>{t('onlineClosed')}</h1>}
         </ThemeProvider>
       </section>
     </Layout>

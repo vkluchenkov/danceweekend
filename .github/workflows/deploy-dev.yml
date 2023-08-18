@@ -33,17 +33,17 @@ jobs:
           envkey_FTP_PHOTO_DIR: ${{ secrets.FTP_PHOTO_DIR_TEST }}
 
       - name: Build the Docker image
-        run: docker build -t cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev .
+        run: docker build -t ghcr.io/vkluchenkov/danceweekend:latest-dev .
 
-      - name: Login to Canister
+      - name: Login to ghcr
         uses: docker/login-action@v2
         with:
-          registry: cloud.canister.io:5000
-          username: ${{ secrets.CANISTERWRITELOGIN }}
-          password: ${{ secrets.CANISTERWRITEPASS }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push the Docker image
-        run: docker push cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev
+        run: docker push ghcr.io/vkluchenkov/danceweekend:latest-dev
 
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.8
@@ -53,9 +53,9 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.SSHPASS }}
           script: |
-            docker login --username=${{ secrets.CANISTERLOGIN }} --password=${{ secrets.CANISTERPASS }} cloud.canister.io:5000
-            docker pull cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev
+            docker login --username=${{ github.actor }} --password=${{ secrets.GITHUB_TOKEN }} ghcr.io
+            docker pull ghcr.io/vkluchenkov/danceweekend:latest-dev
             docker stop Danceweekend-dev
             docker rm Danceweekend-dev
-            docker run -d -p 49162:3000 --name=Danceweekend-dev --restart=always --pull=always cloud.canister.io:5000/vkluchenkov/danceweekend:latest-dev
+            docker run -d -p 49162:3000 --name=Danceweekend-dev --restart=always --pull=always ghcr.io/vkluchenkov/danceweekend:latest-dev
             docker system prune -f

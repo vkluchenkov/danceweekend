@@ -1,6 +1,5 @@
 import { AgeGroup, PricePeriod, SupportedLangs, Version } from '@/src/types';
 import { Style, Level } from '@/src/ulis/contestCategories';
-import { Workshop } from '@/src/ulis/schedule';
 
 export interface GroupContest {
   type: 'duo' | 'group';
@@ -16,10 +15,7 @@ export interface WorldShowGroup {
   price: number;
 }
 
-export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
 export type SoloContestField = (Style & { selected: boolean; id: string; price: number })[];
-
-export type WorkshopsType = 'fullPass' | 'single';
 
 export type FullPassDiscount = 'group' | '30%' | '50%' | 'free' | 'none';
 
@@ -35,8 +31,6 @@ export interface FormFields {
   country: string;
   city: string;
   tel: string;
-  workshops: WorkshopsField;
-  workshopsType: WorkshopsType;
   fullPassDiscount: FullPassDiscount;
   fullPassDiscountSource: string;
   fullPassGroupName: string;
@@ -86,20 +80,17 @@ export type WorkshopsStepProps = StepProps & {
 
 export type ContestSoloStepProps = StepProps & {
   setStepTotal: (total: number) => void;
-  isEligible: boolean;
   soloPassPrice: number;
   setIsNextDisabled: (state: boolean) => void;
 };
 
 export type ContestGroupStepProps = StepProps & {
-  isEligible: boolean;
   setStepTotal: (total: number) => void;
   lastDirection: 'prev' | 'next' | null;
   onStepSubmit: (direction: 'next' | 'prev') => void;
 };
 
 export type WorldShowStepProps = StepProps & {
-  isEligible: boolean;
   setStepTotal: (total: number) => void;
 };
 

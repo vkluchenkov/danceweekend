@@ -20,14 +20,14 @@ export const workshopsPrice: PricePeriod[] = [
     isPromo: true,
     price: {
       live: {
-        fullPassPrice: 249,
-        group1Price: 50,
-        group2Price: 40,
+        fullPassPrice: 299,
+        // group1Price: 55,
+        // group2Price: 40,
       },
       online: {
-        fullPassPrice: 190,
-        group1Price: 25,
-        group2Price: 20,
+        fullPassPrice: 225,
+        // group1Price: 25,
+        // group2Price: 20,
       },
     },
     description: 'promoDescription',
@@ -35,50 +35,50 @@ export const workshopsPrice: PricePeriod[] = [
   {
     price: {
       live: {
-        fullPassPrice: 290,
-        group1Price: 50,
-        group2Price: 40,
-      },
-      online: {
-        fullPassPrice: 230,
-        group1Price: 25,
-        group2Price: 20,
-      },
-    },
-    startDate: new Date('2023-04-01T00:00:00+01:00'), //Must start before current date
-    endDate: new Date('2023-05-31T23:59:59+01:00'),
-  },
-  {
-    price: {
-      live: {
-        fullPassPrice: 340,
-        group1Price: 60,
-        group2Price: 50,
+        fullPassPrice: 350,
+        // group1Price: 50,
+        // group2Price: 40,
       },
       online: {
         fullPassPrice: 260,
-        group1Price: 30,
-        group2Price: 25,
+        // group1Price: 25,
+        // group2Price: 20,
       },
     },
-    startDate: new Date('2023-06-01T00:00:00+01:00'), //Must start immediately after previous
-    endDate: new Date('2023-07-31T23:59:59+01:00'),
+    startDate: new Date('2024-02-01T00:00:00+01:00'), //Must start before current date
+    endDate: new Date('2024-04-30T23:59:59+01:00'),
   },
   {
     price: {
       live: {
         fullPassPrice: 420,
-        group1Price: 70,
-        group2Price: 60,
+        // group1Price: 60,
+        // group2Price: 50,
       },
       online: {
-        fullPassPrice: 320,
-        group1Price: 35,
-        group2Price: 30,
+        fullPassPrice: 315,
+        // group1Price: 30,
+        // group2Price: 25,
       },
     },
-    startDate: new Date('2023-08-01T00:00:00+01:00'), //Must start immediately after previous
-    endDate: new Date('2023-08-16T23:59:59+01:00'),
+    startDate: new Date('2024-05-01T00:00:00+01:00'), //Must start immediately after previous
+    endDate: new Date('2024-07-31T23:59:59+01:00'),
+  },
+  {
+    price: {
+      live: {
+        fullPassPrice: 480,
+        // group1Price: 70,
+        // group2Price: 60,
+      },
+      online: {
+        fullPassPrice: 360,
+        // group1Price: 35,
+        // group2Price: 30,
+      },
+    },
+    startDate: new Date('2024-08-01T00:00:00+01:00'), //Must start immediately after previous
+    endDate: new Date('2024-08-25T23:59:59+01:00'),
   },
 ];
 

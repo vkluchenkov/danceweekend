@@ -4,17 +4,9 @@ import styles from '@/styles/Registration.module.css';
 import textStyles from '@/styles/Text.module.css';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Workshops } from './Workshops';
-import { schedule } from '@/src/ulis/schedule';
 import useTranslation from 'next-translate/useTranslation';
 import { SupportedLangs, Version } from '@/src/types';
-import {
-  FormFields,
-  FullPassDiscount,
-  OrderPayload,
-  SoloContestField,
-  Step,
-  WorkshopsField,
-} from './types';
+import { FormFields, FullPassDiscount, OrderPayload, SoloContestField, Step } from './types';
 import {
   contestSoloPrice,
   isOnlinePromoPeriod,
@@ -25,7 +17,7 @@ import {
 import { Collapse, Snackbar, Alert } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
-import { minWsAdults, minWsKids, motionVariants } from '@/src/ulis/constants';
+import { motionVariants } from '@/src/ulis/constants';
 import { contestCategories, Level } from '@/src/ulis/contestCategories';
 import { ContestGroups } from './ContestGroups';
 import { WorldShow } from './WorldShow';
@@ -103,7 +95,6 @@ const defaultValues: Partial<FormFields> = {
   isFullPass: false,
   isSoloPass: false,
   fullPassDiscount: 'none',
-  workshops: [],
   isSoloContest: false,
   soloContest: [],
   isGroupContest: false,
@@ -151,10 +142,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
   const contestAgeGroup = watch('contestAgeGroup');
   const isFullPass = watch('isFullPass');
   const fullPassDiscount = watch('fullPassDiscount');
-  const isWorkshops = watch('workshops');
   const contestLevel = watch('contestLevel');
-
-  const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
 
   const isStep = useMemo(() => {
     const steps = version === 'live' ? liveSteps : onlineSteps;
@@ -177,18 +165,6 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
     setValue('ageGroup', age ? getAgeGroup(age) : null);
   }, [age, setValue]);
 
-  // Map workshops data into form state
-  useEffect(() => {
-    const res: WorkshopsField = [];
-    schedule.forEach((day) => {
-      day.dayEvents.forEach((event) => {
-        event.type === 'workshop' &&
-          res.push({ ...event, selected: false, day: day.translations[currentLang].dayTitle });
-      });
-    });
-    setValue('workshops', res);
-  }, [setValue, currentLang]);
-
   // Map solo contest styles into form state
   useEffect(() => {
     const res: SoloContestField = [];
@@ -196,34 +172,36 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
     const filteredByAgeGroup = contestCategories.filter(
       (cat) => cat.ageGroup === contestAgeGroup || cat.ageGroups?.includes(contestAgeGroup!)
     );
+    // Filter solo only
+    const filteredBySolo = filteredByAgeGroup.filter(
+      (cat) => !cat.isDuoCategory && !cat.isGroupCategory
+    );
 
-    // Add only solo styles from with props "version" type
     const levels: Level[] = [];
 
-    filteredByAgeGroup.forEach((cat, index) => {
+    filteredBySolo.forEach((cat) => {
+      if (cat.levels.includes(contestLevel) || cat.levels.includes('openLevel')) {
+        cat.categories.forEach((style) => {
+          style.isSolo &&
+            res.push({
+              ...style,
+              selected: false,
+              id: style.translations.en.categoryTitle,
+              price: 0,
+            });
+        });
+      }
       cat.levels.forEach((level) => {
         if (level !== 'openLevel') {
           const isLevel = levels.includes(level);
           if (!isLevel) levels.push(level);
         }
       });
-
-      cat.categories.forEach((style) => {
-        style.isSolo &&
-          style.types.includes(version) &&
-          res.push({
-            ...style,
-            selected: false,
-            id: style.translations.en.categoryTitle,
-            price: 0,
-          });
-      });
     });
 
     setValue('soloContest', res);
     setValue('contestLevels', levels);
-    // setValue('contestLevel', levels[0]);
-  }, [contestAgeGroup, setValue, version]);
+  }, [contestAgeGroup, setValue, contestLevel]);
 
   // Summarize step totals
   useEffect(() => {
@@ -313,16 +291,6 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
     else return ['none', '30%', '50%', 'free'];
   }, [ageGroup, version]);
 
-  const isEligible = useMemo(() => {
-    if (ageGroup === 'baby' || ageGroup === 'kids') {
-      if (isFullPass || selectedWorkshops.length >= minWsKids) return true;
-      else return false;
-    } else {
-      if (isFullPass || selectedWorkshops.length >= minWsAdults) return true;
-      else return false;
-    }
-  }, [ageGroup, isFullPass, selectedWorkshops]);
-
   const soloPassPrice = useMemo(() => {
     const priceKids = contestSoloPrice.soloPassKids.price[version];
     const priceRisingStar = contestSoloPrice.soloPassRisingStar.price[version];
@@ -390,7 +358,6 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
             >
               <ContestSolo
                 setStepTotal={setContestSoloTotal}
-                isEligible={isEligible}
                 soloPassPrice={soloPassPrice}
                 setIsNextDisabled={setIsNextDisabled}
               />
@@ -409,7 +376,6 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
               transition={{ type: 'linear', duration: 0.3 }}
             >
               <ContestGroups
-                isEligible={isEligible}
                 setStepTotal={setContestGroupsTotal}
                 lastDirection={lastDirection}
                 onStepSubmit={hanleSteps}
@@ -428,7 +394,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
               variants={motionVariants}
               transition={{ type: 'linear', duration: 0.3 }}
             >
-              <WorldShow isEligible={isEligible} setStepTotal={setWorldShowTotal} />
+              <WorldShow setStepTotal={setWorldShowTotal} />
             </motion.div>
           </AnimatePresence>
         )}

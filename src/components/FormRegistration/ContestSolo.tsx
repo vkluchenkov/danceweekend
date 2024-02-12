@@ -11,7 +11,6 @@ import { ContestSoloList } from './ContestSoloList';
 
 export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   setStepTotal,
-  isEligible,
   soloPassPrice,
   setIsNextDisabled,
 }) => {
@@ -21,7 +20,6 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   const {
     control,
     watch,
-    trigger,
     setValue,
     resetField,
     formState: { errors },
@@ -41,15 +39,15 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     } else setIsNextDisabled(false);
   }, [isSoloContest, soloContestSelected, setIsNextDisabled]);
 
-  // Clear all contest entries on checkbox disable or if not eligible
+  // Clear all contest entries on checkbox disable
   useEffect(() => {
-    if ((!isSoloContest && soloContest.length > 0) || (!isEligible && soloContest.length > 0)) {
+    if (!isSoloContest && soloContest.length > 0) {
       soloContest.forEach((i) => (i.selected = false));
       setValue('isSoloPass', false);
       resetField('contestLevel');
-      if (!isEligible && soloContest) setValue('isSoloContest', false);
+      if (soloContest) setValue('isSoloContest', false);
     }
-  }, [isSoloContest, soloContest, isEligible, setValue, resetField]);
+  }, [isSoloContest, soloContest, setValue, resetField]);
 
   // Set step total
   useEffect(() => {
@@ -67,14 +65,12 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.contest.soloTitle')}</h2>
-      {!isEligible && <p>{t('form.contest.oops')}</p>}
-      {isEligible && (
-        <FormInputCheckbox
-          control={control}
-          name='isSoloContest'
-          label={<p className={textStyles.p}>{t('form.contest.checkboxLabel')}</p>}
-        />
-      )}
+
+      <FormInputCheckbox
+        control={control}
+        name='isSoloContest'
+        label={<p className={textStyles.p}>{t('form.contest.checkboxLabel')}</p>}
+      />
 
       <Collapse in={isSoloContest} unmountOnExit>
         <div className={styles.form}>

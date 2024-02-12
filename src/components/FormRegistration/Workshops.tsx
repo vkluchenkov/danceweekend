@@ -3,24 +3,13 @@ import { useFormContext } from 'react-hook-form';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { useEffect, useState } from 'react';
-import {
-  Collapse,
-  FormControl,
-  FormControlLabel,
-  MenuItem,
-  Radio,
-  RadioGroup,
-} from '@mui/material';
-import { FormFields, WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
-import { WorkshopsList } from './WorkshopsList';
-import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
-import { schedule } from '@/src/ulis/schedule';
+import { Collapse, MenuItem } from '@mui/material';
+import { FormFields, WorkshopsStepProps } from './types';
+import { FormInputCheckbox, FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { SupportedLangs } from '@/src/types';
-import { isFullPassSoldOut, isOnlineFullPassSoldOut } from '@/src/ulis/price';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   setStepTotal,
-  currentPricePeriod,
   fullPassPrice,
   fullPassDiscountList,
   setIsNextDisabled,
@@ -30,11 +19,8 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
 
   const methods = useFormContext<FormFields>();
   const {
-    setValue,
-    resetField,
     control,
     watch,
-    trigger,
     formState: { errors },
   } = methods;
 
@@ -43,27 +29,15 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
 
   const isFullPass = watch('isFullPass');
   const isFullPassDiscount = watch('fullPassDiscount');
-  const workshopsType = watch('workshopsType');
-  const isWorkshops = watch('workshops');
   const version = watch('version');
 
-  const isSoldOut =
-    (isFullPassSoldOut && version === 'live') || (isOnlineFullPassSoldOut && version === 'online');
-
-  const selectedWorkshops = isWorkshops.filter((ws) => ws.selected);
-
-  // Handle Full Pass sold out
+  // Disable next if no selection
   useEffect(() => {
-    if (isSoldOut) setValue('workshopsType', 'single');
-    else resetField('workshopsType');
-  }, [setValue, resetField, isSoldOut]);
-
-  // Handle group discounts and discounts
-  useEffect(() => {
-    if (isFullPass || selectedWorkshops.length) setIsNextDisabled(false);
+    if (isFullPass) setIsNextDisabled(false);
     else setIsNextDisabled(true);
   });
 
+  //Handle discounts
   useEffect(() => {
     if (isFullPassDiscount != 'none' && isFullPassDiscount != 'group') {
       setIsDiscount(true);
@@ -82,43 +56,11 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   // Set step total
   useEffect(() => {
     if (isFullPass && fullPassPrice) setStepTotal(fullPassPrice);
-    else if (!selectedWorkshops) setStepTotal(0);
-    else {
-      const wsPrice = selectedWorkshops.reduce((prev, current) => {
-        const price: number | undefined =
-          currentPricePeriod?.price[version][`${current.teachersPriceGroup!}Price`];
-        return prev + price!;
-      }, 0);
-      setStepTotal(wsPrice);
-    }
-  }, [selectedWorkshops, isFullPass, currentPricePeriod, fullPassPrice, setStepTotal, version]);
+    else setStepTotal(0);
+  }, [isFullPass, fullPassPrice, setStepTotal]);
 
-  const handleFullPass = (event: React.ChangeEvent<HTMLInputElement>, value: WorkshopsType) => {
-    setValue('isFullPass', value === 'fullPass', { shouldTouch: true });
-    setValue('workshopsType', value, { shouldTouch: true });
-
-    // Reset selection if option has changed
-    if (value === 'fullPass') {
-      const res: WorkshopsField = [];
-      schedule.forEach((day) => {
-        day.dayEvents.forEach((event) => {
-          event.type === 'workshop' &&
-            res.push({ ...event, selected: false, day: day.translations[currentLang].dayTitle });
-        });
-      });
-      setValue('workshops', res);
-    } else {
-      setValue('fullPassDiscount', 'none', { shouldTouch: true });
-      setValue('fullPassDiscountSource', '');
-      setValue('fullPassGroupName', '');
-    }
-  };
-
-  const workshopsDescription = isSoldOut ? (
-    <>
-      <p className={textStyles.p}>{t('form.workshops.fullPassDescriptionSoldOut')}</p>
-    </>
-  ) : (
+  // content
+  const workshopsDescription = (
     <>
       <p className={textStyles.p}>{t('form.workshops.fullPassDescription1')}</p>
       <p className={textStyles.p}>{t('form.workshops.fullPassDescription2')}</p>
@@ -130,42 +72,18 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
       <h2 className={textStyles.h2}>{t('form.workshops.title')}</h2>
       {workshopsDescription}
 
-      {!isSoldOut && (
-        <FormControl component='fieldset'>
-          <h4 className={textStyles.h4}>{t('form.workshops.selectTitle')}</h4>
-          <RadioGroup
-            row
-            name='workshops-selection'
-            value={workshopsType || ''}
-            onChange={(event, value) => handleFullPass(event, value as WorkshopsType)}
-          >
-            <FormControlLabel
-              value='fullPass'
-              control={<Radio />}
-              label={
-                <p className={textStyles.p}>
-                  {t('form.workshops.fullPass')}{' '}
-                  <span className={textStyles.accent}>
-                    {fullPassPrice ? fullPassPrice + ' €' : ''}
-                  </span>
-                </p>
-              }
-            />
-            <FormControlLabel
-              disabled={version === 'live'} //temp
-              value='single'
-              control={<Radio />}
-              label={<p className={textStyles.p}>{t('form.workshops.singleWs')}</p>}
-            />
-          </RadioGroup>
-        </FormControl>
-      )}
+      <FormInputCheckbox
+        control={control}
+        name='isFullPass'
+        label={
+          <p className={textStyles.p}>
+            {t('form.workshops.fullPass')}{' '}
+            <span className={textStyles.accent}>{fullPassPrice ? fullPassPrice + ' €' : ''}</span>
+          </p>
+        }
+      />
 
-      <Collapse in={workshopsType === 'single'} unmountOnExit>
-        <WorkshopsList currentPricePeriod={currentPricePeriod} />
-      </Collapse>
-
-      <Collapse in={workshopsType === 'fullPass'} unmountOnExit>
+      <Collapse in={isFullPass} unmountOnExit>
         <div className={styles.form}>
           <FormInputSelect
             name='fullPassDiscount'

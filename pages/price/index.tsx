@@ -1,12 +1,15 @@
-import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
+import { useMemo, useState } from 'react';
+import useTranslation from 'next-translate/useTranslation';
+import clsx from 'clsx';
+import Trans from 'next-translate/Trans';
+import { motion, AnimatePresence } from 'framer-motion';
+
+import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Price.module.css';
-import useTranslation from 'next-translate/useTranslation';
-import { useMemo, useState } from 'react';
-import { Version, SupportedLangs } from '@/src/types';
+import { Version } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
-import clsx from 'clsx';
 import {
   contestGroupPrice,
   contestSoloPrice,
@@ -18,8 +21,6 @@ import {
   isFullPassSoldOut,
   isOnlineFullPassSoldOut,
 } from '@/src/ulis/price';
-import Trans from 'next-translate/Trans';
-import { motion, AnimatePresence } from 'framer-motion';
 import { motionVariants } from '@/src/ulis/constants';
 
 const Price: NextPage = () => {
@@ -62,9 +63,6 @@ const Price: NextPage = () => {
     );
   }, [t, version]);
 
-  const group1Names = teachersWsGroups.group1.map((n) => t(`workshops.teachers.${n}`)).join(', ');
-  const group2Names = teachersWsGroups.group2.map((n) => t(`workshops.teachers.${n}`)).join(', ');
-
   const workshops = workshopsPrice.map((period, index) => {
     const getTitle = () => {
       const startDate = period.startDate?.toLocaleDateString('pl');
@@ -100,22 +98,6 @@ const Price: NextPage = () => {
             ? `${t('workshops.fullPass')}: ${t('workshops.soldOut')}`
             : `${t('workshops.fullPass')}: ${period.price[version].fullPassPrice}€`}
         </p>
-
-        {period.description && (
-          <p className={clsx(textStyles.p, styles.period__description)}>
-            {t(`workshops.${period.description}`)}
-          </p>
-        )}
-        <h5 className={styles.period__singleTitle}>{t('workshops.singleTitle')}:</h5>
-        <p className={textStyles.p}>
-          {group1Names}:
-          <span className={textStyles.accent}>&nbsp;{period.price[version].group1Price}€</span>
-        </p>
-
-        <p className={textStyles.p}>
-          {group2Names}:
-          <span className={textStyles.accent}> {period.price[version].group2Price}€</span>
-        </p>
       </div>
     );
   });
@@ -131,11 +113,15 @@ const Price: NextPage = () => {
 
       <div className={styles.table__row}>
         <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.soloPassKids')}</p>
-        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-          {contestSoloPrice.soloPassKids.price[version].priceDiscounted}€
-        </p>
-        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-          {contestSoloPrice.soloPassKids.price[version].priceNormal}€
+        <p
+          className={clsx(
+            textStyles.p,
+            textStyles.accent,
+            styles.table__cell,
+            styles.table__cell_singlePrice
+          )}
+        >
+          {contestSoloPrice.soloPassKids}€
         </p>
       </div>
 
@@ -143,11 +129,15 @@ const Price: NextPage = () => {
         <p className={clsx(textStyles.p, styles.table__cell)}>
           {t('competition.soloPassRisingStar')}
         </p>
-        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-          {contestSoloPrice.soloPassRisingStar.price.live.priceDiscounted}€
-        </p>
-        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-          {contestSoloPrice.soloPassRisingStar.price.live.priceNormal}€
+        <p
+          className={clsx(
+            textStyles.p,
+            textStyles.accent,
+            styles.table__cell,
+            styles.table__cell_singlePrice
+          )}
+        >
+          {contestSoloPrice.soloPassRisingStar}€
         </p>
       </div>
 
@@ -155,11 +145,15 @@ const Price: NextPage = () => {
         <p className={clsx(textStyles.p, styles.table__cell)}>
           {t('competition.soloPassProfessionals')}
         </p>
-        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-          {contestSoloPrice.soloPassProfessionals.price.live.priceDiscounted}€
-        </p>
-        <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-          {contestSoloPrice.soloPassProfessionals.price.live.priceNormal}€
+        <p
+          className={clsx(
+            textStyles.p,
+            textStyles.accent,
+            styles.table__cell,
+            styles.table__cell_singlePrice
+          )}
+        >
+          {contestSoloPrice.soloPassProfessionals}€
         </p>
       </div>
     </>
@@ -192,11 +186,15 @@ const Price: NextPage = () => {
           <h4 className={clsx(textStyles.h4, styles.table__header, styles.table__cell)}>
             {t('competition.categoryTitle')}
           </h4>
-          <h4 className={clsx(textStyles.h4, styles.table__header, styles.table__cell)}>
-            {t('competition.with')} Full&nbsp;Pass
-          </h4>
-          <h4 className={clsx(textStyles.h4, styles.table__header, styles.table__cell)}>
-            {t('competition.without')} Full&nbsp;Pass
+          <h4
+            className={clsx(
+              textStyles.h4,
+              styles.table__header,
+              styles.table__cell,
+              styles.table__cell_singlePrice
+            )}
+          >
+            {t('competition.price')}
           </h4>
         </div>
 
@@ -208,11 +206,15 @@ const Price: NextPage = () => {
 
         <div className={styles.table__row}>
           <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.allLevels')}</p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.kids.price[version].priceDiscounted}€
-          </p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.kids.price[version].priceNormal}€
+          <p
+            className={clsx(
+              textStyles.p,
+              textStyles.accent,
+              styles.table__cell,
+              styles.table__cell_singlePrice
+            )}
+          >
+            {contestSoloPrice.kids}€
           </p>
         </div>
 
@@ -224,11 +226,15 @@ const Price: NextPage = () => {
 
         <div className={styles.table__row}>
           <p className={clsx(textStyles.p, styles.table__cell)}>{t('competition.risingStar')}</p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.risingStar.price[version].priceDiscounted}€
-          </p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.risingStar.price[version].priceNormal}€
+          <p
+            className={clsx(
+              textStyles.p,
+              textStyles.accent,
+              styles.table__cell,
+              styles.table__cell_singlePrice
+            )}
+          >
+            {contestSoloPrice.risingStar}€
           </p>
         </div>
 
@@ -238,11 +244,15 @@ const Price: NextPage = () => {
               ? t('competition.professionals')
               : t('competition.professionalsOnline')}
           </p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.professionals.price[version].priceDiscounted}€
-          </p>
-          <p className={clsx(textStyles.p, textStyles.accent, styles.table__cell)}>
-            {contestSoloPrice.professionals.price[version].priceNormal}€
+          <p
+            className={clsx(
+              textStyles.p,
+              textStyles.accent,
+              styles.table__cell,
+              styles.table__cell_singlePrice
+            )}
+          >
+            {contestSoloPrice.professionals}€
           </p>
         </div>
 
@@ -264,7 +274,7 @@ const Price: NextPage = () => {
               styles.table__cell_singlePrice
             )}
           >
-            {contestGroupPrice[version]}€
+            {contestGroupPrice}€
           </p>
         </div>
       </div>
@@ -278,11 +288,7 @@ const Price: NextPage = () => {
       <ul className={textStyles.list}>
         <li>
           {t('worldShow.soloNormal')}:{' '}
-          <span className={textStyles.accent}>{worldShowPrice.soloPriceNormal}€</span>
-        </li>
-        <li>
-          {t('worldShow.soloDiscounted')}:{' '}
-          <span className={textStyles.accent}>{worldShowPrice.soloPriceDicounted}€</span>
+          <span className={textStyles.accent}>{worldShowPrice.solo}€</span>
         </li>
         <li>
           {t('worldShow.groups')}:{' '}
@@ -374,7 +380,6 @@ const Price: NextPage = () => {
         transition={{ type: 'linear', duration: 0.3 }}
       >
         {workshopsContent}
-        {competitionContent}
         {paymentContent}
         {privacyPolicy}
       </motion.section>

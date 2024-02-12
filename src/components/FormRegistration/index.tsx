@@ -1,10 +1,16 @@
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import useTranslation from 'next-translate/useTranslation';
+import { Collapse, Snackbar, Alert } from '@mui/material';
+import clsx from 'clsx';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { motion, AnimatePresence } from 'framer-motion';
+
 import { PersonalData } from './PersonalData';
 import styles from '@/styles/Registration.module.css';
 import textStyles from '@/styles/Text.module.css';
-import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Workshops } from './Workshops';
-import useTranslation from 'next-translate/useTranslation';
 import { SupportedLangs, Version } from '@/src/types';
 import { FormFields, FullPassDiscount, OrderPayload, SoloContestField, Step } from './types';
 import {
@@ -14,7 +20,6 @@ import {
   kidsDiscount,
   workshopsPrice,
 } from '@/src/ulis/price';
-import { Collapse, Snackbar, Alert } from '@mui/material';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { motionVariants } from '@/src/ulis/constants';
@@ -22,12 +27,8 @@ import { contestCategories, Level } from '@/src/ulis/contestCategories';
 import { ContestGroups } from './ContestGroups';
 import { WorldShow } from './WorldShow';
 import { Summary } from './Summary';
-import clsx from 'clsx';
 import { StepsNavigation } from './StepsNavigation';
-import axios from 'axios';
 import { Loader } from '../Loader';
-import { useRouter } from 'next/router';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const liveSteps: Step[] = [
   {
@@ -71,21 +72,11 @@ const onlineSteps: Step[] = [
   {
     id: 'workshops',
     prev: 'personal',
-    next: 'contestSolo',
-  },
-  {
-    id: 'contestSolo',
-    prev: 'workshops',
-    next: 'contestGroups',
-  },
-  {
-    id: 'contestGroups',
-    prev: 'contestSolo',
     next: 'summary',
   },
   {
     id: 'summary',
-    prev: 'contestGroups',
+    prev: 'workshops',
     next: null,
   },
 ];
@@ -292,20 +283,18 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version }) =
   }, [ageGroup, version]);
 
   const soloPassPrice = useMemo(() => {
-    const priceKids = contestSoloPrice.soloPassKids.price[version];
-    const priceRisingStar = contestSoloPrice.soloPassRisingStar.price[version];
-    const priceProfessionals = contestSoloPrice.soloPassProfessionals.price[version];
+    const priceKids = contestSoloPrice.soloPassKids;
+    const priceRisingStar = contestSoloPrice.soloPassRisingStar;
+    const priceProfessionals = contestSoloPrice.soloPassProfessionals;
 
     // Price for Kids and Baby
-    if (ageGroup === 'baby' || ageGroup === 'kids')
-      return isFullPass ? priceKids.priceDiscounted : priceKids.priceNormal;
+    if (ageGroup === 'baby' || ageGroup === 'kids') return priceKids;
     // Price for everyone else
     else {
-      if (contestLevel === 'professionals')
-        return isFullPass ? priceProfessionals.priceDiscounted : priceProfessionals.priceNormal;
-      else return isFullPass ? priceRisingStar.priceDiscounted : priceRisingStar.priceNormal;
+      if (contestLevel === 'professionals') return priceProfessionals;
+      else return priceRisingStar;
     }
-  }, [ageGroup, contestLevel, isFullPass, version]);
+  }, [ageGroup, contestLevel]);
 
   return (
     <FormProvider {...methods}>

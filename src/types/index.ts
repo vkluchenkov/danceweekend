@@ -24,12 +24,7 @@ export type SoloPriceCats =
   | 'soloPassProfessionals';
 
 export interface ContestSoloPrice {
-  price: {
-    [version in Version]: {
-      priceNormal: number;
-      priceDiscounted: number;
-    };
-  };
+  price: number;
 }
 
 export type AgeGroup = 'baby' | 'kids' | 'juniors' | 'adults' | 'seniors';

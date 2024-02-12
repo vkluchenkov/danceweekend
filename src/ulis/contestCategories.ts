@@ -13,7 +13,6 @@ export interface Style {
   isSolo?: boolean;
   isImprovisation?: boolean;
   isSoloPass?: boolean;
-  isQueen?: boolean;
 }
 
 export interface ContestCategory {
@@ -453,7 +452,6 @@ export const contestCategories: ContestCategory[] = [
         types: ['live'],
         isSolo: true,
         isImprovisation: true,
-        isQueen: true,
         translations: {
           en: {
             categoryTitle: 'Queen of live tabla solo improvisation',

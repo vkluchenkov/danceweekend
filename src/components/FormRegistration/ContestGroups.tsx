@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import { Button, Collapse } from '@mui/material';
+
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { useCallback, useEffect } from 'react';
-import { Button, Collapse } from '@mui/material';
 import { ContestGroupStepProps, FormFields, GroupContest } from './types';
 import { ContestGroup } from './ContestGroup';
 import { contestGroupPrice } from '@/src/ulis/price';
@@ -14,7 +14,6 @@ import { FormInputCheckbox } from '@/src/ui-kit/input';
 
 export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   setStepTotal,
-  isEligible,
   lastDirection,
   onStepSubmit,
 }) => {
@@ -41,9 +40,9 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
       style: '',
       qty: 2,
       name: '',
-      price: contestGroupPrice[version] * 2, //qty
+      price: contestGroupPrice * 2, //qty
     };
-  }, [version]);
+  }, []);
 
   const controlledFields = fields.map((field, index) => {
     return {
@@ -56,7 +55,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   // Skip step for seniors age group or if not enough workshops
   // Clean contest group competition state if not empty
   useEffect(() => {
-    if (contestAgeGroup === 'seniors' || !isEligible) {
+    if (contestAgeGroup === 'seniors') {
       if (groupContest.length > 0) {
         setValue('isGroupContest', false);
         setValue('groupContest', []);
@@ -125,34 +124,28 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.contest.groups.title')}</h2>
-      {!isEligible && <p>{t('form.contest.oops')}</p>}
+      <FormInputCheckbox
+        name='isGroupContest'
+        control={control}
+        label={<p className={textStyles.p}>{t('form.contest.groups.checkboxLabel')}</p>}
+      />
 
-      {isEligible && (
-        <>
-          <FormInputCheckbox
-            name='isGroupContest'
-            control={control}
-            label={<p className={textStyles.p}>{t('form.contest.groups.checkboxLabel')}</p>}
-          />
+      <Collapse in={isGroupContest} unmountOnExit>
+        <div className={styles.form}>{groups}</div>
 
-          <Collapse in={isGroupContest} unmountOnExit>
-            <div className={styles.form}>{groups}</div>
-
-            {groupContest.length && groupContest.length < maxGroups && (
-              <Button
-                type='button'
-                variant='outlined'
-                fullWidth
-                size='large'
-                disableElevation
-                onClick={handleMore}
-              >
-                {t('form.contest.groups.add')}
-              </Button>
-            )}
-          </Collapse>
-        </>
-      )}
+        {groupContest.length && groupContest.length < maxGroups && (
+          <Button
+            type='button'
+            variant='outlined'
+            fullWidth
+            size='large'
+            disableElevation
+            onClick={handleMore}
+          >
+            {t('form.contest.groups.add')}
+          </Button>
+        )}
+      </Collapse>
     </div>
   );
 };

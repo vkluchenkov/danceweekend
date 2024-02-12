@@ -1,14 +1,15 @@
+import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Button, MenuItem } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
+import clsx from 'clsx';
+
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { GroupContest, FormFields } from './types';
-import { Button, MenuItem } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
-import { useFormContext } from 'react-hook-form';
-import { useEffect, useState } from 'react';
 import { contestGroupPrice } from '@/src/ulis/price';
-import clsx from 'clsx';
 import { Style } from '@/src/ulis/contestCategories';
 import { SupportedLangs } from '@/src/types';
 
@@ -54,7 +55,7 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, cat
 
   // Calculate selection price
   useEffect(() => {
-    const price = field.qty * contestGroupPrice[version];
+    const price = field.qty * contestGroupPrice;
     setValue(`groupContest.${field.index}.price`, price);
   }, [setValue, field.qty, field.index, version]);
 

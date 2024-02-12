@@ -82,88 +82,18 @@ export const workshopsPrice: PricePeriod[] = [
   },
 ];
 
-export const contestSoloPrice: Record<SoloPriceCats, ContestSoloPrice> = {
-  kids: {
-    price: {
-      live: {
-        priceNormal: 25,
-        priceDiscounted: 20,
-      },
-      online: {
-        priceNormal: 15,
-        priceDiscounted: 10,
-      },
-    },
-  },
-  risingStar: {
-    price: {
-      live: {
-        priceNormal: 40,
-        priceDiscounted: 30,
-      },
-      online: {
-        priceNormal: 30,
-        priceDiscounted: 20,
-      },
-    },
-  },
-  professionals: {
-    price: {
-      live: {
-        priceNormal: 50,
-        priceDiscounted: 40,
-      },
-      online: {
-        priceNormal: 40,
-        priceDiscounted: 30,
-      },
-    },
-  },
-  soloPassKids: {
-    price: {
-      live: {
-        priceNormal: 80,
-        priceDiscounted: 65,
-      },
-      online: {
-        priceNormal: 80,
-        priceDiscounted: 65,
-      },
-    },
-  },
-  soloPassRisingStar: {
-    price: {
-      live: {
-        priceNormal: 130,
-        priceDiscounted: 95,
-      },
-      online: {
-        priceNormal: 130,
-        priceDiscounted: 95,
-      },
-    },
-  },
-  soloPassProfessionals: {
-    price: {
-      live: {
-        priceNormal: 160,
-        priceDiscounted: 130,
-      },
-      online: {
-        priceNormal: 160,
-        priceDiscounted: 130,
-      },
-    },
-  },
+export const contestSoloPrice: Record<SoloPriceCats, number> = {
+  kids: 25,
+  risingStar: 40,
+  professionals: 50,
+  soloPassKids: 80,
+  soloPassRisingStar: 130,
+  soloPassProfessionals: 160,
 };
 
-export const contestGroupPrice = {
-  live: 20,
-  online: 15,
-};
+export const contestGroupPrice = 20;
 
 export const worldShowPrice = {
-  soloPriceNormal: 40,
-  soloPriceDicounted: 30,
+  solo: 40,
   groups: 20,
 };

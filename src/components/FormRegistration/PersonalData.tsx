@@ -1,6 +1,7 @@
-import { FormInputField } from '@/src/ui-kit/input';
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
+
+import { FormInputField } from '@/src/ui-kit/input';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { FormFields, StepProps } from './types';

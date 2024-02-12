@@ -23,11 +23,9 @@ export const ContestSoloList: React.FC = () => {
   const currentLang = lang as SupportedLangs;
 
   const soloContest = watch('soloContest');
-  const isFullPass = watch('isFullPass');
   const isSoloPass = watch('isSoloPass');
   const contestAgeGroup = watch('contestAgeGroup');
   const contestLevel = watch('contestLevel');
-  const version = watch('version');
 
   const controlledFields = fields.map((field, index) => {
     return {
@@ -48,40 +46,38 @@ export const ContestSoloList: React.FC = () => {
   };
 
   const getCategoryPrice = useCallback(
-    (isCategorySoloPass: boolean, isQueen: boolean): number => {
-      const priceKids = contestSoloPrice.kids.price[version];
-      const pricerRisingStar = contestSoloPrice.risingStar.price[version];
-      const pricerProfessionals = contestSoloPrice.professionals.price[version];
+    (isCategorySoloPass: boolean): number => {
+      const priceKids = contestSoloPrice.kids;
+      const pricerRisingStar = contestSoloPrice.risingStar;
+      const pricerProfessionals = contestSoloPrice.professionals;
 
       // If category is included in Solo Pass
       if (isCategorySoloPass && isSoloPass) return 0;
       // If category is not included in Solo Pass
       else {
-        // Price for Kids
-        if (contestAgeGroup === 'kids' || contestAgeGroup === 'baby')
-          return isFullPass ? priceKids.priceDiscounted : priceKids.priceNormal;
+        // Price for Kids-
+        if (contestAgeGroup === 'kids' || contestAgeGroup === 'baby') return priceKids;
         // Price for everyone else
         else {
-          // Price for Professionals and Queen
-          if (contestLevel === 'professionals' || isQueen)
-            return isFullPass
-              ? pricerProfessionals.priceDiscounted
-              : pricerProfessionals.priceNormal;
+          // Price for Professionals
+          if (contestLevel === 'professionals') return pricerProfessionals;
           // Price for Rising star / open level
-          return isFullPass ? pricerRisingStar.priceDiscounted : pricerRisingStar.priceNormal;
+          return pricerRisingStar;
         }
       }
     },
-    [contestAgeGroup, isFullPass, isSoloPass, contestLevel, version]
+    [contestAgeGroup, isSoloPass, contestLevel]
   );
 
   // Re-set prices when fields or Solo Pass change
   useEffect(() => {
     controlledFields.forEach((i) => {
-      const price = getCategoryPrice(!!i.isSoloPass, !!i.isQueen);
+      const price = getCategoryPrice(!!i.isSoloPass);
       const index = soloContest.findIndex((cat) => cat.id === i.id);
       setValue(`soloContest.${index}.price`, price, { shouldTouch: true });
     });
+
+    // eslint-disable-next-line
   }, [soloContest, isSoloPass, contestLevel]);
 
   const categories = controlledFields.map((cat) => {

@@ -1,4 +1,4 @@
-import { PricePeriod, SoloPriceCats, ContestSoloPrice } from '@/src/types';
+import { PricePeriod, SoloPriceCats } from '@/src/types';
 
 export const ispromoPeriod = false;
 export const isOnlinePromoPeriod = false;

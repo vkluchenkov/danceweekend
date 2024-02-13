@@ -1,0 +1,6 @@
+query getPostBySlug($id: ID!) {
+  post(id: $id, idType: SLUG) {
+    content(format: RENDERED)
+    title
+  }
+}

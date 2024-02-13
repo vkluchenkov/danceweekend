@@ -1,0 +1,10 @@
+query getPosts {
+  posts {
+    nodes {
+      id
+      title
+      content(format: RENDERED)
+      slug
+    }
+  }
+}

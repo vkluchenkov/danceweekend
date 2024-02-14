@@ -16,6 +16,24 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+/** A Field Group managed by ACF */
+export type AcfFieldGroup = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Fields associated with an ACF Field Group */
+export type AcfFieldGroupFields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export type Avatar = {
   /** URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
@@ -2665,6 +2683,12 @@ export enum MediaItemSizeEnum {
   MediumLarge = 'MEDIUM_LARGE',
   /** MediaItem with the thumbnail size */
   Thumbnail = 'THUMBNAIL',
+  /** MediaItem with the woocommerce_gallery_thumbnail size */
+  WoocommerceGalleryThumbnail = 'WOOCOMMERCE_GALLERY_THUMBNAIL',
+  /** MediaItem with the woocommerce_single size */
+  WoocommerceSingle = 'WOOCOMMERCE_SINGLE',
+  /** MediaItem with the woocommerce_thumbnail size */
+  WoocommerceThumbnail = 'WOOCOMMERCE_THUMBNAIL',
   /** MediaItem with the 1536x1536 size */
   '1536X1536' = '_1536X1536',
   /** MediaItem with the 2048x2048 size */
@@ -3446,7 +3470,7 @@ export enum OrderEnum {
 }
 
 /** The page type */
-export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & {
+export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfSettingsDww & {
   /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
   ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
   /** Connection between the NodeWithAuthor type and the User type */
@@ -3542,6 +3566,8 @@ export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   revisionOf?: Maybe<NodeWithRevisionsToContentNodeConnectionEdge>;
   /** Connection between the Page type and the page type */
   revisions?: Maybe<PageToRevisionConnection>;
+  /** Fields of the SettingsDww ACF Field Group */
+  settingsDww?: Maybe<SettingsDww>;
   /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
   slug?: Maybe<Scalars['String']['output']>;
   /** The current status of the object */
@@ -4562,6 +4588,8 @@ export type PostPostFormatsNodeInput = {
 
 /** The status of the object. */
 export enum PostStatusEnum {
+  /** Objects with the acf-disabled status */
+  AcfDisabled = 'ACF_DISABLED',
   /** Objects with the auto-draft status */
   AutoDraft = 'AUTO_DRAFT',
   /** Objects with the draft status */
@@ -4585,7 +4613,23 @@ export enum PostStatusEnum {
   /** Objects with the request-pending status */
   RequestPending = 'REQUEST_PENDING',
   /** Objects with the trash status */
-  Trash = 'TRASH'
+  Trash = 'TRASH',
+  /** Objects with the wc-cancelled status */
+  WcCancelled = 'WC_CANCELLED',
+  /** Objects with the wc-checkout-draft status */
+  WcCheckoutDraft = 'WC_CHECKOUT_DRAFT',
+  /** Objects with the wc-completed status */
+  WcCompleted = 'WC_COMPLETED',
+  /** Objects with the wc-failed status */
+  WcFailed = 'WC_FAILED',
+  /** Objects with the wc-on-hold status */
+  WcOnHold = 'WC_ON_HOLD',
+  /** Objects with the wc-pending status */
+  WcPending = 'WC_PENDING',
+  /** Objects with the wc-processing status */
+  WcProcessing = 'WC_PROCESSING',
+  /** Objects with the wc-refunded status */
+  WcRefunded = 'WC_REFUNDED'
 }
 
 /** Set relationships between the post to tags */
@@ -7206,6 +7250,308 @@ export type Settings = {
   writingSettingsUseSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
+/** The &quot;SettingsDww&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDww = AcfFieldGroup & AcfFieldGroupFields & SettingsDww_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDww&quot; Field Group */
+  price: SettingsDwwPrice;
+};
+
+/** The &quot;SettingsDwwPrice&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPrice = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPrice_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  periods: SettingsDwwPricePeriods;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  promoPeriod?: Maybe<SettingsDwwPricePromoPeriod>;
+};
+
+/** The &quot;SettingsDwwPricePeriods&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePeriods = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePeriods_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriods&quot; Field Group */
+  pricePeriod1: SettingsDwwPricePeriodsPricePeriod1;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriods&quot; Field Group */
+  pricePeriod2: SettingsDwwPricePeriodsPricePeriod2;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriods&quot; Field Group */
+  pricePeriod3: SettingsDwwPricePeriodsPricePeriod3;
+};
+
+/** The &quot;SettingsDwwPricePeriodsPricePeriod1&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePeriodsPricePeriod1 = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePeriodsPricePeriod1_Fields & {
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1&quot; Field Group */
+  end: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1&quot; Field Group */
+  price: SettingsDwwPricePeriodsPricePeriod1Price;
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1&quot; Field Group */
+  start: Scalars['String']['output'];
+};
+
+/** The &quot;SettingsDwwPricePeriodsPricePeriod1Price&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePeriodsPricePeriod1Price = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePeriodsPricePeriod1Price_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1Price&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1Price&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePeriodsPricePeriod1Price&quot; Field Group */
+export type SettingsDwwPricePeriodsPricePeriod1Price_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1Price&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1Price&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePeriodsPricePeriod1&quot; Field Group */
+export type SettingsDwwPricePeriodsPricePeriod1_Fields = {
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1&quot; Field Group */
+  end: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1&quot; Field Group */
+  price: SettingsDwwPricePeriodsPricePeriod1Price;
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod1&quot; Field Group */
+  start: Scalars['String']['output'];
+};
+
+/** The &quot;SettingsDwwPricePeriodsPricePeriod2&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePeriodsPricePeriod2 = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePeriodsPricePeriod2_Fields & {
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2&quot; Field Group */
+  end: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2&quot; Field Group */
+  price: SettingsDwwPricePeriodsPricePeriod2Price;
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2&quot; Field Group */
+  start: Scalars['String']['output'];
+};
+
+/** The &quot;SettingsDwwPricePeriodsPricePeriod2Price&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePeriodsPricePeriod2Price = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePeriodsPricePeriod2Price_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2Price&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2Price&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePeriodsPricePeriod2Price&quot; Field Group */
+export type SettingsDwwPricePeriodsPricePeriod2Price_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2Price&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2Price&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePeriodsPricePeriod2&quot; Field Group */
+export type SettingsDwwPricePeriodsPricePeriod2_Fields = {
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2&quot; Field Group */
+  end: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2&quot; Field Group */
+  price: SettingsDwwPricePeriodsPricePeriod2Price;
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod2&quot; Field Group */
+  start: Scalars['String']['output'];
+};
+
+/** The &quot;SettingsDwwPricePeriodsPricePeriod3&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePeriodsPricePeriod3 = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePeriodsPricePeriod3_Fields & {
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3&quot; Field Group */
+  end: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3&quot; Field Group */
+  price: SettingsDwwPricePeriodsPricePeriod3Price;
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3&quot; Field Group */
+  start: Scalars['String']['output'];
+};
+
+/** The &quot;SettingsDwwPricePeriodsPricePeriod3Price&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePeriodsPricePeriod3Price = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePeriodsPricePeriod3Price_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3Price&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3Price&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePeriodsPricePeriod3Price&quot; Field Group */
+export type SettingsDwwPricePeriodsPricePeriod3Price_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3Price&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3Price&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePeriodsPricePeriod3&quot; Field Group */
+export type SettingsDwwPricePeriodsPricePeriod3_Fields = {
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3&quot; Field Group */
+  end: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3&quot; Field Group */
+  price: SettingsDwwPricePeriodsPricePeriod3Price;
+  /** Field of the &quot;date_time_picker&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriodsPricePeriod3&quot; Field Group */
+  start: Scalars['String']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePeriods&quot; Field Group */
+export type SettingsDwwPricePeriods_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriods&quot; Field Group */
+  pricePeriod1: SettingsDwwPricePeriodsPricePeriod1;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriods&quot; Field Group */
+  pricePeriod2: SettingsDwwPricePeriodsPricePeriod2;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePeriods&quot; Field Group */
+  pricePeriod3: SettingsDwwPricePeriodsPricePeriod3;
+};
+
+/** The &quot;SettingsDwwPricePromoPeriod&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePromoPeriod = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePromoPeriod_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  isLivePromo: Scalars['String']['output'];
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  isOnlinePromo: Scalars['String']['output'];
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  price: SettingsDwwPricePromoPeriodPrice;
+};
+
+/** The &quot;SettingsDwwPricePromoPeriodPrice&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePromoPeriodPrice = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePromoPeriodPrice_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodPrice&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodPrice&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePromoPeriodPrice&quot; Field Group */
+export type SettingsDwwPricePromoPeriodPrice_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodPrice&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodPrice&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+export type SettingsDwwPricePromoPeriod_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  isLivePromo: Scalars['String']['output'];
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  isOnlinePromo: Scalars['String']['output'];
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  price: SettingsDwwPricePromoPeriodPrice;
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPrice&quot; Field Group */
+export type SettingsDwwPrice_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  periods: SettingsDwwPricePeriods;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  promoPeriod?: Maybe<SettingsDwwPricePromoPeriod>;
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDww&quot; Field Group */
+export type SettingsDww_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDww&quot; Field Group */
+  price: SettingsDwwPrice;
+};
+
 /** The tag type */
 export type Tag = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable & {
   /** Connection between the Tag type and the ContentNode type */
@@ -8554,7 +8900,11 @@ export enum UserRoleEnum {
   /** User role with specific capabilities */
   Contributor = 'CONTRIBUTOR',
   /** User role with specific capabilities */
+  Customer = 'CUSTOMER',
+  /** User role with specific capabilities */
   Editor = 'EDITOR',
+  /** User role with specific capabilities */
+  ShopManager = 'SHOP_MANAGER',
   /** User role with specific capabilities */
   Subscriber = 'SUBSCRIBER'
 }
@@ -9113,6 +9463,12 @@ export type WpPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** Provides access to fields of the &quot;SettingsDww&quot; ACF Field Group via the &quot;settingsDww&quot; field */
+export type WithAcfSettingsDww = {
+  /** Fields of the SettingsDww ACF Field Group */
+  settingsDww?: Maybe<SettingsDww>;
+};
+
 /** The writing setting type */
 export type WritingSettings = {
   /** Default post category. */
@@ -9135,6 +9491,12 @@ export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPostsQuery = { posts?: { nodes: Array<{ id: string, title?: string | null, content?: string | null, slug?: string | null }> } | null };
 
+export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSettingsQuery = { page?: { title?: string | null, settingsDww?: { price: { promoPeriod?: { isLivePromo: string, isOnlinePromo: string, price: { live: number, online: number } } | null, periods: { pricePeriod1: { start: string, end: string, price: { live: number, online: number } }, pricePeriod2: { start: string, end: string, price: { live: number, online: number } }, pricePeriod3: { start: string, end: string, price: { live: number, online: number } } } } } | null } | null };
+
 
 export const GetPostBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPostBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"SLUG"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetPostBySlugQuery, GetPostBySlugQueryVariables>;
 export const GetPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
+export const GetSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"settings","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"settingsDww"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"promoPeriod"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLivePromo"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlinePromo"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"periods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pricePeriod1"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod2"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod3"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetSettingsQuery, GetSettingsQueryVariables>;

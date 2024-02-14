@@ -1,5 +1,5 @@
-import { NextPage } from 'next';
-import { useMemo, useState } from 'react';
+import { GetStaticProps, NextPage } from 'next';
+import { useEffect, useMemo, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import Trans from 'next-translate/Trans';
@@ -15,18 +15,47 @@ import {
   contestSoloPrice,
   ispromoPeriod,
   isOnlinePromoPeriod,
-  teachersWsGroups,
   workshopsPrice,
   worldShowPrice,
   isFullPassSoldOut,
   isOnlineFullPassSoldOut,
 } from '@/src/ulis/price';
 import { motionVariants } from '@/src/ulis/constants';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
+import { WordpressApi } from '@/src/api/wordpressApi';
+
+export const getStaticProps: GetStaticProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['settings'],
+    queryFn: WordpressApi.getSettings,
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 60,
+  };
+};
 
 const Price: NextPage = () => {
   const { t, lang } = useTranslation('price');
 
+  const { data, isLoading, status, error } = useQuery({
+    queryKey: ['settings'],
+    queryFn: WordpressApi.getSettings,
+    refetchOnMount: false,
+  });
+
+  const [price, setPrice] = useState(data?.price);
+
   const [version, setVersion] = useState<Version>('live');
+
+  useEffect(() => {
+    if (data?.price) setPrice(data.price);
+  }, [data]);
 
   const isSoldOut =
     (isFullPassSoldOut && version === 'live') || (isOnlineFullPassSoldOut && version === 'online');
@@ -63,44 +92,74 @@ const Price: NextPage = () => {
     );
   }, [t, version]);
 
-  const workshops = workshopsPrice.map((period, index) => {
-    const getTitle = () => {
-      const startDate = period.startDate?.toLocaleDateString('pl');
-      const endDate = period.endDate?.toLocaleDateString('pl');
-      if (period.isPromo) return t('workshops.promo');
-      else return `${startDate} – ${endDate}`;
+  const priceCards = () => {
+    const isPromo = (): boolean => {
+      if (version === 'live') return price?.promoPeriod?.isLivePromo === 'true' ? true : false;
+      else return price?.promoPeriod?.isOnlinePromo === 'true' ? true : false;
     };
 
-    const today = new Date();
-    const isPast = period.endDate && today > period.endDate;
-    const isNow =
-      period.endDate && period.startDate && today <= period.endDate && today >= period.startDate;
-
-    const isPromo = version === 'live' ? ispromoPeriod : isOnlinePromoPeriod;
-
-    return (
+    const promoCard = (
       <div
-        key={period.price[version].fullPassPrice + index}
+        key='promoCard'
         className={clsx(
           styles.period,
           // Promo styles
-          period.isPromo && isPromo && styles.period_active,
-          period.isPromo && !isPromo && styles.period_expired,
-          // Date based styles, ignored if promo is active
-          !period.isPromo && !isPromo && isPast && styles.period_expired,
-          !period.isPromo && !isPromo && isNow && styles.period_active
+          isPromo() && styles.period_active,
+          !isPromo() && styles.period_expired
         )}
       >
-        <h4 className={styles.period__title}>{getTitle()}</h4>
+        <h4 className={styles.period__title}>{t('workshops.promo')}</h4>
 
         <p className={clsx(textStyles.p, styles.period__fullPass)}>
           {isSoldOut
             ? `${t('workshops.fullPass')}: ${t('workshops.soldOut')}`
-            : `${t('workshops.fullPass')}: ${period.price[version].fullPassPrice}€`}
+            : `${t('workshops.fullPass')}: ${price?.promoPeriod!.price[version]}€`}
         </p>
       </div>
     );
-  });
+
+    const allCards = [];
+    allCards.push(promoCard);
+
+    const periods = Object.entries(price?.periods!);
+
+    periods.forEach((period, index) => {
+      const startDate = new Date(period[1].start);
+      const endDate = new Date(period[1].end);
+
+      const cardTitle = `${startDate.toLocaleDateString('pl', {
+        timeZone: 'UTC',
+      })} – ${endDate.toLocaleDateString('pl', { timeZone: 'UTC' })}`;
+
+      const today = new Date();
+      const isPast = endDate && today > endDate;
+      const isNow = endDate && startDate && today <= endDate && today >= startDate;
+
+      const card = (
+        <div
+          key={period[0]}
+          className={clsx(
+            styles.period,
+            // Date based styles, ignored if promo is active
+            !isPromo() && isPast && styles.period_expired,
+            !isPromo() && isNow && styles.period_active
+          )}
+        >
+          <h4 className={styles.period__title}>{cardTitle}</h4>
+
+          <p className={clsx(textStyles.p, styles.period__fullPass)}>
+            {isSoldOut
+              ? `${t('workshops.fullPass')}: ${t('workshops.soldOut')}`
+              : `${t('workshops.fullPass')}: ${period[1].price[version]}€`}
+          </p>
+        </div>
+      );
+
+      allCards.push(card);
+    });
+
+    return allCards;
+  };
 
   const soloPassTable = (
     <>
@@ -164,7 +223,7 @@ const Price: NextPage = () => {
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('workshops.title')}</h2>
       <p className={textStyles.p}>{t('workshops.description')}</p>
       {version === 'live' && <p className={textStyles.p}>{t('workshops.kidsDiscount')}</p>}
-      <div className={styles.workshopsContainer}>{workshops}</div>
+      <div className={styles.workshopsContainer}>{priceCards()}</div>
 
       {version === 'live' && (
         <>
@@ -361,6 +420,7 @@ const Price: NextPage = () => {
         transition={{ type: 'linear', duration: 0.3 }}
       >
         {workshopsContent}
+
         {competitionContent}
         {worldShowContent}
         {paymentContent}

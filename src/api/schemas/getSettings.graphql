@@ -1,0 +1,43 @@
+query getSettings {
+  page(id: "settings", idType: URI) {
+    title
+    settingsDww {
+      price {
+        promoPeriod {
+          isLivePromo
+          isOnlinePromo
+          price {
+            live
+            online
+          }
+        }
+        periods {
+          pricePeriod1 {
+            start
+            end
+            price {
+              live
+              online
+            }
+          }
+          pricePeriod2 {
+            start
+            end
+            price {
+              live
+              online
+            }
+          }
+          pricePeriod3 {
+            start
+            end
+            price {
+              live
+              online
+            }
+          }
+        }
+      }
+    }
+  }
+}

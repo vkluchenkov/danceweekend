@@ -15,6 +15,14 @@
   aspect-ratio: 1 / 1;
 }
 
+.photo__wrapper_large {
+  position: fixed;
+  top: 5%;
+  left: 7%;
+  right: 7%;
+  bottom: 5%;
+}
+
 .photo {
   display: block;
   border-radius: 5px;

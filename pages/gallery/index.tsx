@@ -1,23 +1,15 @@
 import { GetStaticProps, NextPage } from 'next';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import { Galleria } from 'primereact/galleria';
 import useTranslation from 'next-translate/useTranslation';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 
 import { Layout } from '@/src/components/Layout';
 import styles from '@/styles/Gallery.module.css';
 import textStyles from '@/styles/Text.module.css';
-import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { WordpressApi } from '@/src/api/wordpressApi';
-import Image from 'next/image';
-
-interface ImageProps {
-  caption?: string | null | undefined;
-  altText?: string | null | undefined;
-  large?: string | null | undefined;
-  small?: string | null | undefined;
-  title?: string | null | undefined;
-  srcSet?: string | null | undefined;
-}
+import { ImageDto } from '@/src/types/gallery.types';
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -46,43 +38,57 @@ const GalleryTest: NextPage = () => {
 
   const galleria = useRef<Galleria>(null);
 
-  const [images, setImages] = useState<ImageProps[] | undefined>(
-    data?.galleryImagesGroup?.images?.nodes
-  );
+  const [images, setImages] = useState<ImageDto[] | undefined>(undefined);
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    if (data?.galleryImagesGroup?.images?.nodes) setImages(data?.galleryImagesGroup?.images?.nodes);
+    const imagesList = data?.galleryImagesGroup?.images?.nodes;
+    if (imagesList) setImages(imagesList);
   }, [data]);
 
-  const itemTemplate = (item: ImageProps) => {
-    return <img src={item.large!} alt={item.title!} style={{ width: '100%', display: 'block' }} />;
+  const imageClickHandler = (index: number) => {
+    setActiveIndex(index);
+    if (galleria.current) galleria.current.show();
   };
 
-  const imageList = images!.map((image: ImageProps, index: number) => {
+  const itemTemplate = (item: ImageDto) => {
     return (
-      <li
-        key={'photo' + index}
-        className={styles.photo__wrapper}
-        onClick={(e) => {
-          setActiveIndex(index);
-          galleria.current!.show();
-        }}
-      >
+      <div className={styles.photo__wrapper_large}>
         <Image
-          src={image.small!}
-          alt={image.altText!}
-          className={styles.photo}
+          src={item.large!}
+          alt={item.title!}
+          style={{ display: 'block', objectFit: 'contain' }}
           fill
-          style={{ objectFit: 'cover', objectPosition: 'top center' }}
-          sizes='
+        />
+      </div>
+    );
+  };
+
+  const imageList = images ? (
+    images.map((image: ImageDto, index: number) => {
+      return (
+        <li
+          key={'photo' + index}
+          className={styles.photo__wrapper}
+          onClick={() => imageClickHandler(index)}
+        >
+          <Image
+            src={image.small!}
+            alt={image.altText!}
+            className={styles.photo}
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'top center' }}
+            sizes='
           (max-width: 768px) 450px,
           80vw'
-        />
-      </li>
-    );
-  });
+          />
+        </li>
+      );
+    })
+  ) : (
+    <></>
+  );
 
   return (
     <>

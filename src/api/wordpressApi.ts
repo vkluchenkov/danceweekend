@@ -1,7 +1,10 @@
-import request, { RequestDocument, Variables, gql } from 'graphql-request';
+import request, { RequestDocument, Variables } from 'graphql-request';
 
 import { config } from '../config';
 import {
+  GetGalleryBySlugDocument,
+  GetGalleryBySlugQuery,
+  GetGalleryBySlugQueryVariables,
   GetPostBySlugDocument,
   GetPostBySlugQuery,
   GetPostBySlugQueryVariables,
@@ -11,7 +14,6 @@ import {
   GetSettingsDocument,
   GetSettingsQuery,
   GetSettingsQueryVariables,
-  Post,
 } from './gql/graphql';
 
 const API_URL = config.wordpress.grapqlBackend;
@@ -51,6 +53,14 @@ class wordpressApi {
       { id: slug }
     );
     return post;
+  }
+
+  public async getGalleryBySlug(slug: string) {
+    const { gallery } = await this.request<GetGalleryBySlugQuery, GetGalleryBySlugQueryVariables>(
+      GetGalleryBySlugDocument,
+      { slug }
+    );
+    return gallery;
   }
 }
 

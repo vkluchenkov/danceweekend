@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "query GetGalleryBySlug($slug: ID!) {\n  gallery(id: $slug, idType: SLUG) {\n    galleryImagesGroup {\n      images(first: 1000) {\n        nodes {\n          caption(format: RENDERED)\n          altText\n          large: sourceUrl\n          small: sourceUrl(size: THUMBNAIL)\n          title\n        }\n      }\n    }\n  }\n}": types.GetGalleryBySlugDocument,
     "query getPostBySlug($id: ID!) {\n  post(id: $id, idType: SLUG) {\n    content(format: RENDERED)\n    title\n  }\n}": types.GetPostBySlugDocument,
     "query getPosts {\n  posts {\n    nodes {\n      id\n      title\n      content(format: RENDERED)\n      slug\n    }\n  }\n}": types.GetPostsDocument,
     "query getSettings {\n  page(id: \"settings\", idType: URI) {\n    title\n    settingsDww {\n      price {\n        promoPeriod {\n          isLivePromo\n          isOnlinePromo\n          price {\n            live\n            online\n          }\n        }\n        periods {\n          pricePeriod1 {\n            start\n            end\n            price {\n              live\n              online\n            }\n          }\n          pricePeriod2 {\n            start\n            end\n            price {\n              live\n              online\n            }\n          }\n          pricePeriod3 {\n            start\n            end\n            price {\n              live\n              online\n            }\n          }\n        }\n      }\n    }\n  }\n}": types.GetSettingsDocument,
@@ -32,6 +33,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetGalleryBySlug($slug: ID!) {\n  gallery(id: $slug, idType: SLUG) {\n    galleryImagesGroup {\n      images(first: 1000) {\n        nodes {\n          caption(format: RENDERED)\n          altText\n          large: sourceUrl\n          small: sourceUrl(size: THUMBNAIL)\n          title\n        }\n      }\n    }\n  }\n}"): (typeof documents)["query GetGalleryBySlug($slug: ID!) {\n  gallery(id: $slug, idType: SLUG) {\n    galleryImagesGroup {\n      images(first: 1000) {\n        nodes {\n          caption(format: RENDERED)\n          altText\n          large: sourceUrl\n          small: sourceUrl(size: THUMBNAIL)\n          title\n        }\n      }\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

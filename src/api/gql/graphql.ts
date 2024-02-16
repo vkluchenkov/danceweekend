@@ -34,6 +34,36 @@ export type AcfFieldGroupFields = {
   fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
+/** Connection between the GalleryImagesGroup type and the MediaItem type */
+export type AcfMediaItemConnection = Connection & MediaItemConnection & {
+  /** Edges for the AcfMediaItemConnection connection */
+  edges: Array<AcfMediaItemConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<MediaItem>;
+  /** Information about pagination in a connection. */
+  pageInfo: AcfMediaItemConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type AcfMediaItemConnectionEdge = Edge & MediaItemConnectionEdge & {
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: MediaItem;
+};
+
+/** Page Info on the &quot;AcfMediaItemConnection&quot; */
+export type AcfMediaItemConnectionPageInfo = MediaItemConnectionPageInfo & PageInfo & WpPageInfo & {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export type Avatar = {
   /** URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
@@ -1242,6 +1272,8 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Attachment = 'ATTACHMENT',
   /** The Type of Content object */
+  Gallery = 'GALLERY',
+  /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
   Post = 'POST'
@@ -1431,6 +1463,32 @@ export type CreateCommentPayload = {
   comment?: Maybe<Comment>;
   /** Whether the mutation succeeded. If the comment is not approved, the server will not return the comment to a non authenticated user, but a success message can be returned if the create succeeded, and the client can optimistically add the comment to the client cache */
   success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Input for the createGallery mutation. */
+export type CreateGalleryInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createGallery mutation. */
+export type CreateGalleryPayload = {
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  gallery?: Maybe<Gallery>;
 };
 
 /** Input for the createMediaItem mutation. */
@@ -1737,6 +1795,28 @@ export type DeleteCommentPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
 };
 
+/** Input for the deleteGallery mutation. */
+export type DeleteGalleryInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The ID of the Gallery to delete */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** The payload for the deleteGallery mutation. */
+export type DeleteGalleryPayload = {
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The object before it was deleted */
+  gallery?: Maybe<Gallery>;
+};
+
 /** Input for the deleteMediaItem mutation. */
 export type DeleteMediaItemInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -2037,6 +2117,187 @@ export type EnqueuedStylesheetConnectionPageInfo = {
   hasPreviousPage: Scalars['Boolean']['output'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The Gallery type */
+export type Gallery = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfGalleryImagesGroup & {
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  galleryId: Scalars['Int']['output'];
+  /** Fields of the GalleryImagesGroup ACF Field Group */
+  galleryImagesGroup?: Maybe<GalleryImagesGroup>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** The globally unique identifier of the gallery object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /** Connection between the Gallery type and the Gallery type */
+  preview?: Maybe<GalleryToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The Gallery type */
+export type GalleryEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The Gallery type */
+export type GalleryEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The Gallery type */
+export type GalleryTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** Connection to Gallery Nodes */
+export type GalleryConnection = {
+  /** A list of edges (relational context) between RootQuery and connected Gallery Nodes */
+  edges: Array<GalleryConnectionEdge>;
+  /** A list of connected Gallery Nodes */
+  nodes: Array<Gallery>;
+  /** Information about pagination in a connection. */
+  pageInfo: GalleryConnectionPageInfo;
+};
+
+/** Edge between a Node and a connected Gallery */
+export type GalleryConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected Gallery Node */
+  node: Gallery;
+};
+
+/** Page Info on the connected GalleryConnectionEdge */
+export type GalleryConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+export enum GalleryIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** The &quot;GalleryImagesGroup&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type GalleryImagesGroup = AcfFieldGroup & AcfFieldGroupFields & GalleryImagesGroup_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;gallery&quot; Field Type added to the schema as part of the &quot;GalleryImagesGroup&quot; Field Group */
+  images?: Maybe<AcfMediaItemConnection>;
+};
+
+
+/** The &quot;GalleryImagesGroup&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type GalleryImagesGroupImagesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Interface representing fields of the ACF &quot;GalleryImagesGroup&quot; Field Group */
+export type GalleryImagesGroup_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;gallery&quot; Field Type added to the schema as part of the &quot;GalleryImagesGroup&quot; Field Group */
+  images?: Maybe<AcfMediaItemConnection>;
+};
+
+
+/** Interface representing fields of the ACF &quot;GalleryImagesGroup&quot; Field Group */
+export type GalleryImagesGroup_FieldsImagesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Connection between the Gallery type and the Gallery type */
+export type GalleryToPreviewConnectionEdge = Edge & GalleryConnectionEdge & OneToOneConnection & {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Gallery;
 };
 
 /** The general setting type */
@@ -3005,7 +3266,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Category | Page | Post | Tag;
+export type MenuItemObjectUnion = Category | Gallery | Page | Post | Tag;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -5328,6 +5589,8 @@ export type RootMutation = {
   createCategory?: Maybe<CreateCategoryPayload>;
   /** The createComment mutation */
   createComment?: Maybe<CreateCommentPayload>;
+  /** The createGallery mutation */
+  createGallery?: Maybe<CreateGalleryPayload>;
   /** The createMediaItem mutation */
   createMediaItem?: Maybe<CreateMediaItemPayload>;
   /** The createPage mutation */
@@ -5344,6 +5607,8 @@ export type RootMutation = {
   deleteCategory?: Maybe<DeleteCategoryPayload>;
   /** The deleteComment mutation */
   deleteComment?: Maybe<DeleteCommentPayload>;
+  /** The deleteGallery mutation */
+  deleteGallery?: Maybe<DeleteGalleryPayload>;
   /** The deleteMediaItem mutation */
   deleteMediaItem?: Maybe<DeleteMediaItemPayload>;
   /** The deletePage mutation */
@@ -5370,6 +5635,8 @@ export type RootMutation = {
   updateCategory?: Maybe<UpdateCategoryPayload>;
   /** The updateComment mutation */
   updateComment?: Maybe<UpdateCommentPayload>;
+  /** The updateGallery mutation */
+  updateGallery?: Maybe<UpdateGalleryPayload>;
   /** The updateMediaItem mutation */
   updateMediaItem?: Maybe<UpdateMediaItemPayload>;
   /** The updatePage mutation */
@@ -5396,6 +5663,12 @@ export type RootMutationCreateCategoryArgs = {
 /** The root mutation */
 export type RootMutationCreateCommentArgs = {
   input: CreateCommentInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreateGalleryArgs = {
+  input: CreateGalleryInput;
 };
 
 
@@ -5444,6 +5717,12 @@ export type RootMutationDeleteCategoryArgs = {
 /** The root mutation */
 export type RootMutationDeleteCommentArgs = {
   input: DeleteCommentInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteGalleryArgs = {
+  input: DeleteGalleryInput;
 };
 
 
@@ -5526,6 +5805,12 @@ export type RootMutationUpdateCommentArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdateGalleryArgs = {
+  input: UpdateGalleryInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdateMediaItemArgs = {
   input: UpdateMediaItemInput;
 };
@@ -5588,6 +5873,15 @@ export type RootQuery = {
   contentTypes?: Maybe<RootQueryToContentTypeConnection>;
   /** Fields of the &#039;DiscussionSettings&#039; settings group */
   discussionSettings?: Maybe<DiscussionSettings>;
+  /** Connection between the RootQuery type and the Gallery type */
+  galleries?: Maybe<RootQueryToGalleryConnection>;
+  /** An object of the Gallery Type.  */
+  gallery?: Maybe<Gallery>;
+  /**
+   * A Gallery object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  galleryBy?: Maybe<Gallery>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
   /** An object of the mediaItem Type.  */
@@ -5742,6 +6036,33 @@ export type RootQueryContentTypesArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryGalleriesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToGalleryConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryGalleryArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<GalleryIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryGalleryByArgs = {
+  galleryId?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  uri?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -6355,6 +6676,74 @@ export type RootQueryToEnqueuedStylesheetConnectionPageInfo = EnqueuedStylesheet
   hasPreviousPage: Scalars['Boolean']['output'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Connection between the RootQuery type and the Gallery type */
+export type RootQueryToGalleryConnection = Connection & GalleryConnection & {
+  /** Edges for the RootQueryToGalleryConnection connection */
+  edges: Array<RootQueryToGalleryConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Gallery>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToGalleryConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToGalleryConnectionEdge = Edge & GalleryConnectionEdge & {
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Gallery;
+};
+
+/** Page Info on the &quot;RootQueryToGalleryConnection&quot; */
+export type RootQueryToGalleryConnectionPageInfo = GalleryConnectionPageInfo & PageInfo & WpPageInfo & {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToGalleryConnection connection */
+export type RootQueryToGalleryConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Connection between the RootQuery type and the mediaItem type */
@@ -8359,6 +8748,36 @@ export type UpdateCommentPayload = {
   success?: Maybe<Scalars['Boolean']['output']>;
 };
 
+/** Input for the updateGallery mutation. */
+export type UpdateGalleryInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the Gallery object */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updateGallery mutation. */
+export type UpdateGalleryPayload = {
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  gallery?: Maybe<Gallery>;
+};
+
 /** Input for the updateMediaItem mutation. */
 export type UpdateMediaItemInput = {
   /** Alternative text to display when mediaItem is not displayed */
@@ -9463,6 +9882,12 @@ export type WpPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** Provides access to fields of the &quot;GalleryImagesGroup&quot; ACF Field Group via the &quot;galleryImagesGroup&quot; field */
+export type WithAcfGalleryImagesGroup = {
+  /** Fields of the GalleryImagesGroup ACF Field Group */
+  galleryImagesGroup?: Maybe<GalleryImagesGroup>;
+};
+
 /** Provides access to fields of the &quot;SettingsDww&quot; ACF Field Group via the &quot;settingsDww&quot; field */
 export type WithAcfSettingsDww = {
   /** Fields of the SettingsDww ACF Field Group */
@@ -9478,6 +9903,13 @@ export type WritingSettings = {
   /** Convert emoticons like :-) and :-P to graphics on display. */
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
+
+export type GetGalleryBySlugQueryVariables = Exact<{
+  slug: Scalars['ID']['input'];
+}>;
+
+
+export type GetGalleryBySlugQuery = { gallery?: { galleryImagesGroup?: { images?: { nodes: Array<{ caption?: string | null, altText?: string | null, title?: string | null, large?: string | null, small?: string | null }> } | null } | null } | null };
 
 export type GetPostBySlugQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -9497,6 +9929,7 @@ export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetSettingsQuery = { page?: { title?: string | null, settingsDww?: { price: { promoPeriod?: { isLivePromo: string, isOnlinePromo: string, price: { live: number, online: number } } | null, periods: { pricePeriod1: { start: string, end: string, price: { live: number, online: number } }, pricePeriod2: { start: string, end: string, price: { live: number, online: number } }, pricePeriod3: { start: string, end: string, price: { live: number, online: number } } } } } | null } | null };
 
 
+export const GetGalleryBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGalleryBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gallery"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"SLUG"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"galleryImagesGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1000"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"altText"}},{"kind":"Field","alias":{"kind":"Name","value":"large"},"name":{"kind":"Name","value":"sourceUrl"}},{"kind":"Field","alias":{"kind":"Name","value":"small"},"name":{"kind":"Name","value":"sourceUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"THUMBNAIL"}}]},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetGalleryBySlugQuery, GetGalleryBySlugQueryVariables>;
 export const GetPostBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPostBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"SLUG"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetPostBySlugQuery, GetPostBySlugQueryVariables>;
 export const GetPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
 export const GetSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"settings","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"settingsDww"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"promoPeriod"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLivePromo"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlinePromo"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"periods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pricePeriod1"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod2"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod3"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetSettingsQuery, GetSettingsQueryVariables>;

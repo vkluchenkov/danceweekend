@@ -4,6 +4,7 @@ import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 import { useState } from 'react';
+import 'styles/mdc-dark-deeppurple/theme.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(

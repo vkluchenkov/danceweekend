@@ -5,6 +5,9 @@ import {
   GetGalleryBySlugDocument,
   GetGalleryBySlugQuery,
   GetGalleryBySlugQueryVariables,
+  GetPageByUriDocument,
+  GetPageByUriQuery,
+  GetPageByUriQueryVariables,
   GetPostBySlugDocument,
   GetPostBySlugQuery,
   GetPostBySlugQueryVariables,
@@ -61,6 +64,14 @@ class wordpressApi {
       { slug }
     );
     return gallery;
+  }
+
+  public async getPageByUri(uri: string) {
+    const { page } = await this.request<GetPageByUriQuery, GetPageByUriQueryVariables>(
+      GetPageByUriDocument,
+      { uri }
+    );
+    return page;
   }
 }
 

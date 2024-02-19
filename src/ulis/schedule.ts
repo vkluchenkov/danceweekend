@@ -191,12 +191,12 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'TBA',
-            description: 'TBA',
+            title: 'Mohanned Hawaz',
+            description: 'Iraqi Al-Khashaba style choreography',
           },
           ru: {
-            title: 'Будет объявлено позднее',
-            description: 'Будет объявлено позднее',
+            title: 'Mohanned Hawaz',
+            description: 'Хореография Iraqi Al-Khashaba style',
           },
         },
       },
@@ -266,12 +266,12 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'TBA',
-            description: 'TBA',
+            title: 'Mohanned Hawaz',
+            description: 'Iraqi Kawliya style choreography',
           },
           ru: {
-            title: 'Будет объявлено позднее',
-            description: 'Будет объявлено позднее',
+            title: 'Mohanned Hawaz',
+            description: 'Хореография Iraqi Kawliya style',
           },
         },
       },

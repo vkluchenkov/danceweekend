@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
   images: {
-    domains: ['wordpress.test'],
+    domains: ['wordpress.test', 'backend.danceweekend.art'],
   },
 };
 

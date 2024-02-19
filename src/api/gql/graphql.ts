@@ -1705,6 +1705,108 @@ export type CreateUserPayload = {
   user?: Maybe<User>;
 };
 
+/** The &quot;Cta&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type Cta = AcfFieldGroup & AcfFieldGroupFields & Cta_Fields & {
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;Cta&quot; Field Group */
+  en?: Maybe<CtaEn>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;Cta&quot; Field Group */
+  ru?: Maybe<CtaRu>;
+};
+
+/** The &quot;CtaEn&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type CtaEn = AcfFieldGroup & AcfFieldGroupFields & CtaEn_Fields & {
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  buttonEnabled: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  buttonLink?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  buttonText?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  header: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  text: Scalars['String']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;CtaEn&quot; Field Group */
+export type CtaEn_Fields = {
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  buttonEnabled: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  buttonLink?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  buttonText?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  header: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaEn&quot; Field Group */
+  text: Scalars['String']['output'];
+};
+
+/** The &quot;CtaRu&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type CtaRu = AcfFieldGroup & AcfFieldGroupFields & CtaRu_Fields & {
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  buttonEnabled: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  buttonLink: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  buttonText: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  header: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  text: Scalars['String']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;CtaRu&quot; Field Group */
+export type CtaRu_Fields = {
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  buttonEnabled: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  buttonLink: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  buttonText: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  header: Scalars['String']['output'];
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;CtaRu&quot; Field Group */
+  text: Scalars['String']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;Cta&quot; Field Group */
+export type Cta_Fields = {
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;Cta&quot; Field Group */
+  en?: Maybe<CtaEn>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;Cta&quot; Field Group */
+  ru?: Maybe<CtaRu>;
+};
+
 /** Object that can be identified with a Database ID */
 export type DatabaseIdentifier = {
   /** The unique identifier stored in the database */
@@ -2944,12 +3046,6 @@ export enum MediaItemSizeEnum {
   MediumLarge = 'MEDIUM_LARGE',
   /** MediaItem with the thumbnail size */
   Thumbnail = 'THUMBNAIL',
-  /** MediaItem with the woocommerce_gallery_thumbnail size */
-  WoocommerceGalleryThumbnail = 'WOOCOMMERCE_GALLERY_THUMBNAIL',
-  /** MediaItem with the woocommerce_single size */
-  WoocommerceSingle = 'WOOCOMMERCE_SINGLE',
-  /** MediaItem with the woocommerce_thumbnail size */
-  WoocommerceThumbnail = 'WOOCOMMERCE_THUMBNAIL',
   /** MediaItem with the 1536x1536 size */
   '1536X1536' = '_1536X1536',
   /** MediaItem with the 2048x2048 size */
@@ -3731,7 +3827,7 @@ export enum OrderEnum {
 }
 
 /** The page type */
-export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfSettingsDww & {
+export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfCta & WithAcfSettingsDww & {
   /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
   ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
   /** Connection between the NodeWithAuthor type and the User type */
@@ -3754,6 +3850,8 @@ export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
   /** The name of the Content Type the node belongs to */
   contentTypeName: Scalars['String']['output'];
+  /** Fields of the Cta ACF Field Group */
+  cta?: Maybe<Cta>;
   /** The unique identifier stored in the database */
   databaseId: Scalars['Int']['output'];
   /** Post publishing date. */
@@ -4874,23 +4972,7 @@ export enum PostStatusEnum {
   /** Objects with the request-pending status */
   RequestPending = 'REQUEST_PENDING',
   /** Objects with the trash status */
-  Trash = 'TRASH',
-  /** Objects with the wc-cancelled status */
-  WcCancelled = 'WC_CANCELLED',
-  /** Objects with the wc-checkout-draft status */
-  WcCheckoutDraft = 'WC_CHECKOUT_DRAFT',
-  /** Objects with the wc-completed status */
-  WcCompleted = 'WC_COMPLETED',
-  /** Objects with the wc-failed status */
-  WcFailed = 'WC_FAILED',
-  /** Objects with the wc-on-hold status */
-  WcOnHold = 'WC_ON_HOLD',
-  /** Objects with the wc-pending status */
-  WcPending = 'WC_PENDING',
-  /** Objects with the wc-processing status */
-  WcProcessing = 'WC_PROCESSING',
-  /** Objects with the wc-refunded status */
-  WcRefunded = 'WC_REFUNDED'
+  Trash = 'TRASH'
 }
 
 /** Set relationships between the post to tags */
@@ -9421,11 +9503,7 @@ export enum UserRoleEnum {
   /** User role with specific capabilities */
   Contributor = 'CONTRIBUTOR',
   /** User role with specific capabilities */
-  Customer = 'CUSTOMER',
-  /** User role with specific capabilities */
   Editor = 'EDITOR',
-  /** User role with specific capabilities */
-  ShopManager = 'SHOP_MANAGER',
   /** User role with specific capabilities */
   Subscriber = 'SUBSCRIBER'
 }
@@ -9984,6 +10062,12 @@ export type WpPageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** Provides access to fields of the &quot;Cta&quot; ACF Field Group via the &quot;cta&quot; field */
+export type WithAcfCta = {
+  /** Fields of the Cta ACF Field Group */
+  cta?: Maybe<Cta>;
+};
+
 /** Provides access to fields of the &quot;GalleryImagesGroup&quot; ACF Field Group via the &quot;galleryImagesGroup&quot; field */
 export type WithAcfGalleryImagesGroup = {
   /** Fields of the GalleryImagesGroup ACF Field Group */
@@ -10005,6 +10089,11 @@ export type WritingSettings = {
   /** Convert emoticons like :-) and :-P to graphics on display. */
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
+
+export type GetCtaQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCtaQuery = { page?: { title?: string | null, cta?: { en?: { header: string, text: string, buttonEnabled: string, buttonLink?: string | null, buttonText?: string | null } | null, ru?: { header: string, text: string, buttonEnabled: string, buttonLink: string, buttonText: string } | null } | null } | null };
 
 export type GetGalleryBySlugQueryVariables = Exact<{
   slug: Scalars['ID']['input'];
@@ -10038,6 +10127,7 @@ export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetSettingsQuery = { page?: { title?: string | null, settingsDww?: { price: { promoPeriod: { isLivePromo: string, isOnlinePromo: string, price: { live: number, online: number } }, periods: { pricePeriod1: { start: string, end: string, price: { live: number, online: number } }, pricePeriod2: { start: string, end: string, price: { live: number, online: number } }, pricePeriod3: { start: string, end: string, price: { live: number, online: number } } }, contest?: { contestGroupPrice: number, contestsoloprice?: { kids: number, risingstar: number, professionals: number, soloPassKids: number, soloPassRisingStar: number, soloPassProfessionals: number } | null } | null, worldShow?: { groups: number, solo: number } | null } } | null } | null };
 
 
+export const GetCtaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCTA"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"settings","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"cta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"en"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"header"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"buttonEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"buttonLink"}},{"kind":"Field","name":{"kind":"Name","value":"buttonText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ru"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"header"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"buttonEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"buttonLink"}},{"kind":"Field","name":{"kind":"Name","value":"buttonText"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetCtaQuery, GetCtaQueryVariables>;
 export const GetGalleryBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGalleryBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gallery"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"SLUG"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"galleryImagesGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1000"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"altText"}},{"kind":"Field","alias":{"kind":"Name","value":"large"},"name":{"kind":"Name","value":"sourceUrl"}},{"kind":"Field","alias":{"kind":"Name","value":"small"},"name":{"kind":"Name","value":"sourceUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"THUMBNAIL"}}]},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetGalleryBySlugQuery, GetGalleryBySlugQueryVariables>;
 export const GetPageByUriDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPageByUri"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uri"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uri"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"featuredImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]}]}}]}}]} as unknown as DocumentNode<GetPageByUriQuery, GetPageByUriQueryVariables>;
 export const GetPostBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPostBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"SLUG"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetPostBySlugQuery, GetPostBySlugQueryVariables>;

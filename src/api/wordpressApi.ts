@@ -2,6 +2,9 @@ import request, { RequestDocument, Variables } from 'graphql-request';
 
 import { config } from '../config';
 import {
+  GetCtaDocument,
+  GetCtaQuery,
+  GetCtaQueryVariables,
   GetGalleryBySlugDocument,
   GetGalleryBySlugQuery,
   GetGalleryBySlugQueryVariables,
@@ -48,6 +51,11 @@ class wordpressApi {
       GetSettingsDocument
     );
     return page?.settingsDww;
+  }
+
+  public async getCta() {
+    const { page } = await this.request<GetCtaQuery, GetCtaQueryVariables>(GetCtaDocument);
+    return page?.cta;
   }
 
   public async getPostBySlug(slug: string) {

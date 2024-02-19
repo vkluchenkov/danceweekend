@@ -1,12 +1,13 @@
 import { useRef } from 'react';
 import Image from 'next/image';
+import { GetStaticProps } from 'next';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import useTranslation from 'next-translate/useTranslation';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import Trans from 'next-translate/Trans';
 import clsx from 'clsx';
 
 import styles from '@/styles/Home.module.css';
-import textStyles from '@/styles/Text.module.css';
 import { Layout } from '@/src/components/Layout';
 import { Divider } from '@/src/ui-kit/Divider';
 import { Cta } from '@/src/components/CTA';
@@ -14,6 +15,23 @@ import teachers from 'public/images/teachers.png';
 import teachers1Line from 'public/images/teachers_1_line.png';
 import { Schedule } from '@/src/components/Schedule';
 import { Partners } from '@/src/components/Partners';
+import { WordpressApi } from '@/src/api/wordpressApi';
+
+export const getStaticProps: GetStaticProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['cta'],
+    queryFn: () => WordpressApi.getCta(),
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 60,
+  };
+};
 
 export default function Home() {
   const { t } = useTranslation();

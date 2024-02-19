@@ -11,12 +11,12 @@ import styles from '@/styles/Price.module.css';
 import { Version } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
 import {
-  contestGroupPrice,
-  contestSoloPrice,
-  ispromoPeriod,
-  isOnlinePromoPeriod,
-  workshopsPrice,
-  worldShowPrice,
+  // contestGroupPrice,
+  // contestSoloPrice,
+  // ispromoPeriod,
+  // isOnlinePromoPeriod,
+  // workshopsPrice,
+  // worldShowPrice,
   isFullPassSoldOut,
   isOnlineFullPassSoldOut,
 } from '@/src/ulis/price';
@@ -161,6 +161,8 @@ const Price: NextPage = () => {
     return allCards;
   };
 
+  const contestSoloPrice = price?.contest?.contestsoloprice;
+
   const soloPassTable = (
     <>
       <div className={styles.table__row}>
@@ -180,7 +182,7 @@ const Price: NextPage = () => {
             styles.table__cell_singlePrice
           )}
         >
-          {contestSoloPrice.soloPassKids}€
+          {contestSoloPrice?.soloPassKids}€
         </p>
       </div>
 
@@ -196,7 +198,7 @@ const Price: NextPage = () => {
             styles.table__cell_singlePrice
           )}
         >
-          {contestSoloPrice.soloPassRisingStar}€
+          {contestSoloPrice?.soloPassRisingStar}€
         </p>
       </div>
 
@@ -212,7 +214,7 @@ const Price: NextPage = () => {
             styles.table__cell_singlePrice
           )}
         >
-          {contestSoloPrice.soloPassProfessionals}€
+          {contestSoloPrice?.soloPassProfessionals}€
         </p>
       </div>
     </>
@@ -273,7 +275,7 @@ const Price: NextPage = () => {
               styles.table__cell_singlePrice
             )}
           >
-            {contestSoloPrice.kids}€
+            {contestSoloPrice?.kids}€
           </p>
         </div>
 
@@ -293,7 +295,7 @@ const Price: NextPage = () => {
               styles.table__cell_singlePrice
             )}
           >
-            {contestSoloPrice.risingStar}€
+            {contestSoloPrice?.risingstar}€
           </p>
         </div>
 
@@ -311,7 +313,7 @@ const Price: NextPage = () => {
               styles.table__cell_singlePrice
             )}
           >
-            {contestSoloPrice.professionals}€
+            {contestSoloPrice?.professionals}€
           </p>
         </div>
 
@@ -333,7 +335,7 @@ const Price: NextPage = () => {
               styles.table__cell_singlePrice
             )}
           >
-            {contestGroupPrice}€
+            {price?.contest?.contestGroupPrice}€
           </p>
         </div>
       </div>
@@ -347,11 +349,11 @@ const Price: NextPage = () => {
       <ul className={textStyles.list}>
         <li>
           {t('worldShow.soloNormal')}:{' '}
-          <span className={textStyles.accent}>{worldShowPrice.solo}€</span>
+          <span className={textStyles.accent}>{price?.worldShow?.solo}€</span>
         </li>
         <li>
           {t('worldShow.groups')}:{' '}
-          <span className={textStyles.accent}>{worldShowPrice.groups}€</span>{' '}
+          <span className={textStyles.accent}>{price?.worldShow?.groups}€</span>{' '}
           {t('worldShow.perPerson')}
         </li>
       </ul>

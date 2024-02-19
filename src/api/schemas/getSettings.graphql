@@ -37,6 +37,21 @@ query getSettings {
             }
           }
         }
+        contest {
+          contestsoloprice {
+            kids
+            risingstar
+            professionals
+            soloPassKids
+            soloPassRisingStar
+            soloPassProfessionals
+          }
+          contestGroupPrice
+        }
+        worldShow {
+          groups
+          solo
+        }
       }
     }
   }

@@ -7652,6 +7652,8 @@ export type SettingsDww = AcfFieldGroup & AcfFieldGroupFields & SettingsDww_Fiel
 
 /** The &quot;SettingsDwwPrice&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type SettingsDwwPrice = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPrice_Fields & {
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  contest?: Maybe<SettingsDwwPriceContest>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -7660,7 +7662,77 @@ export type SettingsDwwPrice = AcfFieldGroup & AcfFieldGroupFields & SettingsDww
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
   periods: SettingsDwwPricePeriods;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
-  promoPeriod?: Maybe<SettingsDwwPricePromoPeriod>;
+  promoPeriod: SettingsDwwPricePromoPeriod;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  worldShow?: Maybe<SettingsDwwPriceWorldShow>;
+};
+
+/** The &quot;SettingsDwwPriceContest&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPriceContest = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPriceContest_Fields & {
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContest&quot; Field Group */
+  contestGroupPrice: Scalars['Float']['output'];
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContest&quot; Field Group */
+  contestsoloprice?: Maybe<SettingsDwwPriceContestContestsoloprice>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPriceContestContestsoloprice = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPriceContestContestsoloprice_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  kids: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  professionals: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  risingstar: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  soloPassKids: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  soloPassProfessionals: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  soloPassRisingStar: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+export type SettingsDwwPriceContestContestsoloprice_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  kids: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  professionals: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  risingstar: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  soloPassKids: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  soloPassProfessionals: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContestContestsoloprice&quot; Field Group */
+  soloPassRisingStar: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPriceContest&quot; Field Group */
+export type SettingsDwwPriceContest_Fields = {
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContest&quot; Field Group */
+  contestGroupPrice: Scalars['Float']['output'];
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceContest&quot; Field Group */
+  contestsoloprice?: Maybe<SettingsDwwPriceContestContestsoloprice>;
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
 };
 
 /** The &quot;SettingsDwwPricePeriods&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -7917,8 +7989,36 @@ export type SettingsDwwPricePromoPeriod_Fields = {
   price: SettingsDwwPricePromoPeriodPrice;
 };
 
+/** The &quot;SettingsDwwPriceWorldShow&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPriceWorldShow = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPriceWorldShow_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceWorldShow&quot; Field Group */
+  groups: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceWorldShow&quot; Field Group */
+  solo: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPriceWorldShow&quot; Field Group */
+export type SettingsDwwPriceWorldShow_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceWorldShow&quot; Field Group */
+  groups: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPriceWorldShow&quot; Field Group */
+  solo: Scalars['Float']['output'];
+};
+
 /** Interface representing fields of the ACF &quot;SettingsDwwPrice&quot; Field Group */
 export type SettingsDwwPrice_Fields = {
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  contest?: Maybe<SettingsDwwPriceContest>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -7927,7 +8027,9 @@ export type SettingsDwwPrice_Fields = {
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
   periods: SettingsDwwPricePeriods;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
-  promoPeriod?: Maybe<SettingsDwwPricePromoPeriod>;
+  promoPeriod: SettingsDwwPricePromoPeriod;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  worldShow?: Maybe<SettingsDwwPriceWorldShow>;
 };
 
 /** Interface representing fields of the ACF &quot;SettingsDww&quot; Field Group */
@@ -9933,11 +10035,11 @@ export type GetPostsQuery = { posts?: { nodes: Array<{ id: string, title?: strin
 export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSettingsQuery = { page?: { title?: string | null, settingsDww?: { price: { promoPeriod?: { isLivePromo: string, isOnlinePromo: string, price: { live: number, online: number } } | null, periods: { pricePeriod1: { start: string, end: string, price: { live: number, online: number } }, pricePeriod2: { start: string, end: string, price: { live: number, online: number } }, pricePeriod3: { start: string, end: string, price: { live: number, online: number } } } } } | null } | null };
+export type GetSettingsQuery = { page?: { title?: string | null, settingsDww?: { price: { promoPeriod: { isLivePromo: string, isOnlinePromo: string, price: { live: number, online: number } }, periods: { pricePeriod1: { start: string, end: string, price: { live: number, online: number } }, pricePeriod2: { start: string, end: string, price: { live: number, online: number } }, pricePeriod3: { start: string, end: string, price: { live: number, online: number } } }, contest?: { contestGroupPrice: number, contestsoloprice?: { kids: number, risingstar: number, professionals: number, soloPassKids: number, soloPassRisingStar: number, soloPassProfessionals: number } | null } | null, worldShow?: { groups: number, solo: number } | null } } | null } | null };
 
 
 export const GetGalleryBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGalleryBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"gallery"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"SLUG"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"galleryImagesGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1000"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"caption"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"altText"}},{"kind":"Field","alias":{"kind":"Name","value":"large"},"name":{"kind":"Name","value":"sourceUrl"}},{"kind":"Field","alias":{"kind":"Name","value":"small"},"name":{"kind":"Name","value":"sourceUrl"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"size"},"value":{"kind":"EnumValue","value":"THUMBNAIL"}}]},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetGalleryBySlugQuery, GetGalleryBySlugQueryVariables>;
 export const GetPageByUriDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPageByUri"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uri"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uri"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"featuredImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]}]}}]}}]} as unknown as DocumentNode<GetPageByUriQuery, GetPageByUriQueryVariables>;
 export const GetPostBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPostBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"SLUG"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetPostBySlugQuery, GetPostBySlugQueryVariables>;
 export const GetPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
-export const GetSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"settings","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"settingsDww"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"promoPeriod"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLivePromo"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlinePromo"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"periods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pricePeriod1"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod2"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod3"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetSettingsQuery, GetSettingsQueryVariables>;
+export const GetSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"settings","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"settingsDww"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"promoPeriod"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLivePromo"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlinePromo"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"periods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pricePeriod1"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod2"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod3"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contest"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contestsoloprice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"kids"}},{"kind":"Field","name":{"kind":"Name","value":"risingstar"}},{"kind":"Field","name":{"kind":"Name","value":"professionals"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassKids"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassRisingStar"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassProfessionals"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contestGroupPrice"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldShow"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"groups"}},{"kind":"Field","name":{"kind":"Name","value":"solo"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetSettingsQuery, GetSettingsQueryVariables>;

@@ -4,24 +4,15 @@ import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import Trans from 'next-translate/Trans';
 import { motion, AnimatePresence } from 'framer-motion';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 
 import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Price.module.css';
 import { Version } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
-import {
-  // contestGroupPrice,
-  // contestSoloPrice,
-  // ispromoPeriod,
-  // isOnlinePromoPeriod,
-  // workshopsPrice,
-  // worldShowPrice,
-  isFullPassSoldOut,
-  isOnlineFullPassSoldOut,
-} from '@/src/ulis/price';
+import { isFullPassSoldOut, isOnlineFullPassSoldOut } from '@/src/ulis/price';
 import { motionVariants } from '@/src/ulis/constants';
-import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 import { WordpressApi } from '@/src/api/wordpressApi';
 
 export const getStaticProps: GetStaticProps = async () => {

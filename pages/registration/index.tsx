@@ -8,7 +8,6 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { Version } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
-import { FormRegistration } from '@/src/components/FormRegistration';
 import { ThemeProvider } from '@mui/material';
 import { darkTheme } from '@/src/ulis/constants';
 import { WordpressApi } from '@/src/api/wordpressApi';

@@ -14,8 +14,8 @@ const partnersList: PartnersList[] = [
     image: '/images/partners/BTV.png',
     description: 'Bellystream.TV logo',
     url: 'https://bellystream.tv',
-    width: 250,
-    height: 40,
+    width: 230,
+    height: 37,
   },
   {
     image: '/images/partners/championship.svg',
@@ -37,6 +37,13 @@ const partnersList: PartnersList[] = [
     url: 'https://cpk.art.pl',
     width: 63,
     height: 100,
+  },
+  {
+    image: '/images/partners/Leila_Logo_Lounge.png',
+    description: 'Leila mezzze and lounge restaurant',
+    url: 'https://restauracjaleila.pl/en/',
+    width: 232,
+    height: 130,
   },
 ];
 

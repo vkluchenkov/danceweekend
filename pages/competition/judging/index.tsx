@@ -48,10 +48,7 @@ const Judging: NextPage = () => {
       <ul className={textStyles.list}>
         <li>{t('criteria1')}</li>
         <li>{t('criteria2')}</li>
-        <li>
-          {t('criteria3')}
-          <p className={textStyles.p}>{t('criteria3Note')}</p>
-        </li>
+        <li>{t('criteria3')}</li>
         <li>{t('criteria4')}</li>
         <li>{t('criteria5')}</li>
         <li>{t('criteria6')}</li>
@@ -70,10 +67,7 @@ const Judging: NextPage = () => {
       <ul className={textStyles.list}>
         <li>{t('tablaCriteria1')}</li>
         <li>{t('tablaCriteria2')}</li>
-        <li>
-          {t('tablaCriteria3')}
-          <p className={textStyles.p}>{t('criteria3Note')}</p>
-        </li>
+        <li>{t('tablaCriteria3')}</li>
         <li>{t('tablaCriteria4')}</li>
         <li>{t('tablaCriteria5')}</li>
       </ul>
@@ -94,10 +88,7 @@ const Judging: NextPage = () => {
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('judgingLineup')}</h2>
       <section className={styles.section}>
-        <h3 className={textStyles.h3}>{t('live')}</h3>
         <p className={textStyles.p}>{t('judgesLive')}</p>
-        <h3 className={textStyles.h3}>{t('online')}</h3>
-        <p className={textStyles.p}>{t('judgesOnline')}</p>
       </section>
     </Layout>
   );

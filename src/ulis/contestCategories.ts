@@ -1,7 +1,6 @@
 import { SupportedLangs, AgeGroup } from '@/src/types';
 
-export type Level = 'beginners' | 'intermediate' | 'risingStar' | 'professionals' | 'openLevel';
-type CategoryType = 'live' | 'online';
+export type Level = 'debut' | 'beginners' | 'semi-pro' | 'professionals' | 'openLevel';
 
 export interface Style {
   translations: {
@@ -9,10 +8,9 @@ export interface Style {
       categoryTitle: string;
     };
   };
-  types: CategoryType[];
   isSolo?: boolean;
+  isForWin?: boolean;
   isImprovisation?: boolean;
-  isSoloPass?: boolean;
 }
 
 export interface ContestCategory {
@@ -23,7 +21,6 @@ export interface ContestCategory {
   isGroupCategory?: boolean;
   isDuoCategory?: boolean;
   levels: Level[];
-  types: CategoryType[];
   translations: {
     [lang in SupportedLangs]: {
       title: string;
@@ -32,11 +29,10 @@ export interface ContestCategory {
   categories: Style[];
 }
 
-const soloSet: Style[] = [
+const mainSoloSet: Style[] = [
   {
-    types: ['live', 'online'],
     isSolo: true,
-    isSoloPass: true,
+    isForWin: true,
     translations: {
       en: {
         categoryTitle: 'Classic',
@@ -47,9 +43,8 @@ const soloSet: Style[] = [
     },
   },
   {
-    types: ['live', 'online'],
     isSolo: true,
-    isSoloPass: true,
+    isForWin: true,
     translations: {
       en: {
         categoryTitle: 'Folklore',
@@ -60,9 +55,8 @@ const soloSet: Style[] = [
     },
   },
   {
-    types: ['live', 'online'],
     isSolo: true,
-    isSoloPass: true,
+    isForWin: true,
     translations: {
       en: {
         categoryTitle: 'Tabla solo CD',
@@ -73,22 +67,20 @@ const soloSet: Style[] = [
     },
   },
   {
-    types: ['live'],
     isSolo: true,
     isImprovisation: true,
+    isForWin: true,
     translations: {
       en: {
-        categoryTitle: 'Tabla solo live improvisation',
+        categoryTitle: 'Live tabla improvisation',
       },
       ru: {
-        categoryTitle: 'Табла соло live импровизация',
+        categoryTitle: 'Импровизация Live tabla',
       },
     },
   },
   {
-    types: ['live', 'online'],
     isSolo: true,
-    isSoloPass: true,
     translations: {
       en: {
         categoryTitle: 'Show/fusion',
@@ -99,22 +91,7 @@ const soloSet: Style[] = [
     },
   },
   {
-    types: ['live', 'online'],
     isSolo: true,
-    isSoloPass: true,
-    translations: {
-      en: {
-        categoryTitle: 'Bollywood',
-      },
-      ru: {
-        categoryTitle: 'Болливуд',
-      },
-    },
-  },
-  {
-    types: ['live', 'online'],
-    isSolo: true,
-    isSoloPass: true,
     translations: {
       en: {
         categoryTitle: 'Pop song',
@@ -124,55 +101,8 @@ const soloSet: Style[] = [
       },
     },
   },
-];
-
-const groupSet: Style[] = [
   {
-    types: ['live', 'online'],
-    translations: {
-      en: {
-        categoryTitle: 'Oriental',
-      },
-      ru: {
-        categoryTitle: 'Ориентал',
-      },
-    },
-  },
-  {
-    types: ['live', 'online'],
-    translations: {
-      en: {
-        categoryTitle: 'Folklore',
-      },
-      ru: {
-        categoryTitle: 'Фольклор',
-      },
-    },
-  },
-  {
-    types: ['live', 'online'],
-    translations: {
-      en: {
-        categoryTitle: 'Tabla solo CD',
-      },
-      ru: {
-        categoryTitle: 'Табла соло CD',
-      },
-    },
-  },
-  {
-    types: ['live', 'online'],
-    translations: {
-      en: {
-        categoryTitle: 'Show/fusion',
-      },
-      ru: {
-        categoryTitle: 'Щоу/фьюжн',
-      },
-    },
-  },
-  {
-    types: ['live', 'online'],
+    isSolo: true,
     translations: {
       en: {
         categoryTitle: 'Bollywood',
@@ -183,7 +113,7 @@ const groupSet: Style[] = [
     },
   },
   {
-    types: ['live', 'online'],
+    isSolo: true,
     translations: {
       en: {
         categoryTitle: 'Tribal',
@@ -195,12 +125,197 @@ const groupSet: Style[] = [
   },
 ];
 
+const babySoloSet: Style[] = [
+  {
+    isSolo: true,
+    translations: {
+      en: {
+        categoryTitle: 'Classic',
+      },
+      ru: {
+        categoryTitle: 'Классика',
+      },
+    },
+  },
+  {
+    isSolo: true,
+    translations: {
+      en: {
+        categoryTitle: 'Folklore',
+      },
+      ru: {
+        categoryTitle: 'Фольклор',
+      },
+    },
+  },
+  {
+    isSolo: true,
+    translations: {
+      en: {
+        categoryTitle: 'Tabla solo CD',
+      },
+      ru: {
+        categoryTitle: 'Табла соло CD',
+      },
+    },
+  },
+  {
+    isSolo: true,
+    translations: {
+      en: {
+        categoryTitle: 'Show/fusion',
+      },
+      ru: {
+        categoryTitle: 'Шоу/фьюжн',
+      },
+    },
+  },
+  {
+    isSolo: true,
+    translations: {
+      en: {
+        categoryTitle: 'Bollywood',
+      },
+      ru: {
+        categoryTitle: 'Болливуд',
+      },
+    },
+  },
+];
+
+const mainGroupSet: Style[] = [
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Classic',
+      },
+      ru: {
+        categoryTitle: 'Классика',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Folklore',
+      },
+      ru: {
+        categoryTitle: 'Фольклор',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Tabla solo CD',
+      },
+      ru: {
+        categoryTitle: 'Табла соло CD',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Show/fusion',
+      },
+      ru: {
+        categoryTitle: 'Шоу/фьюжн',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Bollywood',
+      },
+      ru: {
+        categoryTitle: 'Болливуд',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Tribal',
+      },
+      ru: {
+        categoryTitle: 'Трайбл',
+      },
+    },
+  },
+];
+const babyGroupSet: Style[] = [
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Classic',
+      },
+      ru: {
+        categoryTitle: 'Классика',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Folklore',
+      },
+      ru: {
+        categoryTitle: 'Фольклор',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Tabla solo CD',
+      },
+      ru: {
+        categoryTitle: 'Табла соло CD',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Show/fusion',
+      },
+      ru: {
+        categoryTitle: 'Шоу/фьюжн',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
+        categoryTitle: 'Bollywood',
+      },
+      ru: {
+        categoryTitle: 'Болливуд',
+      },
+    },
+  },
+];
+const allStyles: Style[] = [
+  {
+    isSolo: true,
+    translations: {
+      en: {
+        categoryTitle: 'All styles',
+      },
+      ru: {
+        categoryTitle: 'Все стили',
+      },
+    },
+  },
+];
+
 export const contestCategories: ContestCategory[] = [
   {
     age: '4-6',
     ageGroup: 'baby',
     levels: ['openLevel'],
-    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Baby solo',
@@ -209,28 +324,13 @@ export const contestCategories: ContestCategory[] = [
         title: 'Беби соло',
       },
     },
-    categories: [
-      {
-        types: ['live', 'online'],
-        isSolo: true,
-        isSoloPass: true,
-        translations: {
-          en: {
-            categoryTitle: 'All styles',
-          },
-          ru: {
-            categoryTitle: 'Все стили',
-          },
-        },
-      },
-    ],
+    categories: babySoloSet,
   },
   {
     age: '4-6',
     ageGroup: 'baby',
     isGroupCategory: true,
     levels: ['openLevel'],
-    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Baby groups',
@@ -239,26 +339,13 @@ export const contestCategories: ContestCategory[] = [
         title: 'Беби группы',
       },
     },
-    categories: [
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'All styles',
-          },
-          ru: {
-            categoryTitle: 'Все стили',
-          },
-        },
-      },
-    ],
+    categories: babyGroupSet,
   },
   {
     age: '4-6',
     ageGroup: 'baby',
     isDuoCategory: true,
     levels: ['openLevel'],
-    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Baby duos',
@@ -267,26 +354,13 @@ export const contestCategories: ContestCategory[] = [
         title: 'Беби дуэты',
       },
     },
-    categories: [
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'All styles',
-          },
-          ru: {
-            categoryTitle: 'Все стили',
-          },
-        },
-      },
-    ],
+    categories: babyGroupSet,
   },
 
   {
     age: '7-11',
     ageGroup: 'kids',
-    levels: ['beginners', 'intermediate'],
-    types: ['live', 'online'],
+    levels: ['debut'],
     translations: {
       en: {
         title: 'Kids solo',
@@ -295,15 +369,28 @@ export const contestCategories: ContestCategory[] = [
         title: 'Дети соло',
       },
     },
-    categories: soloSet,
+    categories: allStyles,
+  },
+  {
+    age: '7-11',
+    ageGroup: 'kids',
+    levels: ['beginners', 'semi-pro'],
+    translations: {
+      en: {
+        title: 'Kids solo',
+      },
+      ru: {
+        title: 'Дети соло',
+      },
+    },
+    categories: mainSoloSet,
   },
 
   {
     age: '7-11',
     ageGroup: 'kids',
     isDuoCategory: true,
-    levels: ['openLevel'],
-    types: ['live', 'online'],
+    levels: ['beginners', 'semi-pro'],
     translations: {
       en: {
         title: 'Kids duos',
@@ -312,49 +399,14 @@ export const contestCategories: ContestCategory[] = [
         title: 'Дети дуэты',
       },
     },
-    categories: [
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'All styles',
-          },
-          ru: {
-            categoryTitle: 'Все стили',
-          },
-        },
-      },
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'Bollywood',
-          },
-          ru: {
-            categoryTitle: 'Болливуд',
-          },
-        },
-      },
-      {
-        types: ['live', 'online'],
-        translations: {
-          en: {
-            categoryTitle: 'Tribal',
-          },
-          ru: {
-            categoryTitle: 'Трайбл',
-          },
-        },
-      },
-    ],
+    categories: mainGroupSet,
   },
 
   {
     age: '7-11',
     ageGroup: 'kids',
     isGroupCategory: true,
-    levels: ['openLevel'],
-    types: ['live', 'online'],
+    levels: ['beginners', 'semi-pro'],
     translations: {
       en: {
         title: 'Kids groups',
@@ -363,15 +415,13 @@ export const contestCategories: ContestCategory[] = [
         title: 'Дети группы',
       },
     },
-    categories: groupSet,
+    categories: mainGroupSet,
   },
 
   {
     age: '12-15',
     ageGroup: 'juniors',
-    description: 'descriptionJuniors',
-    levels: ['risingStar', 'professionals'],
-    types: ['live', 'online'],
+    levels: ['debut'],
     translations: {
       en: {
         title: 'Juniors',
@@ -380,30 +430,28 @@ export const contestCategories: ContestCategory[] = [
         title: 'Юниоры',
       },
     },
-    categories: [
-      ...soloSet,
-      {
-        types: ['live', 'online'],
-        isSolo: true,
-        isSoloPass: true,
-        translations: {
-          en: {
-            categoryTitle: 'Tribal',
-          },
-          ru: {
-            categoryTitle: 'Трайбл',
-          },
-        },
-      },
-    ],
+    categories: allStyles,
   },
-
+  {
+    age: '12-15',
+    ageGroup: 'juniors',
+    description: 'descriptionJuniors',
+    levels: ['beginners', 'semi-pro', 'professionals'],
+    translations: {
+      en: {
+        title: 'Juniors',
+      },
+      ru: {
+        title: 'Юниоры',
+      },
+    },
+    categories: mainSoloSet,
+  },
   {
     age: '12-15',
     ageGroup: 'juniors',
     isDuoCategory: true,
-    levels: ['openLevel'],
-    types: ['live', 'online'],
+    levels: ['semi-pro', 'professionals'],
     translations: {
       en: {
         title: 'Juniors duos',
@@ -412,15 +460,13 @@ export const contestCategories: ContestCategory[] = [
         title: 'Юниоры дуэты',
       },
     },
-    categories: groupSet,
+    categories: mainGroupSet,
   },
-
   {
     age: '12-15',
     ageGroup: 'juniors',
     isGroupCategory: true,
-    levels: ['openLevel'],
-    types: ['live', 'online'],
+    levels: ['semi-pro', 'professionals'],
     translations: {
       en: {
         title: 'Juniors groups',
@@ -429,46 +475,12 @@ export const contestCategories: ContestCategory[] = [
         title: 'Юниоры группы',
       },
     },
-    categories: groupSet,
+    categories: mainGroupSet,
   },
-
-  {
-    age: '12+',
-    ageGroup: 'adults',
-    ageGroups: ['adults', 'juniors', 'seniors'],
-    description: 'descriptionQueen',
-    levels: ['openLevel'],
-    types: ['live'],
-    translations: {
-      en: {
-        title: 'Queen of live tabla solo improvisation',
-      },
-      ru: {
-        title: 'Королева live табла соло импровизации',
-      },
-    },
-    categories: [
-      {
-        types: ['live'],
-        isSolo: true,
-        isImprovisation: true,
-        translations: {
-          en: {
-            categoryTitle: 'Queen of live tabla solo improvisation',
-          },
-          ru: {
-            categoryTitle: 'Королева live табла соло импровизации',
-          },
-        },
-      },
-    ],
-  },
-
   {
     age: '16+',
     ageGroup: 'adults',
-    levels: ['risingStar', 'professionals'],
-    types: ['live', 'online'],
+    levels: ['debut'],
     translations: {
       en: {
         title: 'Adults',
@@ -477,30 +489,27 @@ export const contestCategories: ContestCategory[] = [
         title: 'Взрослые',
       },
     },
-    categories: [
-      ...soloSet,
-      {
-        types: ['live', 'online'],
-        isSolo: true,
-        isSoloPass: true,
-        translations: {
-          en: {
-            categoryTitle: 'Tribal',
-          },
-          ru: {
-            categoryTitle: 'Трайбл',
-          },
-        },
-      },
-    ],
+    categories: allStyles,
   },
-
+  {
+    age: '16+',
+    ageGroup: 'adults',
+    levels: ['beginners', 'semi-pro', 'professionals'],
+    translations: {
+      en: {
+        title: 'Adults',
+      },
+      ru: {
+        title: 'Взрослые',
+      },
+    },
+    categories: mainSoloSet,
+  },
   {
     age: '16+',
     ageGroup: 'adults',
     isDuoCategory: true,
-    levels: ['openLevel'],
-    types: ['live', 'online'],
+    levels: ['semi-pro', 'professionals'],
     translations: {
       en: {
         title: 'Adults duos',
@@ -509,15 +518,13 @@ export const contestCategories: ContestCategory[] = [
         title: 'Взрослые дуэты',
       },
     },
-    categories: groupSet,
+    categories: mainGroupSet,
   },
-
   {
     age: '16+',
     ageGroup: 'adults',
     isGroupCategory: true,
-    levels: ['openLevel'],
-    types: ['live', 'online'],
+    levels: ['semi-pro', 'professionals'],
     translations: {
       en: {
         title: 'Adults groups',
@@ -526,7 +533,7 @@ export const contestCategories: ContestCategory[] = [
         title: 'Взрослые группы',
       },
     },
-    categories: groupSet,
+    categories: mainGroupSet,
   },
 
   {
@@ -534,7 +541,6 @@ export const contestCategories: ContestCategory[] = [
     ageGroup: 'seniors',
     description: 'descriptionSeniors',
     levels: ['openLevel'],
-    types: ['live', 'online'],
     translations: {
       en: {
         title: 'Seniors',
@@ -543,21 +549,36 @@ export const contestCategories: ContestCategory[] = [
         title: 'Сеньоры',
       },
     },
-    categories: [
-      ...soloSet,
-      {
-        types: ['live', 'online'],
-        isSolo: true,
-        isSoloPass: true,
-        translations: {
-          en: {
-            categoryTitle: 'Tribal',
-          },
-          ru: {
-            categoryTitle: 'Трайбл',
-          },
-        },
+    categories: mainSoloSet,
+  },
+  {
+    age: '40+',
+    ageGroup: 'seniors',
+    isDuoCategory: true,
+    levels: ['openLevel'],
+    translations: {
+      en: {
+        title: 'Seniors duos',
       },
-    ],
+      ru: {
+        title: 'Сеньоры дуэты',
+      },
+    },
+    categories: mainGroupSet,
+  },
+  {
+    age: '40+',
+    ageGroup: 'seniors',
+    isGroupCategory: true,
+    levels: ['openLevel'],
+    translations: {
+      en: {
+        title: 'Seniors groups',
+      },
+      ru: {
+        title: 'Сеньоры группы',
+      },
+    },
+    categories: mainGroupSet,
   },
 ];

@@ -1,14 +1,12 @@
-import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
+import clsx from 'clsx';
+
+import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Judging.module.css';
-import useTranslation from 'next-translate/useTranslation';
-import { useMemo, useState } from 'react';
-import { Version, SupportedLangs } from '@/src/types';
-import { Switcher } from '@/src/ui-kit/Switcher';
-import Trans from 'next-translate/Trans';
 import { StyledAccordeon } from '@/src/ui-kit/StyledAccordeon';
-import clsx from 'clsx';
 
 const Judging: NextPage = () => {
   const { t, lang } = useTranslation('competitionJudging');

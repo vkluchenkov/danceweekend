@@ -1,10 +1,10 @@
 name: Deploy dev
 
-# on:
-#   push:
-# branches: ['dev']
-# pull_request:
-# branches: ['dev']
+on:
+  push:
+branches: ['dev']
+pull_request:
+branches: ['dev']
 
 jobs:
   build:
@@ -16,24 +16,24 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          envkey_DEPLOY_URL: 'https://dev.danceweekend.art'
+          envkey_DEPLOY_URL: ${{ secrets.TEST_DEPLOY_URL }}
           envkey_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.TEST_NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
           envkey_PAYPAL_SECRET: ${{ secrets.TEST_PAYPAL_SECRET }}
           envkey_PAYPAL_API_URL: ${{ secrets.TEST_PAYPAL_API_URL }}
-          envkey_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
-          envkey_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          envkey_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.TEST_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          envkey_STRIPE_SECRET_KEY: ${{ secrets.TEST_STRIPE_SECRET_KEY }}
           envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
           envkey_NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           envkey_NOTION_DATABASE_LIVE: ${{ secrets.NOTION_DATABASE_LIVE_TEST }}
           envkey_NOTION_DATABASE_ONLINE: ${{ secrets.NOTION_DATABASE_ONLINE_TEST }}
-          envkey_FTP_HOST: ${{ secrets.FTP_HOST_TEST }}
-          envkey_FTP_USER: ${{ secrets.FTP_USER_TEST }}
-          envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD_TEST }}
-          envkey_FTP_DIR: ${{ secrets.FTP_DIR_TEST }}
-          envkey_FTP_PHOTO_DIR: ${{ secrets.FTP_PHOTO_DIR_TEST }}
+          envkey_FTP_HOST: ${{ secrets.FTP_HOST }}
+          envkey_FTP_USER: ${{ secrets.FTP_USER }}
+          envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          envkey_FTP_DIR: ${{ secrets.TEST_FTP_DIR }}
+          envkey_FTP_PHOTO_DIR: ${{ secrets.TEST_FTP_PHOTO_DIR }}
 
       - name: Build the Docker image
-        run: docker build -t ghcr.io/vkluchenkov/danceweekend:latest-dev .
+        run: docker build -t ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev .
 
       - name: Login to ghcr
         uses: docker/login-action@v2
@@ -43,7 +43,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push the Docker image
-        run: docker push ghcr.io/vkluchenkov/danceweekend:latest-dev
+        run: docker push ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev
 
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.8
@@ -54,8 +54,8 @@ jobs:
           passphrase: ${{ secrets.SSHPASS }}
           script: |
             docker login --username=${{ github.actor }} --password=${{ secrets.GITHUB_TOKEN }} ghcr.io
-            docker pull ghcr.io/vkluchenkov/danceweekend:latest-dev
-            docker stop Danceweekend-dev
-            docker rm Danceweekend-dev
-            docker run -d -p 49162:3000 --name=Danceweekend-dev --restart=always --pull=always ghcr.io/vkluchenkov/danceweekend:latest-dev
+            docker pull ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev
+            docker stop ${{ secrets.DOCKER_IMAGE_NAME }}-dev
+            docker rm ${{ secrets.DOCKER_IMAGE_NAME }}-dev
+            docker run -d -p ${{ secrets.TEST_DOCKER_PORT }}:3000 --name=${{ secrets.DOCKER_IMAGE_NAME }}-dev --restart=always --pull=always ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev
             docker system prune -f

@@ -11,43 +11,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          envkey_DEPLOY_URL: ${{ secrets.TEST_DEPLOY_URL }}
-          envkey_NEXT_PUBLIC_GRAPHQL_BACKEND: ${{ secrets.NEXT_PUBLIC_GRAPHQL_BACKEND }}
-          envkey_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.TEST_NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
-          envkey_PAYPAL_SECRET: ${{ secrets.TEST_PAYPAL_SECRET }}
-          envkey_PAYPAL_API_URL: ${{ secrets.TEST_PAYPAL_API_URL }}
-          envkey_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.TEST_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
-          envkey_STRIPE_SECRET_KEY: ${{ secrets.TEST_STRIPE_SECRET_KEY }}
-          envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
-          envkey_NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          envkey_NOTION_DATABASE_LIVE: ${{ secrets.NOTION_DATABASE_LIVE_TEST }}
-          envkey_NOTION_DATABASE_ONLINE: ${{ secrets.NOTION_DATABASE_ONLINE_TEST }}
-          envkey_FTP_HOST: ${{ secrets.FTP_HOST }}
-          envkey_FTP_USER: ${{ secrets.FTP_USER }}
-          envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          envkey_FTP_DIR: ${{ secrets.TEST_FTP_DIR }}
-          envkey_FTP_PHOTO_DIR: ${{ secrets.TEST_FTP_PHOTO_DIR }}
+      # - name: Make envfile
+      #   uses: SpicyPizza/create-envfile@v2.0
+      #   with:
+      #     envkey_DEPLOY_URL: ${{ secrets.TEST_DEPLOY_URL }}
+      #     envkey_NEXT_PUBLIC_GRAPHQL_BACKEND: ${{ secrets.NEXT_PUBLIC_GRAPHQL_BACKEND }}
+      #     envkey_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.TEST_NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
+      #     envkey_PAYPAL_SECRET: ${{ secrets.TEST_PAYPAL_SECRET }}
+      #     envkey_PAYPAL_API_URL: ${{ secrets.TEST_PAYPAL_API_URL }}
+      #     envkey_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.TEST_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+      #     envkey_STRIPE_SECRET_KEY: ${{ secrets.TEST_STRIPE_SECRET_KEY }}
+      #     envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
+      #     envkey_NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      #     envkey_NOTION_DATABASE_LIVE: ${{ secrets.NOTION_DATABASE_LIVE_TEST }}
+      #     envkey_NOTION_DATABASE_ONLINE: ${{ secrets.NOTION_DATABASE_ONLINE_TEST }}
+      #     envkey_FTP_HOST: ${{ secrets.FTP_HOST }}
+      #     envkey_FTP_USER: ${{ secrets.FTP_USER }}
+      #     envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      #     envkey_FTP_DIR: ${{ secrets.TEST_FTP_DIR }}
+      #     envkey_FTP_PHOTO_DIR: ${{ secrets.TEST_FTP_PHOTO_DIR }}
 
-      - name: Build the Docker image
-        run: docker build -t ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev .
+      # - name: Build the Docker image
+      #   run: docker build -t ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev .
 
-      - name: Login to ghcr
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Login to ghcr
+      #   uses: docker/login-action@v2
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push the Docker image
-        run: docker push ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev
+      # - name: Push the Docker image
+      #   run: docker push ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev
 
       - name: Deploy
-        uses: appleboy/ssh-action@v0.1.8
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSHHOST }}
           username: ${{ secrets.SSHUSER }}

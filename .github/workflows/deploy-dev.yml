@@ -17,6 +17,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_DEPLOY_URL: ${{ secrets.TEST_DEPLOY_URL }}
+          envkey_NEXT_NEXT_PUBLIC_GRAPHQL_BACKEND: ${{ secrets.NEXT_PUBLIC_GRAPHQL_BACKEND }}
           envkey_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.TEST_NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
           envkey_PAYPAL_SECRET: ${{ secrets.TEST_PAYPAL_SECRET }}
           envkey_PAYPAL_API_URL: ${{ secrets.TEST_PAYPAL_API_URL }}

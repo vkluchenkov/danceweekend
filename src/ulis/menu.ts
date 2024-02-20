@@ -115,6 +115,17 @@ export const menu: MenuItem[] = [
     },
     subItems: [
       {
+        link: '/info/schedule',
+        translations: {
+          en: {
+            title: 'Schedule',
+          },
+          ru: {
+            title: 'Расписание',
+          },
+        },
+      },
+      {
         link: '/info/photo-video',
         translations: {
           en: {

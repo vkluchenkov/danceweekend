@@ -1,5 +1,4 @@
 import styles from './partners.module.css';
-import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -42,23 +41,18 @@ const partnersList: PartnersList[] = [
 ];
 
 export const Partners: React.FC = () => {
-  const { t, lang } = useTranslation();
-
   const partnersMap = partnersList.map((p) => {
     return (
       <li className={styles.partner} key={p.description}>
         <Link className={styles.imageWrapper} href={p.url} target='_blank'>
-          {/* <div className={styles.image}> */}
           <Image
             src={p.image}
             alt={p.description}
             width={p.width}
             height={p.height}
-            // fill
             style={{ objectFit: 'contain', objectPosition: 'center' }}
             className={styles.image}
           />
-          {/* </div> */}
         </Link>
       </li>
     );

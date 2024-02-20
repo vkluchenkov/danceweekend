@@ -1,8 +1,9 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
+import { config as nextConfig } from './src/config';
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: process.env.NEXT_PUBLIC_GRAPHQL_BACKEND,
+  schema: nextConfig.wordpress.grapqlBackend,
   documents: './src/api/schemas/*.graphql',
   generates: {
     './src/api/gql/': {

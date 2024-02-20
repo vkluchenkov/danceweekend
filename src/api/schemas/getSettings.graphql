@@ -53,6 +53,10 @@ query getSettings {
           solo
         }
       }
+      registrationState {
+        isLiveOpen
+        isOnlineOpen
+      }
     }
   }
 }

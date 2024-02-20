@@ -3,9 +3,8 @@
   "live": "Live festival",
   "online": "Online festival",
   "onlineWarning": "Registration to online festival will be open later.",
-  "liveClosed": "Registration to live festival is closed, everything is sold out. See you next year!",
-  "onlineClosed": "Registration to online festival is closed, everything is sold out. See you next year!",
-  "allClosed": "Registration to this edition of the festival is closed, everything is sold out. See you next year!",
+  "liveClosed": "Registration to live festival is closed, look at our social media for the announcements.",
+  "onlineClosed": "Registration to online festival is closed, look at our social media for the announcements.",
   "form": {
     "common": {
       "required": "This field is required",

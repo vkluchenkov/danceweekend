@@ -46,6 +46,9 @@ jobs:
       # - name: Push the Docker image
       #   run: docker push ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev
 
+      - name: Console
+        run: echo "${{ secrets.SSHKEY }}"
+
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:

@@ -25,8 +25,8 @@ jobs:
           envkey_STRIPE_SECRET_KEY: ${{ secrets.TEST_STRIPE_SECRET_KEY }}
           envkey_SENDINBLUE_SECRET: ${{ secrets.SENDINBLUE_SECRET }}
           envkey_NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          envkey_NOTION_DATABASE_LIVE: ${{ secrets.NOTION_DATABASE_LIVE_TEST }}
-          envkey_NOTION_DATABASE_ONLINE: ${{ secrets.NOTION_DATABASE_ONLINE_TEST }}
+          envkey_NOTION_DATABASE_LIVE: ${{ secrets.TEST_NOTION_DATABASE_LIVE }}
+          envkey_NOTION_DATABASE_ONLINE: ${{ secrets.TEST_NOTION_DATABASE_ONLINE }}
           envkey_FTP_HOST: ${{ secrets.FTP_HOST }}
           envkey_FTP_USER: ${{ secrets.FTP_USER }}
           envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}

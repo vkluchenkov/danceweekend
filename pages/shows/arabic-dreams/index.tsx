@@ -15,13 +15,13 @@ const ArabicDreams: NextPage = () => {
         <Image src={arabicDreamsLogo} alt={t('pageTitle')} fill />
       </div>
       <p className={textStyles.p}>
-        <span className={textStyles.accent}>{t('dateTitle')}:</span> 18.08.2023 / 20:00
+        <span className={textStyles.accent}>{t('dateTitle')}:</span> 23.08.2024 / 20:00
       </p>
       <p className={textStyles.p}>{t('description')}</p>
       <p className={textStyles.p}>{t('videoDescription')}</p>
       <div className={styles.playerWrapper}>
         <iframe
-          src='https://player.vimeo.com/video/743089078?h=27a33d066b'
+          src='https://player.vimeo.com/video/856226990'
           width='100%'
           height='100%'
           frameBorder='0'

@@ -158,6 +158,17 @@ export const menu: MenuItem[] = [
           },
         },
       },
+      {
+        link: '/info/contacts',
+        translations: {
+          en: {
+            title: 'Contacts',
+          },
+          ru: {
+            title: 'Контакты',
+          },
+        },
+      },
     ],
   },
 ];

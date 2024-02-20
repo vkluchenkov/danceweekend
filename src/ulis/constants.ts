@@ -40,6 +40,14 @@ export const telegramUrl = 'https://t.me/+isxRvGCBaf9jMjQ0';
 // Revolut payment link
 export const revolutUrl = 'https://revolut.me/aliahbellydance/eur/';
 
+// Social links
+export const facebookUrl = 'https://www.facebook.com/danceweekendwarsaw';
+export const instagramUrl = 'https://www.instagram.com/danceweekendwarsaw';
+export const emailUrl = 'mailto:danceweekend@aliah.dance';
+
+// map links
+export const cpkUrl = 'https://goo.gl/maps/SnjPT318FQs6SeTW8';
+
 // Animation preset for all transitions
 export const motionVariants = {
   hidden: { opacity: 0 },

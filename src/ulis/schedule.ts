@@ -245,7 +245,7 @@ export const schedule: Day[] = [
     dayEvents: [
       {
         id: 12,
-        start: '09:00',
+        start: '9:00',
         end: '11:00',
         type: 'workshop',
         translations: {

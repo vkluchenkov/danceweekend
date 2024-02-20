@@ -71,9 +71,9 @@ const Registration: NextPage = () => {
       {switcher}
       <section className={styles.section}>
         <ThemeProvider theme={darkTheme}>
-          {version === 'live' && isLiveRegOpen && <FormRegistration version={version} />}
+          {/* {version === 'live' && isLiveRegOpen && <FormRegistration version={version} />} */}
           {version === 'live' && !isLiveRegOpen && <h1>{t('liveClosed')}</h1>}
-          {version === 'online' && isOnlineRegOpen && <FormRegistration version={version} />}
+          {/* {version === 'online' && isOnlineRegOpen && <FormRegistration version={version} />} */}
           {version === 'online' && !isOnlineRegOpen && <h1>{t('onlineClosed')}</h1>}
         </ThemeProvider>
       </section>

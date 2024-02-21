@@ -104,15 +104,6 @@ interface FormRegistrationProps {
 
 export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, priceData }) => {
   const { t, lang } = useTranslation('registration');
-  const currentLang = lang as SupportedLangs;
-
-  const router = useRouter();
-
-  const { data, status, error } = useQuery({
-    queryKey: ['settings'],
-    queryFn: WordpressApi.getSettings,
-    refetchOnMount: false,
-  });
 
   const methods = useForm<FormFields>({
     defaultValues: defaultValues,
@@ -160,8 +151,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       setValue('settings', priceData);
       setIsPriceSet(true);
     }
-    // eslint-disable-next-line
-  }, [priceData]);
+  }, [priceData, isPriceSet, setValue]);
 
   // Set version from props
   useEffect(() => {
@@ -269,44 +259,46 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
   };
 
   const fullPassPrice = useMemo(() => {
-    const isPromo = (): boolean => {
-      if (version === 'live')
-        return settings?.price.promoPeriod.isLivePromo.toLowerCase() === 'true' ? true : false;
-      else
-        return settings?.price.promoPeriod?.isOnlinePromo.toLowerCase() === 'true' ? true : false;
-    };
+    if (settings) {
+      const isPromo = (): boolean => {
+        if (version === 'live')
+          return settings?.price.promoPeriod.isLivePromo.toLowerCase() === 'true' ? true : false;
+        else
+          return settings?.price.promoPeriod?.isOnlinePromo.toLowerCase() === 'true' ? true : false;
+      };
 
-    const periods = Object.entries(settings?.price.periods!);
+      const periods = Object.entries(settings?.price.periods!);
 
-    const today = new Date();
+      const today = new Date();
 
-    const basePrice = (): number | undefined => {
-      const periodPrice = periods.find((p) => {
-        const startDate = new Date(p[1].start);
-        const endDate = new Date(p[1].end);
-        startDate <= today && today <= endDate;
-      })?.[1].price;
+      const basePrice = (): number | undefined => {
+        const periodPrice = periods.find((p) => {
+          const startDate = new Date(p[1].start);
+          const endDate = new Date(p[1].end);
+          startDate <= today && today <= endDate;
+        })?.[1].price;
 
-      if (isPromo()) return settings!.price.promoPeriod.price[version];
-      else if (periodPrice) return periodPrice[version];
-      return undefined;
-    };
+        if (isPromo()) return settings!.price.promoPeriod.price[version];
+        else if (periodPrice) return periodPrice[version];
+        return undefined;
+      };
 
-    // Kids discount for live version
-    if (version === 'live' && (ageGroup === 'baby' || ageGroup === 'kids') && basePrice())
-      return Number.parseFloat((basePrice()! * kidsDiscount).toFixed(2));
+      // Kids discount for live version
+      if (version === 'live' && (ageGroup === 'baby' || ageGroup === 'kids') && basePrice())
+        return Number.parseFloat((basePrice()! * kidsDiscount).toFixed(2));
 
-    // additional discounts (certificates, etc.)
-    if (fullPassDiscount === 'group' && basePrice)
-      return Number.parseFloat((basePrice()! * 0.8).toFixed(2));
+      // additional discounts (certificates, etc.)
+      if (fullPassDiscount === 'group' && basePrice)
+        return Number.parseFloat((basePrice()! * 0.8).toFixed(2));
 
-    if (fullPassDiscount === '30%' && basePrice)
-      return Number.parseFloat((basePrice()! * 0.7).toFixed(2));
+      if (fullPassDiscount === '30%' && basePrice)
+        return Number.parseFloat((basePrice()! * 0.7).toFixed(2));
 
-    if (fullPassDiscount === '50%' && basePrice)
-      return Number.parseFloat((basePrice()! * 0.5).toFixed(2));
-    if (fullPassDiscount === 'free') return 0;
-    else return basePrice();
+      if (fullPassDiscount === '50%' && basePrice)
+        return Number.parseFloat((basePrice()! * 0.5).toFixed(2));
+      if (fullPassDiscount === 'free') return 0;
+      else return basePrice();
+    } else return undefined;
   }, [ageGroup, settings, fullPassDiscount, version]);
 
   const fullPassDiscountList: FullPassDiscount[] = useMemo(() => {

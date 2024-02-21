@@ -28,6 +28,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   const ageGroup = watch('ageGroup');
   const contestLevels = watch('contestLevels');
+  const contestLevel = watch('contestLevel');
   const isSoloPass = watch('isSoloPass');
   const isSoloContest = watch('isSoloContest');
   const soloContest = watch('soloContest');
@@ -114,27 +115,28 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
           )}
 
           {/* Solo Pass selection */}
+          <Collapse in={!!contestLevel} unmountOnExit>
+            <div>
+              <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
+              <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
+              <FormInputCheckbox
+                name='isSoloPass'
+                control={control}
+                label={
+                  <p className={textStyles.p}>
+                    {t('form.contest.soloPassLabel')}
+                    {': '}
+                    <span className={textStyles.accent}>
+                      {soloPassPrice > 0 ? soloPassPrice + '€' : ''}
+                    </span>
+                  </p>
+                }
+              />
+            </div>
 
-          <div>
-            <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
-            <FormInputCheckbox
-              name='isSoloPass'
-              control={control}
-              label={
-                <p className={textStyles.p}>
-                  {t('form.contest.soloPassLabel')}
-                  {': '}
-                  <span className={textStyles.accent}>
-                    {soloPassPrice > 0 ? soloPassPrice + '€' : ''}
-                  </span>
-                </p>
-              }
-            />
-            <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
-          </div>
-
-          <h4 className={textStyles.h4}>{t('form.contest.stylesTitle')}:</h4>
-          <ContestSoloList />
+            <h4 className={textStyles.h4}>{t('form.contest.stylesTitle')}:</h4>
+            <ContestSoloList />
+          </Collapse>
         </div>
       </Collapse>
     </div>

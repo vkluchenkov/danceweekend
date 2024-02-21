@@ -27,6 +27,10 @@ export const PersonalData: React.FC<StepProps> = () => {
           control={control}
           rules={{
             required: t('form.common.required'),
+            pattern: {
+              value: /^[a-zA-ZÀ-ÖØ-ÝżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\s\-]+$/,
+              message: t('form.common.patternError'),
+            },
           }}
           error={!!errors.name}
           helperText={errors?.name?.message as string | undefined}
@@ -38,6 +42,10 @@ export const PersonalData: React.FC<StepProps> = () => {
           control={control}
           rules={{
             required: t('form.common.required'),
+            pattern: {
+              value: /^[a-zA-ZÀ-ÖØ-ÝżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\s\-]+$/,
+              message: t('form.common.patternError'),
+            },
           }}
           error={!!errors.surname}
           helperText={errors?.surname?.message as string | undefined}
@@ -47,6 +55,12 @@ export const PersonalData: React.FC<StepProps> = () => {
           name='stageName'
           label={t('form.personal.stageName')}
           control={control}
+          rules={{
+            pattern: {
+              value: /^[a-zA-ZÀ-ÖØ-ÝżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\s\-]+$/,
+              message: t('form.common.patternError'),
+            },
+          }}
           error={!!errors.stageName}
           helperText={errors?.stageName?.message as string | undefined}
         />
@@ -74,6 +88,19 @@ export const PersonalData: React.FC<StepProps> = () => {
           error={!!errors.age}
           helperText={errors?.age?.message as string | undefined}
         />
+        <div>
+          <p className={textStyles.p} style={{ paddingBottom: '10px' }}>
+            {t('form.personal.haveBeforeTitle')}
+          </p>
+          <FormInputField
+            name='haveBefore'
+            label={t('form.personal.haveBefore')}
+            placeholder='2016, 2017, 2023'
+            control={control}
+            error={!!errors.stageName}
+            helperText={errors?.stageName?.message as string | undefined}
+          />
+        </div>
       </div>
 
       <h2 className={textStyles.h2}>{t('form.personal.contacts')}</h2>

@@ -169,9 +169,11 @@ export const ContestSoloList: React.FC = () => {
   if (contestLevel === 'professionals')
     return (
       <>
-        <p className={clsx(textStyles.p)}>{absoluteWinnerText}</p>
+        <p className={clsx(textStyles.p)} style={{ padding: '10px 0' }}>
+          {absoluteWinnerText}
+        </p>
         <h4 className={clsx(textStyles.h4, textStyles.accent)}>
-          {t('form.contest.championTitle')}:
+          {t('form.contest.absoluteWinnerTitle')}:
         </h4>
         <div>{absoluteWinnerCategories}</div>
         <h4 className={clsx(textStyles.h4, textStyles.accent)}>{t('form.contest.restTitle')}:</h4>

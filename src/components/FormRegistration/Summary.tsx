@@ -46,7 +46,8 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
   // Personal
   const personal = useMemo(() => {
-    return ['name', 'surname', 'stageName', 'age'].map((i) => ({
+    const list = ['name', 'surname', 'stageName', 'age', 'haveBefore'];
+    return list.map((i) => ({
       key: i,
       value: form[i as keyof FormFields],
     }));
@@ -64,7 +65,8 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
   // Contacts
   const contacts = useMemo(() => {
-    return ['social', 'country', 'city', 'tel', 'email'].map((i) => ({
+    const list = ['social', 'country', 'city', 'tel', 'email'];
+    return list.map((i) => ({
       key: i,
       value: form[i as keyof FormFields],
     }));
@@ -81,8 +83,6 @@ export const Summary: React.FC<SummaryStepProps> = ({
   });
 
   // Workshops
-  const isFullPass = form.isFullPass;
-
   const workshopsData = useMemo(() => {
     return (
       <>

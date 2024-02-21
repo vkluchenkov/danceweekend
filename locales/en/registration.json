@@ -8,11 +8,12 @@
   "form": {
     "common": {
       "required": "This field is required",
-      "numbersError": "This field is for numbers only",
       "prev": "← Back",
       "next": "Next →",
       "total": "Total",
-      "submit": "Submit!"
+      "submit": "Submit!",
+      "numbersError": "This field is for numbers only",
+      "patternError": "This field can contain only Latin characters and numbers."
     },
     "personal": {
       "title": "Tell us about yourself",
@@ -21,6 +22,8 @@
       "surname": "Surname",
       "stageName": "Stage name (if exists)",
       "age": "Age (on festival start date)",
+      "haveBeforeTitle": "Have you been at Dance Weekend before? Write years below, if so.",
+      "haveBefore": "Years of your previous visits",
       "ageError": "Age should be between 4 and 99",
       "social": "Social networks profile(s)",
       "country": "Country",
@@ -74,7 +77,7 @@
       },
       "stylesTitle": "Styles",
       "free": "free",
-      "absoluteWinnerTitle": "Absolute winner styles",
+      "absoluteWinnerTitle": "Absolute winner battle styles",
       "restTitle": "Rest styles",
       "absoluteWinnerText": "The contestants, who take part in 4 categories at Professionals level (Classic, Folklore, Tabla solo CD and Tabla solo Improvisation) automatically take part in the battle for the title of the Absolute winner. To be able to compete for the title it is mandatory to dance in all 4 of those categories mentioned. The criteria for judging improvisation and overall Absolute winner choosing process are described on <0>Judging</0> page.",
       "groups": {

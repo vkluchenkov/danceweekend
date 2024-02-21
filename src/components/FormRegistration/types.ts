@@ -27,6 +27,7 @@ export interface FormFields {
   surname: string;
   stageName: string;
   age: number;
+  haveBefore: string;
   email: string;
   social: string;
   country: string;

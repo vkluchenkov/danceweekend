@@ -267,7 +267,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
           return settings?.price.promoPeriod?.isOnlinePromo.toLowerCase() === 'true' ? true : false;
       };
 
-      const periods = Object.entries(settings?.price.periods!);
+      const periods = Object.entries(settings.price.periods);
 
       const today = new Date();
 
@@ -278,7 +278,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
           startDate <= today && today <= endDate;
         })?.[1].price;
 
-        if (isPromo()) return settings!.price.promoPeriod.price[version];
+        if (isPromo()) return settings.price.promoPeriod.price[version];
         else if (periodPrice) return periodPrice[version];
         return undefined;
       };

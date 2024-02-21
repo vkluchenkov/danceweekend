@@ -11,6 +11,7 @@ import { Switcher } from '@/src/ui-kit/Switcher';
 import { ThemeProvider } from '@mui/material';
 import { darkTheme } from '@/src/ulis/constants';
 import { WordpressApi } from '@/src/api/wordpressApi';
+import { FormRegistration } from '@/src/components/FormRegistration';
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -70,7 +71,9 @@ const Registration: NextPage = () => {
       {switcher}
       <section className={styles.section}>
         <ThemeProvider theme={darkTheme}>
-          {/* {version === 'live' && isLiveRegOpen && <FormRegistration version={version} />} */}
+          {version === 'live' && isLiveRegOpen && (
+            <FormRegistration version={version} priceData={data} />
+          )}
           {version === 'live' && !isLiveRegOpen && <h1>{t('liveClosed')}</h1>}
           {/* {version === 'online' && isOnlineRegOpen && <FormRegistration version={version} />} */}
           {version === 'online' && !isOnlineRegOpen && <h1>{t('onlineClosed')}</h1>}

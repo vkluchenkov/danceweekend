@@ -100,12 +100,12 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'Aliah',
-            description: 'Pop\u00A0song choreography',
+            title: 'Leandro Ferreyra',
+            description: 'TBA',
           },
           ru: {
-            title: 'Aliah',
-            description: 'Хореография Pop song',
+            title: 'Leandro Ferreyra',
+            description: 'TBA',
           },
         },
       },

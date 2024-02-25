@@ -4,7 +4,7 @@ import { montserrat } from '@/src/ulis/font';
 // Age groups
 export const babyMinAge = 4;
 export const babyMaxAge = 6;
-export const kidsMinAge = 5;
+export const kidsMinAge = 7;
 export const kidsMaxAge = 11;
 export const juniorsMinAge = 12;
 export const juniorsMaxAge = 15;
@@ -12,8 +12,8 @@ export const adultsMinAge = 16;
 export const adultsMaxAge = 39;
 
 // Minimum numbers of workshops to be eligible for compatition or World Show
-export const minWsKids = 1;
-export const minWsAdults = 3;
+// export const minWsKids = 1;
+// export const minWsAdults = 3;
 
 // Maximum number of groups to register for one person
 export const maxGroups = 3;
@@ -39,6 +39,14 @@ export const telegramUrl = 'https://t.me/+isxRvGCBaf9jMjQ0';
 
 // Revolut payment link
 export const revolutUrl = 'https://revolut.me/aliahbellydance/eur/';
+
+// Social links
+export const facebookUrl = 'https://www.facebook.com/danceweekendwarsaw';
+export const instagramUrl = 'https://www.instagram.com/danceweekendwarsaw';
+export const emailUrl = 'mailto:danceweekend@aliah.dance';
+
+// map links
+export const cpkUrl = 'https://goo.gl/maps/SnjPT318FQs6SeTW8';
 
 // Animation preset for all transitions
 export const motionVariants = {

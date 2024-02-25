@@ -1,15 +1,37 @@
 import { useRef } from 'react';
+import Image from 'next/image';
+import { GetStaticProps } from 'next';
+import LiteYouTubeEmbed from 'react-lite-youtube-embed';
+import useTranslation from 'next-translate/useTranslation';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
+import Trans from 'next-translate/Trans';
+import clsx from 'clsx';
+
 import styles from '@/styles/Home.module.css';
 import { Layout } from '@/src/components/Layout';
 import { Divider } from '@/src/ui-kit/Divider';
 import { Cta } from '@/src/components/CTA';
-import Image from 'next/image';
 import teachers from 'public/images/teachers.png';
 import teachers1Line from 'public/images/teachers_1_line.png';
-import LiteYouTubeEmbed from 'react-lite-youtube-embed';
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
 import { Schedule } from '@/src/components/Schedule';
+import { Partners } from '@/src/components/Partners';
+import { WordpressApi } from '@/src/api/wordpressApi';
+
+export const getStaticProps: GetStaticProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['cta'],
+    queryFn: () => WordpressApi.getCta(),
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 60,
+  };
+};
 
 export default function Home() {
   const { t } = useTranslation();
@@ -49,6 +71,11 @@ export default function Home() {
             id='O2bM1PcpQTc'
             title='Dance weekend in Warsaw festival 2019 / Promo'
           />
+        </section>
+        <Divider inverted />
+        <section className={styles.partners}>
+          <h2 className={clsx(styles.content__title)}>{t('home:partnersTitle')}</h2>
+          <Partners />
         </section>
         <Divider />
         <section className={styles.schedule}>

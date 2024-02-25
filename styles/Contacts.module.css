@@ -1,0 +1,38 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0 0;
+}
+
+.contacts__social {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+}
+
+.social__button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.social__button:hover {
+  opacity: 0.7;
+}
+
+.social__button_fb {
+  background: url('/images/icon_fb.svg') center no-repeat;
+}
+
+.social__button_insta {
+  background: url('/images/icon_insta.svg') center no-repeat;
+}
+
+.social__button_email {
+  background: url('/images/icon_at.svg') center no-repeat;
+}

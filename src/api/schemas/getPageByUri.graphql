@@ -1,0 +1,11 @@
+query GetPageByUri($uri: ID!) {
+  page(id: $uri, idType: URI) {
+    title
+    featuredImage {
+      node {
+        sourceUrl
+      }
+    }
+    content(format: RENDERED)
+  }
+}

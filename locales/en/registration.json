@@ -3,9 +3,8 @@
   "live": "Live festival",
   "online": "Online festival",
   "onlineWarning": "Registration to online festival will be open later.",
-  "liveClosed": "Registration to live festival is closed, everything is sold out. See you next year!",
-  "onlineClosed": "Registration to online festival is closed, everything is sold out. See you next year!",
-  "allClosed": "Registration to this edition of the festival is closed, everything is sold out. See you next year!",
+  "liveClosed": "Registration to live festival is closed, look at our social media for the announcements.",
+  "onlineClosed": "Registration to online festival is closed, look at our social media for the announcements.",
   "form": {
     "common": {
       "required": "This field is required",
@@ -32,10 +31,9 @@
     },
     "workshops": {
       "title": "Workshops",
-      "selectTitle": "Full Pass or one by one?",
       "fullPass": "Full Pass",
-      "fullPassDescription1": "It’s possible to buy workshops as a package — Full Pass or single workshops of your choice. ",
-      "fullPassDescription2": "Full Pass unlocks all the workshops, discounts in competition and access to World Show. Also allows you to pay in installments (except Promo tariff). Kids and Baby have 50% discount.",
+      "fullPassDescription1": "It’s possible to buy workshops only as a package — Full Pass. ",
+      "fullPassDescription2": "Full Pass unlocks all the workshops, competition and World Show. You can pay for it in installments (except Promo tariff). Kids and Baby have 50% discount.",
       "fullPassDescriptionSoldOut": "Full Pass for this edition of our festival has been sold out. It is only possible to buy single workshops.",
       "singleWs": "Single workshops",
       "discounts": {
@@ -111,9 +109,9 @@
         "title": "Finances",
         "total": "Your registration total",
         "installments": "I want to pay with 2 installments",
-        "installmentsDetails": "There is a possibility to pay for your package in 2 installments. The first 50% should be paid right after the registration, the other 50% any time before 31.07.2023. In case if the second payment is failed to be transferred in due time, you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
+        "installmentsDetails": "There is a possibility to pay for your package in 2 installments. The first 50% should be paid right after the registration, the other 50% any time before 31.07.2024. In case if the second payment is failed to be transferred in due time, you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
         "amountNow": "Amount to pay now",
-        "amountAfter": "Amount to pay till 31.07.2023"
+        "amountAfter": "Amount to pay till 31.07.2024"
       }
     },
     "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue."

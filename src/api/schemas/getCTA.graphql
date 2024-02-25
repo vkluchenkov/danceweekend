@@ -1,0 +1,21 @@
+query getCTA {
+  page(id: "settings", idType: URI) {
+    title
+    cta {
+      en {
+        header
+        text
+        buttonEnabled
+        buttonLink
+        buttonText
+      }
+      ru {
+        header
+        text
+        buttonEnabled
+        buttonLink
+        buttonText
+      }
+    }
+  }
+}

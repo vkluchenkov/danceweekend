@@ -1,0 +1,15 @@
+query GetGalleryBySlug($slug: ID!) {
+  gallery(id: $slug, idType: SLUG) {
+    galleryImagesGroup {
+      images(first: 1000) {
+        nodes {
+          caption(format: RENDERED)
+          altText
+          large: sourceUrl
+          small: sourceUrl(size: THUMBNAIL)
+          title
+        }
+      }
+    }
+  }
+}

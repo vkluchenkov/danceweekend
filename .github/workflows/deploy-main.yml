@@ -9,12 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
+        uses: SpicyPizza/create-envfile@v2.0
         with:
-          envkey_DEPLOY_URL: 'https://danceweekend.art'
+          envkey_DEPLOY_URL: ${{ secrets.DEPLOY_URL }}
+          envkey_NEXT_PUBLIC_GRAPHQL_BACKEND: ${{ secrets.NEXT_PUBLIC_GRAPHQL_BACKEND }}
           envkey_NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
           envkey_PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
           envkey_PAYPAL_API_URL: ${{ secrets.PAYPAL_API_URL }}
@@ -25,14 +26,14 @@ jobs:
           envkey_NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           envkey_NOTION_DATABASE_LIVE: ${{ secrets.NOTION_DATABASE_LIVE }}
           envkey_NOTION_DATABASE_ONLINE: ${{ secrets.NOTION_DATABASE_ONLINE }}
-          envkey_FTP_HOST: ${{ secrets.FTP_HOST_LIVE }}
-          envkey_FTP_USER: ${{ secrets.FTP_USER_LIVE }}
-          envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD_LIVE }}
-          envkey_FTP_DIR: ${{ secrets.FTP_DIR_LIVE }}
+          envkey_FTP_HOST: ${{ secrets.FTP_HOST }}
+          envkey_FTP_USER: ${{ secrets.FTP_USER }}
+          envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          envkey_FTP_DIR: ${{ secrets.FTP_DIR }}
           envkey_FTP_PHOTO_DIR: ${{ secrets.FTP_PHOTO_DIR }}
 
       - name: Build the Docker image
-        run: docker build -t ghcr.io/vkluchenkov/danceweekend:latest-main .
+        run: docker build -t ghcr.io/${{ secrets.IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-main .
 
       - name: Login to ghcr
         uses: docker/login-action@v2
@@ -42,10 +43,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push the Docker image
-        run: docker push ghcr.io/vkluchenkov/danceweekend:latest-main
+        run: docker push ghcr.io/${{ secrets.IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-main
 
       - name: Deploy
-        uses: appleboy/ssh-action@v0.1.8
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSHHOST }}
           username: ${{ secrets.SSHUSER }}
@@ -53,8 +54,8 @@ jobs:
           passphrase: ${{ secrets.SSHPASS }}
           script: |
             docker login --username=${{ github.actor }} --password=${{ secrets.GITHUB_TOKEN }} ghcr.io
-            docker pull ghcr.io/vkluchenkov/danceweekend:latest-main
-            docker stop Danceweekend-main
-            docker rm Danceweekend-main
-            docker run -d -p 49161:3000 --name=Danceweekend-main --restart=always --pull=always ghcr.io/vkluchenkov/danceweekend:latest-main
+            docker pull ghcr.io/${{ secrets.IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-main
+            docker stop ${{ secrets.DOCKER_IMAGE_NAME }}-main
+            docker rm ${{ secrets.DOCKER_IMAGE_NAME }}-main
+            docker run -d -p ${{ secrets.DOCKER_PORT }}:3000 --name=${{ secrets.DOCKER_IMAGE_NAME }}-main --restart=always --pull=always ghcr.io/${{ secrets.IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-main
             docker system prune -f

@@ -14,7 +14,8 @@
 .period {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  justify-content: center;
+  padding: 10px 10px 3px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.2);

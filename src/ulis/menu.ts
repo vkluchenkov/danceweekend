@@ -115,6 +115,17 @@ export const menu: MenuItem[] = [
     },
     subItems: [
       {
+        link: '/info/schedule',
+        translations: {
+          en: {
+            title: 'Schedule',
+          },
+          ru: {
+            title: 'Расписание',
+          },
+        },
+      },
+      {
         link: '/info/photo-video',
         translations: {
           en: {
@@ -125,17 +136,17 @@ export const menu: MenuItem[] = [
           },
         },
       },
-      {
-        link: '/info/bazaar',
-        translations: {
-          en: {
-            title: 'Bazaar',
-          },
-          ru: {
-            title: 'Базар',
-          },
-        },
-      },
+      // {
+      //   link: '/info/bazaar',
+      //   translations: {
+      //     en: {
+      //       title: 'Bazaar',
+      //     },
+      //     ru: {
+      //       title: 'Базар',
+      //     },
+      //   },
+      // },
       {
         link: '/info/faq',
         translations: {
@@ -144,6 +155,17 @@ export const menu: MenuItem[] = [
           },
           ru: {
             title: 'FAQ',
+          },
+        },
+      },
+      {
+        link: '/info/contacts',
+        translations: {
+          en: {
+            title: 'Contacts',
+          },
+          ru: {
+            title: 'Контакты',
           },
         },
       },

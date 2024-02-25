@@ -1,14 +1,12 @@
-import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
+import clsx from 'clsx';
+
+import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Judging.module.css';
-import useTranslation from 'next-translate/useTranslation';
-import { useMemo, useState } from 'react';
-import { Version, SupportedLangs } from '@/src/types';
-import { Switcher } from '@/src/ui-kit/Switcher';
-import Trans from 'next-translate/Trans';
 import { StyledAccordeon } from '@/src/ui-kit/StyledAccordeon';
-import clsx from 'clsx';
 
 const Judging: NextPage = () => {
   const { t, lang } = useTranslation('competitionJudging');
@@ -48,10 +46,7 @@ const Judging: NextPage = () => {
       <ul className={textStyles.list}>
         <li>{t('criteria1')}</li>
         <li>{t('criteria2')}</li>
-        <li>
-          {t('criteria3')}
-          <p className={textStyles.p}>{t('criteria3Note')}</p>
-        </li>
+        <li>{t('criteria3')}</li>
         <li>{t('criteria4')}</li>
         <li>{t('criteria5')}</li>
         <li>{t('criteria6')}</li>
@@ -70,10 +65,7 @@ const Judging: NextPage = () => {
       <ul className={textStyles.list}>
         <li>{t('tablaCriteria1')}</li>
         <li>{t('tablaCriteria2')}</li>
-        <li>
-          {t('tablaCriteria3')}
-          <p className={textStyles.p}>{t('criteria3Note')}</p>
-        </li>
+        <li>{t('tablaCriteria3')}</li>
         <li>{t('tablaCriteria4')}</li>
         <li>{t('tablaCriteria5')}</li>
       </ul>
@@ -94,10 +86,7 @@ const Judging: NextPage = () => {
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('judgingLineup')}</h2>
       <section className={styles.section}>
-        <h3 className={textStyles.h3}>{t('live')}</h3>
         <p className={textStyles.p}>{t('judgesLive')}</p>
-        <h3 className={textStyles.h3}>{t('online')}</h3>
-        <p className={textStyles.p}>{t('judgesOnline')}</p>
       </section>
     </Layout>
   );

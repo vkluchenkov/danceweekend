@@ -1,19 +1,19 @@
 export type Version = 'live' | 'online';
 export type SupportedLangs = 'ru' | 'en';
 
-export interface PricePeriod {
-  price: {
-    [version in Version]: {
-      fullPassPrice: number;
-      group1Price: number;
-      group2Price: number;
-    };
-  };
-  description?: string;
-  startDate?: Date;
-  endDate?: Date;
-  isPromo?: boolean;
-}
+// export interface PricePeriod {
+//   price: {
+//     [version in Version]: {
+//       fullPassPrice: number;
+//       // group1Price: number;
+//       // group2Price: number;
+//     };
+//   };
+//   description?: string;
+//   startDate?: Date;
+//   endDate?: Date;
+//   isPromo?: boolean;
+// }
 
 export type SoloPriceCats =
   | 'kids'
@@ -24,12 +24,7 @@ export type SoloPriceCats =
   | 'soloPassProfessionals';
 
 export interface ContestSoloPrice {
-  price: {
-    [version in Version]: {
-      priceNormal: number;
-      priceDiscounted: number;
-    };
-  };
+  price: number;
 }
 
 export type AgeGroup = 'baby' | 'kids' | 'juniors' | 'adults' | 'seniors';

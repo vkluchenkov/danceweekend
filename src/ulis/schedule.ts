@@ -101,11 +101,11 @@ export const schedule: Day[] = [
         translations: {
           en: {
             title: 'Leandro Ferreyra',
-            description: 'TBA',
+            description: 'Flamenco fusion choreography',
           },
           ru: {
             title: 'Leandro Ferreyra',
-            description: 'TBA',
+            description: 'Хореография Flamenco fusion',
           },
         },
       },

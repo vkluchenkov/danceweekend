@@ -89,15 +89,15 @@ export const PersonalData: React.FC<StepProps> = () => {
         />
         <div>
           <p className={textStyles.p} style={{ paddingBottom: '10px' }}>
-            {t('form.personal.haveBeforeTitle')}
+            {t('form.personal.yearsBeforeTitle')}
           </p>
           <FormInputField
-            name='haveBefore'
-            label={t('form.personal.haveBefore')}
+            name='yearsBefore'
+            label={t('form.personal.yearsBefore')}
             placeholder='2016, 2017, 2023'
             control={control}
-            error={!!errors.stageName}
-            helperText={errors?.stageName?.message as string | undefined}
+            error={!!errors.yearsBefore}
+            helperText={errors?.yearsBefore?.message as string | undefined}
           />
         </div>
       </div>

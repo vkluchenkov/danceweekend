@@ -2,13 +2,13 @@ import { GetStaticProps, NextPage } from 'next';
 import { useEffect, useMemo, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
+import { ThemeProvider } from '@mui/material';
 
 import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { Version } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
-import { ThemeProvider } from '@mui/material';
 import { darkTheme } from '@/src/ulis/constants';
 import { WordpressApi } from '@/src/api/wordpressApi';
 import { FormRegistration } from '@/src/components/FormRegistration';
@@ -62,25 +62,31 @@ const Registration: NextPage = () => {
     );
   }, [t, version]);
 
+  // Keep forms always visible in dev env and check the settings otherwise
   const isLiveRegOpen =
-    regState?.isLiveOpen === 'true' || process.env.NODE_ENV === 'development' ? true : false;
+    regState?.isLiveOpen.toLowerCase() === 'true' || process.env.NODE_ENV === 'development'
+      ? true
+      : false;
+
   const isOnlineRegOpen =
-    regState?.isOnlineOpen === 'true' || process.env.NODE_ENV === 'development' ? true : false;
+    regState?.isOnlineOpen.toLowerCase() === 'true' || process.env.NODE_ENV === 'development'
+      ? true
+      : false;
 
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
       <section className={styles.section}>
+        {version === 'live' && !isLiveRegOpen && <h1>{t('liveClosed')}</h1>}
+        {version === 'online' && !isOnlineRegOpen && <h1>{t('onlineClosed')}</h1>}
         <ThemeProvider theme={darkTheme}>
           {version === 'live' && isLiveRegOpen && (
             <FormRegistration version={version} priceData={data} />
           )}
-          {version === 'live' && !isLiveRegOpen && <h1>{t('liveClosed')}</h1>}
           {version === 'online' && isOnlineRegOpen && (
             <FormRegistration version={version} priceData={data} />
           )}
-          {version === 'online' && !isOnlineRegOpen && <h1>{t('onlineClosed')}</h1>}
         </ThemeProvider>
       </section>
     </Layout>

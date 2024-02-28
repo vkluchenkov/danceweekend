@@ -5,6 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     NOTION_DATABASE_LIVE: process.env.NOTION_DATABASE_LIVE,
+    NOTION_DATABASE_ONLINE: process.env.NOTION_DATABASE_ONLINE,
   },
   output: 'standalone',
   images: {

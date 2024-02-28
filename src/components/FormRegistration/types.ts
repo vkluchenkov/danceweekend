@@ -68,12 +68,9 @@ export interface Step {
   next: StepId | null;
 }
 
-export interface StepProps {
-  // onStepSubmit: (direction: 'next' | 'prev') => void;
-}
+export interface StepProps {}
 
 export type WorkshopsStepProps = StepProps & {
-  // currentPricePeriod: PricePeriod | undefined;
   fullPassPrice: number | undefined;
   setStepTotal: (total: number) => void;
   fullPassDiscountList: FullPassDiscount[];
@@ -99,14 +96,12 @@ export type WorldShowStepProps = StepProps & {
 export type SummaryStepProps = StepProps & {
   fullPassPrice: number | undefined;
   soloPassPrice: number;
-  // currentPricePeriod: PricePeriod | undefined;
   total: number;
   setIsNextDisabled: (state: boolean) => void;
 };
 
 export type OrderPayload = FormFields & {
   fullPassPrice: number | undefined;
-  // currentPricePeriod: PricePeriod | undefined;
   currentLang: SupportedLangs;
   soloPassPrice: number;
   total: number;

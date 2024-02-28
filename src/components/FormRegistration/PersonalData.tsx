@@ -52,58 +52,59 @@ export const PersonalData: React.FC<StepProps> = () => {
           error={!!errors.surname}
           helperText={errors?.surname?.message as string | undefined}
         />
-
-        <FormInputField
-          name='stageName'
-          label={t('form.personal.stageName')}
-          control={control}
-          rules={{
-            pattern: {
-              value: /^[a-zA-ZÀ-ÖØ-ÝżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\s\-]+$/,
-              message: t('form.common.patternError'),
-            },
-          }}
-          error={!!errors.stageName}
-          helperText={errors?.stageName?.message as string | undefined}
-        />
-
-        <FormInputField
-          name='age'
-          type='tel'
-          label={t('form.personal.age')}
-          rules={{
-            required: t('form.common.required'),
-            min: {
-              value: 4,
-              message: t('form.personal.ageError'),
-            },
-            max: {
-              value: 99,
-              message: t('form.personal.ageError'),
-            },
-            pattern: {
-              value: /^\d+$/,
-              message: t('form.common.numbersError'),
-            },
-          }}
-          control={control}
-          error={!!errors.age}
-          helperText={errors?.age?.message as string | undefined}
-        />
         {version === 'live' && (
-          <div>
-            <p className={textStyles.p} style={{ paddingBottom: '10px' }}>
-              {t('form.personal.yearsBeforeTitle')}
-            </p>
+          <>
             <FormInputField
-              name='yearsBefore'
-              label={t('form.personal.yearsBefore')}
-              placeholder='2016, 2017, 2023'
+              name='stageName'
+              label={t('form.personal.stageName')}
               control={control}
-              error={!!errors.yearsBefore}
-              helperText={errors?.yearsBefore?.message as string | undefined}
+              rules={{
+                pattern: {
+                  value: /^[a-zA-ZÀ-ÖØ-ÝżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9\s\-]+$/,
+                  message: t('form.common.patternError'),
+                },
+              }}
+              error={!!errors.stageName}
+              helperText={errors?.stageName?.message as string | undefined}
             />
-          </div>
+
+            <FormInputField
+              name='age'
+              type='tel'
+              label={t('form.personal.age')}
+              rules={{
+                required: t('form.common.required'),
+                min: {
+                  value: 4,
+                  message: t('form.personal.ageError'),
+                },
+                max: {
+                  value: 99,
+                  message: t('form.personal.ageError'),
+                },
+                pattern: {
+                  value: /^\d+$/,
+                  message: t('form.common.numbersError'),
+                },
+              }}
+              control={control}
+              error={!!errors.age}
+              helperText={errors?.age?.message as string | undefined}
+            />
+            <div>
+              <p className={textStyles.p} style={{ paddingBottom: '10px' }}>
+                {t('form.personal.yearsBeforeTitle')}
+              </p>
+              <FormInputField
+                name='yearsBefore'
+                label={t('form.personal.yearsBefore')}
+                placeholder='2016, 2017, 2023'
+                control={control}
+                error={!!errors.yearsBefore}
+                helperText={errors?.yearsBefore?.message as string | undefined}
+              />
+            </div>
+          </>
         )}
       </div>
 
@@ -139,41 +140,44 @@ export const PersonalData: React.FC<StepProps> = () => {
           error={!!errors.social}
           helperText={errors?.social?.message as string | undefined}
         />
+        {version === 'live' && (
+          <>
+            <FormInputField
+              name='country'
+              label={t('form.personal.country')}
+              control={control}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors.country}
+              helperText={errors?.country?.message as string | undefined}
+            />
 
-        <FormInputField
-          name='country'
-          label={t('form.personal.country')}
-          control={control}
-          rules={{
-            required: t('form.common.required'),
-          }}
-          error={!!errors.country}
-          helperText={errors?.country?.message as string | undefined}
-        />
+            <FormInputField
+              name='city'
+              label={t('form.personal.city')}
+              control={control}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors.city}
+              helperText={errors?.city?.message as string | undefined}
+            />
 
-        <FormInputField
-          name='city'
-          label={t('form.personal.city')}
-          control={control}
-          rules={{
-            required: t('form.common.required'),
-          }}
-          error={!!errors.city}
-          helperText={errors?.city?.message as string | undefined}
-        />
-
-        <FormInputField
-          name='tel'
-          type='tel'
-          placeholder='+48 123456789'
-          label={t('form.personal.tel')}
-          control={control}
-          rules={{
-            required: t('form.common.required'),
-          }}
-          error={!!errors.tel}
-          helperText={errors?.tel?.message as string | undefined}
-        />
+            <FormInputField
+              name='tel'
+              type='tel'
+              placeholder='+48 123456789'
+              label={t('form.personal.tel')}
+              control={control}
+              rules={{
+                required: t('form.common.required'),
+              }}
+              error={!!errors.tel}
+              helperText={errors?.tel?.message as string | undefined}
+            />
+          </>
+        )}
       </div>
     </>
   );

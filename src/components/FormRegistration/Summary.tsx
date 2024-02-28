@@ -9,7 +9,6 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { SummaryStepProps, FormFields } from './types';
 import { SupportedLangs } from '@/src/types';
-// import { worldShowPrice } from '@/src/ulis/price';
 import { FormInputCheckbox } from '@/src/ui-kit/input';
 import { contestCategories } from '@/src/ulis/contestCategories';
 
@@ -25,7 +24,6 @@ export const Summary: React.FC<SummaryStepProps> = ({
   const methods = useFormContext<FormFields>();
   const { watch, control } = methods;
 
-  const version = watch('version');
   const settings = watch('settings');
   const form = watch();
 
@@ -46,7 +44,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
   // Personal
   const personal = useMemo(() => {
-    const list = ['name', 'surname', 'stageName', 'age', 'haveBefore'];
+    const list = ['name', 'surname', 'stageName', 'age', 'yearsBefore'];
     return list.map((i) => ({
       key: i,
       value: form[i as keyof FormFields],

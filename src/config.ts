@@ -6,5 +6,6 @@ export const config = {
   },
   notion: {
     liveDbId: must(process.env.NOTION_DATABASE_LIVE),
+    onlineDbId: must(process.env.NOTION_DATABASE_ONLINE),
   },
 };

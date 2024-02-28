@@ -105,12 +105,16 @@ interface FormRegistrationProps {
 export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, priceData }) => {
   const { t, lang } = useTranslation('registration');
 
+  const currentLang = lang as SupportedLangs;
+
   const methods = useForm<FormFields>({
     defaultValues: defaultValues,
     mode: 'onChange',
   });
 
   const { handleSubmit, setValue, watch } = methods;
+
+  const router = useRouter();
 
   const [total, setTotal] = useState(0);
   const [isTotalOpen, setIsTotalOpen] = useState(false);
@@ -215,26 +219,25 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
 
   // Handle form submit
   const onSubmit = async (data: FormFields) => {
-    console.log(data);
-    // setIsLoading(true);
+    setIsLoading(true);
 
-    // const payload: OrderPayload = {
-    //   ...data,
-    //   fullPassPrice: fullPassPrice,
-    //   currentLang: currentLang,
-    //   soloPassPrice: soloPassPrice,
-    //   total: total,
-    // };
-    // await axios
-    //   .post('/api/reg-submit', payload)
-    //   .then((res) => {
-    //     router.push('/thank-you');
-    //   })
-    //   .catch((error: any) => {
-    //     setIsSnackBarOpen(true);
-    //     console.log(error);
-    //   })
-    //   .finally(() => setIsLoading(false));
+    const payload: OrderPayload = {
+      ...data,
+      fullPassPrice: fullPassPrice,
+      currentLang: currentLang,
+      soloPassPrice: soloPassPrice,
+      total: total,
+    };
+    await axios
+      .post('/api/reg-submit', payload)
+      .then((res) => {
+        router.push('/thank-you');
+      })
+      .catch((error: any) => {
+        setIsSnackBarOpen(true);
+        console.log(error);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   // Handle steps navigation

@@ -115,7 +115,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
           )}
 
           {/* Solo Pass selection */}
-          <Collapse in={!!contestLevel} unmountOnExit>
+          <Collapse in={!!contestLevel && contestLevel !== 'debut'} unmountOnExit>
             <div>
               <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
               <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
@@ -133,7 +133,9 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
                 }
               />
             </div>
-
+          </Collapse>
+          {/* Styles selection */}
+          <Collapse in={!!contestLevel} unmountOnExit>
             <h4 className={textStyles.h4}>{t('form.contest.stylesTitle')}:</h4>
             <ContestSoloList />
           </Collapse>

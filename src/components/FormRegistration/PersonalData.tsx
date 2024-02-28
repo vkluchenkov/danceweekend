@@ -21,7 +21,6 @@ export const PersonalData: React.FC<StepProps> = () => {
       <h2 className={textStyles.h2}>{t('form.personal.title')}</h2>
       <div className={styles.form}>
         <FormInputField
-          autoFocus
           name='name'
           label={t('form.personal.name')}
           control={control}

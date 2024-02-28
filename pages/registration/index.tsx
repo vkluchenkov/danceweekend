@@ -62,8 +62,10 @@ const Registration: NextPage = () => {
     );
   }, [t, version]);
 
-  const isLiveRegOpen = regState?.isLiveOpen === 'true' ? true : false;
-  const isOnlineRegOpen = regState?.isOnlineOpen === 'true' ? true : false;
+  const isLiveRegOpen =
+    regState?.isLiveOpen === 'true' || process.env.NODE_ENV === 'development' ? true : false;
+  const isOnlineRegOpen =
+    regState?.isOnlineOpen === 'true' || process.env.NODE_ENV === 'development' ? true : false;
 
   return (
     <Layout title={t('pageTitle')}>
@@ -75,7 +77,9 @@ const Registration: NextPage = () => {
             <FormRegistration version={version} priceData={data} />
           )}
           {version === 'live' && !isLiveRegOpen && <h1>{t('liveClosed')}</h1>}
-          {/* {version === 'online' && isOnlineRegOpen && <FormRegistration version={version} />} */}
+          {version === 'online' && isOnlineRegOpen && (
+            <FormRegistration version={version} priceData={data} />
+          )}
           {version === 'online' && !isOnlineRegOpen && <h1>{t('onlineClosed')}</h1>}
         </ThemeProvider>
       </section>

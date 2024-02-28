@@ -13,8 +13,11 @@ export const PersonalData: React.FC<StepProps> = () => {
   const {
     control,
     trigger,
+    watch,
     formState: { errors },
   } = methods;
+
+  const version = watch('version');
 
   return (
     <>
@@ -87,19 +90,21 @@ export const PersonalData: React.FC<StepProps> = () => {
           error={!!errors.age}
           helperText={errors?.age?.message as string | undefined}
         />
-        <div>
-          <p className={textStyles.p} style={{ paddingBottom: '10px' }}>
-            {t('form.personal.yearsBeforeTitle')}
-          </p>
-          <FormInputField
-            name='yearsBefore'
-            label={t('form.personal.yearsBefore')}
-            placeholder='2016, 2017, 2023'
-            control={control}
-            error={!!errors.yearsBefore}
-            helperText={errors?.yearsBefore?.message as string | undefined}
-          />
-        </div>
+        {version === 'live' && (
+          <div>
+            <p className={textStyles.p} style={{ paddingBottom: '10px' }}>
+              {t('form.personal.yearsBeforeTitle')}
+            </p>
+            <FormInputField
+              name='yearsBefore'
+              label={t('form.personal.yearsBefore')}
+              placeholder='2016, 2017, 2023'
+              control={control}
+              error={!!errors.yearsBefore}
+              helperText={errors?.yearsBefore?.message as string | undefined}
+            />
+          </div>
+        )}
       </div>
 
       <h2 className={textStyles.h2}>{t('form.personal.contacts')}</h2>

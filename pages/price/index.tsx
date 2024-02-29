@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Trans from 'next-translate/Trans';
 import { motion, AnimatePresence } from 'framer-motion';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 
 import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
@@ -56,6 +57,16 @@ const Price: NextPage = () => {
     <Trans
       i18nKey='price:competition.attention'
       components={[<span className={textStyles.accent} key={1} />]}
+    />
+  );
+
+  const photoAttention = (
+    <Trans
+      i18nKey='price:competition.attention2'
+      components={[
+        <span className={textStyles.accent} key={1} />,
+        <Link href='/info/photo-video' key={2} target='_blank' />,
+      ]}
     />
   );
 
@@ -232,6 +243,7 @@ const Price: NextPage = () => {
     <>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('competition.title')}</h2>
       <p className={textStyles.p}>{contestAttention}</p>
+      <p className={textStyles.p}>{photoAttention}</p>
 
       {/* Price table */}
       <div className={styles.table}>

@@ -29,16 +29,13 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
 
   const groupContest = watch('groupContest');
   const contestAgeGroup = watch('contestAgeGroup');
-  const contestLevel = watch('contestLevel');
   const isGroupContest = watch('isGroupContest');
-  const version = watch('version');
   const settings = watch('settings');
 
   const defaultGroup: GroupContest = useMemo(() => {
     return {
       type: 'duo',
       ageGroup: contestAgeGroup,
-      level: contestLevel,
       styles: [],
       style: '',
       qty: 2,
@@ -55,15 +52,6 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
       index,
     };
   });
-
-  // clean contest group competition state if not empty
-  // useEffect(() => {
-  //     if (groupContest.length > 0) {
-  //       setValue('isGroupContest', false);
-  //       setValue('groupContest', []);
-  //     }
-  //     if (lastDirection) onStepSubmit(lastDirection);
-  // });
 
   // Set first group fields and clear all group fields and errors on checkbox change
   useEffect(() => {
@@ -101,23 +89,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   );
 
   const groups = controlledFields.map((field) => {
-    const isDuoType = field.type === 'duo';
-    const isGroupType = field.type === 'group';
-
-    const contestCategory = contestCategories.find(
-      (cat) =>
-        (cat.ageGroup === contestAgeGroup && cat.isDuoCategory === isDuoType) ||
-        cat.isGroupCategory === isGroupType
-    );
-
-    return (
-      <ContestGroup
-        field={field}
-        key={field.id}
-        catStyles={contestCategory?.categories}
-        onDelete={() => handleDelete(field.id)}
-      />
-    );
+    return <ContestGroup field={field} key={field.id} onDelete={() => handleDelete(field.id)} />;
   });
 
   return (

@@ -9,17 +9,15 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { GroupContest, FormFields } from './types';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
-// import { contestGroupPrice } from '@/src/ulis/price';
-import { Style } from '@/src/ulis/contestCategories';
-import { AgeGroup, ageGroupArray, SupportedLangs } from '@/src/types';
+import { Style, contestCategories } from '@/src/ulis/contestCategories';
+import { ageGroupArray, SupportedLangs } from '@/src/types';
 
 interface ContestGroupProps {
   field: GroupContest & { id: string; index: number };
   onDelete: () => void;
-  catStyles: Style[] | undefined;
 }
 
-export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, catStyles }) => {
+export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) => {
   const { t, lang } = useTranslation('registration');
   const currentLang = lang as SupportedLangs;
 
@@ -32,7 +30,7 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, cat
   } = methods;
 
   const settings = watch('settings');
-  const contestLevels = watch('contestLevels');
+  const ageGroup = watch(`groupContest.${field.index}.ageGroup`);
 
   const fieldErrors = errors.groupContest?.[field.index];
 
@@ -59,6 +57,10 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, cat
     const price = field.qty * settings?.price.contest?.contestGroupPrice!;
     setValue(`groupContest.${field.index}.price`, price);
   }, [setValue, field.qty, field.index, settings]);
+
+  const contestCategory = contestCategories.find(
+    (cat) => cat.ageGroup === ageGroup && (cat.isDuoCategory || cat.isGroupCategory)
+  );
 
   return (
     <div className={clsx(styles.form)}>
@@ -91,7 +93,7 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, cat
       </FormInputSelect>
 
       <FormInputSelect
-        name={`groupContest.${field.index}.age`}
+        name={`groupContest.${field.index}.ageGroup`}
         control={control}
         label={t('form.contest.groups.ageGroupTitle')}
         rules={{
@@ -118,7 +120,7 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, cat
         error={!!fieldErrors?.style}
         helperText={fieldErrors?.style?.message as string | undefined}
       >
-        {catStyles?.map((style) => {
+        {contestCategory?.categories?.map((style) => {
           const id = style.translations.en.categoryTitle;
           const title = style.translations[currentLang].categoryTitle;
           return (

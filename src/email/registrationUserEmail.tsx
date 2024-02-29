@@ -12,13 +12,11 @@ import {
   MjmlDivider,
 } from '@faire/mjml-react';
 import { Translate } from 'next-translate';
-import Trans from 'next-translate/Trans';
+import { renderReactToMjml } from './renderReactToMjml';
+
 import { OrderPayload } from '../components/FormRegistration/types';
 import { defaultUrl, telegramUrl } from '../ulis/constants';
 import { contestCategories } from '../ulis/contestCategories';
-import { worldShowPrice } from '../ulis/price';
-
-import { renderReactToMjml } from './renderReactToMjml';
 
 interface registrationUserEmailProps {
   form: OrderPayload;
@@ -40,7 +38,7 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
   };
 
   // Personal
-  const personal = ['name', 'surname', 'stageName', 'age'].map((i) => ({
+  const personal = ['name', 'surname', 'stageName', 'age', 'yearsBefore'].map((i) => ({
     key: i,
     value: form[i as keyof OrderPayload],
   }));
@@ -103,53 +101,36 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
   });
 
   // Workshops
-  const isFullPass = form.isFullPass;
-  const workshops = form.workshops.filter((ws) => ws.selected);
-
   const workshopsData = () => {
-    if (isFullPass) {
-      return (
-        <>
-          <li>
-            {t('form.workshops.fullPass')}:{' '}
-            <span style={{ color: accentColor }}>{form.fullPassPrice}€</span>
-          </li>
-
-          <li>
-            {t('form.workshops.discounts.title')}:{' '}
-            <span style={{ color: accentColor }}>
-              {t(`form.workshops.discounts.${form.fullPassDiscount}`)}
-            </span>
-          </li>
-
-          {form.fullPassDiscount === 'group' && (
-            <li>
-              {t('form.workshops.discounts.groupName')}:{' '}
-              <span style={{ color: accentColor }}>{form.fullPassGroupName}</span>
-            </li>
-          )}
-
-          {form.fullPassDiscount != 'group' && form.fullPassDiscount != 'none' && (
-            <li>
-              {t('form.workshops.discounts.details')}:{' '}
-              <span style={{ color: accentColor }}>{form.fullPassDiscountSource}</span>
-            </li>
-          )}
-        </>
-      );
-    }
-    return workshops.map((ws) => {
-      const price = form.currentPricePeriod?.price[form.version][`${ws.teachersPriceGroup!}Price`];
-      return (
-        <li key={ws.id}>
-          <span style={{ color: accentColor }}>{ws.translations[form.currentLang].title}</span>
-          <br />
-          {ws.translations[form.currentLang].description}
-          <br />
-          <span style={{ color: accentColor }}>{price}€</span>
+    return (
+      <>
+        <li>
+          {t('form.workshops.fullPass')}:{' '}
+          <span style={{ color: accentColor }}>{form.fullPassPrice}€</span>
         </li>
-      );
-    });
+
+        <li>
+          {t('form.workshops.discounts.title')}:{' '}
+          <span style={{ color: accentColor }}>
+            {t(`form.workshops.discounts.${form.fullPassDiscount}`)}
+          </span>
+        </li>
+
+        {form.fullPassDiscount === 'group' && (
+          <li>
+            {t('form.workshops.discounts.groupName')}:{' '}
+            <span style={{ color: accentColor }}>{form.fullPassGroupName}</span>
+          </li>
+        )}
+
+        {form.fullPassDiscount != 'group' && form.fullPassDiscount != 'none' && (
+          <li>
+            {t('form.workshops.discounts.details')}:{' '}
+            <span style={{ color: accentColor }}>{form.fullPassDiscountSource}</span>
+          </li>
+        )}
+      </>
+    );
   };
 
   // Contest solo
@@ -279,10 +260,6 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
 
   // WorldShow
   const worldShowData = () => {
-    const soloPrice = isFullPass
-      ? worldShowPrice.soloPriceDicounted
-      : worldShowPrice.soloPriceNormal;
-
     if (form.isWorldShowSolo || form.isWorldShowGroup)
       return (
         <>
@@ -290,7 +267,8 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
 
           {form.isWorldShowSolo && (
             <MjmlText mj-class='text'>
-              {t('form.worldShow.solo')}: <span style={{ color: accentColor }}>{soloPrice}€</span>
+              {t('form.worldShow.solo')}:{' '}
+              <span style={{ color: accentColor }}>{form.settings?.price.worldShow?.solo}€</span>
             </MjmlText>
           )}
 

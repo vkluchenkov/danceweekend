@@ -5,6 +5,7 @@ import { Style, Level } from '../ulis/contestCategories';
 export interface MusicFormFields {
   type: 'group' | 'duo' | 'solo';
   event: 'contest' | 'worldShow' | undefined;
+  email: string;
   name?: string;
   surname?: string;
   groupName?: string;

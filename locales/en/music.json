@@ -4,6 +4,8 @@
     "required": "This field is required",
     "name": "Participant name",
     "surname": "Participant surname",
+    "email": "Email",
+    "emailError": "Email is not valid",
     "groupName": "Group / duo name",
     "event": "Event",
     "file": "Music file",
@@ -25,9 +27,9 @@
     },
     "levels": {
       "title": "Level",
+      "debut": "Debut",
       "beginners": "Beginners",
-      "intermediate": "Intermediate",
-      "risingStar": "Rising star (beginners + intermediate)",
+      "semi-pro": "Semi professionals",
       "professionals": "Professionals",
       "openLevel": "Open level"
     },

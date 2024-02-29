@@ -390,7 +390,7 @@ export const contestCategories: ContestCategory[] = [
     age: '7-11',
     ageGroup: 'kids',
     isDuoCategory: true,
-    levels: ['beginners', 'semi-pro'],
+    levels: ['openLevel'],
     translations: {
       en: {
         title: 'Kids duos',
@@ -406,7 +406,7 @@ export const contestCategories: ContestCategory[] = [
     age: '7-11',
     ageGroup: 'kids',
     isGroupCategory: true,
-    levels: ['beginners', 'semi-pro'],
+    levels: ['openLevel'],
     translations: {
       en: {
         title: 'Kids groups',
@@ -451,7 +451,7 @@ export const contestCategories: ContestCategory[] = [
     age: '12-15',
     ageGroup: 'juniors',
     isDuoCategory: true,
-    levels: ['semi-pro', 'professionals'],
+    levels: ['openLevel'],
     translations: {
       en: {
         title: 'Juniors duos',
@@ -466,7 +466,7 @@ export const contestCategories: ContestCategory[] = [
     age: '12-15',
     ageGroup: 'juniors',
     isGroupCategory: true,
-    levels: ['semi-pro', 'professionals'],
+    levels: ['openLevel'],
     translations: {
       en: {
         title: 'Juniors groups',
@@ -509,7 +509,7 @@ export const contestCategories: ContestCategory[] = [
     age: '16+',
     ageGroup: 'adults',
     isDuoCategory: true,
-    levels: ['semi-pro', 'professionals'],
+    levels: ['openLevel'],
     translations: {
       en: {
         title: 'Adults duos',
@@ -524,7 +524,7 @@ export const contestCategories: ContestCategory[] = [
     age: '16+',
     ageGroup: 'adults',
     isGroupCategory: true,
-    levels: ['semi-pro', 'professionals'],
+    levels: ['openLevel'],
     translations: {
       en: {
         title: 'Adults groups',

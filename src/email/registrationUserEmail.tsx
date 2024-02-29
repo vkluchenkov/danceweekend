@@ -447,8 +447,9 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
             <MjmlText mj-class='text'>
               {t('email.telegram1')}{' '}
               <a href={telegramUrl} target='_blank' rel='noreferrer' style={{ color: accentColor }}>
-                {t('email.telegram2')}
+                {t('email.telegram2')}{' '}
               </a>
+              {t('email.telegram3')}
             </MjmlText>
           </MjmlColumn>
         </MjmlSection>

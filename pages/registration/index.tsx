@@ -64,17 +64,19 @@ const Registration: NextPage = () => {
 
   // check the settings for dev and production env whether to open or close forms
   const isLiveRegOpen = useMemo(() => {
-    if (process.env.NODE_ENV === 'development')
+    if (process.env.ENVIRONMENT === 'development')
       return regState?.isLiveOpenDev.toLowerCase() === 'true' ? true : false;
-    if (process.env.NODE_ENV === 'production')
+    if (process.env.ENVIRONMENT === 'production')
       return regState?.isLiveOpen.toLowerCase() === 'true' ? true : false;
+    else return true;
   }, [regState]);
 
   const isOnlineRegOpen = useMemo(() => {
-    if (process.env.NODE_ENV === 'development')
+    if (process.env.ENVIRONMENT === 'development')
       return regState?.isOnlineOpenDev.toLowerCase() === 'true' ? true : false;
-    if (process.env.NODE_ENV === 'production')
+    if (process.env.ENVIRONMENT === 'production')
       return regState?.isOnlineOpen.toLowerCase() === 'true' ? true : false;
+    else return true;
   }, [regState]);
 
   return (

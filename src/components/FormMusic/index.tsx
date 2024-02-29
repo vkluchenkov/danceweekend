@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
-import { AgeGroup, SupportedLangs } from '@/src/types';
-import { MusicFormFields } from '@/src/types/music.types';
-import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { Alert, Button, Collapse, FormHelperText, MenuItem, Snackbar } from '@mui/material';
 import useTranslation from 'next-translate/useTranslation';
 import { Controller, useFormContext } from 'react-hook-form';
+
+import { AgeGroup, SupportedLangs } from '@/src/types';
+import { MusicFormFields } from '@/src/types/music.types';
+import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import styles from '@/styles/Registration.module.css';
 import { contestCategories } from '@/src/ulis/contestCategories';
 
@@ -95,6 +96,7 @@ export const FormMusic: React.FC<FormMusicProps> = ({
   return (
     <>
       {/* Select group or solo */}
+
       <FormInputSelect
         name='type'
         control={control}
@@ -109,6 +111,24 @@ export const FormMusic: React.FC<FormMusicProps> = ({
         <MenuItem value='duo'>{t('form.type.duo')}</MenuItem>
         <MenuItem value='group'>{t('form.type.group')}</MenuItem>
       </FormInputSelect>
+
+      <FormInputField
+        name='email'
+        type='email'
+        placeholder='user@example.com'
+        control={control}
+        rules={{
+          required: t('form.required'),
+          pattern: {
+            value:
+              /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+            message: t('form.emailError'),
+          },
+        }}
+        label={t('form.email')}
+        error={!!errors.email}
+        helperText={errors.email?.message as string | undefined}
+      />
 
       {/* Solo fields */}
       <Collapse in={type === 'solo'} unmountOnExit>
@@ -251,7 +271,7 @@ export const FormMusic: React.FC<FormMusicProps> = ({
                   <label>{t('form.file')}</label>
                   <input
                     type='file'
-                    accept='.mp3, .wav, .mp4a'
+                    accept='.mp3, .wav, .m4a'
                     onChange={(event) => {
                       onChange(event.target.files?.[0]);
                     }}

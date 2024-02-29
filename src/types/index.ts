@@ -27,4 +27,5 @@ export interface ContestSoloPrice {
   price: number;
 }
 
-export type AgeGroup = 'baby' | 'kids' | 'juniors' | 'adults' | 'seniors';
+export const ageGroupArray = ['baby', 'kids', 'juniors', 'adults', 'seniors'] as const;
+export type AgeGroup = (typeof ageGroupArray)[number];

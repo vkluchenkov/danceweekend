@@ -1,12 +1,13 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
-import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
-import textStyles from '@/styles/Text.module.css';
-import styles from '@/styles/Registration.module.css';
 import useTranslation from 'next-translate/useTranslation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ThemeProvider } from '@mui/material';
 import axios from 'axios';
+
+import { Layout } from '@/src/components/Layout';
+import textStyles from '@/styles/Text.module.css';
+import styles from '@/styles/Registration.module.css';
 import { Loader } from '@/src/components/Loader';
 import { darkTheme, groupsLimit, margin, soloLimit, worldShowLimit } from '@/src/ulis/constants';
 import { MusicFormFields } from '@/src/types/music.types';
@@ -22,7 +23,6 @@ const Music: NextPage = () => {
   const { handleSubmit, watch, setValue, reset } = methods;
 
   const [isLoading, setIsLoading] = useState(false);
-  // const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isDurationCorrect, setIsDurationCorrect] = useState(false);
@@ -30,6 +30,7 @@ const Music: NextPage = () => {
   const file = watch('file');
   const ageGroup = watch('ageGroup');
   const type = watch('type');
+  const level = watch('level');
   const audioLength = watch('audioLength');
   const event = watch('event');
 
@@ -55,7 +56,7 @@ const Music: NextPage = () => {
   // Map contest levels and styles by age group and type
   useEffect(() => {
     if (ageGroup) {
-      const categories: (Style & { isDuo: boolean; isGroup: boolean })[] = [];
+      const styles: (Style & { isDuo: boolean; isGroup: boolean })[] = [];
       const levels: Level[] = [];
 
       // Filter by age
@@ -70,31 +71,30 @@ const Music: NextPage = () => {
         if (type === 'group') return cat.isGroupCategory;
       });
 
-      // Fill categories from filtered
+      // Fill categories from filtered, excluding improvisation
       filteredByType.forEach((cat, index) => {
+        if ((level && cat.levels.includes(level)) || cat.levels.includes('openLevel')) {
+          cat.categories.forEach((style) => {
+            !style.isImprovisation &&
+              styles.push({
+                ...style,
+                isDuo: !!cat.isDuoCategory,
+                isGroup: !!cat.isGroupCategory,
+              });
+          });
+        }
         cat.levels.forEach((level) => {
           if (level !== 'openLevel') {
             const isLevel = levels.includes(level);
             if (!isLevel) levels.push(level);
           }
         });
-
-        cat.categories.forEach(
-          (style) =>
-            !style.isImprovisation &&
-            categories.push({
-              ...style,
-              isDuo: !!cat.isDuoCategory,
-              isGroup: !!cat.isGroupCategory,
-            })
-        );
       });
 
-      setValue('categories', categories);
+      setValue('categories', styles);
       setValue('levels', levels);
-      setValue('level', levels[0]);
     }
-  }, [ageGroup, setValue, type]);
+  }, [ageGroup, setValue, type, level]);
 
   // Handle snackbar close
   const handleClose = useCallback((event?: React.SyntheticEvent | Event, reason?: string) => {

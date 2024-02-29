@@ -1,7 +1,30 @@
 import { must } from './ulis/must';
 
+// All non NEXT_PUBLIC should be listed in next.config
 export const config = {
   wordpress: {
     grapqlBackend: must(process.env.NEXT_PUBLIC_GRAPHQL_BACKEND),
+  },
+  notion: {
+    token: must(process.env.NOTION_TOKEN),
+    liveDbId: must(process.env.NOTION_DATABASE_LIVE),
+    onlineDbId: must(process.env.NOTION_DATABASE_ONLINE),
+  },
+  brevo: {
+    token: must(process.env.SENDINBLUE_SECRET),
+  },
+  stripe: {
+    stripeKey: must(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY),
+    stripeSecretKey: must(process.env.STRIPE_SECRET_KEY),
+  },
+  paypal: {
+    paypalClientId: must(process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID),
+  },
+  ftp: {
+    musicDir: must(process.env.FTP_DIR),
+    photoDir: must(process.env.FTP_PHOTO_DIR),
+    ftpHost: must(process.env.FTP_HOST),
+    ftpUser: must(process.env.FTP_USER),
+    ftpPassword: must(process.env.FTP_PASSWORD),
   },
 };

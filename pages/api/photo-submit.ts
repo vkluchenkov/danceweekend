@@ -1,9 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import formidable, { File } from 'formidable';
 import path from 'path';
-import { FormFields, FormData } from '@/src/types/photo.types';
 import * as ftp from 'basic-ftp';
 import sanitize from 'sanitize-filename';
+
+import { FormFields, FormData } from '@/src/types/photo.types';
+import { config as appConfig } from '@/src/config';
 
 export const config = {
   api: {
@@ -49,15 +51,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (formData) {
     const { name } = formData.fields;
+    const time = new Date().toLocaleTimeString('pl');
 
     const tempPath = formData.file.filepath;
     const extName = path.extname(formData.file.originalFilename!);
-    const fileName = sanitize(name!) + extName;
+    const fileName = sanitize(name!) + ' (' + time + ')' + extName;
 
     // FTP
     const ftpClient = new ftp.Client();
 
-    const ftpDir = process.env.FTP_PHOTO_DIR!;
+    const ftpDir = appConfig.ftp.photoDir;
 
     const ftpUploadDir = () => {
       const date = new Date().toLocaleDateString('pl');
@@ -66,13 +69,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
       await ftpClient.access({
-        host: process.env.FTP_HOST,
-        user: process.env.FTP_USER,
-        password: process.env.FTP_PASSWORD,
+        host: appConfig.ftp.ftpHost,
+        user: appConfig.ftp.ftpUser,
+        password: appConfig.ftp.ftpPassword,
         secure: false,
       });
 
-      await ftpClient.ensureDir(ftpDir + ftpUploadDir());
+      // Debug
+      // ftpClient.ftp.verbose = true;
+
+      // Get full path
+      const fullDirName = ftpDir + ftpUploadDir();
+      // Create dir or make sure it exists
+      await ftpClient.ensureDir(fullDirName);
+      // upload new file
       await ftpClient.uploadFrom(tempPath, fileName);
     } catch (error) {
       console.log(error);

@@ -5,22 +5,14 @@ import clsx from 'clsx';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useQuery } from '@tanstack/react-query';
-
 import { Collapse, Snackbar, Alert } from '@mui/material';
+
 import { PersonalData } from './PersonalData';
 import styles from '@/styles/Registration.module.css';
 import textStyles from '@/styles/Text.module.css';
 import { Workshops } from './Workshops';
 import { SupportedLangs, Version } from '@/src/types';
 import { FormFields, FullPassDiscount, OrderPayload, SoloContestField, Step } from './types';
-// import {
-//   contestSoloPrice,
-//   isOnlinePromoPeriod,
-//   ispromoPeriod,
-//   kidsDiscount,
-//   workshopsPrice,
-// } from '@/src/ulis/price';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { motionVariants } from '@/src/ulis/constants';

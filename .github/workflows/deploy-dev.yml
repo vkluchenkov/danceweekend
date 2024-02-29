@@ -56,5 +56,5 @@ jobs:
             docker pull ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev
             docker stop ${{ secrets.DOCKER_IMAGE_NAME }}-dev
             docker rm ${{ secrets.DOCKER_IMAGE_NAME }}-dev
-            docker run -d -p ${{ secrets.TEST_DOCKER_PORT }}:3000 --name=${{ secrets.DOCKER_IMAGE_NAME }}-dev --restart=always --pull=always ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev
+            docker run -d -p ${{ secrets.TEST_DOCKER_PORT }}:3000 --name=${{ secrets.DOCKER_IMAGE_NAME }}-dev --restart=always --pull=always ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev -e "NODE_ENV=develop"
             docker system prune -f

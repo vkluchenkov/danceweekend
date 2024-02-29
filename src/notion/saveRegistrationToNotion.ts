@@ -14,7 +14,7 @@ interface saveRegistrationToNotionProps {
 export const saveRegistrationToNotion = async (props: saveRegistrationToNotionProps) => {
   const { form, t } = props;
 
-  const notion = new Client({ auth: process.env.NOTION_TOKEN });
+  const notion = new Client({ auth: config.notion.token });
 
   const fullPassDiscountSelect = () => {
     switch (form.fullPassDiscount) {

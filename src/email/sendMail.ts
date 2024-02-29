@@ -1,10 +1,8 @@
 import * as SibApiV3Sdk from '@sendinblue/client';
+import { config } from '../config';
 
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-apiInstance.setApiKey(
-  SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
-  process.env.SENDINBLUE_SECRET!
-);
+apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, config.brevo.token);
 
 interface SendMailProps {
   senderEmail: string;

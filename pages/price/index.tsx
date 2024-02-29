@@ -85,8 +85,9 @@ const Price: NextPage = () => {
 
   const priceCards = () => {
     const isPromo = (): boolean => {
-      if (version === 'live') return price?.promoPeriod?.isLivePromo === 'true' ? true : false;
-      else return price?.promoPeriod?.isOnlinePromo === 'true' ? true : false;
+      if (version === 'live')
+        return price?.promoPeriod?.isLivePromo.toLowerCase() === 'true' ? true : false;
+      else return price?.promoPeriod?.isOnlinePromo.toLowerCase() === 'true' ? true : false;
     };
 
     const promoCard = (

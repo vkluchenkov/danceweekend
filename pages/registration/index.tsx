@@ -68,7 +68,7 @@ const Registration: NextPage = () => {
       return regState?.isLiveOpenDev.toLowerCase() === 'true' ? true : false;
     if (process.env.ENVIRONMENT === 'production')
       return regState?.isLiveOpen.toLowerCase() === 'true' ? true : false;
-    else return true;
+    else return false;
   }, [regState]);
 
   const isOnlineRegOpen = useMemo(() => {
@@ -76,7 +76,7 @@ const Registration: NextPage = () => {
       return regState?.isOnlineOpenDev.toLowerCase() === 'true' ? true : false;
     if (process.env.ENVIRONMENT === 'production')
       return regState?.isOnlineOpen.toLowerCase() === 'true' ? true : false;
-    else return true;
+    else return false;
   }, [regState]);
 
   return (

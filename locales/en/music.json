@@ -44,5 +44,11 @@
     },
     "audio1": "Your audio duration: ",
     "audio2": " exceeds the limit of "
+  },
+  "email": {
+    "title": "New music uploaded by",
+    "subtitle": "Music details:",
+    "audioLength": "Audio length (sec.)",
+    "copyright": "Dance Weekend in Warsaw"
   }
 }

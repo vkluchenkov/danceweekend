@@ -20,4 +20,10 @@ export const config = {
   paypal: {
     paypalClientId: must(process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID),
   },
+  ftp: {
+    musicDir: must(process.env.FTP_DIR),
+    ftpHost: must(process.env.FTP_HOST),
+    ftpUser: must(process.env.FTP_USER),
+    ftpPassword: must(process.env.FTP_PASSWORD),
+  },
 };

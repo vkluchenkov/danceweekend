@@ -9,6 +9,10 @@ const nextConfig = {
     NOTION_TOKEN: process.env.NOTION_TOKEN,
     SENDINBLUE_SECRET: process.env.SENDINBLUE_SECRET,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    FTP_DIR: process.env.FTP_DIR,
+    FTP_HOST: process.env.FTP_HOST,
+    FTP_USER: process.env.FTP_USER,
+    FTP_PASSWORD: process.env.FTP_PASSWORD,
   },
   output: 'standalone',
   images: {

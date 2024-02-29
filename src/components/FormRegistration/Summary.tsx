@@ -189,12 +189,10 @@ export const Summary: React.FC<SummaryStepProps> = ({
           <ul className={clsx(textStyles.list, textStyles.list_summary)}>
             {form.groupContest.map((group, index) => {
               // Category style translation
-              const isDuoType = group.type === 'duo';
-              const isGroupType = group.type === 'group';
               const contestCategory = contestCategories.find(
                 (cat) =>
-                  (cat.ageGroup === form.contestAgeGroup && cat.isDuoCategory === isDuoType) ||
-                  cat.isGroupCategory === isGroupType
+                  cat.ageGroup === form.groupContest[index].ageGroup &&
+                  (cat.isDuoCategory || cat.isGroupCategory)
               );
               const catStyle = contestCategory?.categories.find(
                 (style) => style.translations.en.categoryTitle === group.style
@@ -212,6 +210,13 @@ export const Summary: React.FC<SummaryStepProps> = ({
                       {t('form.contest.groups.groupOrDuo')}:{' '}
                       <span className={textStyles.accent}>
                         {t(`form.contest.groups.${group.type}`)}
+                      </span>
+                    </li>
+
+                    <li>
+                      {t('form.contest.groups.ageGroupTitle')}:{' '}
+                      <span className={textStyles.accent}>
+                        {t(`form.contest.ageGroups.${group.ageGroup}`)}
                       </span>
                     </li>
 

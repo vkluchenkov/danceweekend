@@ -9,7 +9,7 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { GroupContest, FormFields } from './types';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
-import { Style, contestCategories } from '@/src/ulis/contestCategories';
+import { contestCategories } from '@/src/ulis/contestCategories';
 import { ageGroupArray, SupportedLangs } from '@/src/types';
 
 interface ContestGroupProps {

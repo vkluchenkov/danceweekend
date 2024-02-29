@@ -41,18 +41,18 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
     return { name: category.translations.en.categoryTitle };
   });
 
-  const contestGroups = form.groupContest.map((group) => {
+  const contestGroups = form.groupContest.map((group, index) => {
     // Category style translation
-    const isDuoType = group.type === 'duo';
-    const isGroupType = group.type === 'group';
     const contestCategory = contestCategories.find(
       (cat) =>
-        (cat.ageGroup === form.contestAgeGroup && cat.isDuoCategory === isDuoType) ||
-        cat.isGroupCategory === isGroupType
+        cat.ageGroup === form.groupContest[index].ageGroup &&
+        (cat.isDuoCategory || cat.isGroupCategory)
     );
     const catStyle = contestCategory?.categories.find(
       (style) => style.translations.en.categoryTitle === group.style
     );
+
+    const ageGroup = t(`form.contest.ageGroups.${group.ageGroup}`);
 
     return {
       name:
@@ -62,6 +62,8 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
         ' | ' +
         group.qty +
         ' pers. | ' +
+        ageGroup +
+        ' | ' +
         catStyle?.translations.en.categoryTitle,
     };
   });

@@ -1,29 +1,31 @@
 import { useState, useCallback } from 'react';
-import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
-import textStyles from '@/styles/Text.module.css';
-import styles from '@/styles/Registration.module.css';
 import useTranslation from 'next-translate/useTranslation';
-import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { FormProvider, useForm } from 'react-hook-form';
-import { PaymentFormFields } from '@/src/types/payment.types';
 import { ThemeProvider, MenuItem, InputAdornment, Collapse, Snackbar, Alert } from '@mui/material';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
+
+import { Layout } from '@/src/components/Layout';
+import textStyles from '@/styles/Text.module.css';
+import styles from '@/styles/Registration.module.css';
+import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
+import { PaymentFormFields } from '@/src/types/payment.types';
 import { Loader } from '@/src/components/Loader';
 import { darkTheme } from '@/src/ulis/constants';
+import { config } from '@/src/config';
 
-const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
+const stripeKey = config.stripe.stripeKey;
 const stripePromise = loadStripe(stripeKey);
 
 const Payment: NextPage = () => {
   const { t } = useTranslation('payment');
   const router = useRouter();
 
-  const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!;
+  const paypalClientId = config.paypal.paypalClientId;
 
   const methods = useForm<PaymentFormFields>({
     mode: 'onChange',
@@ -143,9 +145,9 @@ const Payment: NextPage = () => {
                     fundingSource='paypal'
                     disabled={false}
                     createOrder={async (data, actions) => {
-                      const isValid = await trigger();
+                      const isFormValid = await trigger();
                       const value = qty !== '' ? parseFloat(qty).toFixed(2) : '0';
-                      if (isValid)
+                      if (isFormValid)
                         return actions.order.create({
                           purchase_units: [
                             {

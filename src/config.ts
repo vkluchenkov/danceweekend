@@ -13,4 +13,11 @@ export const config = {
   brevo: {
     token: must(process.env.SENDINBLUE_SECRET),
   },
+  stripe: {
+    stripeKey: must(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY),
+    stripeSecretKey: must(process.env.STRIPE_SECRET_KEY),
+  },
+  paypal: {
+    paypalClientId: must(process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID),
+  },
 };

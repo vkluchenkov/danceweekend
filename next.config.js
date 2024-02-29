@@ -8,6 +8,7 @@ const nextConfig = {
     NOTION_DATABASE_ONLINE: process.env.NOTION_DATABASE_ONLINE,
     NOTION_TOKEN: process.env.NOTION_TOKEN,
     SENDINBLUE_SECRET: process.env.SENDINBLUE_SECRET,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   },
   output: 'standalone',
   images: {

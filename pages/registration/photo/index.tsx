@@ -1,12 +1,13 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
-import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
-import textStyles from '@/styles/Text.module.css';
-import styles from '@/styles/Registration.module.css';
 import useTranslation from 'next-translate/useTranslation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ThemeProvider } from '@mui/material';
 import axios from 'axios';
+
+import { Layout } from '@/src/components/Layout';
+import textStyles from '@/styles/Text.module.css';
+import styles from '@/styles/Registration.module.css';
 import { Loader } from '@/src/components/Loader';
 import { darkTheme, photoFileSizeLimit } from '@/src/ulis/constants';
 import { PhotoFormFields } from '@/src/types/photo.types';
@@ -18,7 +19,7 @@ const Photo: NextPage = () => {
   const methods = useForm<PhotoFormFields>({
     mode: 'onChange',
   });
-  const { handleSubmit, watch, reset } = methods;
+  const { handleSubmit, watch, reset, setValue } = methods;
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -55,6 +56,7 @@ const Photo: NextPage = () => {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         setIsSuccess(true);
+        setValue('file', null);
         reset();
       } catch (error) {
         setIsError(true);
@@ -62,7 +64,7 @@ const Photo: NextPage = () => {
         setIsLoading(false);
       }
     },
-    [reset]
+    [reset, setValue]
   );
 
   return (

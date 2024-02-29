@@ -22,6 +22,7 @@ export const config = {
   },
   ftp: {
     musicDir: must(process.env.FTP_DIR),
+    photoDir: must(process.env.FTP_PHOTO_DIR),
     ftpHost: must(process.env.FTP_HOST),
     ftpUser: must(process.env.FTP_USER),
     ftpPassword: must(process.env.FTP_PASSWORD),

@@ -4,9 +4,9 @@ import path from 'path';
 import { promises as fs } from 'fs';
 import * as ftp from 'basic-ftp';
 import sanitize from 'sanitize-filename';
-import { config as appConfig } from '@/src/config';
 import getT from 'next-translate/getT';
 
+import { config as appConfig } from '@/src/config';
 import { FormFields, FormData } from '@/src/types/music.types';
 import { senderEmail, senderName } from '@/src/ulis/constants';
 import { sendMail } from '@/src/email/sendMail';

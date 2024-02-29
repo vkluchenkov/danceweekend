@@ -62,16 +62,20 @@ const Registration: NextPage = () => {
     );
   }, [t, version]);
 
-  // Keep forms always visible in dev env and check the settings otherwise
-  const isLiveRegOpen =
-    regState?.isLiveOpen.toLowerCase() === 'true' || process.env.NODE_ENV === 'development'
-      ? true
-      : false;
+  // check the settings for dev and production env whether to open or close forms
+  const isLiveRegOpen = useMemo(() => {
+    if (process.env.NODE_ENV === 'development')
+      return regState?.isLiveOpenDev.toLowerCase() === 'true' ? true : false;
+    if (process.env.NODE_ENV === 'production')
+      return regState?.isLiveOpen.toLowerCase() === 'true' ? true : false;
+  }, [regState]);
 
-  const isOnlineRegOpen =
-    regState?.isOnlineOpen.toLowerCase() === 'true' || process.env.NODE_ENV === 'development'
-      ? true
-      : false;
+  const isOnlineRegOpen = useMemo(() => {
+    if (process.env.NODE_ENV === 'development')
+      return regState?.isOnlineOpenDev.toLowerCase() === 'true' ? true : false;
+    if (process.env.NODE_ENV === 'production')
+      return regState?.isOnlineOpen.toLowerCase() === 'true' ? true : false;
+  }, [regState]);
 
   return (
     <Layout title={t('pageTitle')}>

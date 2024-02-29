@@ -55,7 +55,9 @@ query getSettings {
       }
       registrationState {
         isLiveOpen
+        isLiveOpenDev
         isOnlineOpen
+        isOnlineOpenDev
       }
     }
   }

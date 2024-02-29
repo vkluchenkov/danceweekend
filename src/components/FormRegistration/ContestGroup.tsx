@@ -11,7 +11,7 @@ import { GroupContest, FormFields } from './types';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 // import { contestGroupPrice } from '@/src/ulis/price';
 import { Style } from '@/src/ulis/contestCategories';
-import { SupportedLangs } from '@/src/types';
+import { AgeGroup, ageGroupArray, SupportedLangs } from '@/src/types';
 
 interface ContestGroupProps {
   field: GroupContest & { id: string; index: number };
@@ -31,8 +31,8 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, cat
     formState: { errors },
   } = methods;
 
-  // const version = watch('version');
   const settings = watch('settings');
+  const contestLevels = watch('contestLevels');
 
   const fieldErrors = errors.groupContest?.[field.index];
 
@@ -88,6 +88,23 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete, cat
       >
         <MenuItem value='duo'>{t('form.contest.groups.duo')}</MenuItem>
         <MenuItem value='group'>{t('form.contest.groups.group')}</MenuItem>
+      </FormInputSelect>
+
+      <FormInputSelect
+        name={`groupContest.${field.index}.age`}
+        control={control}
+        label={t('form.contest.groups.ageGroupTitle')}
+        rules={{
+          required: t('form.common.required'),
+        }}
+        error={!!fieldErrors?.style}
+        helperText={fieldErrors?.style?.message as string | undefined}
+      >
+        {ageGroupArray.map((group) => (
+          <MenuItem key={group} value={group}>
+            {t(`form.contest.ageGroups.${group}`)}
+          </MenuItem>
+        ))}
       </FormInputSelect>
 
       <FormInputSelect

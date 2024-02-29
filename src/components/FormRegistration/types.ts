@@ -4,6 +4,8 @@ import { Style, Level } from '@/src/ulis/contestCategories';
 
 export interface GroupContest {
   type: 'duo' | 'group';
+  ageGroup: AgeGroup | null;
+  level: Level | null;
   style: string;
   qty: number;
   name: string;

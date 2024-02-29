@@ -29,6 +29,7 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
 
   const groupContest = watch('groupContest');
   const contestAgeGroup = watch('contestAgeGroup');
+  const contestLevel = watch('contestLevel');
   const isGroupContest = watch('isGroupContest');
   const version = watch('version');
   const settings = watch('settings');
@@ -36,6 +37,8 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   const defaultGroup: GroupContest = useMemo(() => {
     return {
       type: 'duo',
+      ageGroup: contestAgeGroup,
+      level: contestLevel,
       styles: [],
       style: '',
       qty: 2,
@@ -53,16 +56,14 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
     };
   });
 
-  // Skip step for seniors age group and clean contest group competition state if not empty
-  useEffect(() => {
-    if (contestAgeGroup === 'seniors') {
-      if (groupContest.length > 0) {
-        setValue('isGroupContest', false);
-        setValue('groupContest', []);
-      }
-      if (lastDirection) onStepSubmit(lastDirection);
-    }
-  });
+  // clean contest group competition state if not empty
+  // useEffect(() => {
+  //     if (groupContest.length > 0) {
+  //       setValue('isGroupContest', false);
+  //       setValue('groupContest', []);
+  //     }
+  //     if (lastDirection) onStepSubmit(lastDirection);
+  // });
 
   // Set first group fields and clear all group fields and errors on checkbox change
   useEffect(() => {
@@ -83,8 +84,8 @@ export const ContestGroups: React.FC<ContestGroupStepProps> = ({
   }, [controlledFields, setStepTotal]);
 
   const handleMore = useCallback(async () => {
-    const isValid = await trigger();
-    if (isValid) setValue('groupContest', [...groupContest, defaultGroup]);
+    const isFormValid = await trigger();
+    if (isFormValid) setValue('groupContest', [...groupContest, defaultGroup]);
   }, [groupContest, setValue, defaultGroup, trigger]);
 
   const handleDelete = useCallback(

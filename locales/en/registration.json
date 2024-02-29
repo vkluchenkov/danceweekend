@@ -83,6 +83,7 @@
       "groups": {
         "title": "Competition duos and groups",
         "checkboxLabel": "I want to register a duo or a group",
+        "ageGroupTitle": "Age group",
         "groupOrDuo": "Group or duo?",
         "style": "Style",
         "duo": "Duo",

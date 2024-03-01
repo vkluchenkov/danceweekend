@@ -35,7 +35,7 @@ export const senderEmail = 'danceweekend@aliah.dance';
 export const senderName = 'Dance Weekend in Warsaw festival';
 
 // talegram
-export const telegramUrl = 'https://t.me/+isxRvGCBaf9jMjQ0';
+export const telegramUrl = 'https://t.me/+eu_0k5Miq0JjMjE0';
 
 // Revolut payment link
 export const revolutUrl = 'https://revolut.me/aliahbellydance/eur/';

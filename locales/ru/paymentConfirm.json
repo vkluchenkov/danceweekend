@@ -1,0 +1,22 @@
+{
+  "pageTitle": "Подтверждение",
+  "form": {
+    "required": "Это поле обязательно",
+    "name": "Имя",
+    "email": "Email",
+    "password": "Пароль",
+    "lang": "Язык письма",
+    "en": "English",
+    "ru": "Русский",
+    "submit": "Отправить",
+    "error": "Упс. Поломалася. Зови Вову.",
+    "success": "Письмо отправлено!"
+  },
+  "email": {
+    "subj": "Ваш платеж и регистрация подтверждены!",
+    "title": "Привет ",
+    "subtitle": "Хорошие новости",
+    "text": "Ваш платеж и регистрация подтвеждены. Добро пожаловать на Dance Weekend in Warsaw festival. Увидимся в августе!",
+    "copyright": "©Dance Weekend in Warsaw festival"
+  }
+}

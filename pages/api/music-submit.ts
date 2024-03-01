@@ -111,7 +111,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       // Debug
-      ftpClient.ftp.verbose = true;
+      // ftpClient.ftp.verbose = true;
 
       // Get full path
       const fullDirName = ftpDir + ftpUploadDir();
@@ -150,7 +150,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         mailContent: adminEmailContent,
       };
 
-      // sendMail(adminMailPayload);
+      sendMail(adminMailPayload);
     } catch (error) {
       console.log(error);
       status = 500;

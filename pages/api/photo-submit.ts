@@ -63,8 +63,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const ftpDir = appConfig.ftp.photoDir;
 
     const ftpUploadDir = () => {
-      const date = new Date().toLocaleDateString('pl');
-      return '/' + date;
+      const year = new Date().getFullYear();
+      const month = new Date().getMonth() + 1;
+      const day = new Date().getDate();
+      return '/' + year + '/' + month + '/' + day;
     };
 
     try {

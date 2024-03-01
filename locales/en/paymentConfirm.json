@@ -1,0 +1,22 @@
+{
+  "pageTitle": "Сonfirmation",
+  "form": {
+    "required": "This field is required",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "lang": "Language",
+    "en": "English",
+    "ru": "Русский",
+    "submit": "Send",
+    "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue.",
+    "success": "Confirmation sent!"
+  },
+  "email": {
+    "subj": "Your payment and registration has been confirmed!",
+    "title": "Hi ",
+    "subtitle": "Great news",
+    "text": "Your payment and registration has been confirmed. Welcome to Dance Weekend in Warsaw festival. See you in August!",
+    "copyright": "©Dance Weekend in Warsaw festival"
+  }
+}

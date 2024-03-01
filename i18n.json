@@ -16,6 +16,7 @@
     "/music": ["music"],
     "/price": ["price"],
     "/payment": ["payment"],
+    "/payment/confirm": ["paymentConfirm"],
     "/payment/thank-you": ["payment"],
     "/registration": ["registration"],
     "/registration/photo": ["photoForm"],

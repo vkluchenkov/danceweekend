@@ -166,7 +166,7 @@ export const ContestSoloList: React.FC = () => {
     );
   });
 
-  if (contestLevel === 'professionals')
+  if (contestLevel === 'professionals' && contestAgeGroup === 'adults')
     return (
       <>
         <p className={clsx(textStyles.p)} style={{ padding: '10px 0' }}>

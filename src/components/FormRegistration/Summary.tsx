@@ -52,13 +52,13 @@ export const Summary: React.FC<SummaryStepProps> = ({
   }, [form]);
 
   const personalData = personal.map((i) => {
-    if (!i.value) return <></>;
-    return (
-      <li key={i.key}>
-        {t(`form.personal.${i.key}`)}:{' '}
-        <span className={textStyles.accent}>{i.value as string}</span>
-      </li>
-    );
+    if (i.value)
+      return (
+        <li key={i.key}>
+          {t(`form.personal.${i.key}`)}:{' '}
+          <span className={textStyles.accent}>{i.value as string}</span>
+        </li>
+      );
   });
 
   // Contacts
@@ -71,13 +71,13 @@ export const Summary: React.FC<SummaryStepProps> = ({
   }, [form]);
 
   const contactsData = contacts.map((i) => {
-    if (!i.value) return <></>;
-    return (
-      <li key={i.key}>
-        {t(`form.personal.${i.key}`)}:{' '}
-        <span className={textStyles.accent}>{i.value as string}</span>
-      </li>
-    );
+    if (i.value)
+      return (
+        <li key={i.key}>
+          {t(`form.personal.${i.key}`)}:{' '}
+          <span className={textStyles.accent}>{i.value as string}</span>
+        </li>
+      );
   });
 
   // Workshops

@@ -43,7 +43,7 @@ export interface FormFields {
   contestAgeGroup: AgeGroup | null;
   isSoloPass: boolean;
   contestLevels: Level[];
-  contestLevel: Level;
+  contestLevel?: Level;
   soloContest: SoloContestField;
   isGroupContest: boolean;
   groupContest: GroupContest[];

@@ -74,7 +74,7 @@ const ContestRules: NextPage = () => {
 
   const commonContent = (
     <>
-      <p className={textStyles.p}>{t('version', { version: '2', date: '29.02.2024' })}</p>
+      <p className={textStyles.p}>{t('version', { version: '3', date: '02.02.2024' })}</p>
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
       <p className={textStyles.p}>{t('attentionText')}</p>
@@ -102,7 +102,6 @@ const ContestRules: NextPage = () => {
       <p className={textStyles.p}>{t('prizesMain')}</p>
       <p className={textStyles.p}>{t('prizesSolo')}</p>
       <p className={textStyles.p}>{t('prizesGroups')}</p>
-      <p className={textStyles.p}>{t('prizesQueen')}</p>
       <p className={textStyles.p}>{t('prizesAdditional')}</p>
       <p className={textStyles.p}>{t('prizesKids')}</p>
 

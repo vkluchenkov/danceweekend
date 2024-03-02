@@ -64,7 +64,12 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const workshopsDescription = (
     <>
       <p className={textStyles.p}>{t('form.workshops.fullPassDescription1')}</p>
-      <p className={textStyles.p}>{t('form.workshops.fullPassDescription2')}</p>
+      {version === 'live' && (
+        <p className={textStyles.p}>{t('form.workshops.fullPassDescription2Live')}</p>
+      )}
+      {version === 'online' && (
+        <p className={textStyles.p}>{t('form.workshops.fullPassDescription2Online')}</p>
+      )}
     </>
   );
 

@@ -31,6 +31,7 @@ jobs:
           envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           envkey_FTP_DIR: ${{ secrets.TEST_FTP_DIR }}
           envkey_FTP_PHOTO_DIR: ${{ secrets.TEST_FTP_PHOTO_DIR }}
+          envkey_NEXT_SHARP_PATH: '/tmp/node_modules/sharp'
 
       - name: Build the Docker image
         run: docker build -t ghcr.io/${{ secrets.TEST_IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-dev .

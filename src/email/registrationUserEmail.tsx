@@ -44,13 +44,14 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
   }));
 
   const personalData = personal.map((i) => {
-    const value = i.value as string;
-    if (!i.value) return <></>;
-    return (
-      <li key={i.key}>
-        {t(`form.personal.${i.key}`)}: <span style={{ color: accentColor }}>{value.trim()}</span>
-      </li>
-    );
+    if (i.value) {
+      const value = i.value as string;
+      return (
+        <li key={i.key}>
+          {t(`form.personal.${i.key}`)}: <span style={{ color: accentColor }}>{value.trim()}</span>
+        </li>
+      );
+    }
   });
 
   // Contacts
@@ -60,44 +61,45 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
   }));
 
   const contactsData = contacts.map((i) => {
-    const value = i.value as string;
-    if (!i.value) return <></>;
-    if (i.key === 'email')
+    if (i.value) {
+      const value = i.value as string;
+      if (i.key === 'email')
+        return (
+          <li key={i.key}>
+            {t(`form.personal.${i.key}`)}:{' '}
+            <a
+              href={`mailto:${value.trim()}`}
+              target='_blank'
+              rel='noreferrer'
+              style={{ color: accentColor }}
+            >
+              {value.trim()}
+            </a>
+          </li>
+        );
+      if (i.key === 'social')
+        return (
+          <li key={i.key}>
+            {t(`form.personal.${i.key}`)}:{' '}
+            <a
+              href='#'
+              style={{
+                color: accentColor,
+                cursor: 'default',
+                textDecoration: 'none',
+                pointerEvents: 'none',
+              }}
+            >
+              {value.trim()}
+            </a>
+          </li>
+        );
       return (
         <li key={i.key}>
-          {t(`form.personal.${i.key}`)}:{' '}
-          <a
-            href={`mailto:${value.trim()}`}
-            target='_blank'
-            rel='noreferrer'
-            style={{ color: accentColor }}
-          >
-            {value.trim()}
-          </a>
+          {t(`form.personal.${i.key}`)}: <span style={{ color: accentColor }}>{value.trim()}</span>
         </li>
       );
-    if (i.key === 'social')
-      return (
-        <li key={i.key}>
-          {t(`form.personal.${i.key}`)}:{' '}
-          <a
-            href='#'
-            style={{
-              color: accentColor,
-              cursor: 'default',
-              textDecoration: 'none',
-              pointerEvents: 'none',
-            }}
-          >
-            {value.trim()}
-          </a>
-        </li>
-      );
-    return (
-      <li key={i.key}>
-        {t(`form.personal.${i.key}`)}: <span style={{ color: accentColor }}>{value.trim()}</span>
-      </li>
-    );
+    }
   });
 
   // Workshops

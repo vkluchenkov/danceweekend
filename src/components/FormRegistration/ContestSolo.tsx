@@ -46,7 +46,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     if (!isSoloContest && soloContest.length > 0) {
       soloContest.forEach((i) => (i.selected = false));
       setValue('isSoloPass', false);
-      resetField('contestLevel');
+      // resetField('contestLevel');
       if (soloContest) setValue('isSoloContest', false);
     }
   }, [isSoloContest, soloContest, setValue, resetField]);
@@ -115,7 +115,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
           )}
 
           {/* Solo Pass selection */}
-          <Collapse in={contestLevel !== 'debut'} unmountOnExit>
+          <Collapse in={contestLevel && contestLevel !== 'debut'} unmountOnExit>
             <div>
               <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
               <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>

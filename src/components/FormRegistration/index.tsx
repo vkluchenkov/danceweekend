@@ -166,7 +166,14 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
     setValue('ageGroup', age ? getAgeGroup(age) : null);
   }, [age, setValue]);
 
-  // Map solo contest styles into form state
+  // Set contest level to open level for baby and seniors and reset for all others on age change
+  useEffect(() => {
+    if (contestAgeGroup === 'baby' || contestAgeGroup === 'seniors')
+      setValue('contestLevel', 'openLevel');
+    else setValue('contestLevel', undefined);
+  }, [contestAgeGroup, setValue]);
+
+  // Map solo contest styles and levels into form state
   useEffect(() => {
     const res: SoloContestField = [];
     // Filter by age
@@ -181,7 +188,8 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
     const levels: Level[] = [];
 
     filteredBySolo.forEach((cat) => {
-      if (cat.levels.includes(contestLevel) || cat.levels.includes('openLevel')) {
+      // if (cat.levels.includes(contestLevel) || cat.levels.includes('openLevel')) {
+      if (contestLevel && cat.levels.includes(contestLevel)) {
         cat.categories.forEach((style) => {
           style.isSolo &&
             res.push({

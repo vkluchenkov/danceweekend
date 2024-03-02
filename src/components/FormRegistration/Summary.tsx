@@ -316,9 +316,9 @@ export const Summary: React.FC<SummaryStepProps> = ({
       <h4 className={textStyles.h4}>
         {t('form.summary.money.total')}: <span className={textStyles.accent}>{total}€</span>
       </h4>
-      {!settings?.price.promoPeriod.isLivePromo &&
-        form.version === 'live' &&
-        form.fullPassDiscount !== 'free' && (
+      {
+        // !settings?.price.promoPeriod.isLivePromo &&
+        form.version === 'live' && form.fullPassDiscount !== 'free' && (
           <>
             <p className={textStyles.p}>{t('form.summary.money.installmentsDetails')}</p>
             <FormInputCheckbox
@@ -338,7 +338,8 @@ export const Summary: React.FC<SummaryStepProps> = ({
               </>
             )}
           </>
-        )}
+        )
+      }
 
       {/* Rules */}
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.summary.lastThing')}</h3>

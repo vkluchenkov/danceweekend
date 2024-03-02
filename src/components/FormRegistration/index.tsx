@@ -273,14 +273,15 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
           startDate <= today && today <= endDate;
         })?.[1].price;
 
-        if (isPromo()) return settings.price.promoPeriod.price[version];
-        else if (periodPrice) return periodPrice[version];
-        return undefined;
-      };
+        const promoPrice = settings.price.promoPeriod.price[version];
 
-      // Kids discount for live version
-      if (version === 'live' && (ageGroup === 'baby' || ageGroup === 'kids') && basePrice())
-        return Number.parseFloat((basePrice()! * kidsDiscount).toFixed(2));
+        const currentPrice: number | undefined = isPromo() ? promoPrice : periodPrice![version];
+
+        // Kids discount for live version
+        if (version === 'live' && (ageGroup === 'baby' || ageGroup === 'kids') && currentPrice)
+          return Number.parseFloat((currentPrice * kidsDiscount).toFixed(2));
+        else return currentPrice;
+      };
 
       // additional discounts (certificates, etc.)
       if (fullPassDiscount === 'group' && basePrice)

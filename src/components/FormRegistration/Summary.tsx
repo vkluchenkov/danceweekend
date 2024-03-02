@@ -71,7 +71,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
   }, [form]);
 
   const contactsData = contacts.map((i) => {
-    if (!i.value)
+    if (i.value)
       return (
         <li key={i.key}>
           {t(`form.personal.${i.key}`)}:{' '}

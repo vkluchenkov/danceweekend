@@ -35,7 +35,8 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   const soloContest = watch('soloContest');
   const soloContestSelected = soloContest.filter((cat) => cat.selected);
 
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [isAgeInitialized, setIsAgeInitialized] = useState(false);
+  const [isStyleInitialized, setIsStyleInitialized] = useState(false);
 
   // disable next if none selected
   useEffect(() => {
@@ -49,35 +50,51 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     if (soloContest.length > 0) soloContest.forEach((i) => (i.selected = false));
     // clear solo pass
     setValue('isSoloPass', false);
+  }, [soloContest, setValue]);
+
+  const resetLevel = useCallback(() => {
     // set level to default
     if (contestAgeGroup === 'baby' || contestAgeGroup === 'seniors')
       setValue('contestLevel', 'openLevel');
-    else {
-      resetField('contestLevel');
-    }
-  }, [contestAgeGroup, soloContest, setValue, resetField]);
+    else resetField('contestLevel');
+  }, [contestAgeGroup, setValue, resetField]);
 
   // Clear all contest entries on checkbox off
   useEffect(() => {
     if (!isSoloContest) {
       // console.log('cleaning up because of checkbox');
       cleanup();
+      resetLevel();
     }
-    // want to run this ONLY on chackbox change
+    // want to run this ONLY on checkbox change
     // eslint-disable-next-line
   }, [isSoloContest]);
 
-  // Clear all contest entries on age change and styles remapping
+  // Clear all contest entries on age change
   useEffect(() => {
     // making sure it's not running on component init
-    if (!isInitialized) setIsInitialized(true);
+    if (!isAgeInitialized) setIsAgeInitialized(true);
     else {
-      // console.log('cleaning up because of age / styles change');
+      // console.log('cleaning up because of age change');
       cleanup();
+      resetLevel();
     }
     // want to run this ONLY on age change
     // eslint-disable-next-line
-  }, [contestAgeGroup, soloContest]);
+  }, [contestAgeGroup]);
+
+  // Clear all contest entries on styles remapping
+  useEffect(() => {
+    // making sure it's not running on component init
+    if (!isStyleInitialized) setIsStyleInitialized(true);
+    else {
+      // console.log('cleaning up because of styles change');
+      cleanup();
+      // Not resetting level, because this causes styles to remap and causes cleanup again
+    }
+    // want to run this ONLY on styles change
+    // eslint-disable-next-line
+  }, [soloContest]);
 
   // Set step total
   useEffect(() => {

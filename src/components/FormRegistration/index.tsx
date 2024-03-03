@@ -284,7 +284,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
         const periodPrice = periods.find((p) => {
           const startDate = new Date(p[1].start);
           const endDate = new Date(p[1].end);
-          startDate <= today && today <= endDate;
+          return startDate <= today && today <= endDate;
         })?.[1].price;
 
         const promoPrice = settings.price.promoPeriod.price[version];

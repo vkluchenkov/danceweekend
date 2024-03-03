@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Collapse, MenuItem } from '@mui/material';
 
 import textStyles from '@/styles/Text.module.css';
@@ -27,12 +27,16 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   } = methods;
 
   const ageGroup = watch('ageGroup');
+  const contestAgeGroup = watch('contestAgeGroup');
   const contestLevels = watch('contestLevels');
   const contestLevel = watch('contestLevel');
   const isSoloPass = watch('isSoloPass');
   const isSoloContest = watch('isSoloContest');
   const soloContest = watch('soloContest');
   const soloContestSelected = soloContest.filter((cat) => cat.selected);
+
+  const [isAgeInitialized, setIsAgeInitialized] = useState(false);
+  const [isStyleInitialized, setIsStyleInitialized] = useState(false);
 
   // disable next if none selected
   useEffect(() => {
@@ -41,15 +45,56 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     } else setIsNextDisabled(false);
   }, [isSoloContest, soloContestSelected, setIsNextDisabled]);
 
-  // Clear all contest entries on checkbox disable
+  const cleanup = useCallback(() => {
+    // clear all stlyes
+    if (soloContest.length > 0) soloContest.forEach((i) => (i.selected = false));
+    // clear solo pass
+    setValue('isSoloPass', false);
+  }, [soloContest, setValue]);
+
+  const resetLevel = useCallback(() => {
+    // set level to default
+    if (contestAgeGroup === 'baby' || contestAgeGroup === 'seniors')
+      setValue('contestLevel', 'openLevel');
+    else resetField('contestLevel');
+  }, [contestAgeGroup, setValue, resetField]);
+
+  // Clear all contest entries on checkbox off
   useEffect(() => {
-    if (!isSoloContest && soloContest.length > 0) {
-      soloContest.forEach((i) => (i.selected = false));
-      setValue('isSoloPass', false);
-      // resetField('contestLevel');
-      if (soloContest) setValue('isSoloContest', false);
+    if (!isSoloContest) {
+      // console.log('cleaning up because of checkbox');
+      cleanup();
+      resetLevel();
     }
-  }, [isSoloContest, soloContest, setValue, resetField]);
+    // want to run this ONLY on checkbox change
+    // eslint-disable-next-line
+  }, [isSoloContest]);
+
+  // Clear all contest entries on age change
+  useEffect(() => {
+    // making sure it's not running on component init
+    if (!isAgeInitialized) setIsAgeInitialized(true);
+    else {
+      // console.log('cleaning up because of age change');
+      cleanup();
+      resetLevel();
+    }
+    // want to run this ONLY on age change
+    // eslint-disable-next-line
+  }, [contestAgeGroup]);
+
+  // Clear all contest entries on styles remapping
+  useEffect(() => {
+    // making sure it's not running on component init
+    if (!isStyleInitialized) setIsStyleInitialized(true);
+    else {
+      // console.log('cleaning up because of styles change');
+      cleanup();
+      // Not resetting level, because this causes styles to remap and causes cleanup again
+    }
+    // want to run this ONLY on styles change
+    // eslint-disable-next-line
+  }, [soloContest]);
 
   // Set step total
   useEffect(() => {
@@ -62,7 +107,17 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     setStepTotal(total);
   }, [isSoloPass, soloPassPrice, soloContestSelected, setStepTotal]);
 
-  const ageGroupList = getContestAgeGroupsList(ageGroup);
+  const ageGroupList = useMemo(() => {
+    return getContestAgeGroupsList(ageGroup);
+  }, [ageGroup]);
+
+  const contestLevelsList = useMemo(() => {
+    return contestLevels.map((level) => (
+      <MenuItem key={level} value={level}>
+        {t(`form.contest.levels.${level}`)}
+      </MenuItem>
+    ));
+  }, [contestLevels, t]);
 
   return (
     <div className={styles.form}>
@@ -106,16 +161,12 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
               error={!!errors?.contestLevel}
               helperText={errors?.contestLevel?.message as string | undefined}
             >
-              {contestLevels.map((level) => (
-                <MenuItem key={level} value={level}>
-                  {t(`form.contest.levels.${level}`)}
-                </MenuItem>
-              ))}
+              {contestLevelsList}
             </FormInputSelect>
           )}
 
           {/* Solo Pass selection */}
-          <Collapse in={contestLevel && contestLevel !== 'debut'} unmountOnExit>
+          <Collapse in={!!contestLevel && contestLevel !== 'debut'} unmountOnExit>
             <div>
               <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
               <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>

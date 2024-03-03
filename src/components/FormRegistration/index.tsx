@@ -133,10 +133,6 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
   const contestAgeGroup = watch('contestAgeGroup');
   const fullPassDiscount = watch('fullPassDiscount');
   const contestLevel = watch('contestLevel');
-
-  const soloContest = watch('soloContest');
-  const soloContestSelected = soloContest.filter((cat) => cat.selected);
-
   const settings = watch('settings');
 
   const isStep = useMemo(() => {
@@ -147,6 +143,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
   // Set price from props -= once =-
   useEffect(() => {
     if (priceData && !isPriceSet) {
+      // console.log('setting price');
       setValue('settings', priceData);
       setIsPriceSet(true);
     }
@@ -154,6 +151,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
 
   // Set version from props
   useEffect(() => {
+    // console.log('setting version');
     setValue('version', version);
   }, [version, setValue]);
 
@@ -164,56 +162,53 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
   }, [total]);
 
   // Write initial age groups into form state
-  useEffect(() => {
-    setValue('contestAgeGroup', age ? getAgeGroup(age) : null);
-    setValue('ageGroup', age ? getAgeGroup(age) : null);
-  }, [age, setValue]);
+  const initialAgeGroup = useMemo(() => {
+    // console.log('getting initial age group');
+    return getAgeGroup(age);
+  }, [age]);
 
-  // Set contest level to open level for baby and seniors and reset for all others on age change
   useEffect(() => {
-    if (contestAgeGroup === 'baby' || contestAgeGroup === 'seniors')
-      setValue('contestLevel', 'openLevel');
-    else setValue('contestLevel', undefined);
-  }, [contestAgeGroup, setValue]);
+    // console.log('setting contest age group');
+    setValue('contestAgeGroup', initialAgeGroup);
+    setValue('ageGroup', initialAgeGroup);
+  }, [initialAgeGroup, setValue]);
 
   // Map solo contest styles and levels into form state
   useEffect(() => {
-    if (!soloContestSelected.length) {
-      const res: SoloContestField = [];
-      // Filter by age
-      const filteredByAgeGroup = contestCategories.filter(
-        (cat) => cat.ageGroup === contestAgeGroup || cat.ageGroups?.includes(contestAgeGroup!)
-      );
-      // Filter solo only
-      const filteredBySolo = filteredByAgeGroup.filter(
-        (cat) => !cat.isDuoCategory && !cat.isGroupCategory
-      );
+    // console.log('mapping contest fields');
+    const res: SoloContestField = [];
+    // Filter by age
+    const filteredByAgeGroup = contestCategories.filter(
+      (cat) => cat.ageGroup === contestAgeGroup || cat.ageGroups?.includes(contestAgeGroup!)
+    );
+    // Filter solo only
+    const filteredBySolo = filteredByAgeGroup.filter(
+      (cat) => !cat.isDuoCategory && !cat.isGroupCategory
+    );
 
-      const levels: Level[] = [];
+    const levels: Level[] = [];
 
-      filteredBySolo.forEach((cat) => {
-        // if (cat.levels.includes(contestLevel) || cat.levels.includes('openLevel')) {
-        if (contestLevel && cat.levels.includes(contestLevel)) {
-          cat.categories.forEach((style) => {
-            style.isSolo &&
-              res.push({
-                ...style,
-                selected: false,
-                id: style.translations.en.categoryTitle,
-                price: 0,
-              });
-          });
-        }
-        cat.levels.forEach((level) => {
-          if (level !== 'openLevel') {
-            const isLevel = levels.includes(level);
-            if (!isLevel) levels.push(level);
-          }
+    filteredBySolo.forEach((cat) => {
+      if (contestLevel && cat.levels.includes(contestLevel)) {
+        cat.categories.forEach((style) => {
+          style.isSolo &&
+            res.push({
+              ...style,
+              selected: false,
+              id: style.translations.en.categoryTitle,
+              price: 0,
+            });
         });
+      }
+      cat.levels.forEach((level) => {
+        if (level !== 'openLevel') {
+          const isLevel = levels.includes(level);
+          if (!isLevel) levels.push(level);
+        }
       });
-      setValue('soloContest', res);
-      setValue('contestLevels', levels);
-    }
+    });
+    setValue('soloContest', res);
+    setValue('contestLevels', levels);
     // eslint-disable-next-line
   }, [contestAgeGroup, contestLevel]);
 
@@ -298,13 +293,13 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       };
 
       // additional discounts (certificates, etc.)
-      if (fullPassDiscount === 'group' && basePrice)
+      if (fullPassDiscount === 'group' && basePrice())
         return Number.parseFloat((basePrice()! * 0.8).toFixed(2));
 
-      if (fullPassDiscount === '30%' && basePrice)
+      if (fullPassDiscount === '30%' && basePrice())
         return Number.parseFloat((basePrice()! * 0.7).toFixed(2));
 
-      if (fullPassDiscount === '50%' && basePrice)
+      if (fullPassDiscount === '50%' && basePrice())
         return Number.parseFloat((basePrice()! * 0.5).toFixed(2));
       if (fullPassDiscount === 'free') return 0;
       else return basePrice();

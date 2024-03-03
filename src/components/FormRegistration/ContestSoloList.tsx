@@ -2,18 +2,18 @@ import React, { useCallback, useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormControlLabel } from '@mui/material';
+import clsx from 'clsx';
+import Trans from 'next-translate/Trans';
+import Link from 'next/link';
 
 import textStyles from '@/styles/Text.module.css';
 import { SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormFields } from './types';
-import clsx from 'clsx';
-import Trans from 'next-translate/Trans';
-import Link from 'next/link';
-// import { contestSoloPrice } from '@/src/ulis/price';
 
 export const ContestSoloList: React.FC = () => {
   const { t, lang } = useTranslation('registration');
+  const currentLang = lang as SupportedLangs;
 
   const absoluteWinnerText = (
     <Trans
@@ -33,8 +33,6 @@ export const ContestSoloList: React.FC = () => {
     name: 'soloContest',
     keyName: 'id',
   });
-
-  const currentLang = lang as SupportedLangs;
 
   const settings = watch('settings');
   const soloContest = watch('soloContest');

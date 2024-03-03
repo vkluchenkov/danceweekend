@@ -32,6 +32,7 @@ jobs:
           envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           envkey_FTP_DIR: ${{ secrets.FTP_DIR }}
           envkey_FTP_PHOTO_DIR: ${{ secrets.FTP_PHOTO_DIR }}
+          envkey_ADMIN_PIN: ${{ secrets.ADMIN_PIN }}
 
       - name: Build the Docker image
         run: docker build -t ghcr.io/${{ secrets.IMAGE_REPOSITORY }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest-main .

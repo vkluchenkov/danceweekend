@@ -316,7 +316,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
       <h4 className={textStyles.h4}>
         {t('form.summary.money.total')}: <span className={textStyles.accent}>{total}€</span>
       </h4>
-      {!settings?.price.promoPeriod.isLivePromo &&
+      {settings?.price.promoPeriod.isLivePromo === 'false' &&
         form.version === 'live' &&
         form.fullPassDiscount !== 'free' && (
           <>

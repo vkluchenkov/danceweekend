@@ -134,6 +134,9 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
   const fullPassDiscount = watch('fullPassDiscount');
   const contestLevel = watch('contestLevel');
 
+  const soloContest = watch('soloContest');
+  const soloContestSelected = soloContest.filter((cat) => cat.selected);
+
   const settings = watch('settings');
 
   const isStep = useMemo(() => {
@@ -175,42 +178,44 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
 
   // Map solo contest styles and levels into form state
   useEffect(() => {
-    const res: SoloContestField = [];
-    // Filter by age
-    const filteredByAgeGroup = contestCategories.filter(
-      (cat) => cat.ageGroup === contestAgeGroup || cat.ageGroups?.includes(contestAgeGroup!)
-    );
-    // Filter solo only
-    const filteredBySolo = filteredByAgeGroup.filter(
-      (cat) => !cat.isDuoCategory && !cat.isGroupCategory
-    );
+    if (!soloContestSelected.length) {
+      const res: SoloContestField = [];
+      // Filter by age
+      const filteredByAgeGroup = contestCategories.filter(
+        (cat) => cat.ageGroup === contestAgeGroup || cat.ageGroups?.includes(contestAgeGroup!)
+      );
+      // Filter solo only
+      const filteredBySolo = filteredByAgeGroup.filter(
+        (cat) => !cat.isDuoCategory && !cat.isGroupCategory
+      );
 
-    const levels: Level[] = [];
+      const levels: Level[] = [];
 
-    filteredBySolo.forEach((cat) => {
-      // if (cat.levels.includes(contestLevel) || cat.levels.includes('openLevel')) {
-      if (contestLevel && cat.levels.includes(contestLevel)) {
-        cat.categories.forEach((style) => {
-          style.isSolo &&
-            res.push({
-              ...style,
-              selected: false,
-              id: style.translations.en.categoryTitle,
-              price: 0,
-            });
-        });
-      }
-      cat.levels.forEach((level) => {
-        if (level !== 'openLevel') {
-          const isLevel = levels.includes(level);
-          if (!isLevel) levels.push(level);
+      filteredBySolo.forEach((cat) => {
+        // if (cat.levels.includes(contestLevel) || cat.levels.includes('openLevel')) {
+        if (contestLevel && cat.levels.includes(contestLevel)) {
+          cat.categories.forEach((style) => {
+            style.isSolo &&
+              res.push({
+                ...style,
+                selected: false,
+                id: style.translations.en.categoryTitle,
+                price: 0,
+              });
+          });
         }
+        cat.levels.forEach((level) => {
+          if (level !== 'openLevel') {
+            const isLevel = levels.includes(level);
+            if (!isLevel) levels.push(level);
+          }
+        });
       });
-    });
-
-    setValue('soloContest', res);
-    setValue('contestLevels', levels);
-  }, [contestAgeGroup, setValue, contestLevel]);
+      setValue('soloContest', res);
+      setValue('contestLevels', levels);
+    }
+    // eslint-disable-next-line
+  }, [contestAgeGroup, contestLevel]);
 
   // Summarize step totals
   useEffect(() => {
@@ -228,6 +233,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       soloPassPrice: soloPassPrice,
       total: total,
     };
+
     await axios
       .post('/api/reg-submit', payload)
       .then((res) => {

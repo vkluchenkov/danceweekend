@@ -67,22 +67,17 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
     // eslint-disable-next-line
   }, [isSoloContest]);
 
-  // Clear all contest entries on age change
+  // Clear all contest entries on age change and styles remapping
   useEffect(() => {
     // making sure it's not running on component init
     if (!isInitialized) setIsInitialized(true);
     else {
-      // console.log('cleaning up because of age change');
+      // console.log('cleaning up because of age / styles change');
       cleanup();
     }
     // want to run this ONLY on age change
     // eslint-disable-next-line
-  }, [contestAgeGroup]);
-
-  // Clear solo pass on categories remapping
-  useEffect(() => {
-    setValue('isSoloPass', false);
-  }, [soloContest, setValue]);
+  }, [contestAgeGroup, soloContest]);
 
   // Set step total
   useEffect(() => {

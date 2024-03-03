@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       senderEmail: senderEmail,
       senderName: senderName,
       recipientEmail: orderPayload.email,
-      recipientName: orderPayload.name,
+      recipientName: orderPayload.name.trim(),
       recipientSubj: t('email.userSubj'),
       mailContent: userEmailContent,
     };
@@ -32,7 +32,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       senderName: senderName,
       recipientEmail: senderEmail,
       recipientName: senderName,
-      recipientSubj: t('email.adminSubj') + ' ' + orderPayload.name + ' ' + orderPayload.surname,
+      recipientSubj:
+        t('email.adminSubj') + ' ' + orderPayload.name.trim() + ' ' + orderPayload.surname.trim(),
       mailContent: adminEmailContent,
     };
     // console.log(userEmailErrors);

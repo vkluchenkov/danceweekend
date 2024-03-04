@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const userEmailContent = registrationUserEmail({ form: orderPayload, t: t }).html;
-    const adminEmailContent = registrationAdminEmail({ form: orderPayload, t: t }).html;
+    // const adminEmailContent = registrationAdminEmail({ form: orderPayload, t: t }).html;
     const userEmailErrors = registrationUserEmail({ form: orderPayload, t: t }).errors;
 
     const userMailPayload = {
@@ -27,19 +27,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       mailContent: userEmailContent,
     };
 
-    const adminMailPayload = {
-      senderEmail: senderEmail,
-      senderName: senderName,
-      recipientEmail: senderEmail,
-      recipientName: senderName,
-      recipientSubj:
-        t('email.adminSubj') + ' ' + orderPayload.name.trim() + ' ' + orderPayload.surname.trim(),
-      mailContent: adminEmailContent,
-    };
+    // const adminMailPayload = {
+    //   senderEmail: senderEmail,
+    //   senderName: senderName,
+    //   recipientEmail: senderEmail,
+    //   recipientName: senderName,
+    //   recipientSubj:
+    //     t('email.adminSubj') + ' ' + orderPayload.name.trim() + ' ' + orderPayload.surname.trim(),
+    //   mailContent: adminEmailContent,
+    // };
     // console.log(userEmailErrors);
     // console.log(userEmailContent);
     sendMail(userMailPayload);
-    sendMail(adminMailPayload);
+    // sendMail(adminMailPayload);
 
     await saveRegistrationToNotion({ form: orderPayload, t: enT });
 

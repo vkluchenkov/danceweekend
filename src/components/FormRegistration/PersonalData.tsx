@@ -1,12 +1,15 @@
 import useTranslation from 'next-translate/useTranslation';
-import { useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import { Collapse, FormControlLabel } from '@mui/material';
 
-import { FormInputField } from '@/src/ui-kit/input';
+import { FormInputCheckbox, FormInputField } from '@/src/ui-kit/input';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
-import { FormFields, StepProps } from './types';
+import { FormFields, PersonalStepProps, StepProps } from './types';
+import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
+import { useEffect } from 'react';
 
-export const PersonalData: React.FC<StepProps> = () => {
+export const PersonalData: React.FC<PersonalStepProps> = ({ setIsNextDisabled }) => {
   const { t } = useTranslation('registration');
 
   const methods = useFormContext<FormFields>();
@@ -14,10 +17,59 @@ export const PersonalData: React.FC<StepProps> = () => {
     control,
     trigger,
     watch,
+    setValue,
     formState: { errors },
   } = methods;
 
+  const { fields } = useFieldArray({
+    control,
+    name: 'yearsBefore2',
+    keyName: 'id',
+  });
+
   const version = watch('version');
+  const yearsBefore2 = watch('yearsBefore2');
+  const beenBefore = watch('beenBefore');
+  const yearsBeforeSelected = yearsBefore2.filter((year) => year.selected);
+
+  const controlledFields = fields.map((field, index) => {
+    return {
+      ...field,
+      ...yearsBefore2[index],
+    };
+  });
+
+  // disable next if no years selected
+  useEffect(() => {
+    if (beenBefore && !yearsBeforeSelected.length) {
+      setIsNextDisabled(true);
+    } else setIsNextDisabled(false);
+  }, [yearsBeforeSelected, beenBefore, setIsNextDisabled]);
+
+  const handleYearChange = (
+    id: string,
+    event: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean
+  ) => {
+    const index = yearsBefore2.findIndex((cat) => cat.id === id);
+    setValue(`yearsBefore2.${index}.selected`, checked, { shouldTouch: true });
+  };
+
+  const yearsFields = controlledFields.map((year) => {
+    return (
+      <div key={year.id}>
+        <FormControlLabel
+          control={
+            <InputCheckbox
+              checked={year.selected}
+              onChange={handleYearChange.bind(null, year.id)}
+            />
+          }
+          label={<p className={textStyles.p}>{year.year}</p>}
+        />
+      </div>
+    );
+  });
 
   return (
     <>
@@ -91,19 +143,19 @@ export const PersonalData: React.FC<StepProps> = () => {
               error={!!errors.age}
               helperText={errors?.age?.message as string | undefined}
             />
-            <div>
-              <p className={textStyles.p} style={{ paddingBottom: '10px' }}>
-                {t('form.personal.yearsBeforeTitle')}
-              </p>
-              <FormInputField
-                name='yearsBefore'
-                label={t('form.personal.yearsBefore')}
-                placeholder='2016, 2017, 2023'
-                control={control}
-                error={!!errors.yearsBefore}
-                helperText={errors?.yearsBefore?.message as string | undefined}
-              />
-            </div>
+            <FormInputCheckbox
+              control={control}
+              name='beenBefore'
+              label={<p className={textStyles.p}>{t('form.personal.yearsBeforeTitle')} </p>}
+            />
+            <Collapse in={beenBefore} unmountOnExit>
+              <div>
+                <p className={textStyles.p} style={{ paddingBottom: '10px' }}>
+                  {t('form.personal.yearsBefore')}:
+                </p>
+                <div className={styles.yearsWrapper}>{yearsFields}</div>
+              </div>
+            </Collapse>
           </>
         )}
       </div>

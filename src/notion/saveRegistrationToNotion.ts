@@ -41,6 +41,11 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
     return { name: category.translations.en.categoryTitle };
   });
 
+  const yearsSelected = form.yearsBefore2.filter((year) => year.selected);
+  const yearsSelectedValues = yearsSelected.map((year) => {
+    return { name: year.year };
+  });
+
   const contestGroups = form.groupContest.map((group, index) => {
     // Category style translation
     const contestCategory = contestCategories.find(
@@ -127,14 +132,9 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
           },
         ],
       },
-      YearsBefore: {
-        type: 'rich_text',
-        rich_text: [
-          {
-            type: 'text',
-            text: { content: form.yearsBefore },
-          },
-        ],
+      Years: {
+        type: 'multi_select',
+        multi_select: yearsSelectedValues,
       },
       Phone: {
         type: 'phone_number',

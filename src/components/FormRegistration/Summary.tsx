@@ -67,10 +67,10 @@ export const Summary: React.FC<SummaryStepProps> = ({
     const yearsSelectedValues = yearsSelected.map((year) => year.year);
 
     const yearsElements = (
-      <>
-        <h4 className={clsx(textStyles.h4)}>{t('form.personal.yearsBefore')}:</h4>
-        <p className={textStyles.p}>{yearsSelectedValues.join(', ')}</p>
-      </>
+      <li>
+        {t('form.personal.yearsBefore')}:{' '}
+        <span className={textStyles.accent}>{yearsSelectedValues.join(', ')}</span>
+      </li>
     );
 
     return yearsElements;
@@ -307,8 +307,10 @@ export const Summary: React.FC<SummaryStepProps> = ({
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>
         {t('form.summary.personalTitle')}
       </h3>
-      <ul className={clsx(textStyles.list, textStyles.list_summary)}>{personalData}</ul>
-      <ul className={clsx(textStyles.list, textStyles.list_summary)}>{yearsBeforeData}</ul>
+      <ul className={clsx(textStyles.list, textStyles.list_summary)}>
+        {personalData}
+        {yearsBeforeData}
+      </ul>
 
       {/* Contacts */}
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.personal.contacts')}</h3>

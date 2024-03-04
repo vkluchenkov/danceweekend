@@ -84,8 +84,17 @@ const onlineSteps: Step[] = [
   },
 ];
 
+const yearsMap: yearsBeforeField = yearsValues.map((year) => {
+  return {
+    year,
+    selected: false,
+    id: year,
+  };
+});
+
 const defaultValues: Partial<FormFields> = {
   version: 'live',
+  yearsBefore2: yearsMap,
   isFullPass: false,
   isSoloPass: false,
   fullPassDiscount: 'none',
@@ -174,19 +183,6 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
     // console.log('getting initial age group');
     return getAgeGroup(age);
   }, [age]);
-
-  // Map years
-  useEffect(() => {
-    const res: yearsBeforeField = yearsValues.map((year) => {
-      return {
-        year,
-        selected: false,
-        id: year,
-      };
-    });
-
-    setValue('yearsBefore2', res);
-  }, []);
 
   useEffect(() => {
     // console.log('setting contest age group');

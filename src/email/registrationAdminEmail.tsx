@@ -37,7 +37,7 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
   };
 
   // Personal
-  const personal = ['name', 'surname', 'stageName', 'age', 'yearsBefore'].map((i) => ({
+  const personal = ['name', 'surname', 'stageName', 'age'].map((i) => ({
     key: i,
     value: form[i as keyof OrderPayload],
   }));
@@ -52,6 +52,21 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
       );
     }
   });
+
+  // Years before
+  const yearsBeforeData = () => {
+    const yearsSelected = form.yearsBefore2.filter((year) => year.selected);
+    const yearsSelectedValues = yearsSelected.map((year) => year.year);
+
+    const yearsElements = (
+      <>
+        {t('form.personal.yearsBefore')}:{' '}
+        <span style={{ color: accentColor }}>{yearsSelectedValues.join(', ')}</span>
+      </>
+    );
+
+    return yearsElements;
+  };
 
   // Contacts
   const contacts = ['social', 'country', 'city', 'tel', 'email'].map((i) => ({
@@ -389,7 +404,10 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
             {/* Personal data*/}
             <MjmlText mj-class='h3'>{t('form.summary.personalTitle')}</MjmlText>
             <MjmlText mj-class='text'>
-              <ul style={{ listStyle: 'none', padding: 0, lineHeight: 1.5 }}>{personalData}</ul>
+              <ul style={{ listStyle: 'none', padding: 0, lineHeight: 1.5 }}>
+                {personalData}
+                <li>{yearsBeforeData()}</li>
+              </ul>
             </MjmlText>
 
             {/* Contacts data*/}

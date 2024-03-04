@@ -12,7 +12,15 @@ import styles from '@/styles/Registration.module.css';
 import textStyles from '@/styles/Text.module.css';
 import { Workshops } from './Workshops';
 import { SupportedLangs, Version } from '@/src/types';
-import { FormFields, FullPassDiscount, OrderPayload, SoloContestField, Step } from './types';
+import {
+  FormFields,
+  FullPassDiscount,
+  OrderPayload,
+  SoloContestField,
+  Step,
+  yearsBeforeField,
+  yearsValues,
+} from './types';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { motionVariants } from '@/src/ulis/constants';
@@ -76,8 +84,17 @@ const onlineSteps: Step[] = [
   },
 ];
 
+const yearsMap: yearsBeforeField = yearsValues.map((year) => {
+  return {
+    year,
+    selected: false,
+    id: year,
+  };
+});
+
 const defaultValues: Partial<FormFields> = {
   version: 'live',
+  yearsBefore2: yearsMap,
   isFullPass: false,
   isSoloPass: false,
   fullPassDiscount: 'none',
@@ -339,7 +356,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
               variants={motionVariants}
               transition={{ type: 'linear', duration: 0.3 }}
             >
-              <PersonalData />
+              <PersonalData setIsNextDisabled={setIsNextDisabled} />
             </motion.div>
           </AnimatePresence>
         )}

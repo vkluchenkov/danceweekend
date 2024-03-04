@@ -22,7 +22,7 @@
       "surname": "Surname",
       "stageName": "Stage name (if exists)",
       "age": "Age (on festival start date)",
-      "yearsBeforeTitle": "Have you been at Dance Weekend before? Write years below, if so.",
+      "yearsBeforeTitle": "I have been at Dance Weekend in Warsaw before",
       "yearsBefore": "Years of your previous visits",
       "ageError": "Age should be between 4 and 99",
       "social": "Social networks profile(s)",

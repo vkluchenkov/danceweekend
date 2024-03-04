@@ -44,7 +44,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
   // Personal
   const personal = useMemo(() => {
-    const list = ['name', 'surname', 'stageName', 'age', 'yearsBefore'];
+    const list = ['name', 'surname', 'stageName', 'age'];
     return list.map((i) => ({
       key: i,
       value: form[i as keyof FormFields],
@@ -60,6 +60,21 @@ export const Summary: React.FC<SummaryStepProps> = ({
         </li>
       );
   });
+
+  // Years before
+  const yearsBeforeData = useMemo(() => {
+    const yearsSelected = form.yearsBefore2.filter((year) => year.selected);
+    const yearsSelectedValues = yearsSelected.map((year) => year.year);
+
+    const yearsElements = (
+      <li>
+        {t('form.personal.yearsBefore')}:{' '}
+        <span className={textStyles.accent}>{yearsSelectedValues.join(', ')}</span>
+      </li>
+    );
+
+    return yearsElements;
+  }, [form, t]);
 
   // Contacts
   const contacts = useMemo(() => {
@@ -292,7 +307,10 @@ export const Summary: React.FC<SummaryStepProps> = ({
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>
         {t('form.summary.personalTitle')}
       </h3>
-      <ul className={clsx(textStyles.list, textStyles.list_summary)}>{personalData}</ul>
+      <ul className={clsx(textStyles.list, textStyles.list_summary)}>
+        {personalData}
+        {yearsBeforeData}
+      </ul>
 
       {/* Contacts */}
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.personal.contacts')}</h3>

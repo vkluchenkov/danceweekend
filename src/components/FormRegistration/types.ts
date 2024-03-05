@@ -21,6 +21,12 @@ export type SoloContestField = (Style & { selected: boolean; id: string; price: 
 
 export type FullPassDiscount = 'group' | '30%' | '50%' | 'free' | 'none';
 
+export const yearsValues = ['2016', '2017', '2018', '2019', '2021', '2022', '2023'] as const;
+
+export type yearsBefore = (typeof yearsValues)[number];
+
+export type yearsBeforeField = { year: yearsBefore; selected: boolean; id: yearsBefore }[];
+
 export interface FormFields {
   version: Version;
   settings: Awaited<ReturnType<typeof WordpressApi.getSettings>>;
@@ -28,7 +34,9 @@ export interface FormFields {
   surname: string;
   stageName: string;
   age: number;
-  yearsBefore: string;
+  // yearsBefore: string;
+  beenBefore: boolean;
+  yearsBefore2: yearsBeforeField;
   email: string;
   social: string;
   country: string;
@@ -70,6 +78,10 @@ export interface Step {
 }
 
 export interface StepProps {}
+
+export type PersonalStepProps = StepProps & {
+  setIsNextDisabled: (state: boolean) => void;
+};
 
 export type WorkshopsStepProps = StepProps & {
   fullPassPrice: number | undefined;

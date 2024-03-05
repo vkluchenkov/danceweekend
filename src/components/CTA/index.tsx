@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
-import { WordpressApi } from '@/src/api/wordpressApi';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
 
+import { WordpressApi } from '@/src/api/wordpressApi';
 import { Divider } from '../../ui-kit/Divider';
 import styles from './cta.module.css';
 import { SupportedLangs } from '@/src/types';
@@ -21,22 +22,35 @@ export const Cta: React.FC = () => {
     refetchOnMount: false,
   });
 
-  const [cta, setCta] = useState(data);
+  const [header, setHeader] = useState('');
+  const [text, setText] = useState('');
+  const [buttonText, setButtonText] = useState('');
+  const [buttonLink, setButtonLink] = useState('');
+  const [isBtnEnabled, setIsBtnEnabled] = useState(false);
 
   useEffect(() => {
-    if (data) setCta(data);
-  }, [data]);
+    const currentData = data![currentLang];
+    if (currentData) {
+      setHeader(currentData.header);
+      setText(currentData.text);
+      setIsBtnEnabled(currentData.buttonEnabled.toLowerCase() === 'true' ? true : false);
+      if (currentData.buttonText) setButtonText(currentData.buttonText);
+      if (currentData.buttonLink) setButtonLink(currentData.buttonLink);
+    }
+  }, [data, currentLang]);
 
-  const title = cta ? cta[currentLang]?.header : '';
-  const text = cta ? cta[currentLang]?.text : '';
-  const buttonText = cta ? cta[currentLang]?.buttonText : '';
-  const buttonLink = cta ? cta[currentLang]?.buttonLink : '';
-  const isBtnEnabled = cta && cta[currentLang]?.buttonEnabled === 'True' ? true : false;
+  const formattedText = (
+    <Trans
+      i18nKey={''}
+      defaultTrans={text}
+      components={{ b: <span className={styles.cta__subtitle_accent} key={1} /> }}
+    />
+  );
 
   return (
     <section className={styles.cta}>
-      <h2 className={styles.cta__title}>{title}</h2>
-      <p className={clsx(styles.cta__subtitle, styles.cta__subtitle_accent)}>{text}</p>
+      <h2 className={styles.cta__title}>{header}</h2>
+      <p className={clsx(styles.cta__subtitle)}>{formattedText}</p>
       {isBtnEnabled && (
         <button
           type='button'

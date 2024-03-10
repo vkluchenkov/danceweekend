@@ -55,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const tempPath = formData.file.filepath;
     const extName = path.extname(formData.file.originalFilename!);
-    const fileName = sanitize(name!) + ' (' + time + ')' + extName;
+    const fileName = sanitize(name!) + ' (' + sanitize(time) + ')' + extName;
 
     // FTP
     const ftpClient = new ftp.Client();

@@ -7,46 +7,54 @@ import { sendMail } from '@/src/email/sendMail';
 import { senderEmail, senderName } from '@/src/ulis/constants';
 import { registrationAdminEmail } from '@/src/email/registrationAdminEmail';
 import { saveRegistrationToNotion } from '@/src/notion/saveRegistrationToNotion';
+import { registrationPayloadSchema } from '@/src/validation/registrationPayloadSchema';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const orderPayload: OrderPayload = req.body;
-  const t = await getT(orderPayload.currentLang, 'registration');
-  const enT = await getT('en', 'registration');
+  const validate = registrationPayloadSchema.validate(orderPayload);
 
-  try {
-    const userEmailContent = registrationUserEmail({ form: orderPayload, t: t }).html;
-    const adminEmailContent = registrationAdminEmail({ form: orderPayload, t: t }).html;
-    const userEmailErrors = registrationUserEmail({ form: orderPayload, t: t }).errors;
+  if (validate.error) {
+    res.status(400).send({ message: 'Bad request' });
+    return;
+  } else {
+    const t = await getT(orderPayload.currentLang, 'registration');
+    const enT = await getT('en', 'registration');
 
-    const userMailPayload = {
-      senderEmail: senderEmail,
-      senderName: senderName,
-      recipientEmail: orderPayload.email,
-      recipientName: orderPayload.name.trim(),
-      recipientSubj: t('email.userSubj'),
-      mailContent: userEmailContent,
-    };
+    try {
+      const userEmailContent = registrationUserEmail({ form: orderPayload, t: t }).html;
+      const adminEmailContent = registrationAdminEmail({ form: orderPayload, t: t }).html;
+      const userEmailErrors = registrationUserEmail({ form: orderPayload, t: t }).errors;
 
-    const adminMailPayload = {
-      senderEmail: senderEmail,
-      senderName: senderName,
-      recipientEmail: senderEmail,
-      recipientName: senderName,
-      recipientSubj:
-        t('email.adminSubj') + ' ' + orderPayload.name.trim() + ' ' + orderPayload.surname.trim(),
-      mailContent: adminEmailContent,
-    };
+      const userMailPayload = {
+        senderEmail: senderEmail,
+        senderName: senderName,
+        recipientEmail: orderPayload.email,
+        recipientName: orderPayload.name.trim(),
+        recipientSubj: t('email.userSubj'),
+        mailContent: userEmailContent,
+      };
 
-    // console.log(userEmailErrors);
-    // console.log(userEmailContent);
-    sendMail(userMailPayload);
-    sendMail(adminMailPayload);
+      const adminMailPayload = {
+        senderEmail: senderEmail,
+        senderName: senderName,
+        recipientEmail: senderEmail,
+        recipientName: senderName,
+        recipientSubj:
+          t('email.adminSubj') + ' ' + orderPayload.name.trim() + ' ' + orderPayload.surname.trim(),
+        mailContent: adminEmailContent,
+      };
 
-    await saveRegistrationToNotion({ form: orderPayload, t: enT });
+      // console.log(userEmailErrors);
+      // console.log(userEmailContent);
+      sendMail(userMailPayload);
+      sendMail(adminMailPayload);
 
-    res.status(200).send('Ok');
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('Error');
+      await saveRegistrationToNotion({ form: orderPayload, t: enT });
+
+      res.status(200).send('Ok');
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Error');
+    }
   }
 }

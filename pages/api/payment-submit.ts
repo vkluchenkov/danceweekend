@@ -1,10 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import Joi from 'joi';
 import getT from 'next-translate/getT';
+
 import { PaymentFormFields } from '@/src/types/payment.types';
 import { paymentAdminEmail } from '@/src/email/paymentAdminEmail';
 import { senderEmail, senderName } from '@/src/ulis/constants';
 import { sendMail } from '@/src/email/sendMail';
-import Joi from 'joi';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const orderPayload: PaymentFormFields = req.body;
@@ -13,8 +14,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const orderPayloadSchema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
-    qty: Joi.number().required(),
-    method: Joi.string().required(),
+    qty: Joi.number().required().min(10).max(5000),
+    method: Joi.string().required().equal('paypal', 'stripe'),
   });
 
   const validate = orderPayloadSchema.validate(orderPayload);

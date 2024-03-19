@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import formidable, { File } from 'formidable';
 import path from 'path';
-import * as ftp from 'basic-ftp';
 import sanitize from 'sanitize-filename';
 
 import { FormFields, FormData } from '@/src/types/photo.types';
-import { config as appConfig } from '@/src/config';
+import TelegramBot from 'node-telegram-bot-api';
 
 export const config = {
   api: {
@@ -37,9 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     form.on('end', () => resolve({ file, fields }));
     form.on('error', (err) => reject(err));
 
-    form.parse(req, () => {
-      //
-    });
+    form.parse(req, () => {});
   }).catch((e) => {
     console.log(e);
     status = 500;
@@ -51,47 +48,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (formData) {
     const { name } = formData.fields;
-    const time = new Date().toLocaleTimeString('pl');
 
     const tempPath = formData.file.filepath;
     const extName = path.extname(formData.file.originalFilename!);
-    const fileName = sanitize(name!) + ' (' + sanitize(time) + ')' + extName;
-
-    // FTP
-    const ftpClient = new ftp.Client();
-
-    const ftpDir = appConfig.ftp.photoDir;
-
-    const ftpUploadDir = () => {
-      const year = new Date().getFullYear();
-      const month = new Date().getMonth() + 1;
-      const day = new Date().getDate();
-      return '/' + year + '/' + month + '/' + day;
-    };
+    const telegramFileName = sanitize(name!) + extName;
 
     try {
-      await ftpClient.access({
-        host: appConfig.ftp.ftpHost,
-        user: appConfig.ftp.ftpUser,
-        password: appConfig.ftp.ftpPassword,
-        secure: false,
-      });
+      const token = process.env.TELEGRAM_BOT_TOKEN!;
+      const bot = new TelegramBot(token, { polling: false });
+      const chatId = process.env.TELEGRAM_CHAT_ID!;
+      const threadId = process.env.TELEGRAM_THREAD_ID!;
 
-      // Debug
-      // ftpClient.ftp.verbose = true;
-
-      // Get full path
-      const fullDirName = ftpDir + ftpUploadDir();
-      // Create dir or make sure it exists
-      await ftpClient.ensureDir(fullDirName);
-      // upload new file
-      await ftpClient.uploadFrom(tempPath, fileName);
+      bot.sendDocument(
+        chatId,
+        tempPath,
+        { caption: `New photo from ${name}`, reply_to_message_id: parseInt(threadId) },
+        { filename: telegramFileName }
+      );
     } catch (error) {
       console.log(error);
       status = 500;
       resultBody = {
         status: 'fail',
-        message: 'FTP Upload error',
+        message: 'Telegram error',
       };
     }
   }

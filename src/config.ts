@@ -27,4 +27,9 @@ export const config = {
     ftpUser: must(process.env.FTP_USER),
     ftpPassword: must(process.env.FTP_PASSWORD),
   },
+  telegram: {
+    botToken: must(process.env.TELEGRAM_BOT_TOKEN),
+    chatId: must(process.env.TELEGRAM_CHAT_ID),
+    threadId: must(process.env.TELEGRAM_THREAD_ID),
+  },
 };

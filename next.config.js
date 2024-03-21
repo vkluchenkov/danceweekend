@@ -14,6 +14,9 @@ const nextConfig = {
     FTP_HOST: process.env.FTP_HOST,
     FTP_USER: process.env.FTP_USER,
     FTP_PASSWORD: process.env.FTP_PASSWORD,
+    TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
+    TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID,
+    TELEGRAM_THREAD_ID: process.env.TELEGRAM_THREAD_ID,
   },
   output: 'standalone',
   images: {

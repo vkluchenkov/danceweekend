@@ -65,4 +65,5 @@ export const registrationPayloadSchema = Joi.object({
   }),
   rulesAccepted: Joi.boolean().required(),
   isInstallments: Joi.boolean().required(),
+  settings: Joi.object().required(),
 });

@@ -1,19 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Joi from 'joi';
 import TelegramBot from 'node-telegram-bot-api';
 
 import { PaymentFormFields } from '@/src/types/payment.types';
 import { config } from '@/src/config';
+import { orderPayloadSchema } from '@/src/validation/orderPayloadSchema';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const orderPayload: PaymentFormFields = req.body;
-
-  const orderPayloadSchema = Joi.object({
-    name: Joi.string().required(),
-    email: Joi.string().email().required(),
-    qty: Joi.number().required().min(10).max(5000),
-    method: Joi.string().required().equal('paypal', 'stripe'),
-  });
 
   const validate = orderPayloadSchema.validate(orderPayload);
 

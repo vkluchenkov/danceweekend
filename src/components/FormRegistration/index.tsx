@@ -12,15 +12,7 @@ import styles from '@/styles/Registration.module.css';
 import textStyles from '@/styles/Text.module.css';
 import { Workshops } from './Workshops';
 import { SupportedLangs, Version } from '@/src/types';
-import {
-  FormFields,
-  FullPassDiscount,
-  OrderPayload,
-  SoloContestField,
-  Step,
-  yearsBeforeField,
-  yearsValues,
-} from './types';
+import { FormFields, FullPassDiscount, OrderPayload, SoloContestField } from './types';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { motionVariants } from '@/src/ulis/constants';
@@ -32,79 +24,7 @@ import { StepsNavigation } from './StepsNavigation';
 import { Loader } from '../Loader';
 import { WordpressApi } from '@/src/api/wordpressApi';
 import { kidsDiscount } from '@/src/ulis/price';
-
-const liveSteps: Step[] = [
-  {
-    id: 'personal',
-    prev: null,
-    next: 'workshops',
-  },
-  {
-    id: 'workshops',
-    prev: 'personal',
-    next: 'contestSolo',
-  },
-  {
-    id: 'contestSolo',
-    prev: 'workshops',
-    next: 'contestGroups',
-  },
-  {
-    id: 'contestGroups',
-    prev: 'contestSolo',
-    next: 'worldShow',
-  },
-  {
-    id: 'worldShow',
-    prev: 'contestGroups',
-    next: 'summary',
-  },
-  {
-    id: 'summary',
-    prev: 'worldShow',
-    next: null,
-  },
-];
-
-const onlineSteps: Step[] = [
-  {
-    id: 'personal',
-    prev: null,
-    next: 'workshops',
-  },
-  {
-    id: 'workshops',
-    prev: 'personal',
-    next: 'summary',
-  },
-  {
-    id: 'summary',
-    prev: 'workshops',
-    next: null,
-  },
-];
-
-const yearsMap: yearsBeforeField = yearsValues.map((year) => {
-  return {
-    year,
-    selected: false,
-    id: year,
-  };
-});
-
-const defaultValues: Partial<FormFields> = {
-  version: 'live',
-  yearsBefore2: yearsMap,
-  isFullPass: false,
-  isSoloPass: false,
-  fullPassDiscount: 'none',
-  isSoloContest: false,
-  soloContest: [],
-  isGroupContest: false,
-  groupContest: [],
-  currentStep: 'personal',
-  rulesAccepted: false,
-};
+import { defaultValues, liveSteps, onlineSteps } from './helpers';
 
 interface FormRegistrationProps {
   version: Version;

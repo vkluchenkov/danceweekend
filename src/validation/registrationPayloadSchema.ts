@@ -5,7 +5,7 @@ export const registrationPayloadSchema = Joi.object({
   currentLang: Joi.string().required().equal('en', 'ru'),
   soloPassPrice: Joi.number().required(),
   total: Joi.number().required(),
-  version: Joi.string().required().equal('live', 'online'),
+  version: Joi.string().required().equal('live'),
   name: Joi.string().required(),
   surname: Joi.string().required(),
   stageName: Joi.string().allow(''),
@@ -73,7 +73,7 @@ export const registrationPayloadSchema = Joi.object({
     price: Joi.number().required(),
   }),
   rulesAccepted: Joi.boolean().required(),
-  isInstallments: Joi.boolean().required(),
+  isInstallments: Joi.boolean(),
   currentStep: Joi.string(),
   settings: Joi.object().required(),
 }).unknown();

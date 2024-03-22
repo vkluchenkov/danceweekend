@@ -10,11 +10,16 @@ import { registrationAdminEmail } from '@/src/email/registrationAdminEmail';
 import { saveRegistrationToNotion } from '@/src/notion/saveRegistrationToNotion';
 import { registrationPayloadSchema } from '@/src/validation/registrationPayloadSchema';
 import { config } from '@/src/config';
+import { registrationOnlinePayloadSchema } from '@/src/validation/registrationOnlinePayloadSchema';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const orderPayload: OrderPayload = req.body;
 
-  const validate = registrationPayloadSchema.validate(orderPayload);
+  const validate =
+    orderPayload.version === 'live'
+      ? registrationPayloadSchema.validate(orderPayload)
+      : registrationOnlinePayloadSchema.validate(orderPayload);
+
   if (validate.error) {
     console.log(validate.error);
     res.status(400).send({ message: 'Bad request' });

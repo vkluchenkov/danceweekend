@@ -30,7 +30,6 @@ jobs:
           envkey_FTP_USER: ${{ secrets.FTP_USER }}
           envkey_FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           envkey_FTP_DIR: ${{ secrets.TEST_FTP_DIR }}
-          # envkey_FTP_PHOTO_DIR: ${{ secrets.TEST_FTP_PHOTO_DIR }}
           envkey_ADMIN_PIN: ${{ secrets.ADMIN_PIN }}
           envkey_TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           envkey_TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

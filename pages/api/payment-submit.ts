@@ -11,6 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const validate = orderPayloadSchema.validate(orderPayload);
 
   if (validate.error) {
+    console.log(validate.error.message);
     res.status(400).send({ message: 'Bad request' });
     return;
   } else {

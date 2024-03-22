@@ -88,8 +88,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (event === 'contest') {
         const isCategory = !!category;
         const safeCategory = sanitize(category!);
+
+        const groupOrSolo = type === 'group' || type === 'duo' ? 'Groups and Duos/' : 'Solo/';
+
         return (
           '/Contest/' +
+          groupOrSolo +
           ageGroup! +
           '/' +
           (level != undefined ? level + '/' : '') +
@@ -165,10 +169,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return t('email.title');
         };
 
-        return getSubj() + `\n` + formEntries;
+        return getSubj() + `\n` + formEntries + `\n` + 'Uploaded to: ' + ftpUploadDir();
       };
 
-      bot.sendDocument(
+      console.log(fileName());
+      console.log(tempPath);
+
+      bot.sendAudio(
         chatId,
         tempPath,
         {

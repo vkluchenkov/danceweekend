@@ -3,23 +3,21 @@ import Joi from 'joi';
 export const registrationPayloadSchema = Joi.object({
   fullpassPrice: Joi.number(),
   currentLang: Joi.string().required().equal('en', 'ru'),
-  solopassPrice: Joi.number().required(),
+  soloPassPrice: Joi.number().required(),
   total: Joi.number().required(),
   version: Joi.string().required().equal('live', 'online'),
   name: Joi.string().required(),
   surname: Joi.string().required(),
-  stageName: Joi.string().required(),
+  stageName: Joi.string().allow(''),
   age: Joi.number().required(),
   beenBefore: Joi.boolean().required(),
-  yearsBefore2: Joi.array()
-    .items(
-      Joi.object({
-        year: Joi.string().required().equal('2016', '2017', '2018', '2019', '2021', '2022', '2023'),
-        selected: Joi.boolean().required(),
-        id: Joi.string().required(),
-      })
-    )
-    .required(),
+  yearsBefore2: Joi.array().items(
+    Joi.object({
+      year: Joi.string().required().equal('2016', '2017', '2018', '2019', '2021', '2022', '2023'),
+      selected: Joi.boolean().required(),
+      id: Joi.string().required(),
+    })
+  ),
   email: Joi.string().email().required(),
   social: Joi.string(),
   country: Joi.string().required(),
@@ -34,15 +32,25 @@ export const registrationPayloadSchema = Joi.object({
   contestAgeGroup: Joi.string().required().equal('baby', 'kids', 'juniors', 'adults', 'seniors'),
   isSoloPass: Joi.boolean().required(),
   contestLevels: Joi.array().items(
-    Joi.string().required().equal('debut', 'beginners', 'semi-pro', 'professionals', 'openLevel')
+    Joi.string().equal('debut', 'beginners', 'semi-pro', 'professionals', 'openLevel')
   ),
   contestLevel: Joi.string().equal('debut', 'beginners', 'semi-pro', 'professionals', 'openLevel'),
   soloContest: Joi.array().items(
     Joi.object({
+      isSolo: Joi.boolean().required(),
+      isForWin: Joi.boolean(),
+      isImprovisation: Joi.boolean(),
       id: Joi.string().required(),
       selected: Joi.boolean().required(),
-      style: Joi.string().required(),
       price: Joi.number().required(),
+      translations: Joi.object({
+        ru: Joi.object({
+          categoryTitle: Joi.string().required(),
+        }),
+        en: Joi.object({
+          categoryTitle: Joi.string().required(),
+        }),
+      }),
     })
   ),
   isGroupContest: Joi.boolean().required(),
@@ -51,6 +59,7 @@ export const registrationPayloadSchema = Joi.object({
       type: Joi.string().required().equal('duo', 'group'),
       ageGroup: Joi.string().required().equal('baby', 'kids', 'juniors', 'adults', 'seniors'),
       style: Joi.string().required(),
+      styles: Joi.array(),
       qty: Joi.number().required(),
       name: Joi.string().required(),
       price: Joi.number().required(),
@@ -65,5 +74,6 @@ export const registrationPayloadSchema = Joi.object({
   }),
   rulesAccepted: Joi.boolean().required(),
   isInstallments: Joi.boolean().required(),
+  currentStep: Joi.string(),
   settings: Joi.object().required(),
-});
+}).unknown();

@@ -3,6 +3,7 @@ import formidable, { File } from 'formidable';
 import path from 'path';
 import sanitize from 'sanitize-filename';
 
+import { config as siteConfig } from '@/src/config';
 import { FormFields, FormData } from '@/src/types/photo.types';
 import TelegramBot from 'node-telegram-bot-api';
 
@@ -54,10 +55,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const telegramFileName = sanitize(name!) + extName;
 
     try {
-      const token = process.env.TELEGRAM_BOT_TOKEN!;
+      const token = siteConfig.telegram.botToken;
       const bot = new TelegramBot(token, { polling: false });
-      const chatId = process.env.TELEGRAM_CHAT_ID!;
-      const threadId = process.env.TELEGRAM_THREAD_ID!;
+      const chatId = siteConfig.telegram.chatId;
+      const threadId = siteConfig.telegram.threadId;
 
       bot.sendDocument(
         chatId,

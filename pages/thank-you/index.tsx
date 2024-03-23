@@ -1,12 +1,13 @@
-import { Layout } from '@/src/components/Layout';
 import { NextPage } from 'next';
+import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
+import clsx from 'clsx';
+
+import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Thanks.module.css';
-import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
-import Trans from 'next-translate/Trans';
 import { revolutUrl, telegramUrl } from '@/src/ulis/constants';
-import clsx from 'clsx';
 
 const ThankYou: NextPage = () => {
   const { t, lang } = useTranslation('thank-you');
@@ -33,14 +34,14 @@ const ThankYou: NextPage = () => {
     <Trans i18nKey='thank-you:iban' components={[<span className={textStyles.accent} key={1} />]} />
   );
 
-  const revolut = (
-    <Trans
-      i18nKey='thank-you:revolutText'
-      components={[
-        <Link href={revolutUrl} target='_blank' className={textStyles.accent} key={1} />,
-      ]}
-    />
-  );
+  // const revolut = (
+  //   <Trans
+  //     i18nKey='thank-you:revolutText'
+  //     components={[
+  //       <Link href={revolutUrl} target='_blank' className={textStyles.accent} key={1} />,
+  //     ]}
+  //   />
+  // );
 
   const music = (
     <Trans
@@ -90,7 +91,7 @@ const ThankYou: NextPage = () => {
         </p>
 
         <h3 className={textStyles.h3}>{t('revolutTitle')}</h3>
-        <p className={textStyles.p}>{revolut}</p>
+        <p className={textStyles.p}>{t('revolutText')}</p>
 
         <h3 className={textStyles.h3}>{t('bank')}</h3>
         <p className={textStyles.p}>

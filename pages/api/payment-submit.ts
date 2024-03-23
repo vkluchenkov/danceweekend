@@ -1,32 +1,37 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getT from 'next-translate/getT';
+import TelegramBot from 'node-telegram-bot-api';
+
 import { PaymentFormFields } from '@/src/types/payment.types';
-import { paymentAdminEmail } from '@/src/email/paymentAdminEmail';
-import { senderEmail, senderName } from '@/src/ulis/constants';
-import { sendMail } from '@/src/email/sendMail';
+import { config } from '@/src/config';
+import { orderPayloadSchema } from '@/src/validation/orderPayloadSchema';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const orderPayload: PaymentFormFields = req.body;
-  const t = await getT('en', 'payment');
-  const { name, email, qty, method } = orderPayload;
 
-  if (!name || !email || !qty || !method) {
+  const validate = orderPayloadSchema.validate(orderPayload);
+
+  if (validate.error) {
+    console.log(validate.error.message);
     res.status(400).send({ message: 'Bad request' });
     return;
   } else {
-    const adminEmailContent = paymentAdminEmail({ form: orderPayload, t: t }).html;
-    const adminEmailErrors = paymentAdminEmail({ form: orderPayload, t: t }).errors;
+    try {
+      const bot = new TelegramBot(config.telegram.botToken, { polling: false });
+      const chatId = config.telegram.chatId;
+      const threadId = config.telegram.threadId;
 
-    const adminMailPayload = {
-      senderEmail: senderEmail,
-      senderName: senderName,
-      recipientEmail: senderEmail,
-      recipientName: senderName,
-      recipientSubj: t('email.title') + ' ' + orderPayload.name,
-      mailContent: adminEmailContent,
-    };
+      bot.sendMessage(
+        chatId,
+        `New payment started from ${orderPayload.name}. 
+        Email: ${orderPayload.email}.
+        Amount: ${orderPayload.qty} via ${orderPayload.method}`,
+        { reply_to_message_id: parseInt(threadId) }
+      );
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Telegram Error');
+    }
 
-    sendMail(adminMailPayload);
     res.status(200).send({ message: 'Ok' });
     return;
   }

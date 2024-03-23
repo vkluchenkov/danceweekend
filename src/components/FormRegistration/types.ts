@@ -6,6 +6,7 @@ export interface GroupContest {
   type: 'duo' | 'group';
   ageGroup: AgeGroup | null;
   style: string;
+  styles?: Style[];
   qty: number;
   name: string;
   price: number;

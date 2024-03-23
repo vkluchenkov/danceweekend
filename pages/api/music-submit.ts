@@ -1,16 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import formidable, { File } from 'formidable';
 import path from 'path';
-import { promises as fs } from 'fs';
 import * as ftp from 'basic-ftp';
 import sanitize from 'sanitize-filename';
 import getT from 'next-translate/getT';
+import TelegramBot from 'node-telegram-bot-api';
 
 import { config as appConfig } from '@/src/config';
 import { FormFields, FormData } from '@/src/types/music.types';
-import { senderEmail, senderName } from '@/src/ulis/constants';
-import { sendMail } from '@/src/email/sendMail';
-import { musicAdminEmail } from '@/src/email/musicAdminEmail';
 
 export const config = {
   api: {
@@ -91,8 +88,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (event === 'contest') {
         const isCategory = !!category;
         const safeCategory = sanitize(category!);
+
+        const groupOrSolo = type === 'group' || type === 'duo' ? 'Groups and Duos/' : 'Solo/';
+
         return (
           '/Contest/' +
+          groupOrSolo +
           ageGroup! +
           '/' +
           (level != undefined ? level + '/' : '') +
@@ -122,35 +123,67 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // upload new file
       await ftpClient.uploadFrom(tempPath, fileName());
 
-      // Emails
-      const getSubj = () => {
-        if (name && surname) return t('email.title') + ' ' + name + ' ' + surname;
-        if (groupName) return t('email.title') + ' ' + groupName;
-        return t('email.title');
+      // Telegram
+      const bot = new TelegramBot(appConfig.telegram.botToken, { polling: false });
+      const chatId = appConfig.telegram.chatId;
+      const threadId = appConfig.telegram.threadId;
+
+      const getCaption = () => {
+        const form = formData.fields;
+
+        const musicForm = [
+          'email',
+          'type',
+          'event',
+          'groupName',
+          'ageGroup',
+          'level',
+          'category',
+          'audioLength',
+        ].map((i) => ({
+          key: i,
+          value: form[i as keyof FormFields],
+        }));
+
+        const formEntries = musicForm
+          .map((i) => {
+            const value = i.value as string;
+            if (!i.value) return '';
+            if (i.key === 'type') return `Type: ${t(`form.${value.trim()}`)}`;
+            if (i.key === 'event') return `Event: ${t(`form.${value.trim()}`)}`;
+            if (i.key === 'ageGroup') return `Age group: ${t(`form.ageGroups.${value.trim()}`)}`;
+            if (i.key === 'level') return `Level: ${t(`form.levels.${value.trim()}`)}`;
+            if (i.key === 'category') return `Style: ${value.trim()}`;
+            if (i.key === 'audioLength')
+              return `Audio length: ${Math.round(value as unknown as number)} sec`;
+            return t(`form.${i.key}`) + ': ' + value.trim();
+          })
+          .join('\n')
+          .replaceAll('\n\n', '\n')
+          .replaceAll('\n\n', '\n')
+          .replaceAll('\n\n', '\n');
+
+        const getSubj = () => {
+          if (name && surname) return t('email.title') + ' ' + name + ' ' + surname;
+          if (groupName) return t('email.title') + ' ' + groupName;
+          return t('email.title');
+        };
+
+        return getSubj() + `\n` + formEntries + `\n` + 'Uploaded to: ' + ftpUploadDir();
       };
 
-      const adminEmailContent = musicAdminEmail({
-        form: formData.fields,
-        t: t,
-        subj: getSubj(),
-      }).html;
+      console.log(fileName());
+      console.log(tempPath);
 
-      const adminEmailErrors = musicAdminEmail({
-        form: formData.fields,
-        t: t,
-        subj: getSubj(),
-      }).errors;
-
-      const adminMailPayload = {
-        senderEmail: senderEmail,
-        senderName: senderName,
-        recipientEmail: senderEmail,
-        recipientName: senderName,
-        recipientSubj: getSubj(),
-        mailContent: adminEmailContent,
-      };
-
-      sendMail(adminMailPayload);
+      bot.sendAudio(
+        chatId,
+        tempPath,
+        {
+          caption: getCaption(),
+          reply_to_message_id: parseInt(threadId),
+        },
+        { filename: fileName() }
+      );
     } catch (error) {
       console.log(error);
       status = 500;

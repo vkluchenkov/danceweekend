@@ -38,12 +38,14 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   const [isAgeInitialized, setIsAgeInitialized] = useState(false);
   const [isStyleInitialized, setIsStyleInitialized] = useState(false);
 
-  // disable next if none selected
+  // disable next if none selected or solo pass and less than 3 selected
   useEffect(() => {
     if (isSoloContest && !soloContestSelected.length) {
       setIsNextDisabled(true);
+    } else if (isSoloContest && isSoloPass && soloContestSelected.length < 4) {
+      setIsNextDisabled(true);
     } else setIsNextDisabled(false);
-  }, [isSoloContest, soloContestSelected, setIsNextDisabled]);
+  }, [isSoloContest, soloContestSelected, isSoloPass, setIsNextDisabled]);
 
   const cleanup = useCallback(() => {
     // clear all stlyes

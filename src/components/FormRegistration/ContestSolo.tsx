@@ -115,7 +115,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   const contestLevelsList = useMemo(() => {
     return contestLevels.map((level) => (
-      <MenuItem key={level} value={level}>
+      <MenuItem key={level} value={level} translate='no'>
         {t(`form.contest.levels.${level}`)}
       </MenuItem>
     ));
@@ -145,7 +145,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
               helperText={errors?.contestAgeGroup?.message as string | undefined}
             >
               {ageGroupList.map((group) => (
-                <MenuItem key={group} value={group}>
+                <MenuItem key={group} value={group} translate='no'>
                   {t(`form.contest.ageGroups.${group}`)}
                 </MenuItem>
               ))}
@@ -154,6 +154,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
           {contestLevels.length > 0 && (
             <FormInputSelect
+              translate='no'
               name='contestLevel'
               control={control}
               label={t('form.contest.levels.title')}

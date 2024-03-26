@@ -83,16 +83,22 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
       </div>
 
       <FormInputSelect
+        translate='no'
         control={control}
         label={t('form.contest.groups.groupOrDuo')}
         fullWidth
         name={`groupContest.${field.index}.type`}
       >
-        <MenuItem value='duo'>{t('form.contest.groups.duo')}</MenuItem>
-        <MenuItem value='group'>{t('form.contest.groups.group')}</MenuItem>
+        <MenuItem value='duo' translate='no'>
+          {t('form.contest.groups.duo')}
+        </MenuItem>
+        <MenuItem value='group' translate='no'>
+          {t('form.contest.groups.group')}
+        </MenuItem>
       </FormInputSelect>
 
       <FormInputSelect
+        translate='no'
         name={`groupContest.${field.index}.ageGroup`}
         control={control}
         label={t('form.contest.groups.ageGroupTitle')}
@@ -103,13 +109,14 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
         helperText={fieldErrors?.style?.message as string | undefined}
       >
         {ageGroupArray.map((group) => (
-          <MenuItem key={group} value={group}>
+          <MenuItem key={group} value={group} translate='no'>
             {t(`form.contest.ageGroups.${group}`)}
           </MenuItem>
         ))}
       </FormInputSelect>
 
       <FormInputSelect
+        translate='no'
         control={control}
         label={t('form.contest.groups.style')}
         fullWidth
@@ -124,7 +131,7 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
           const id = style.translations.en.categoryTitle;
           const title = style.translations[currentLang].categoryTitle;
           return (
-            <MenuItem key={id} value={id}>
+            <MenuItem key={id} value={id} translate='no'>
               {title}
             </MenuItem>
           );

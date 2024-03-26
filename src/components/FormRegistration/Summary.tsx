@@ -134,7 +134,10 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
     const stylesData = (
       <li>
-        <ul className={clsx(textStyles.list, textStyles.list_summary, styles.summary__group)}>
+        <ul
+          className={clsx(textStyles.list, textStyles.list_summary, styles.summary__group)}
+          translate='no'
+        >
           <li>
             <h4 className={clsx(textStyles.h4)}>{t('form.contest.stylesTitle')}:</h4>
           </li>
@@ -201,7 +204,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
             {t('form.contest.groups.title')}
           </h3>
 
-          <ul className={clsx(textStyles.list, textStyles.list_summary)}>
+          <ul className={clsx(textStyles.list, textStyles.list_summary)} translate='no'>
             {form.groupContest.map((group, index) => {
               // Category style translation
               const contestCategory = contestCategories.find(
@@ -279,7 +282,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
           {form.isWorldShowGroup && (
             <>
-              <p className={textStyles.p}>
+              <p className={textStyles.p} translate='no'>
                 {t('form.summary.worldShowGroup')}:{' '}
                 <span className={textStyles.accent}>{form.worldShowGroup?.price}€</span>
                 <br />
@@ -318,7 +321,9 @@ export const Summary: React.FC<SummaryStepProps> = ({
 
       {/* Workshops */}
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>{t('form.workshops.title')}</h3>
-      <ul className={clsx(textStyles.list, textStyles.list_summary)}>{workshopsData}</ul>
+      <ul className={clsx(textStyles.list, textStyles.list_summary)} translate='no'>
+        {workshopsData}
+      </ul>
 
       {/* Competition solo */}
       {contestSoloData}

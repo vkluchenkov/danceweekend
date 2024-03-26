@@ -83,7 +83,7 @@ const Registration: NextPage = () => {
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
       {switcher}
-      <section className={styles.section}>
+      <section className={styles.section} translate='no'>
         {version === 'live' && !isLiveRegOpen && <h1>{t('liveClosed')}</h1>}
         {version === 'online' && !isOnlineRegOpen && <h1>{t('onlineClosed')}</h1>}
         <ThemeProvider theme={darkTheme}>

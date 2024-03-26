@@ -25,7 +25,7 @@ export const registrationPayloadSchema = Joi.object({
   tel: Joi.string().required(),
   isFullPass: Joi.boolean().required(),
   fullPassDiscount: Joi.string().required().equal('group', '30%', '50%', 'free', 'none'),
-  fullPassDiscountSource: Joi.string(),
+  fullPassDiscountSource: Joi.string().allow(''),
   fullPassGroupName: Joi.string(),
   ageGroup: Joi.string().required().equal('baby', 'kids', 'juniors', 'adults', 'seniors'),
   isSoloContest: Joi.boolean().required(),

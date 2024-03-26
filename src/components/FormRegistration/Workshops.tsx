@@ -92,6 +92,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
       <Collapse in={isFullPass} unmountOnExit>
         <div className={styles.form}>
           <FormInputSelect
+            translate='no'
             name='fullPassDiscount'
             control={control}
             label={t('form.workshops.discounts.title')}
@@ -102,7 +103,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
             helperText={errors?.fullPassDiscount?.message as string | undefined}
           >
             {fullPassDiscountList.map((i) => (
-              <MenuItem key={i} value={i}>
+              <MenuItem key={i} value={i} translate='no'>
                 {t(`form.workshops.discounts.${i}`)}
               </MenuItem>
             ))}

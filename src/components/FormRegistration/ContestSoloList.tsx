@@ -179,5 +179,5 @@ export const ContestSoloList: React.FC = () => {
       </>
     );
 
-  return <div>{allCategories}</div>;
+  return <div translate='no'>{allCategories}</div>;
 };

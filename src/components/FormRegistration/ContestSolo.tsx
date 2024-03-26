@@ -135,6 +135,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
         <div className={styles.form}>
           {ageGroupList.length > 1 && (
             <FormInputSelect
+              translate='no'
               name='contestAgeGroup'
               control={control}
               label={t('form.contest.ageGroups.title')}

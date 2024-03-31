@@ -71,8 +71,9 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
 
   // Set step total
   useEffect(() => {
-    if (isFullPass && fullPassPrice) setStepTotal(fullPassPrice);
-    if (!isFullPass && selectedWorkshops.length >= 1) {
+    if (isFullPass && fullPassPrice) {
+      setStepTotal(fullPassPrice);
+    } else if (!isFullPass && selectedWorkshops.length >= 1) {
       const total = selectedWorkshops.reduce((acc, ws) => acc + singleWsPrice[version], 0);
       setStepTotal(total);
     } else setStepTotal(0);

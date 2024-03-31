@@ -13,10 +13,11 @@ import {
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { FormFields, WorkshopsField, WorkshopsStepProps, WorkshopsType } from './types';
-import { FormInputCheckbox, FormInputField, FormInputSelect } from '@/src/ui-kit/input';
+import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { SupportedLangs } from '@/src/types';
 import { schedule } from '@/src/ulis/schedule';
 import { WorkshopsList } from './WorkshopsList';
+import { singleWsPrice } from '@/src/ulis/price';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   setStepTotal,
@@ -71,8 +72,11 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   // Set step total
   useEffect(() => {
     if (isFullPass && fullPassPrice) setStepTotal(fullPassPrice);
-    else setStepTotal(0);
-  }, [isFullPass, fullPassPrice, setStepTotal]);
+    if (!isFullPass && selectedWorkshops.length >= 1) {
+      const total = selectedWorkshops.reduce((acc, ws) => acc + singleWsPrice[version], 0);
+      setStepTotal(total);
+    } else setStepTotal(0);
+  }, [isFullPass, fullPassPrice, setStepTotal, selectedWorkshops, version]);
 
   const handleFullPass = (event: React.ChangeEvent<HTMLInputElement>, value: WorkshopsType) => {
     setValue('isFullPass', value === 'fullPass', { shouldTouch: true });
@@ -111,17 +115,6 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.workshops.title')}</h2>
       {workshopsDescription}
-
-      {/* <FormInputCheckbox
-        control={control}
-        name='isFullPass'
-        label={
-          <p className={textStyles.p}>
-            {t('form.workshops.fullPass')}{' '}
-            <span className={textStyles.accent}>{fullPassPrice ? fullPassPrice + ' €' : ''}</span>
-          </p>
-        }
-      /> */}
 
       <FormControl component='fieldset'>
         <h4 className={textStyles.h4}>{t('form.workshops.selectTitle')}</h4>

@@ -9,8 +9,28 @@ export const registrationOnlinePayloadSchema = Joi.object({
   surname: Joi.string().required(),
   email: Joi.string().email().required(),
   social: Joi.string(),
+  workshops: Joi.array().items(
+    Joi.object({
+      id: Joi.number().required(),
+      selected: Joi.boolean().required(),
+      day: Joi.string().required(),
+      start: Joi.string().required(),
+      end: Joi.string().required(),
+      type: Joi.string().required().equal('workshop'),
+      translations: Joi.object({
+        ru: Joi.object({
+          title: Joi.string().required(),
+          description: Joi.string().required(),
+        }),
+        en: Joi.object({
+          title: Joi.string().required(),
+          description: Joi.string().required(),
+        }),
+      }),
+    })
+  ),
   isFullPass: Joi.boolean().required(),
-  fullPassDiscount: Joi.string().required().equal('group', '30%', '50%', 'free', 'none'),
-  fullPassDiscountSource: Joi.string(),
+  fullPassDiscount: Joi.string().equal('group', '30%', '50%', 'free', 'none'),
+  fullPassDiscountSource: Joi.string().allow(''),
   settings: Joi.object().required(),
 }).unknown();

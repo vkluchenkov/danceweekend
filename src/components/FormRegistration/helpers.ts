@@ -70,6 +70,7 @@ export const defaultValues: Partial<FormFields> = {
   version: 'live',
   yearsBefore2: yearsMap,
   isFullPass: false,
+  workshops: [],
   isSoloPass: false,
   fullPassDiscount: 'none',
   isSoloContest: false,

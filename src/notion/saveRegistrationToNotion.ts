@@ -36,6 +36,14 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
     }
   };
 
+  const wsSelected = form.workshops.filter((ws) => ws.selected);
+
+  const singleWs = wsSelected.map((ws) => {
+    const title = ws.translations.en.title;
+    const description = ws.translations.en.description;
+    return { name: title + ' – ' + description };
+  });
+
   const selectedStyles = form.soloContest.filter((cat) => cat.selected);
   const contestSoloStyles = selectedStyles.map((category) => {
     return { name: category.translations.en.categoryTitle };
@@ -144,6 +152,10 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
         type: 'email',
         email: form.email,
       },
+      FullPass: {
+        type: 'checkbox',
+        checkbox: form.isFullPass,
+      },
       Discount: {
         type: 'select',
         select: fullPassDiscountSelect() ? { name: fullPassDiscountSelect()! } : null,
@@ -161,6 +173,10 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
             },
           },
         ],
+      },
+      'Single WS': {
+        type: 'multi_select',
+        multi_select: singleWs,
       },
       'Solo Contest': {
         type: 'checkbox',
@@ -257,6 +273,10 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
         type: 'email',
         email: form.email,
       },
+      FullPass: {
+        type: 'checkbox',
+        checkbox: form.isFullPass,
+      },
       Discount: {
         type: 'select',
         select: fullPassDiscountSelect() ? { name: fullPassDiscountSelect()! } : null,
@@ -270,6 +290,10 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
             },
           },
         ],
+      },
+      'Single WS': {
+        type: 'multi_select',
+        multi_select: singleWs,
       },
       Total: {
         type: 'number',

@@ -35,7 +35,8 @@
     "workshops": {
       "title": "Workshops",
       "fullPass": "Full Pass",
-      "fullPassDescription1": "It’s possible to buy workshops only as a package — Full Pass. ",
+      "selectTitle": "Full Pass or one by one?",
+      "fullPassDescription1": "It’s possible to buy workshops as a package — Full Pass or single workshops of your choice. ",
       "fullPassDescription2Live": "Full Pass unlocks all the workshops, competition and World Show. You can pay for it in installments (except Promo tariff). Kids and Baby have 50% discount.",
       "fullPassDescription2Online": "Full Pass unlocks access to all the workshops.",
       "fullPassDescriptionSoldOut": "Full Pass for this edition of our festival has been sold out. It is only possible to buy single workshops.",
@@ -59,7 +60,7 @@
       "soloPassLabel": "I want to buy Solo Pass",
       "soloPassTitle": "Solo Pass",
       "solosPassDescription": "With the Solo Pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
-      "oops": "In order to take part in the competition all the participants are required to have at least one workshop or Full pass for Baby and Kids, 3 workshops or Full Pass for Juniors and older.",
+      "notEligible": "In order to take part in the competition all the participants are required to have at least 3 workshops or Full Pass.",
       "ageGroups": {
         "title": "Competition age group",
         "baby": "Baby",
@@ -100,7 +101,7 @@
     "worldShow": {
       "title": "World show",
       "description": "You have a unique opportunity to perform on the main festival’s stage during the World Show, which will take place on the last day of the festival.",
-      "oops": "In order to take part in the World Show all the participants are required to have at least one workshop or Full pass for Baby and Kids, 3 workshops or Full Pass for Juniors and older.",
+      "notEligible": "In order to take part in the World Show all the participants are required to have at least 3 workshops or Full Pass.",
       "solo": "I want to perform solo",
       "group": "I want to add duo or group",
       "perPerson": "per person",

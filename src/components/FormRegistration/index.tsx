@@ -12,7 +12,13 @@ import styles from '@/styles/Registration.module.css';
 import textStyles from '@/styles/Text.module.css';
 import { Workshops } from './Workshops';
 import { SupportedLangs, Version } from '@/src/types';
-import { FormFields, FullPassDiscount, OrderPayload, SoloContestField } from './types';
+import {
+  FormFields,
+  FullPassDiscount,
+  OrderPayload,
+  SoloContestField,
+  WorkshopsField,
+} from './types';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
 import { motionVariants } from '@/src/ulis/constants';
@@ -25,6 +31,7 @@ import { Loader } from '../Loader';
 import { WordpressApi } from '@/src/api/wordpressApi';
 import { kidsDiscount } from '@/src/ulis/price';
 import { defaultValues, liveSteps, onlineSteps } from './helpers';
+import { schedule } from '@/src/ulis/schedule';
 
 interface FormRegistrationProps {
   version: Version;
@@ -68,9 +75,11 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
   const age = watch('age');
   const ageGroup = watch('ageGroup');
   const contestAgeGroup = watch('contestAgeGroup');
+  const isFullPass = watch('isFullPass');
   const fullPassDiscount = watch('fullPassDiscount');
   const contestLevel = watch('contestLevel');
   const settings = watch('settings');
+  const workshops = watch('workshops');
 
   const isStep = useMemo(() => {
     const steps = version === 'live' ? liveSteps : onlineSteps;
@@ -148,6 +157,26 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
     setValue('contestLevels', levels);
     // eslint-disable-next-line
   }, [contestAgeGroup, contestLevel]);
+
+  // Map workshops data into form state
+  useEffect(() => {
+    const res: WorkshopsField = [];
+    schedule.forEach((day) => {
+      day.dayEvents.forEach((event) => {
+        event.type === 'workshop' &&
+          res.push({ ...event, selected: false, day: day.translations[currentLang].dayTitle });
+      });
+    });
+    setValue('workshops', res);
+  }, [setValue, currentLang]);
+
+  // Check if has full pass or at least 3 workshops
+  const isEligeble = useMemo(() => {
+    const selectedWorkshops = workshops.filter((ws) => ws.selected);
+    if (isFullPass) return true;
+    if (selectedWorkshops.length >= 3) return true;
+    return false;
+  }, [workshops, isFullPass]);
 
   // Summarize step totals
   useEffect(() => {
@@ -316,6 +345,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
                 setStepTotal={setContestSoloTotal}
                 soloPassPrice={soloPassPrice}
                 setIsNextDisabled={setIsNextDisabled}
+                isEligible={isEligeble}
               />
             </motion.div>
           </AnimatePresence>
@@ -350,7 +380,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
               variants={motionVariants}
               transition={{ type: 'linear', duration: 0.3 }}
             >
-              <WorldShow setStepTotal={setWorldShowTotal} />
+              <WorldShow setStepTotal={setWorldShowTotal} isEligible={isEligeble} />
             </motion.div>
           </AnimatePresence>
         )}

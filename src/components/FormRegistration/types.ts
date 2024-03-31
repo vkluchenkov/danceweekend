@@ -1,6 +1,7 @@
 import { WordpressApi } from '@/src/api/wordpressApi';
 import { AgeGroup, SupportedLangs, Version } from '@/src/types';
 import { Style, Level } from '@/src/ulis/contestCategories';
+import { Workshop } from '@/src/ulis/schedule';
 
 export interface GroupContest {
   type: 'duo' | 'group';
@@ -11,6 +12,10 @@ export interface GroupContest {
   name: string;
   price: number;
 }
+
+export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];
+
+export type WorkshopsType = 'fullPass' | 'single' | '';
 
 export interface WorldShowGroup {
   qty: number;
@@ -43,6 +48,8 @@ export interface FormFields {
   country: string;
   city: string;
   tel: string;
+  workshops: WorkshopsField;
+  workshopsType: WorkshopsType;
   isFullPass: boolean;
   fullPassDiscount: FullPassDiscount;
   fullPassDiscountSource: string;
@@ -95,6 +102,7 @@ export type ContestSoloStepProps = StepProps & {
   setStepTotal: (total: number) => void;
   soloPassPrice: number;
   setIsNextDisabled: (state: boolean) => void;
+  isEligible: boolean;
 };
 
 export type ContestGroupStepProps = StepProps & {
@@ -105,6 +113,7 @@ export type ContestGroupStepProps = StepProps & {
 
 export type WorldShowStepProps = StepProps & {
   setStepTotal: (total: number) => void;
+  isEligible: boolean;
 };
 
 export type SummaryStepProps = StepProps & {

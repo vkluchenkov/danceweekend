@@ -8,7 +8,7 @@ import styles from '@/styles/Registration.module.css';
 import { WorldShowStepProps, FormFields } from './types';
 import { FormInputCheckbox, FormInputField } from '@/src/ui-kit/input';
 
-export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal }) => {
+export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligible }) => {
   const { t } = useTranslation('registration');
 
   const methods = useFormContext<FormFields>();
@@ -54,66 +54,71 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal }) => {
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.worldShow.title')}</h2>
-      <p className={textStyles.p}>{t('form.worldShow.description')}</p>
-      <FormInputCheckbox
-        control={control}
-        name='isWorldShowSolo'
-        label={
-          <p className={textStyles.p}>
-            {t('form.worldShow.solo')}:{' '}
-            <span className={textStyles.accent}>{settings?.price.worldShow?.solo!}€</span>
-          </p>
-        }
-      />
-
-      <FormInputCheckbox
-        name='isWorldShowGroup'
-        control={control}
-        label={
-          <p className={textStyles.p}>
-            {t('form.worldShow.group')}:{' '}
-            <span className={textStyles.accent}>
-              {settings?.price.worldShow?.groups!}€ / {t('form.worldShow.perPerson')}
-            </span>
-          </p>
-        }
-      />
-
-      <Collapse in={isWorldShowGroup} unmountOnExit>
-        <div className={styles.form}>
-          <FormInputField
+      {!isEligible && <p className={textStyles.p}>{t('form.worldShow.notEligible')}</p>}
+      {isEligible && (
+        <>
+          <p className={textStyles.p}>{t('form.worldShow.description')}</p>
+          <FormInputCheckbox
             control={control}
-            type='tel'
-            label={t('form.contest.groups.qty')}
-            name='worldShowGroup.qty'
-            rules={{
-              required: t('form.common.required'),
-              min: {
-                value: 2,
-                message: t('form.worldShow.qtyError'),
-              },
-            }}
-            error={!!errors?.worldShowGroup?.qty}
-            helperText={errors?.worldShowGroup?.qty?.message as string | undefined}
+            name='isWorldShowSolo'
+            label={
+              <p className={textStyles.p}>
+                {t('form.worldShow.solo')}:{' '}
+                <span className={textStyles.accent}>{settings?.price.worldShow?.solo!}€</span>
+              </p>
+            }
           />
 
-          <FormInputField
+          <FormInputCheckbox
+            name='isWorldShowGroup'
             control={control}
-            label={t('form.contest.groups.name')}
-            name='worldShowGroup.name'
-            rules={{
-              required: t('form.common.required'),
-            }}
-            error={!!errors?.worldShowGroup?.name}
-            helperText={errors?.worldShowGroup?.name?.message as string | undefined}
+            label={
+              <p className={textStyles.p}>
+                {t('form.worldShow.group')}:{' '}
+                <span className={textStyles.accent}>
+                  {settings?.price.worldShow?.groups!}€ / {t('form.worldShow.perPerson')}
+                </span>
+              </p>
+            }
           />
 
-          <p className={textStyles.p}>
-            {t('form.contest.groups.price')}:{' '}
-            <span className={textStyles.accent}>{worldShowGroup?.price}€</span>
-          </p>
-        </div>
-      </Collapse>
+          <Collapse in={isWorldShowGroup} unmountOnExit>
+            <div className={styles.form}>
+              <FormInputField
+                control={control}
+                type='tel'
+                label={t('form.contest.groups.qty')}
+                name='worldShowGroup.qty'
+                rules={{
+                  required: t('form.common.required'),
+                  min: {
+                    value: 2,
+                    message: t('form.worldShow.qtyError'),
+                  },
+                }}
+                error={!!errors?.worldShowGroup?.qty}
+                helperText={errors?.worldShowGroup?.qty?.message as string | undefined}
+              />
+
+              <FormInputField
+                control={control}
+                label={t('form.contest.groups.name')}
+                name='worldShowGroup.name'
+                rules={{
+                  required: t('form.common.required'),
+                }}
+                error={!!errors?.worldShowGroup?.name}
+                helperText={errors?.worldShowGroup?.name?.message as string | undefined}
+              />
+
+              <p className={textStyles.p}>
+                {t('form.contest.groups.price')}:{' '}
+                <span className={textStyles.accent}>{worldShowGroup?.price}€</span>
+              </p>
+            </div>
+          </Collapse>
+        </>
+      )}
     </div>
   );
 };

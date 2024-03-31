@@ -101,7 +101,7 @@
     "worldShow": {
       "title": "World show",
       "description": "You have a unique opportunity to perform on the main festival’s stage during the World Show, which will take place on the last day of the festival.",
-      "oops": "In order to take part in the World Show all the participants are required to have at least one workshop or Full pass for Baby and Kids, 3 workshops or Full Pass for Juniors and older.",
+      "notEligible": "In order to take part in the World Show all the participants are required to have at least 3 workshops or Full Pass.",
       "solo": "I want to perform solo",
       "group": "I want to add duo or group",
       "perPerson": "per person",

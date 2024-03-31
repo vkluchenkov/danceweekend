@@ -12,7 +12,7 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Price.module.css';
 import { Version } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
-import { isFullPassSoldOut, isOnlineFullPassSoldOut } from '@/src/ulis/price';
+import { isFullPassSoldOut, isOnlineFullPassSoldOut, singleWsPrice } from '@/src/ulis/price';
 import { motionVariants } from '@/src/ulis/constants';
 import { WordpressApi } from '@/src/api/wordpressApi';
 
@@ -118,6 +118,11 @@ const Price: NextPage = () => {
             ? `${t('workshops.fullPass')}: ${t('workshops.soldOut')}`
             : `${t('workshops.fullPass')}: ${price?.promoPeriod!.price[version]}€`}
         </p>
+
+        <h5 className={styles.period__singleTitle}>
+          {t('workshops.singleTitle')}:{' '}
+          <span className={textStyles.accent}>&nbsp;{singleWsPrice[version]}€</span>
+        </h5>
       </div>
     );
 
@@ -155,6 +160,10 @@ const Price: NextPage = () => {
               ? `${t('workshops.fullPass')}: ${t('workshops.soldOut')}`
               : `${t('workshops.fullPass')}: ${period[1].price[version]}€`}
           </p>
+          <h5 className={styles.period__singleTitle}>
+            {t('workshops.singleTitle')}:{' '}
+            <span className={textStyles.accent}>&nbsp;{singleWsPrice[version]}€</span>
+          </h5>
         </div>
       );
 

@@ -81,6 +81,8 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
   const settings = watch('settings');
   const workshops = watch('workshops');
 
+  const selectedWorkshops = workshops.filter((ws) => ws.selected);
+
   const isStep = useMemo(() => {
     const steps = version === 'live' ? liveSteps : onlineSteps;
     return steps.find((step) => step.id === currentStep);
@@ -172,11 +174,12 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
 
   // Check if has full pass or at least 3 workshops
   const isEligeble = useMemo(() => {
-    const selectedWorkshops = workshops.filter((ws) => ws.selected);
     if (isFullPass) return true;
-    if (selectedWorkshops.length >= 3) return true;
+    if (selectedWorkshops.length >= 3) {
+      return true;
+    }
     return false;
-  }, [workshops, isFullPass]);
+  }, [isFullPass, selectedWorkshops]);
 
   // Summarize step totals
   useEffect(() => {

@@ -51,6 +51,14 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
     if (!isWorldShowGroup && worldShowGroup) setValue('worldShowGroup', null);
   }, [isWorldShowGroup, worldShowGroup, setValue]);
 
+  // Reset all worldshow fields if not eligible
+  useEffect(() => {
+    if (!isEligible) {
+      setValue('isWorldShowSolo', false);
+      setValue('isWorldShowGroup', false);
+    }
+  }, [isEligible, setValue]);
+
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.worldShow.title')}</h2>

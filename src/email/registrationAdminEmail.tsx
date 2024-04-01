@@ -16,6 +16,7 @@ import { renderReactToMjml } from './renderReactToMjml';
 import { OrderPayload } from '../components/FormRegistration/types';
 import { defaultUrl } from '../ulis/constants';
 import { contestCategories } from '../ulis/contestCategories';
+import { singleWsPrice } from '../ulis/price';
 
 interface registrationUserEmailProps {
   form: OrderPayload;
@@ -119,36 +120,60 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
   });
 
   // Workshops
+  const isFullPass = form.isFullPass;
+  const workshops = form.workshops.filter((ws) => ws.selected);
+
   const workshopsData = () => {
-    return (
-      <>
-        <li>
-          {t('form.workshops.fullPass')}:{' '}
-          <span style={{ color: accentColor }}>{form.fullPassPrice}€</span>
-        </li>
+    if (isFullPass) {
+      return (
+        <>
+          <MjmlText mj-class='text'>
+            <ul style={{ listStyle: 'none', padding: 0, lineHeight: 1.5 }}>
+              <li>
+                {t('form.workshops.fullPass')}:{' '}
+                <span style={{ color: accentColor }}>{form.fullPassPrice}€</span>
+              </li>
 
-        <li>
-          {t('form.workshops.discounts.title')}:{' '}
-          <span style={{ color: accentColor }}>
-            {t(`form.workshops.discounts.${form.fullPassDiscount}`)}
-          </span>
-        </li>
+              <li>
+                {t('form.workshops.discounts.title')}:{' '}
+                <span style={{ color: accentColor }}>
+                  {t(`form.workshops.discounts.${form.fullPassDiscount}`)}
+                </span>
+              </li>
 
-        {form.fullPassDiscount === 'group' && (
-          <li>
-            {t('form.workshops.discounts.groupName')}:{' '}
-            <span style={{ color: accentColor }}>{form.fullPassGroupName}</span>
+              {form.fullPassDiscount != 'none' && (
+                <li>
+                  {t('form.workshops.discounts.details')}:{' '}
+                  <span style={{ color: accentColor }}>{form.fullPassDiscountSource}</span>
+                </li>
+              )}
+            </ul>
+          </MjmlText>
+        </>
+      );
+    }
+    if (workshops.length) {
+      const wsList = workshops.map((ws) => {
+        const price = singleWsPrice[form.version];
+        return (
+          <li key={ws.id} style={{ margin: '0 0 10px' }}>
+            <span style={{ color: accentColor }}>{ws.translations[form.currentLang].title}</span>
+            <br />
+            {ws.translations[form.currentLang].description}
+            <br />
+            <span style={{ color: accentColor }}>{price}€</span>
           </li>
-        )}
+        );
+      });
 
-        {form.fullPassDiscount != 'group' && form.fullPassDiscount != 'none' && (
-          <li>
-            {t('form.workshops.discounts.details')}:{' '}
-            <span style={{ color: accentColor }}>{form.fullPassDiscountSource}</span>
-          </li>
-        )}
-      </>
-    );
+      return (
+        <>
+          <MjmlText mj-class='text'>
+            <ul style={{ listStyle: 'none', padding: 0, lineHeight: 1.5 }}>{wsList}</ul>
+          </MjmlText>
+        </>
+      );
+    }
   };
 
   // Contest solo

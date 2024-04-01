@@ -59,11 +59,13 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
     const yearsSelected = form.yearsBefore2.filter((year) => year.selected);
     const yearsSelectedValues = yearsSelected.map((year) => year.year);
 
-    const yearsElements = (
+    const yearsElements = yearsSelected.length ? (
       <>
         {t('form.personal.yearsBefore')}:{' '}
         <span style={{ color: accentColor }}>{yearsSelectedValues.join(', ')}</span>
       </>
+    ) : (
+      <></>
     );
 
     return yearsElements;

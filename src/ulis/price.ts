@@ -10,7 +10,7 @@ export const kidsDiscount = 0.5;
 export const kidsMaxAge = 11;
 
 export const singleWsPrice = {
-  live: 75,
+  live: 65,
   online: 45,
 };
 

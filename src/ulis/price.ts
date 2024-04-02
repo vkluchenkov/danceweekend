@@ -9,6 +9,11 @@ export const isOnlineFullPassSoldOut = false;
 export const kidsDiscount = 0.5;
 export const kidsMaxAge = 11;
 
+export const singleWsPrice = {
+  live: 65,
+  online: 45,
+};
+
 // export const contestSoloPrice: Record<SoloPriceCats, number> = {
 //   kids: 25,
 //   risingStar: 45,

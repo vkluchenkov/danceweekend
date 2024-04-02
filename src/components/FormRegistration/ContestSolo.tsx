@@ -14,6 +14,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   setStepTotal,
   soloPassPrice,
   setIsNextDisabled,
+  isEligible,
 }) => {
   const { t } = useTranslation('registration');
 
@@ -115,7 +116,7 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
 
   const contestLevelsList = useMemo(() => {
     return contestLevels.map((level) => (
-      <MenuItem key={level} value={level}>
+      <MenuItem key={level} value={level} translate='no'>
         {t(`form.contest.levels.${level}`)}
       </MenuItem>
     ));
@@ -124,76 +125,82 @@ export const ContestSolo: React.FC<ContestSoloStepProps> = ({
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.contest.soloTitle')}</h2>
+      {!isEligible && <p className={textStyles.p}>{t('form.contest.notEligible')}</p>}
+      {isEligible && (
+        <>
+          <FormInputCheckbox
+            control={control}
+            name='isSoloContest'
+            label={<p className={textStyles.p}>{t('form.contest.checkboxLabel')}</p>}
+          />
 
-      <FormInputCheckbox
-        control={control}
-        name='isSoloContest'
-        label={<p className={textStyles.p}>{t('form.contest.checkboxLabel')}</p>}
-      />
+          <Collapse in={isSoloContest} unmountOnExit>
+            <div className={styles.form}>
+              {ageGroupList.length > 1 && (
+                <FormInputSelect
+                  translate='no'
+                  name='contestAgeGroup'
+                  control={control}
+                  label={t('form.contest.ageGroups.title')}
+                  rules={{
+                    required: t('form.common.required'),
+                  }}
+                  error={!!errors?.contestAgeGroup}
+                  helperText={errors?.contestAgeGroup?.message as string | undefined}
+                >
+                  {ageGroupList.map((group) => (
+                    <MenuItem key={group} value={group} translate='no'>
+                      {t(`form.contest.ageGroups.${group}`)}
+                    </MenuItem>
+                  ))}
+                </FormInputSelect>
+              )}
 
-      <Collapse in={isSoloContest} unmountOnExit>
-        <div className={styles.form}>
-          {ageGroupList.length > 1 && (
-            <FormInputSelect
-              name='contestAgeGroup'
-              control={control}
-              label={t('form.contest.ageGroups.title')}
-              rules={{
-                required: t('form.common.required'),
-              }}
-              error={!!errors?.contestAgeGroup}
-              helperText={errors?.contestAgeGroup?.message as string | undefined}
-            >
-              {ageGroupList.map((group) => (
-                <MenuItem key={group} value={group}>
-                  {t(`form.contest.ageGroups.${group}`)}
-                </MenuItem>
-              ))}
-            </FormInputSelect>
-          )}
+              {contestLevels.length > 0 && (
+                <FormInputSelect
+                  translate='no'
+                  name='contestLevel'
+                  control={control}
+                  label={t('form.contest.levels.title')}
+                  rules={{
+                    required: t('form.common.required'),
+                  }}
+                  error={!!errors?.contestLevel}
+                  helperText={errors?.contestLevel?.message as string | undefined}
+                >
+                  {contestLevelsList}
+                </FormInputSelect>
+              )}
 
-          {contestLevels.length > 0 && (
-            <FormInputSelect
-              name='contestLevel'
-              control={control}
-              label={t('form.contest.levels.title')}
-              rules={{
-                required: t('form.common.required'),
-              }}
-              error={!!errors?.contestLevel}
-              helperText={errors?.contestLevel?.message as string | undefined}
-            >
-              {contestLevelsList}
-            </FormInputSelect>
-          )}
-
-          {/* Solo Pass selection */}
-          <Collapse in={!!contestLevel && contestLevel !== 'debut'} unmountOnExit>
-            <div>
-              <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
-              <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
-              <FormInputCheckbox
-                name='isSoloPass'
-                control={control}
-                label={
-                  <p className={textStyles.p}>
-                    {t('form.contest.soloPassLabel')}
-                    {': '}
-                    <span className={textStyles.accent}>
-                      {soloPassPrice > 0 ? soloPassPrice + '€' : ''}
-                    </span>
-                  </p>
-                }
-              />
+              {/* Solo Pass selection */}
+              <Collapse in={!!contestLevel && contestLevel !== 'debut'} unmountOnExit>
+                <div>
+                  <h4 className={textStyles.h4}>{t('form.contest.soloPassTitle')}:</h4>
+                  <p className={textStyles.p}>{t('form.contest.solosPassDescription')}</p>
+                  <FormInputCheckbox
+                    name='isSoloPass'
+                    control={control}
+                    label={
+                      <p className={textStyles.p}>
+                        {t('form.contest.soloPassLabel')}
+                        {': '}
+                        <span className={textStyles.accent}>
+                          {soloPassPrice > 0 ? soloPassPrice + '€' : ''}
+                        </span>
+                      </p>
+                    }
+                  />
+                </div>
+              </Collapse>
+              {/* Styles selection */}
+              <Collapse in={!!soloContest.length} unmountOnExit>
+                <h4 className={textStyles.h4}>{t('form.contest.stylesTitle')}:</h4>
+                <ContestSoloList />
+              </Collapse>
             </div>
           </Collapse>
-          {/* Styles selection */}
-          <Collapse in={!!soloContest.length} unmountOnExit>
-            <h4 className={textStyles.h4}>{t('form.contest.stylesTitle')}:</h4>
-            <ContestSoloList />
-          </Collapse>
-        </div>
-      </Collapse>
+        </>
+      )}
     </div>
   );
 };

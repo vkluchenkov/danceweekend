@@ -69,11 +69,11 @@ export const schedule: Day[] = [
         translations: {
           en: {
             title: 'Diana Gnatchenko',
-            description: 'TBA',
+            description: 'Drum solo choreography',
           },
           ru: {
             title: 'Диана Гнатченко',
-            description: 'Будет объявлено позднее',
+            description: 'Хореография Drum\u00A0solo',
           },
         },
       },
@@ -160,11 +160,11 @@ export const schedule: Day[] = [
         translations: {
           en: {
             title: 'Diana Gnatchenko',
-            description: 'Drum solo choreography',
+            description: 'Balady-Flamenco (Fusion choreography)',
           },
           ru: {
             title: 'Диана Гнатченко',
-            description: 'Хореография Drum\u00A0solo',
+            description: 'Хореография Balady-Flamenco (Fusion)',
           },
         },
       },

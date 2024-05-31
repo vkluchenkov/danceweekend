@@ -243,12 +243,17 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       const periods = Object.entries(settings.price.periods);
 
       const today = new Date();
+      const tzOffset = today.getTimezoneOffset();
 
       const basePrice = (): number | undefined => {
         const periodPrice = periods.find((p) => {
           const startDate = new Date(p[1].start);
           const endDate = new Date(p[1].end);
-          return startDate <= today && today <= endDate;
+
+          const startDateOffset = new Date(startDate.getTime() + tzOffset * 60 * 1000);
+          const endDateOffset = new Date(endDate.getTime() + tzOffset * 60 * 1000);
+
+          return startDateOffset <= today && today <= endDateOffset;
         })?.[1].price;
 
         const promoPrice = settings.price.promoPeriod.price[version];

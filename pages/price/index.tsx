@@ -132,16 +132,22 @@ const Price: NextPage = () => {
     const periods = Object.entries(price?.periods!);
 
     periods.forEach((period, index) => {
+      const today = new Date();
+      const tzOffset = today.getTimezoneOffset();
+
       const startDate = new Date(period[1].start);
       const endDate = new Date(period[1].end);
 
-      const cardTitle = `${startDate.toLocaleDateString('pl', {
-        timeZone: 'UTC',
-      })} – ${endDate.toLocaleDateString('pl', { timeZone: 'UTC' })}`;
+      const startDateOffset = new Date(startDate.getTime() + tzOffset * 60 * 1000);
+      const endDateOffset = new Date(endDate.getTime() + tzOffset * 60 * 1000);
 
-      const today = new Date();
-      const isPast = endDate && today > endDate;
-      const isNow = endDate && startDate && today <= endDate && today >= startDate;
+      const cardTitle = `${startDateOffset.toLocaleDateString('pl', {
+        timeZone: 'Europe/Warsaw',
+      })} – ${endDateOffset.toLocaleDateString('pl', { timeZone: 'Europe/Warsaw' })}`;
+
+      const isPast = endDateOffset && today > endDateOffset;
+      const isNow =
+        endDateOffset && startDateOffset && today <= endDateOffset && today >= startDateOffset;
 
       const card = (
         <div

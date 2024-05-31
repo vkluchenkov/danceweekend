@@ -133,7 +133,8 @@ const Price: NextPage = () => {
 
     periods.forEach((period, index) => {
       const today = new Date();
-      const tzOffset = today.getTimezoneOffset();
+      // const tzOffset = today.getTimezoneOffset();
+      const tzOffset = -120;
 
       const startDate = new Date(period[1].start);
       const endDate = new Date(period[1].end);

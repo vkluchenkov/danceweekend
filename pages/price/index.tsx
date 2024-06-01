@@ -15,6 +15,7 @@ import { Switcher } from '@/src/ui-kit/Switcher';
 import { isFullPassSoldOut, isOnlineFullPassSoldOut, singleWsPrice } from '@/src/ulis/price';
 import { motionVariants } from '@/src/ulis/constants';
 import { WordpressApi } from '@/src/api/wordpressApi';
+import { DateTime } from 'luxon';
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -132,23 +133,22 @@ const Price: NextPage = () => {
     const periods = Object.entries(price?.periods!);
 
     periods.forEach((period, index) => {
-      const today = new Date();
-      // const tzOffset = today.getTimezoneOffset();
-      const tzOffset = -120;
+      const today = DateTime.now().setZone('Europe/Warsaw');
 
-      const startDate = new Date(period[1].start);
-      const endDate = new Date(period[1].end);
+      const startDate = DateTime.fromISO(period[1].start)
+        .setZone('UTC')
+        .setZone('Europe/Warsaw', { keepLocalTime: true });
 
-      const startDateOffset = new Date(startDate.getTime() + tzOffset * 60 * 1000);
-      const endDateOffset = new Date(endDate.getTime() + tzOffset * 60 * 1000);
+      const endDate = DateTime.fromISO(period[1].end)
+        .setZone('UTC')
+        .setZone('Europe/Warsaw', { keepLocalTime: true });
 
-      const cardTitle = `${startDateOffset.toLocaleDateString('pl', {
-        timeZone: 'Europe/Warsaw',
-      })} – ${endDateOffset.toLocaleDateString('pl', { timeZone: 'Europe/Warsaw' })}`;
+      const cardTitle = `${startDate.setLocale('pl').toLocaleString()} – ${endDate
+        .setLocale('pl')
+        .toLocaleString()}`;
 
-      const isPast = endDateOffset && today > endDateOffset;
-      const isNow =
-        endDateOffset && startDateOffset && today <= endDateOffset && today >= startDateOffset;
+      const isPast = endDate && today > endDate;
+      const isNow = endDate && startDate && today <= endDate && today >= startDate;
 
       const card = (
         <div

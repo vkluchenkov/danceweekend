@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Collapse, Snackbar, Alert } from '@mui/material';
+import { DateTime } from 'luxon';
 
 import { PersonalData } from './PersonalData';
 import styles from '@/styles/Registration.module.css';
@@ -242,19 +243,19 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
 
       const periods = Object.entries(settings.price.periods);
 
-      const today = new Date();
-      // const tzOffset = today.getTimezoneOffset();
-      const tzOffset = -120;
+      const today = DateTime.now().setZone('Europe/Warsaw');
 
       const basePrice = (): number | undefined => {
         const periodPrice = periods.find((p) => {
-          const startDate = new Date(p[1].start);
-          const endDate = new Date(p[1].end);
+          const startDate = DateTime.fromISO(p[1].start)
+            .setZone('UTC')
+            .setZone('Europe/Warsaw', { keepLocalTime: true });
 
-          const startDateOffset = new Date(startDate.getTime() + tzOffset * 60 * 1000);
-          const endDateOffset = new Date(endDate.getTime() + tzOffset * 60 * 1000);
+          const endDate = DateTime.fromISO(p[1].end)
+            .setZone('UTC')
+            .setZone('Europe/Warsaw', { keepLocalTime: true });
 
-          return startDateOffset <= today && today <= endDateOffset;
+          return startDate <= today && today <= endDate;
         })?.[1].price;
 
         const promoPrice = settings.price.promoPeriod.price[version];

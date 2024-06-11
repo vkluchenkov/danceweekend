@@ -11,6 +11,14 @@ query getSettings {
             online
           }
         }
+        promoPeriodDev {
+          isLivePromo
+          isOnlinePromo
+          price {
+            live
+            online
+          }
+        }
         periods {
           pricePeriod1 {
             start

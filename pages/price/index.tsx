@@ -10,13 +10,12 @@ import Link from 'next/link';
 import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Price.module.css';
-import { Version } from '@/src/types';
+import { SupportedLangs, Version } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
 import { isFullPassSoldOut, isOnlineFullPassSoldOut, singleWsPrice } from '@/src/ulis/price';
 import { defaultUrl, motionVariants } from '@/src/ulis/constants';
 import { WordpressApi } from '@/src/api/wordpressApi';
 import { DateTime } from 'luxon';
-import { useRouter } from 'next/router';
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -36,6 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Price: NextPage = () => {
   const { t, lang } = useTranslation('price');
+  const currentLang = lang as SupportedLangs;
 
   const { data, isLoading, status, error } = useQuery({
     queryKey: ['settings'],
@@ -118,6 +118,8 @@ const Price: NextPage = () => {
       ? price?.promoPeriodDev?.price[version]
       : price?.promoPeriod?.price[version];
 
+    const promoText = isDev ? price?.promoPeriodDev[currentLang] : price?.promoPeriod[currentLang];
+
     const promoCard = (
       <div
         key='promoCard'
@@ -128,7 +130,9 @@ const Price: NextPage = () => {
           !isPromo() && styles.period_expired
         )}
       >
-        <h4 className={styles.period__title}>{t('workshops.promo')}</h4>
+        <h4 className={styles.period__title}>
+          {promoText?.length ? promoText : t('workshops.promo')}
+        </h4>
 
         <p className={clsx(textStyles.p, styles.period__fullPass)}>
           {isSoldOut

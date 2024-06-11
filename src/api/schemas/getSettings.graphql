@@ -6,6 +6,8 @@ query getSettings {
         promoPeriod {
           isLivePromo
           isOnlinePromo
+          ru
+          en
           price {
             live
             online
@@ -14,6 +16,8 @@ query getSettings {
         promoPeriodDev {
           isLivePromo
           isOnlinePromo
+          ru
+          en
           price {
             live
             online

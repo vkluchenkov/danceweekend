@@ -13,9 +13,10 @@ import styles from '@/styles/Price.module.css';
 import { Version } from '@/src/types';
 import { Switcher } from '@/src/ui-kit/Switcher';
 import { isFullPassSoldOut, isOnlineFullPassSoldOut, singleWsPrice } from '@/src/ulis/price';
-import { motionVariants } from '@/src/ulis/constants';
+import { defaultUrl, motionVariants } from '@/src/ulis/constants';
 import { WordpressApi } from '@/src/api/wordpressApi';
 import { DateTime } from 'luxon';
+import { useRouter } from 'next/router';
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -42,9 +43,15 @@ const Price: NextPage = () => {
     refetchOnMount: false,
   });
 
+  const [isDev, setIsDev] = useState(false);
+
   const [price, setPrice] = useState(data?.price);
 
   const [version, setVersion] = useState<Version>('live');
+
+  useEffect(() => {
+    setIsDev(!window.location.href.startsWith(defaultUrl));
+  }, [setIsDev]);
 
   useEffect(() => {
     if (data?.price) setPrice(data.price);
@@ -97,10 +104,19 @@ const Price: NextPage = () => {
 
   const priceCards = () => {
     const isPromo = (): boolean => {
-      if (version === 'live')
-        return price?.promoPeriod?.isLivePromo.toLowerCase() === 'true' ? true : false;
-      else return price?.promoPeriod?.isOnlinePromo.toLowerCase() === 'true' ? true : false;
+      const livePromo = isDev
+        ? price?.promoPeriodDev?.isLivePromo.toLowerCase()
+        : price?.promoPeriod?.isLivePromo.toLowerCase();
+      const onlinePromo = isDev
+        ? price?.promoPeriodDev?.isOnlinePromo.toLowerCase()
+        : price?.promoPeriod?.isOnlinePromo.toLowerCase();
+      if (version === 'live') return livePromo === 'true' ? true : false;
+      else return onlinePromo === 'true' ? true : false;
     };
+
+    const promoPrice = isDev
+      ? price?.promoPeriodDev?.price[version]
+      : price?.promoPeriod?.price[version];
 
     const promoCard = (
       <div
@@ -117,7 +133,7 @@ const Price: NextPage = () => {
         <p className={clsx(textStyles.p, styles.period__fullPass)}>
           {isSoldOut
             ? `${t('workshops.fullPass')}: ${t('workshops.soldOut')}`
-            : `${t('workshops.fullPass')}: ${price?.promoPeriod!.price[version]}€`}
+            : `${t('workshops.fullPass')}: ${promoPrice}€`}
         </p>
 
         <h5 className={styles.period__singleTitle}>
@@ -155,6 +171,7 @@ const Price: NextPage = () => {
           key={period[0]}
           className={clsx(
             styles.period,
+            isPromo() && styles.period_expired,
             // Date based styles, ignored if promo is active
             !isPromo() && isPast && styles.period_expired,
             !isPromo() && isNow && styles.period_active

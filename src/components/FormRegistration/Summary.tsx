@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import clsx from 'clsx';
@@ -12,6 +12,7 @@ import { SupportedLangs } from '@/src/types';
 import { FormInputCheckbox } from '@/src/ui-kit/input';
 import { contestCategories } from '@/src/ulis/contestCategories';
 import { singleWsPrice } from '@/src/ulis/price';
+import { defaultUrl } from '@/src/ulis/constants';
 
 export const Summary: React.FC<SummaryStepProps> = ({
   fullPassPrice,
@@ -26,11 +27,30 @@ export const Summary: React.FC<SummaryStepProps> = ({
   const { watch, control } = methods;
 
   const settings = watch('settings');
+  const version = watch('version');
   const form = watch();
+
+  const [isDev, setIsDev] = useState(false);
+
+  useEffect(() => {
+    setIsDev(!window.location.href.startsWith(defaultUrl));
+  }, [setIsDev]);
 
   useEffect(() => {
     setIsNextDisabled(!form.rulesAccepted);
   }, [setIsNextDisabled, form]);
+
+  const isPromo = useMemo((): boolean => {
+    const livePromo = isDev
+      ? settings?.price.promoPeriodDev.isLivePromo.toLowerCase()
+      : settings?.price.promoPeriod.isLivePromo.toLowerCase();
+    const onlinePromo = isDev
+      ? settings?.price.promoPeriodDev.isOnlinePromo.toLowerCase()
+      : settings?.price.promoPeriod.isOnlinePromo.toLowerCase();
+
+    if (version === 'live') return livePromo === 'true' ? true : false;
+    else return onlinePromo === 'true' ? true : false;
+  }, [settings, isDev, version]);
 
   // translations with HTML
   const acceptRules = (
@@ -367,7 +387,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
       <h4 className={textStyles.h4}>
         {t('form.summary.money.total')}: <span className={textStyles.accent}>{total}€</span>
       </h4>
-      {settings?.price.promoPeriod.isLivePromo === 'false' &&
+      {!isPromo &&
         form.isFullPass &&
         form.version === 'live' &&
         form.fullPassDiscount !== 'free' && (

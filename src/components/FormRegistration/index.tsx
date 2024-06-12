@@ -22,7 +22,7 @@ import {
 } from './types';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
-import { motionVariants } from '@/src/ulis/constants';
+import { defaultUrl, motionVariants } from '@/src/ulis/constants';
 import { contestCategories, Level } from '@/src/ulis/contestCategories';
 import { ContestGroups } from './ContestGroups';
 import { WorldShow } from './WorldShow';
@@ -53,6 +53,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
 
   const router = useRouter();
 
+  const [isDev, setIsDev] = useState(false);
   const [total, setTotal] = useState(0);
   const [isTotalOpen, setIsTotalOpen] = useState(false);
   const [wstotal, setWsTotal] = useState(0);
@@ -88,6 +89,10 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
     const steps = version === 'live' ? liveSteps : onlineSteps;
     return steps.find((step) => step.id === currentStep);
   }, [currentStep, version]);
+
+  useEffect(() => {
+    setIsDev(!window.location.href.startsWith(defaultUrl));
+  }, [setIsDev]);
 
   // Set price from props -= once =-
   useEffect(() => {
@@ -235,10 +240,15 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
   const fullPassPrice = useMemo(() => {
     if (settings) {
       const isPromo = (): boolean => {
-        if (version === 'live')
-          return settings?.price.promoPeriod.isLivePromo.toLowerCase() === 'true' ? true : false;
-        else
-          return settings?.price.promoPeriod?.isOnlinePromo.toLowerCase() === 'true' ? true : false;
+        const livePromo = isDev
+          ? settings.price.promoPeriodDev.isLivePromo.toLowerCase()
+          : settings.price.promoPeriod.isLivePromo.toLowerCase();
+        const onlinePromo = isDev
+          ? settings.price.promoPeriodDev.isOnlinePromo.toLowerCase()
+          : settings.price.promoPeriod.isOnlinePromo.toLowerCase();
+
+        if (version === 'live') return livePromo === 'true' ? true : false;
+        else return onlinePromo === 'true' ? true : false;
       };
 
       const periods = Object.entries(settings.price.periods);
@@ -258,7 +268,9 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
           return startDate <= today && today <= endDate;
         })?.[1].price;
 
-        const promoPrice = settings.price.promoPeriod.price[version];
+        const promoPrice = isDev
+          ? settings.price.promoPeriodDev.price[version]
+          : settings.price.promoPeriod.price[version];
 
         const currentPrice: number | undefined = isPromo() ? promoPrice : periodPrice![version];
 
@@ -280,7 +292,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       if (fullPassDiscount === 'free') return 0;
       else return basePrice();
     } else return undefined;
-  }, [ageGroup, settings, fullPassDiscount, version]);
+  }, [ageGroup, settings, fullPassDiscount, version, isDev]);
 
   const fullPassDiscountList: FullPassDiscount[] = useMemo(() => {
     // Kids and baby can't have less than 100% discount in live version due to automatic 50%

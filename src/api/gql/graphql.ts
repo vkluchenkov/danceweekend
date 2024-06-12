@@ -3604,6 +3604,8 @@ export enum MimeTypeEnum {
   AudioXMsWma = 'AUDIO_X_MS_WMA',
   /** audio/x-realaudio mime type. */
   AudioXRealaudio = 'AUDIO_X_REALAUDIO',
+  /** image/avif mime type. */
+  ImageAvif = 'IMAGE_AVIF',
   /** image/bmp mime type. */
   ImageBmp = 'IMAGE_BMP',
   /** image/gif mime type. */
@@ -7748,6 +7750,8 @@ export type SettingsDwwPrice = AcfFieldGroup & AcfFieldGroupFields & SettingsDww
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
   promoPeriod: SettingsDwwPricePromoPeriod;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  promoPeriodDev: SettingsDwwPricePromoPeriodDev;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
   worldShow?: Maybe<SettingsDwwPriceWorldShow>;
 };
 
@@ -8019,6 +8023,8 @@ export type SettingsDwwPricePeriods_Fields = {
 
 /** The &quot;SettingsDwwPricePromoPeriod&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type SettingsDwwPricePromoPeriod = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePromoPeriod_Fields & {
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  en: Scalars['String']['output'];
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -8030,6 +8036,72 @@ export type SettingsDwwPricePromoPeriod = AcfFieldGroup & AcfFieldGroupFields & 
   isOnlinePromo: Scalars['String']['output'];
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
   price: SettingsDwwPricePromoPeriodPrice;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  ru: Scalars['String']['output'];
+};
+
+/** The &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePromoPeriodDev = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePromoPeriodDev_Fields & {
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  en: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  isLivePromo: Scalars['String']['output'];
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  isOnlinePromo: Scalars['String']['output'];
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  price: SettingsDwwPricePromoPeriodDevPrice;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  ru: Scalars['String']['output'];
+};
+
+/** The &quot;SettingsDwwPricePromoPeriodDevPrice&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type SettingsDwwPricePromoPeriodDevPrice = AcfFieldGroup & AcfFieldGroupFields & SettingsDwwPricePromoPeriodDevPrice_Fields & {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDevPrice&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDevPrice&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePromoPeriodDevPrice&quot; Field Group */
+export type SettingsDwwPricePromoPeriodDevPrice_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDevPrice&quot; Field Group */
+  live: Scalars['Float']['output'];
+  /** Field of the &quot;number&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDevPrice&quot; Field Group */
+  online: Scalars['Float']['output'];
+};
+
+/** Interface representing fields of the ACF &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+export type SettingsDwwPricePromoPeriodDev_Fields = {
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  en: Scalars['String']['output'];
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  isLivePromo: Scalars['String']['output'];
+  /** Field of the &quot;radio&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  isOnlinePromo: Scalars['String']['output'];
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  price: SettingsDwwPricePromoPeriodDevPrice;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriodDev&quot; Field Group */
+  ru: Scalars['String']['output'];
 };
 
 /** The &quot;SettingsDwwPricePromoPeriodPrice&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -8060,6 +8132,8 @@ export type SettingsDwwPricePromoPeriodPrice_Fields = {
 
 /** Interface representing fields of the ACF &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
 export type SettingsDwwPricePromoPeriod_Fields = {
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  en: Scalars['String']['output'];
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -8071,6 +8145,8 @@ export type SettingsDwwPricePromoPeriod_Fields = {
   isOnlinePromo: Scalars['String']['output'];
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
   price: SettingsDwwPricePromoPeriodPrice;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;SettingsDwwPricePromoPeriod&quot; Field Group */
+  ru: Scalars['String']['output'];
 };
 
 /** The &quot;SettingsDwwPriceWorldShow&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
@@ -8112,6 +8188,8 @@ export type SettingsDwwPrice_Fields = {
   periods: SettingsDwwPricePeriods;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
   promoPeriod: SettingsDwwPricePromoPeriod;
+  /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
+  promoPeriodDev: SettingsDwwPricePromoPeriodDev;
   /** Field of the &quot;group&quot; Field Type added to the schema as part of the &quot;SettingsDwwPrice&quot; Field Group */
   worldShow?: Maybe<SettingsDwwPriceWorldShow>;
 };
@@ -10162,7 +10240,7 @@ export type GetPostsQuery = { posts?: { nodes: Array<{ id: string, title?: strin
 export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSettingsQuery = { page?: { title?: string | null, settingsDww?: { price: { promoPeriod: { isLivePromo: string, isOnlinePromo: string, price: { live: number, online: number } }, periods: { pricePeriod1: { start: string, end: string, price: { live: number, online: number } }, pricePeriod2: { start: string, end: string, price: { live: number, online: number } }, pricePeriod3: { start: string, end: string, price: { live: number, online: number } } }, contest?: { contestGroupPrice: number, contestsoloprice?: { kids: number, risingstar: number, professionals: number, soloPassKids: number, soloPassRisingStar: number, soloPassProfessionals: number } | null } | null, worldShow?: { groups: number, solo: number } | null }, registrationState: { isLiveOpen: string, isLiveOpenDev: string, isOnlineOpen: string, isOnlineOpenDev: string } } | null } | null };
+export type GetSettingsQuery = { page?: { title?: string | null, settingsDww?: { price: { promoPeriod: { isLivePromo: string, isOnlinePromo: string, ru: string, en: string, price: { live: number, online: number } }, promoPeriodDev: { isLivePromo: string, isOnlinePromo: string, ru: string, en: string, price: { live: number, online: number } }, periods: { pricePeriod1: { start: string, end: string, price: { live: number, online: number } }, pricePeriod2: { start: string, end: string, price: { live: number, online: number } }, pricePeriod3: { start: string, end: string, price: { live: number, online: number } } }, contest?: { contestGroupPrice: number, contestsoloprice?: { kids: number, risingstar: number, professionals: number, soloPassKids: number, soloPassRisingStar: number, soloPassProfessionals: number } | null } | null, worldShow?: { groups: number, solo: number } | null }, registrationState: { isLiveOpen: string, isLiveOpenDev: string, isOnlineOpen: string, isOnlineOpenDev: string } } | null } | null };
 
 
 export const GetCtaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCTA"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"settings","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"cta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"en"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"header"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"buttonEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"buttonLink"}},{"kind":"Field","name":{"kind":"Name","value":"buttonText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"ru"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"header"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"buttonEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"buttonLink"}},{"kind":"Field","name":{"kind":"Name","value":"buttonText"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetCtaQuery, GetCtaQueryVariables>;
@@ -10170,4 +10248,4 @@ export const GetGalleryBySlugDocument = {"kind":"Document","definitions":[{"kind
 export const GetPageByUriDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPageByUri"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uri"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uri"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"featuredImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sourceUrl"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]}]}}]}}]} as unknown as DocumentNode<GetPageByUriQuery, GetPageByUriQueryVariables>;
 export const GetPostBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPostBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"SLUG"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetPostBySlugQuery, GetPostBySlugQueryVariables>;
 export const GetPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"RENDERED"}}]},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
-export const GetSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"settings","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"settingsDww"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"promoPeriod"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLivePromo"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlinePromo"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"periods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pricePeriod1"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod2"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod3"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contest"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contestsoloprice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"kids"}},{"kind":"Field","name":{"kind":"Name","value":"risingstar"}},{"kind":"Field","name":{"kind":"Name","value":"professionals"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassKids"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassRisingStar"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassProfessionals"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contestGroupPrice"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldShow"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"groups"}},{"kind":"Field","name":{"kind":"Name","value":"solo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"registrationState"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLiveOpen"}},{"kind":"Field","name":{"kind":"Name","value":"isLiveOpenDev"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlineOpen"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlineOpenDev"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetSettingsQuery, GetSettingsQueryVariables>;
+export const GetSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"settings","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"idType"},"value":{"kind":"EnumValue","value":"URI"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"settingsDww"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"promoPeriod"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLivePromo"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlinePromo"}},{"kind":"Field","name":{"kind":"Name","value":"ru"}},{"kind":"Field","name":{"kind":"Name","value":"en"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"promoPeriodDev"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLivePromo"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlinePromo"}},{"kind":"Field","name":{"kind":"Name","value":"ru"}},{"kind":"Field","name":{"kind":"Name","value":"en"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"periods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pricePeriod1"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod2"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pricePeriod3"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}},{"kind":"Field","name":{"kind":"Name","value":"price"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"live"}},{"kind":"Field","name":{"kind":"Name","value":"online"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contest"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contestsoloprice"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"kids"}},{"kind":"Field","name":{"kind":"Name","value":"risingstar"}},{"kind":"Field","name":{"kind":"Name","value":"professionals"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassKids"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassRisingStar"}},{"kind":"Field","name":{"kind":"Name","value":"soloPassProfessionals"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contestGroupPrice"}}]}},{"kind":"Field","name":{"kind":"Name","value":"worldShow"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"groups"}},{"kind":"Field","name":{"kind":"Name","value":"solo"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"registrationState"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isLiveOpen"}},{"kind":"Field","name":{"kind":"Name","value":"isLiveOpenDev"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlineOpen"}},{"kind":"Field","name":{"kind":"Name","value":"isOnlineOpenDev"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetSettingsQuery, GetSettingsQueryVariables>;

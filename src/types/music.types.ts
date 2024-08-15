@@ -8,6 +8,7 @@ export interface MusicFormFields {
   email: string;
   name?: string;
   surname?: string;
+  stageName?: string;
   groupName?: string;
   ageGroup?: AgeGroup;
   levels?: Level[];

@@ -4,6 +4,7 @@
     "required": "This field is required",
     "name": "Participant name",
     "surname": "Participant surname",
+    "stageName": "Stage name (if specified in the registration)",
     "email": "Email",
     "emailError": "Email is not valid",
     "groupName": "Group / duo name",

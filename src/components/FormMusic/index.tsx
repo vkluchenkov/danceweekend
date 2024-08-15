@@ -162,6 +162,20 @@ export const FormMusic: React.FC<FormMusicProps> = ({
             error={!!errors.surname}
             helperText={errors.surname?.message as string | undefined}
           />
+
+          <FormInputField
+            name='stageName'
+            control={control}
+            rules={{
+              pattern: {
+                value: /^[a-zA-Z0-9\s\-]+$/,
+                message: t('form.patternError'),
+              },
+            }}
+            label={t('form.stageName')}
+            error={!!errors.stageName}
+            helperText={errors.stageName?.message as string | undefined}
+          />
         </div>
       </Collapse>
 

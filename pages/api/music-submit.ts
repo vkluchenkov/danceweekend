@@ -57,10 +57,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   if (formData) {
-    const { event, name, email, surname, type, groupName, ageGroup, level, category, audioLength } =
-      formData.fields;
+    const {
+      event,
+      name,
+      email,
+      surname,
+      stageName,
+      type,
+      groupName,
+      ageGroup,
+      level,
+      category,
+      audioLength,
+    } = formData.fields;
     const tempPath = formData.file.filepath;
     const extName = path.extname(formData.file.originalFilename!);
+    const fileStageName = stageName ? '(' + sanitize(stageName) + ')' : '';
     const fileName = () => {
       if (type === 'duo' || type === 'group')
         return sanitize(groupName!) + '_' + Math.round(audioLength) + 'sec' + extName;
@@ -69,7 +81,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           sanitize(name!) +
           ' ' +
           sanitize(surname!) +
-          '_' +
+          ' ' +
+          fileStageName +
+          ' ' +
           Math.round(audioLength) +
           'sec' +
           extName

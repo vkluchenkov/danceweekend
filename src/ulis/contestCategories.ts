@@ -227,6 +227,16 @@ const mainGroupSet: Style[] = [
   {
     translations: {
       en: {
+        categoryTitle: 'Pop song',
+      },
+      ru: {
+        categoryTitle: 'Эстрадная песня',
+      },
+    },
+  },
+  {
+    translations: {
+      en: {
         categoryTitle: 'Bollywood',
       },
       ru: {

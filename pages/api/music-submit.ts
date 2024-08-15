@@ -178,7 +178,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .replaceAll('\n\n', '\n');
 
         const getSubj = () => {
-          if (name && surname) return t('email.title') + ' ' + name + ' ' + surname;
+          if (name && surname)
+            return t('email.title') + ' ' + name + ' ' + surname + ' ' + fileStageName;
           if (groupName) return t('email.title') + ' ' + groupName;
           return t('email.title');
         };
@@ -186,8 +187,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return getSubj() + `\n` + formEntries + `\n` + 'Uploaded to: ' + ftpUploadDir();
       };
 
-      console.log(fileName());
-      console.log(tempPath);
+      // console.log(fileName());
+      // console.log(tempPath);
 
       bot.sendAudio(
         chatId,

@@ -17,6 +17,7 @@ const nextConfig = {
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID,
     TELEGRAM_THREAD_ID: process.env.TELEGRAM_THREAD_ID,
+    ADMIN_PIN: process.env.ADMIN_PIN,
   },
   output: 'standalone',
   images: {

@@ -6,6 +6,7 @@
     "surname": "Participant surname",
     "stageName": "Stage name (if specified in the registration)",
     "email": "Email",
+    "password": "Password",
     "emailError": "Email is not valid",
     "groupName": "Group / duo name",
     "event": "Event",

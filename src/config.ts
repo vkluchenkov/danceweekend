@@ -31,4 +31,7 @@ export const config = {
     chatId: must(process.env.TELEGRAM_CHAT_ID, 'Telegram chat id is missing'),
     threadId: must(process.env.TELEGRAM_THREAD_ID, 'Telegram thread id is missing'),
   },
+  other: {
+    adminPin: must(process.env.ADMIN_PIN, 'Admin pin is missing'),
+  },
 };

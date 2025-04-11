@@ -41,16 +41,16 @@ export const schedule: Day[] = [
   {
     translations: {
       en: {
-        dayTitle: '22.08 Thursday',
+        dayTitle: '21.08 Thursday',
       },
       ru: {
-        dayTitle: '22.08 Четверг',
+        dayTitle: '21.08 Четверг',
       },
     },
     dayEvents: [
       {
         id: 1,
-        start: '8:30',
+        start: '9:00',
         type: 'other',
         translations: {
           en: {
@@ -63,8 +63,8 @@ export const schedule: Day[] = [
       },
       {
         id: 2,
-        start: '9:00',
-        end: '11:30',
+        start: '9:30',
+        end: '12:30',
         type: 'workshop',
         translations: {
           en: {
@@ -79,33 +79,33 @@ export const schedule: Day[] = [
       },
       {
         id: 3,
-        start: '11:45',
-        end: '13:15',
+        start: '12:15',
+        end: '13:45',
         type: 'workshop',
         translations: {
           en: {
-            title: 'Kate Ksenzova',
-            description: 'Dabke choreography',
+            title: 'Dariya Babak',
+            description: 'TBA',
           },
           ru: {
-            title: 'Екатерина Ксензова',
-            description: 'Хореография Dabke',
+            title: 'Дарья Бабак',
+            description: 'Будет объявлено позже',
           },
         },
       },
       {
         id: 4,
-        start: '13:30',
+        start: '14:00',
         end: '15:30',
         type: 'workshop',
         translations: {
           en: {
-            title: 'Leandro Ferreyra',
-            description: 'Flamenco fusion choreography',
+            title: 'Aliah',
+            description: 'Shaabi choreography',
           },
           ru: {
-            title: 'Leandro Ferreyra',
-            description: 'Хореография Flamenco fusion',
+            title: 'Aliah',
+            description: 'Хореография Shaabi',
           },
         },
       },
@@ -116,12 +116,12 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'Alex Delora',
-            description: 'Shimmy technique',
+            title: 'Pablo Acosta',
+            description: 'Flamenco fusion choreography',
           },
           ru: {
-            title: 'Alex Delora',
-            description: 'Техника Shimmy',
+            title: 'Pablo Acosta',
+            description: 'Хореография Flamenco fusion',
           },
         },
       },
@@ -145,74 +145,58 @@ export const schedule: Day[] = [
   {
     translations: {
       en: {
-        dayTitle: '23.08 Friday',
+        dayTitle: '22.08 Friday',
       },
       ru: {
-        dayTitle: '23.08 Пятница',
+        dayTitle: '22.08 Пятница',
       },
     },
     dayEvents: [
       {
         id: 7,
-        start: '9:00',
-        end: '11:30',
+        start: '9:30',
+        end: '12:00',
         type: 'workshop',
         translations: {
           en: {
             title: 'Diana Gnatchenko',
-            description: 'Balady-Flamenco (Fusion choreography)',
+            description: 'Pop song choreography',
           },
           ru: {
             title: 'Диана Гнатченко',
-            description: 'Хореография Balady-Flamenco (Fusion)',
+            description: 'Хореография Pop song',
           },
         },
       },
       {
         id: 8,
-        start: '11:45',
-        end: '13:15',
+        start: '12:15',
+        end: '14:15',
         type: 'workshop',
         translations: {
           en: {
-            title: 'Levana',
-            description: 'Shaabi choreography',
+            title: 'Marta Korzun',
+            description: 'Graceful Arms & Expressive Hands',
           },
           ru: {
-            title: 'Levana',
-            description: 'Хореография Shaabi',
+            title: 'Марта Корзун',
+            description: 'Грациозные руки и выразительные кисти',
           },
         },
       },
       {
         id: 9,
-        start: '13:30',
-        end: '15:30',
-        type: 'workshop',
-        translations: {
-          en: {
-            title: 'Mohanned Hawaz',
-            description: 'Iraqi Al-Khashaba style choreography',
-          },
-          ru: {
-            title: 'Mohanned Hawaz',
-            description: 'Хореография Iraqi Al-Khashaba style',
-          },
-        },
-      },
-      {
-        id: 10,
-        start: '15:45',
-        end: '17:45',
+        start: '14:30',
+        end: '17:30',
         type: 'workshop',
         translations: {
           en: {
             title: 'Khader Ahmad',
-            description: 'Live tabla improvisation for competitions',
+            description: 'Live tabla improvisation (practice)',
           },
           ru: {
             title: 'Khader Ahmad',
-            description: 'Live tabla — конкурсная импровизация',
+            description: 'Live tabla импровизация (практика)',
           },
         },
       },
@@ -236,10 +220,10 @@ export const schedule: Day[] = [
   {
     translations: {
       en: {
-        dayTitle: '24.08 Saturday',
+        dayTitle: '23.08 Saturday',
       },
       ru: {
-        dayTitle: '24.08 Суббота',
+        dayTitle: '23.08 Суббота',
       },
     },
     dayEvents: [
@@ -250,12 +234,12 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'Aida Bogomolova',
-            description: 'Baladi choreography',
+            title: 'Marta Korzun',
+            description: 'Classical oriental choreography',
           },
           ru: {
-            title: 'Аида Богомолова',
-            description: 'Хореография Baladi',
+            title: 'Марта Корзун',
+            description: 'Хореография Classical oriental',
           },
         },
       },
@@ -266,25 +250,25 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'Mohanned Hawaz',
-            description: 'Iraqi Kawliya style choreography',
+            title: 'Levana',
+            description: 'Baladi choreography',
           },
           ru: {
-            title: 'Mohanned Hawaz',
-            description: 'Хореография Iraqi Kawliya style',
+            title: 'Levana',
+            description: 'Хореография Baladi',
           },
         },
       },
       {
         id: 14,
-        start: '15:00',
+        start: '15:30',
         type: 'contest',
         translations: {
           en: {
-            title: 'Competition part 1',
+            title: 'Competition (Baby, Kids, Juniors, Adults beginners)',
           },
           ru: {
-            title: 'Конкурс часть 1',
+            title: 'Конкурс (Беби, Дети, Юниоры, Взрослые начинающие)',
           },
         },
       },
@@ -293,10 +277,10 @@ export const schedule: Day[] = [
   {
     translations: {
       en: {
-        dayTitle: '25.08 Sunday',
+        dayTitle: '24.08 Sunday',
       },
       ru: {
-        dayTitle: '25.08 Воскресенье',
+        dayTitle: '24.08 Воскресенье',
       },
     },
     dayEvents: [
@@ -307,41 +291,41 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'Aida Bogomolova',
-            description: 'Tarab choreography',
+            title: 'Pablo Acosta',
+            description: 'Mejance choreography',
           },
           ru: {
-            title: 'Аида Богомолова',
-            description: 'Хореография Tarab',
+            title: 'Pablo Acosta',
+            description: 'Хореография Mejance',
           },
         },
       },
       {
         id: 16,
         start: '11:15',
-        end: '13:45',
+        end: '13:15',
         type: 'workshop',
         translations: {
           en: {
-            title: 'Alex Delora',
+            title: 'Aliah',
             description: 'Drum\u00A0solo choreography',
           },
           ru: {
-            title: 'Alex Delora',
+            title: 'Aliah',
             description: 'Хореография Drum\u00A0solo',
           },
         },
       },
       {
         id: 17,
-        start: '15:00',
+        start: '15:30',
         type: 'contest',
         translations: {
           en: {
-            title: 'Competition part 2',
+            title: 'Competition (Adults semi-professionals, Professionals)',
           },
           ru: {
-            title: 'Конкурс часть 2',
+            title: 'Конкурс (Взрослые продолжающие, Профессионалы)',
           },
         },
       },

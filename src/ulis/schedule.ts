@@ -265,10 +265,10 @@ export const schedule: Day[] = [
         type: 'contest',
         translations: {
           en: {
-            title: 'Competition (Baby, Kids, Juniors, Adults beginners)',
+            title: 'Competition part 1',
           },
           ru: {
-            title: 'Конкурс (Беби, Дети, Юниоры, Взрослые начинающие)',
+            title: 'Конкурс часть 1',
           },
         },
       },
@@ -322,10 +322,10 @@ export const schedule: Day[] = [
         type: 'contest',
         translations: {
           en: {
-            title: 'Competition (Adults semi-professionals, Professionals)',
+            title: 'Competition part 2',
           },
           ru: {
-            title: 'Конкурс (Взрослые продолжающие, Профессионалы)',
+            title: 'Конкурс часть 2',
           },
         },
       },

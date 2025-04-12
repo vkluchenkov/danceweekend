@@ -15,7 +15,7 @@
   },
   "competition": {
     "title": "Competition price",
-    "attention": "Attention! In order to take part in competition, you must have <0>Full Pass or at least 3 workshops</0>.",
+    "attention": "Attention! In order to take part in competition, you must have <0>Full Pass or at least 3 workshops (1 for baby or kids)</0>.",
     "attention2": "All the participants will receive photos and videos of their performances <0>FOR FREE</0>. Details on <1>Photo and video page</1>.",
     "categoryTitle": "Category",
     "kids": "Kids and baby solo",
@@ -35,7 +35,7 @@
   },
   "worldShow": {
     "title": "World show",
-    "attention": "Attention! To participate in World show, you must have <0>Full Pass or at least 3 workshops</0>.",
+    "attention": "Attention! To participate in World show, you must have <0>Full Pass or at least 3 workshops (1 for baby or kids)</0>.",
     "soloNormal": "Solo performance without Full Pass",
     "soloDiscounted": "Solo performance with Full Pass",
     "groups": "Groups and duos",

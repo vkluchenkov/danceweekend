@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
@@ -10,8 +10,33 @@ import { contestCategories } from '@/src/ulis/contestCategories';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Rules.module.css';
 import { SupportedLangs } from '@/src/types';
-import { motionVariants } from '@/src/ulis/constants';
-import { useMemo } from 'react';
+import {
+  groupsLimit,
+  motionVariants,
+  soloLimit,
+  soloProfessionalsLimit,
+} from '@/src/ulis/constants';
+import { useEffect, useMemo, useState } from 'react';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { WordpressApi } from '@/src/api/wordpressApi';
+import { DateTime } from 'luxon';
+import { formatTime } from '@/src/ulis/formatTime';
+
+export const getStaticProps: GetStaticProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['settings'],
+    queryFn: WordpressApi.getSettings,
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: 30,
+  };
+};
 
 const ContestRules: NextPage = () => {
   const { t, lang } = useTranslation('competitionRules');
@@ -35,6 +60,18 @@ const ContestRules: NextPage = () => {
       ]}
     />
   );
+
+  const { data, isLoading, status, error } = useQuery({
+    queryKey: ['settings'],
+    queryFn: WordpressApi.getSettings,
+    refetchOnMount: false,
+  });
+
+  const [contestSettings, setContestSettings] = useState(data?.price.contest);
+
+  useEffect(() => {
+    if (data?.price.contest) setContestSettings(data.price.contest);
+  }, [data]);
 
   const getCatsList = useMemo(
     () =>
@@ -72,9 +109,17 @@ const ContestRules: NextPage = () => {
     [currentLang, t]
   );
 
+  const changeDate = DateTime.fromISO(contestSettings?.from!)
+    .setZone('UTC')
+    .setZone('Europe/Warsaw', { keepLocalTime: true })
+    .setLocale('pl')
+    .toLocaleString();
+
   const commonContent = (
     <>
-      <p className={textStyles.p}>{t('version', { version: '5', date: '15.08.2024' })}</p>
+      <p className={textStyles.p}>
+        {t('version', { version: contestSettings?.version, date: changeDate })}
+      </p>
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
       <p className={textStyles.p}>{t('attentionText')}</p>
@@ -84,8 +129,15 @@ const ContestRules: NextPage = () => {
       {getCatsList}
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>2. {t('timingTitle')}</h2>
-      <p className={textStyles.p}>{t('timingSolo')}</p>
-      <p className={textStyles.p}>{t('timingGroups')}</p>
+      <p className={textStyles.p}>
+        {t('timingSolo')} {formatTime(soloLimit)}
+      </p>
+      <p className={textStyles.p}>
+        {t('timingProfessionals')} {formatTime(soloProfessionalsLimit)}
+      </p>
+      <p className={textStyles.p}>
+        {t('timingGroups')} {formatTime(groupsLimit)}
+      </p>
     </>
   );
 

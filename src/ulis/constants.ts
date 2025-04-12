@@ -12,15 +12,19 @@ export const adultsMinAge = 16;
 export const adultsMaxAge = 39;
 
 // Minimum numbers of workshops to be eligible for compatition or World Show
-// export const minWsKids = 1;
-// export const minWsAdults = 3;
+export const minWsKids = 1;
+export const minWsAdults = 3;
+
+// Number of performances for solo pass to be profitable (blocks the form if less)
+export const minSoloPass = 4;
 
 // Maximum number of groups to register for one person
 export const maxGroups = 3;
 
 // Music limits (sec)
-export const soloLimit = 180;
-export const groupsLimit = 210;
+export const soloLimit = 210;
+export const soloProfessionalsLimit = 240;
+export const groupsLimit = 240;
 export const worldShowLimit = 240;
 export const margin = 1.1; //percent
 
@@ -36,9 +40,6 @@ export const senderName = 'Dance Weekend in Warsaw festival';
 
 // talegram
 export const telegramUrl = 'https://t.me/+eu_0k5Miq0JjMjE0';
-
-// Revolut payment link
-export const revolutUrl = 'https://revolut.me/aliahbellydance/eur/';
 
 // Social links
 export const facebookUrl = 'https://www.facebook.com/danceweekendwarsaw';
@@ -69,3 +70,6 @@ export const darkTheme = createTheme({
 });
 
 export const currencySymbol = '€';
+
+type CurrencyCodes = 'PLN' | 'EUR';
+export const currencyCode: CurrencyCodes = 'EUR';

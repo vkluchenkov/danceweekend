@@ -50,6 +50,7 @@ export interface FormFields {
   tel: string;
   workshops: WorkshopsField;
   workshopsType: WorkshopsType;
+  wsPrices: WsPrices | undefined;
   isFullPass: boolean;
   fullPassDiscount: FullPassDiscount;
   fullPassDiscountSource: string;
@@ -89,6 +90,17 @@ export interface StepProps {}
 
 export type PersonalStepProps = StepProps & {
   setIsNextDisabled: (state: boolean) => void;
+};
+
+export type WsPrices = {
+  group1: {
+    names: string;
+    price: number;
+  };
+  group2: {
+    names: string;
+    price: number;
+  };
 };
 
 export type WorkshopsStepProps = StepProps & {

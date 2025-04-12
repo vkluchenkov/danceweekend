@@ -7,7 +7,6 @@ import React, { useCallback } from 'react';
 import { SupportedLangs } from '@/src/types';
 import { InputCheckbox } from '@/src/ui-kit/input/InputCheckbox';
 import { FormFields } from './types';
-import { singleWsPrice } from '@/src/ulis/price';
 import textStyles from '@/styles/Text.module.css';
 
 interface WorkshopsSingleProps {
@@ -29,7 +28,7 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = () => {
   const currentLang = lang as SupportedLangs;
 
   const watchWorkshops = watch('workshops');
-  const version = watch('version');
+  const wsPrices = watch('wsPrices');
 
   const controlledFields = fields.map((field, index) => {
     return {
@@ -52,7 +51,7 @@ export const WorkshopsList: React.FC<WorkshopsSingleProps> = () => {
 
   const workshops = uniqueDays.map((day) => {
     const workshopsInputs = controlledFields.map((ws) => {
-      const price = singleWsPrice[version];
+      const price = wsPrices?.[ws.teachersPriceGroup].price;
       if (ws.day === day)
         return (
           <FormControlLabel

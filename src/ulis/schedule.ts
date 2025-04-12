@@ -11,6 +11,7 @@ export interface Workshop {
     };
   };
   type: 'workshop';
+  teachersPriceGroup: 'group1' | 'group2';
 }
 
 interface OtherEvent {
@@ -76,6 +77,7 @@ export const schedule: Day[] = [
             description: 'Хореография Drum\u00A0solo',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 3,
@@ -92,6 +94,7 @@ export const schedule: Day[] = [
             description: 'Будет объявлено позже',
           },
         },
+        teachersPriceGroup: 'group2',
       },
       {
         id: 4,
@@ -108,6 +111,7 @@ export const schedule: Day[] = [
             description: 'Хореография Shaabi',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 5,
@@ -124,6 +128,7 @@ export const schedule: Day[] = [
             description: 'Хореография Flamenco fusion',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 6,
@@ -167,6 +172,7 @@ export const schedule: Day[] = [
             description: 'Хореография Pop song',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 8,
@@ -183,6 +189,7 @@ export const schedule: Day[] = [
             description: 'Грациозные руки и выразительные кисти',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 9,
@@ -199,6 +206,7 @@ export const schedule: Day[] = [
             description: 'Live tabla импровизация (практика)',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 11,
@@ -242,6 +250,7 @@ export const schedule: Day[] = [
             description: 'Хореография Classical oriental',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 13,
@@ -258,6 +267,7 @@ export const schedule: Day[] = [
             description: 'Хореография Baladi',
           },
         },
+        teachersPriceGroup: 'group2',
       },
       {
         id: 14,
@@ -299,6 +309,7 @@ export const schedule: Day[] = [
             description: 'Хореография Mejance',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 16,
@@ -315,6 +326,7 @@ export const schedule: Day[] = [
             description: 'Хореография Drum\u00A0solo',
           },
         },
+        teachersPriceGroup: 'group1',
       },
       {
         id: 17,

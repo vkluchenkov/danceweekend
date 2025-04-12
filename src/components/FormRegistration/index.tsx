@@ -30,8 +30,8 @@ import { Summary } from './Summary';
 import { StepsNavigation } from './StepsNavigation';
 import { Loader } from '../Loader';
 import { WordpressApi } from '@/src/api/wordpressApi';
-import { kidsDiscount } from '@/src/ulis/price';
-import { defaultValues, liveSteps, onlineSteps } from './helpers';
+import { groupDiscount, kidsDiscount, p30Discount, p50Discount } from '@/src/ulis/price';
+import { defaultValues, getWsPrices, liveSteps, onlineSteps } from './helpers';
 import { schedule } from '@/src/ulis/schedule';
 
 interface FormRegistrationProps {
@@ -126,6 +126,11 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
     setValue('contestAgeGroup', initialAgeGroup);
     setValue('ageGroup', initialAgeGroup);
   }, [initialAgeGroup, setValue]);
+
+  // Write workshops prices into form state
+  useEffect(() => {
+    setValue('wsPrices', getWsPrices(settings, isDev));
+  }, [settings, isDev, setValue]);
 
   // Map solo contest styles and levels into form state
   useEffect(() => {
@@ -243,12 +248,8 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
         const livePromo = isDev
           ? settings.price.promoPeriodDev.isLivePromo.toLowerCase()
           : settings.price.promoPeriod.isLivePromo.toLowerCase();
-        const onlinePromo = isDev
-          ? settings.price.promoPeriodDev.isOnlinePromo.toLowerCase()
-          : settings.price.promoPeriod.isOnlinePromo.toLowerCase();
 
-        if (version === 'live') return livePromo === 'true' ? true : false;
-        else return onlinePromo === 'true' ? true : false;
+        return livePromo === 'true' ? true : false;
       };
 
       const periods = Object.entries(settings.price.periods);
@@ -269,50 +270,54 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
         })?.[1].price;
 
         const promoPrice = isDev
-          ? settings.price.promoPeriodDev.price[version]
-          : settings.price.promoPeriod.price[version];
+          ? settings.price.promoPeriodDev.price.live
+          : settings.price.promoPeriod.price.live;
 
-        const currentPrice: number | undefined = isPromo() ? promoPrice : periodPrice![version];
+        const currentPrice: number | undefined = isPromo() ? promoPrice : periodPrice!.live;
 
         // Kids discount for live version
-        if (version === 'live' && (ageGroup === 'baby' || ageGroup === 'kids') && currentPrice)
+        if ((ageGroup === 'baby' || ageGroup === 'kids') && currentPrice)
           return Number.parseFloat((currentPrice * kidsDiscount).toFixed(2));
         else return currentPrice;
       };
 
       // additional discounts (certificates, etc.)
       if (fullPassDiscount === 'group' && basePrice())
-        return Number.parseFloat((basePrice()! * 0.8).toFixed(2));
+        return Number.parseFloat((basePrice()! * groupDiscount).toFixed(2));
 
       if (fullPassDiscount === '30%' && basePrice())
-        return Number.parseFloat((basePrice()! * 0.7).toFixed(2));
+        return Number.parseFloat((basePrice()! * p30Discount).toFixed(2));
 
       if (fullPassDiscount === '50%' && basePrice())
-        return Number.parseFloat((basePrice()! * 0.5).toFixed(2));
+        return Number.parseFloat((basePrice()! * p50Discount).toFixed(2));
       if (fullPassDiscount === 'free') return 0;
       else return basePrice();
     } else return undefined;
-  }, [ageGroup, settings, fullPassDiscount, version, isDev]);
+  }, [ageGroup, settings, fullPassDiscount, isDev]);
 
   const fullPassDiscountList: FullPassDiscount[] = useMemo(() => {
-    // Kids and baby can't have less than 100% discount in live version due to automatic 50%
-    if (version === 'live')
-      return ageGroup === 'baby' || ageGroup === 'kids'
-        ? ['none', 'free']
-        : ['none', 'group', '30%', '50%', 'free'];
-    // No group discounts for online
-    else return ['none', '30%', '50%', 'free'];
-  }, [ageGroup, version]);
+    // Kids and baby can't have less than 50% discount in live version due to automatic 30%
+    return ageGroup === 'baby' || ageGroup === 'kids'
+      ? ['none', '50%', 'free']
+      : ['none', 'group', '30%', '50%', 'free'];
+  }, [ageGroup]);
 
   const soloPassPrice = useMemo(() => {
-    const priceKids = settings?.price.contest?.contestsoloprice?.soloPassKids!;
-    const priceRisingStar = settings?.price.contest?.contestsoloprice?.soloPassRisingStar!;
-    const priceProfessionals = settings?.price.contest?.contestsoloprice?.soloPassProfessionals!;
+    const soloPriceFullPass = settings?.price.contest?.contestsoloprice!;
+    const soloPriceWithoutFullPass = settings?.price.contest?.contestsolopricewithoutfullpass!;
+
+    const priceKids = isFullPass ? soloPriceFullPass.kids : soloPriceWithoutFullPass.kids;
+    const priceRisingStar = isFullPass
+      ? soloPriceFullPass.risingstar
+      : soloPriceWithoutFullPass.risingstar;
+    const priceProfessionals = isFullPass
+      ? soloPriceFullPass.professionals
+      : soloPriceWithoutFullPass.professionals;
 
     if (ageGroup === 'baby' || ageGroup === 'kids') return priceKids;
     if (contestLevel === 'professionals') return priceProfessionals;
     return priceRisingStar;
-  }, [ageGroup, settings, contestLevel]);
+  }, [ageGroup, settings, contestLevel, isFullPass]);
 
   return (
     <FormProvider {...methods}>

@@ -1,26 +1,42 @@
 query getSettings {
-  page(id: "settings", idType: URI) {
+  page(id: "settings-dww-2025", idType: URI) {
     title
-    settingsDww {
+    settingsdww25 {
       price {
         promoPeriod {
           isLivePromo
-          isOnlinePromo
-          ru
-          en
           price {
             live
-            online
+          }
+          ru
+          en
+          singlews {
+            group1 {
+              names
+              price
+            }
+            group2 {
+              names
+              price
+            }
           }
         }
         promoPeriodDev {
           isLivePromo
-          isOnlinePromo
-          ru
-          en
           price {
             live
-            online
+          }
+          ru
+          en
+          singlews {
+            group1 {
+              names
+              price
+            }
+            group2 {
+              names
+              price
+            }
           }
         }
         periods {
@@ -29,7 +45,16 @@ query getSettings {
             end
             price {
               live
-              online
+            }
+            singlews {
+              group1 {
+                names
+                price
+              }
+              group2 {
+                names
+                price
+              }
             }
           }
           pricePeriod2 {
@@ -37,7 +62,16 @@ query getSettings {
             end
             price {
               live
-              online
+            }
+            singlews {
+              group1 {
+                names
+                price
+              }
+              group2 {
+                names
+                price
+              }
             }
           }
           pricePeriod3 {
@@ -45,24 +79,44 @@ query getSettings {
             end
             price {
               live
-              online
+            }
+            singlews {
+              group1 {
+                names
+                price
+              }
+              group2 {
+                names
+                price
+              }
             }
           }
         }
         contest {
           contestsoloprice {
             kids
-            risingstar
             professionals
+            risingstar
             soloPassKids
-            soloPassRisingStar
             soloPassProfessionals
+            soloPassRisingStar
           }
+          contestsolopricewithoutfullpass {
+            kids
+            professionals
+            risingstar
+            soloPassKids
+            soloPassProfessionals
+            soloPassRisingStar
+          }
+          from
+          version
           contestGroupPrice
         }
         worldShow {
+          solofullpass
+          solowithoutfullpass
           groups
-          solo
         }
       }
       registrationState {

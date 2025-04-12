@@ -1,5 +1,5 @@
 query getCTA {
-  page(id: "settings", idType: URI) {
+  page(id: "settings-dww-2025", idType: URI) {
     title
     cta {
       en {

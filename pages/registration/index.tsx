@@ -45,23 +45,6 @@ const Registration: NextPage = () => {
     if (data?.registrationState) setRegState(data.registrationState);
   }, [data]);
 
-  const switcher = useMemo(() => {
-    return (
-      <Switcher
-        value={version}
-        option1={{
-          value: 'live',
-          label: t('live'),
-        }}
-        option2={{
-          value: 'online',
-          label: t('online'),
-        }}
-        onClick={(value) => setVersion(value)}
-      />
-    );
-  }, [t, version]);
-
   // check the settings for dev and production env whether to open or close forms
   const isLiveRegOpen = useMemo(() => {
     if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'development')
@@ -71,28 +54,13 @@ const Registration: NextPage = () => {
     else return false;
   }, [regState]);
 
-  const isOnlineRegOpen = useMemo(() => {
-    if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'development')
-      return regState?.isOnlineOpenDev.toLowerCase() === 'true' ? true : false;
-    if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'production')
-      return regState?.isOnlineOpen.toLowerCase() === 'true' ? true : false;
-    else return false;
-  }, [regState]);
-
   return (
     <Layout title={t('pageTitle')}>
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
-      {switcher}
       <section className={styles.section}>
         {version === 'live' && !isLiveRegOpen && <h1>{t('liveClosed')}</h1>}
-        {version === 'online' && !isOnlineRegOpen && <h1>{t('onlineClosed')}</h1>}
         <ThemeProvider theme={darkTheme}>
-          {version === 'live' && isLiveRegOpen && (
-            <FormRegistration version={version} priceData={data} />
-          )}
-          {version === 'online' && isOnlineRegOpen && (
-            <FormRegistration version={version} priceData={data} />
-          )}
+          {isLiveRegOpen && <FormRegistration version={version} priceData={data} />}
         </ThemeProvider>
       </section>
     </Layout>

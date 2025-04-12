@@ -3,9 +3,10 @@
   "dateTitle": "Date and time",
   "description": "All the participants of Dance Weekend in Warsaw have a unique opportunity to dance on our main stage during the World Show in open stage format!",
   "conditionsTitle": "Conditions for participants:",
-  "conditionsGeneral": "To take part in World Show all the participants are required to have Full pass or at least 3 workshops.",
+  "conditionsGeneral": "To take part in World Show all the participants are required to have Full pass or at least 3 workshops (1 for kids and baby).",
   "attentionText2": "All the participants will receive photos and videos of their performances <0>FOR FREE</0>. Details on <1>Photo and video page</1>.",
-  "conditionsSolo": "Price for solo performance:",
+  "conditionsSoloFP": "Price for solo performance with Full Pass:",
+  "conditionsSoloNoFP": "Price for solo performance without Full Pass:",
   "conditionsGroup": "Price for group performance:",
   "perPerson": "per person.",
   "musicLimit": "Music limit for the participants:"

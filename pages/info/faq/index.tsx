@@ -36,7 +36,7 @@ const FAQ: NextPage = () => {
         <p className={textStyles.p}>{t('description')}</p>
 
         <StyledAccordeon summary={t('q1')} details={<p className={textStyles.p}>{a1}</p>} />
-        <StyledAccordeon summary={t('q2')} details={<p className={textStyles.p}>{a2}</p>} />
+        {/* <StyledAccordeon summary={t('q2')} details={<p className={textStyles.p}>{a2}</p>} /> */}
         <StyledAccordeon summary={t('q3')} details={<p className={textStyles.p}>{a3}</p>} />
         <StyledAccordeon summary={t('q4')} details={<p className={textStyles.p}>{t('a4')}</p>} />
       </section>

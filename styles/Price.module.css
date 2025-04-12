@@ -114,7 +114,7 @@
   }
 
   .table__row {
-    grid-template-columns: 4fr minmax(200px, 1fr) minmax(200px, 1fr);
+    grid-template-columns: 4fr minmax(200px, 2fr) minmax(200px, 2fr);
   }
 
   .table__cell {

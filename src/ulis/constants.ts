@@ -67,3 +67,5 @@ export const darkTheme = createTheme({
     fontFamily: montserrat.style.fontFamily,
   },
 });
+
+export const currencySymbol = '€';

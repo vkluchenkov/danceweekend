@@ -4,15 +4,14 @@ import { SoloPriceCats } from '@/src/types';
 // export const isOnlinePromoPeriod = false;
 
 export const isFullPassSoldOut = false;
-export const isOnlineFullPassSoldOut = false;
 
-export const kidsDiscount = 0.5;
+export const kidsDiscount = 0.7;
 export const kidsMaxAge = 11;
 
-export const singleWsPrice = {
-  live: 65,
-  online: 45,
-};
+// export const singleWsPrice = {
+//   live: 65,
+//   online: 45,
+// };
 
 // export const contestSoloPrice: Record<SoloPriceCats, number> = {
 //   kids: 25,

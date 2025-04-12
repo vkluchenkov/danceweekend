@@ -205,7 +205,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       ...data,
       fullPassPrice: fullPassPrice,
       currentLang: currentLang,
-      soloPassPrice: soloPassPrice,
+      soloPassPrice: getSoloPassPrice(),
       total: total,
     };
 
@@ -273,12 +273,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
           ? settings.price.promoPeriodDev.price.live
           : settings.price.promoPeriod.price.live;
 
-        const currentPrice: number | undefined = isPromo() ? promoPrice : periodPrice!.live;
-
-        // Kids discount for live version
-        if ((ageGroup === 'baby' || ageGroup === 'kids') && currentPrice)
-          return Number.parseFloat((currentPrice * kidsDiscount).toFixed(2));
-        else return currentPrice;
+        return isPromo() ? promoPrice : periodPrice!.live;
       };
 
       // additional discounts (certificates, etc.)
@@ -291,6 +286,10 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       if (fullPassDiscount === '50%' && basePrice())
         return Number.parseFloat((basePrice()! * p50Discount).toFixed(2));
       if (fullPassDiscount === 'free') return 0;
+
+      // Kids discount
+      if ((ageGroup === 'baby' || ageGroup === 'kids') && basePrice())
+        return Number.parseFloat((basePrice()! * kidsDiscount).toFixed(2));
       else return basePrice();
     } else return undefined;
   }, [ageGroup, settings, fullPassDiscount, isDev]);
@@ -302,22 +301,19 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       : ['none', 'group', '30%', '50%', 'free'];
   }, [ageGroup]);
 
-  const soloPassPrice = useMemo(() => {
-    const soloPriceFullPass = settings?.price.contest?.contestsoloprice!;
-    const soloPriceWithoutFullPass = settings?.price.contest?.contestsolopricewithoutfullpass!;
+  const getSoloPassPrice = () => {
+    const soloPrice = isFullPass
+      ? settings?.price.contest?.contestsoloprice!
+      : settings?.price.contest?.contestsolopricewithoutfullpass!;
 
-    const priceKids = isFullPass ? soloPriceFullPass.kids : soloPriceWithoutFullPass.kids;
-    const priceRisingStar = isFullPass
-      ? soloPriceFullPass.risingstar
-      : soloPriceWithoutFullPass.risingstar;
-    const priceProfessionals = isFullPass
-      ? soloPriceFullPass.professionals
-      : soloPriceWithoutFullPass.professionals;
+    const priceKids = soloPrice.kids;
+    const priceRisingStar = soloPrice.risingstar;
+    const priceProfessionals = soloPrice.professionals;
 
     if (ageGroup === 'baby' || ageGroup === 'kids') return priceKids;
     if (contestLevel === 'professionals') return priceProfessionals;
     return priceRisingStar;
-  }, [ageGroup, settings, contestLevel, isFullPass]);
+  };
 
   return (
     <FormProvider {...methods}>
@@ -370,7 +366,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
             >
               <ContestSolo
                 setStepTotal={setContestSoloTotal}
-                soloPassPrice={soloPassPrice}
+                soloPassPrice={getSoloPassPrice()}
                 setIsNextDisabled={setIsNextDisabled}
                 isEligible={isEligeble}
               />
@@ -424,7 +420,7 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
             >
               <Summary
                 fullPassPrice={fullPassPrice}
-                soloPassPrice={soloPassPrice}
+                soloPassPrice={getSoloPassPrice()}
                 total={total}
                 setIsNextDisabled={setIsNextDisabled}
               />

@@ -19,7 +19,7 @@ const partnersList: PartnersList[] = [
   },
   {
     image: '/images/partners/championship.svg',
-    description: 'Open Bellydance Chamionship of Poland logo',
+    description: 'Open Bellydance Chamionship logo',
     url: 'https://championship.dance',
     width: 128,
     height: 110,
@@ -38,13 +38,13 @@ const partnersList: PartnersList[] = [
     width: 63,
     height: 100,
   },
-  {
-    image: '/images/partners/Leila_Logo_Lounge.png',
-    description: 'Leila mezzze and lounge restaurant',
-    url: 'https://restauracjaleila.pl/en/',
-    width: 232,
-    height: 130,
-  },
+  // {
+  //   image: '/images/partners/Leila_Logo_Lounge.png',
+  //   description: 'Leila mezzze and lounge restaurant',
+  //   url: 'https://restauracjaleila.pl/en/',
+  //   width: 232,
+  //   height: 130,
+  // },
 ];
 
 export const Partners: React.FC = () => {

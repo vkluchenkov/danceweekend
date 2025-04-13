@@ -25,7 +25,7 @@
   .partners {
     flex-direction: row;
     row-gap: 20px;
-    column-gap: 25px;
+    column-gap: 30px;
     flex-wrap: wrap;
   }
 

@@ -116,9 +116,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, title, isHome, imageRe
           content={title ? title + ' – Dance Weekend in Warsaw' : 'Dance Weekend in Warsaw'}
         />
         <meta name='og:description' content='International bellydance festival' />
-        <meta name='og:image' content='/images/social_poster_2024.jpg' />
+        <meta name='og:image' content='/images/DWW25_KV1.jpg' />
         <meta name='og:image:width' content='1500' />
-        <meta name='og:image:height' content='1500' />
+        <meta name='og:image:height' content='1875' />
         <link rel='icon' href='/images/favicon.png' />
       </Head>
       <Header isHome={isHome} mainHomeRef={mainHomeRef} mainRef={mainRef} lineRef={lineRef} />

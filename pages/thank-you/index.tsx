@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Thanks.module.css';
-import { revolutUrl, telegramUrl } from '@/src/ulis/constants';
+import { telegramUrl } from '@/src/ulis/constants';
 
 const ThankYou: NextPage = () => {
   const { t, lang } = useTranslation('thank-you');
@@ -33,15 +33,6 @@ const ThankYou: NextPage = () => {
   const iban = (
     <Trans i18nKey='thank-you:iban' components={[<span className={textStyles.accent} key={1} />]} />
   );
-
-  // const revolut = (
-  //   <Trans
-  //     i18nKey='thank-you:revolutText'
-  //     components={[
-  //       <Link href={revolutUrl} target='_blank' className={textStyles.accent} key={1} />,
-  //     ]}
-  //   />
-  // );
 
   const music = (
     <Trans

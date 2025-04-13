@@ -17,7 +17,7 @@ import { renderReactToMjml } from './renderReactToMjml';
 import { OrderPayload } from '../components/FormRegistration/types';
 import { defaultUrl, telegramUrl } from '../ulis/constants';
 import { contestCategories } from '../ulis/contestCategories';
-import { singleWsPrice } from '../ulis/price';
+// import { singleWsPrice } from '../ulis/price';
 
 interface registrationUserEmailProps {
   form: OrderPayload;
@@ -155,14 +155,14 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
     }
     if (workshops.length) {
       const wsList = workshops.map((ws) => {
-        const price = singleWsPrice[form.version];
+        // const price = singleWsPrice[form.version];
         return (
           <li key={ws.id} style={{ margin: '0 0 10px' }}>
             <span style={{ color: accentColor }}>{ws.translations[form.currentLang].title}</span>
             <br />
             {ws.translations[form.currentLang].description}
             <br />
-            <span style={{ color: accentColor }}>{price}€</span>
+            {/* <span style={{ color: accentColor }}>{price}€</span> */}
           </li>
         );
       });
@@ -317,7 +317,9 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
           {form.isWorldShowSolo && (
             <MjmlText mj-class='text'>
               {t('form.worldShow.solo')}:{' '}
-              <span style={{ color: accentColor }}>{form.settings?.price.worldShow?.solo}€</span>
+              <span style={{ color: accentColor }}>
+                {form.settings?.price.worldShow?.solofullpass}€
+              </span>
             </MjmlText>
           )}
 

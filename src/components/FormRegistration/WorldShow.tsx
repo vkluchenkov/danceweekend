@@ -34,7 +34,7 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
 
   // Calculate step total
   useEffect(() => {
-    const solo = isWorldShowSolo ? settings?.price.worldShow?.solo! : 0;
+    const solo = isWorldShowSolo ? settings?.price.worldShow?.solofullpass! : 0;
     const group = worldShowGroup?.price ? worldShowGroup.price : 0;
     setStepTotal(solo + group);
   }, [isWorldShowSolo, worldShowGroup?.price, settings, setStepTotal]);
@@ -72,7 +72,9 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
             label={
               <p className={textStyles.p}>
                 {t('form.worldShow.solo')}:{' '}
-                <span className={textStyles.accent}>{settings?.price.worldShow?.solo!}€</span>
+                <span className={textStyles.accent}>
+                  {settings?.price.worldShow?.solofullpass!}€
+                </span>
               </p>
             }
           />

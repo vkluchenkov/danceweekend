@@ -11,7 +11,7 @@ import { SummaryStepProps, FormFields } from './types';
 import { SupportedLangs } from '@/src/types';
 import { FormInputCheckbox } from '@/src/ui-kit/input';
 import { contestCategories } from '@/src/ulis/contestCategories';
-import { singleWsPrice } from '@/src/ulis/price';
+// import { singleWsPrice } from '@/src/ulis/price';
 import { defaultUrl } from '@/src/ulis/constants';
 
 export const Summary: React.FC<SummaryStepProps> = ({
@@ -44,13 +44,9 @@ export const Summary: React.FC<SummaryStepProps> = ({
     const livePromo = isDev
       ? settings?.price.promoPeriodDev.isLivePromo.toLowerCase()
       : settings?.price.promoPeriod.isLivePromo.toLowerCase();
-    const onlinePromo = isDev
-      ? settings?.price.promoPeriodDev.isOnlinePromo.toLowerCase()
-      : settings?.price.promoPeriod.isOnlinePromo.toLowerCase();
 
-    if (version === 'live') return livePromo === 'true' ? true : false;
-    else return onlinePromo === 'true' ? true : false;
-  }, [settings, isDev, version]);
+    return livePromo === 'true' ? true : false;
+  }, [settings, isDev]);
 
   // translations with HTML
   const acceptRules = (
@@ -155,14 +151,14 @@ export const Summary: React.FC<SummaryStepProps> = ({
     }
     if (workshops.length) {
       const wsList = workshops.map((ws) => {
-        const price = singleWsPrice[form.version];
+        // const price = singleWsPrice[form.version];
         return (
           <li key={ws.id} className={styles.summary__group}>
             <span className={textStyles.accent}>{ws.translations[currentLang].title}</span>
             <br />
             {ws.translations[currentLang].description}
             <br />
-            <span className={textStyles.accent}>{price}€</span>
+            {/* <span className={textStyles.accent}>{price}€</span> */}
           </li>
         );
       });
@@ -324,7 +320,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
           {form.isWorldShowSolo && (
             <p className={textStyles.p}>
               {t('form.worldShow.solo')}:{' '}
-              <span className={textStyles.accent}>{settings?.price.worldShow?.solo!}€</span>
+              {/* <span className={textStyles.accent}>{settings?.price.worldShow?.solo!}€</span> */}
             </p>
           )}
 
@@ -344,7 +340,7 @@ export const Summary: React.FC<SummaryStepProps> = ({
           )}
         </>
       );
-  }, [form, t, settings]);
+  }, [form, t]);
 
   return (
     <div className={styles.form}>

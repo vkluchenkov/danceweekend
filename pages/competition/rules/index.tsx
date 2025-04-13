@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { useEffect, useMemo, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
@@ -22,7 +23,6 @@ import {
 import { WordpressApi } from '@/src/api/wordpressApi';
 import { formatTime } from '@/src/ulis/formatTime';
 import prize from 'public/images/Prize.png';
-import Image from 'next/image';
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();

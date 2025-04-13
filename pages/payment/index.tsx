@@ -15,7 +15,7 @@ import styles from '@/styles/Registration.module.css';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { PaymentFormFields } from '@/src/types/payment.types';
 import { Loader } from '@/src/components/Loader';
-import { darkTheme } from '@/src/ulis/constants';
+import { currencyCode, darkTheme } from '@/src/ulis/constants';
 import { config } from '@/src/config';
 
 const stripeKey = config.stripe.stripeKey;
@@ -79,7 +79,7 @@ const Payment: NextPage = () => {
       <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
 
       <section className={styles.section}>
-        <PayPalScriptProvider options={{ 'client-id': paypalClientId, currency: 'EUR' }}>
+        <PayPalScriptProvider options={{ clientId: paypalClientId, currency: 'EUR' }}>
           <ThemeProvider theme={darkTheme}>
             <FormProvider {...methods}>
               <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -151,10 +151,11 @@ const Payment: NextPage = () => {
                         return actions.order.create({
                           purchase_units: [
                             {
-                              amount: { value: value },
+                              amount: { currency_code: currencyCode, value: value },
                               description: 'Registration payment for ' + name,
                             },
                           ],
+                          intent: 'CAPTURE',
                           application_context: {},
                         });
                       else return '';

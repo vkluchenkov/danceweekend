@@ -1,9 +1,12 @@
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { useEffect, useMemo, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import { DateTime } from 'luxon';
 
 import { Layout } from '@/src/components/Layout';
 import { contestCategories } from '@/src/ulis/contestCategories';
@@ -16,11 +19,10 @@ import {
   soloLimit,
   soloProfessionalsLimit,
 } from '@/src/ulis/constants';
-import { useEffect, useMemo, useState } from 'react';
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { WordpressApi } from '@/src/api/wordpressApi';
-import { DateTime } from 'luxon';
 import { formatTime } from '@/src/ulis/formatTime';
+import prize from 'public/images/Prize.png';
+import Image from 'next/image';
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -151,6 +153,9 @@ const ContestRules: NextPage = () => {
       <p className={textStyles.p}>{t('limitationsText')}</p>
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>5. {t('prizesTitle')}</h2>
+
+      <Image src={prize} alt='' width={250} className={styles.prize} />
+
       <p className={textStyles.p}>{t('prizesMain')}</p>
       <p className={textStyles.p}>{t('prizesSolo')}</p>
       <p className={textStyles.p}>{t('prizesGroups')}</p>
@@ -164,20 +169,18 @@ const ContestRules: NextPage = () => {
 
   return (
     <Layout title={t('pageTitle')}>
-      <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
-      <section className={styles.section}>
-        <AnimatePresence>
-          <motion.div
-            initial='hidden'
-            animate='enter'
-            exit='exit'
-            variants={motionVariants}
-            transition={{ type: 'linear', duration: 0.3 }}
-          >
-            {liveContent}
-          </motion.div>
-        </AnimatePresence>
-      </section>
+      <AnimatePresence>
+        <motion.div
+          initial='hidden'
+          animate='enter'
+          exit='exit'
+          variants={motionVariants}
+          transition={{ type: 'linear', duration: 0.3 }}
+        >
+          <h1 className={textStyles.h1}>{t('pageTitle')}</h1>
+          <section className={styles.section}>{liveContent}</section>
+        </motion.div>
+      </AnimatePresence>
     </Layout>
   );
 };

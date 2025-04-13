@@ -65,7 +65,7 @@ export const schedule: Day[] = [
       {
         id: 2,
         start: '9:30',
-        end: '12:30',
+        end: '12:00',
         type: 'workshop',
         translations: {
           en: {
@@ -87,11 +87,11 @@ export const schedule: Day[] = [
         translations: {
           en: {
             title: 'Dariya Babak',
-            description: 'TBA',
+            description: 'Iraqi choreography',
           },
           ru: {
             title: 'Дарья Бабак',
-            description: 'Будет объявлено позже',
+            description: 'Хореография Iraqi',
           },
         },
         teachersPriceGroup: 'group2',
@@ -137,11 +137,11 @@ export const schedule: Day[] = [
         translations: {
           en: {
             title: 'World show',
-            description: 'Gala show with festival\u00A0participants',
+            description: 'Gala show with festival\u00A0participants. Free entrance',
           },
           ru: {
             title: 'World show',
-            description: 'Гала шоу с\u00A0участницами фестиваля',
+            description: 'Гала шоу с\u00A0участницами фестиваля. Вход свободный',
           },
         },
       },
@@ -194,7 +194,7 @@ export const schedule: Day[] = [
       {
         id: 9,
         start: '14:30',
-        end: '17:30',
+        end: '17:00',
         type: 'workshop',
         translations: {
           en: {
@@ -215,11 +215,11 @@ export const schedule: Day[] = [
         translations: {
           en: {
             title: 'Arabic\u00A0Dreams gala\u00A0show',
-            description: 'with festival stars',
+            description: 'With festival stars. Free entrance',
           },
           ru: {
             title: 'Гала\u00A0шоу Arabic\u00A0Dreams',
-            description: 'со звездами фестиваля',
+            description: 'Cо звездами фестиваля. Вход свободный',
           },
         },
       },

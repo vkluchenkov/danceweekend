@@ -28,7 +28,8 @@
   margin: 0;
 }
 
-.cta__subtitle_accent {
+.cta__subtitle_accent,
+.cta__title_accent {
   color: var(--accent-text-color);
 }
 

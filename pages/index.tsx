@@ -13,6 +13,7 @@ import { Divider } from '@/src/ui-kit/Divider';
 import { Cta } from '@/src/components/CTA';
 import teachers from 'public/images/teachers.png';
 import teachers1Line from 'public/images/teachers_1_line.png';
+import prize from 'public/images/Prize.png';
 import { Schedule } from '@/src/components/Schedule';
 import { Partners } from '@/src/components/Partners';
 import { WordpressApi } from '@/src/api/wordpressApi';
@@ -39,9 +40,18 @@ export default function Home() {
 
   // Translations with HTML
   const welcomeTitle = <Trans i18nKey='home:welcomeTitle' components={[<br key={1} />]} />;
-  const welcomeText = (
+  const welcomeText1 = (
     <Trans
       i18nKey='home:welcomeText'
+      components={[
+        <p className={styles.content__text} key={0} />,
+        <span className={styles.content__text_accent} key={1} />,
+      ]}
+    />
+  );
+  const welcomeText2 = (
+    <Trans
+      i18nKey='home:welcomeText2'
       components={[
         <p className={styles.content__text} key={0} />,
         <span className={styles.content__text_accent} key={1} />,
@@ -64,7 +74,9 @@ export default function Home() {
         <Cta />
         <section className={styles.content}>
           <h1 className={styles.content__title}>{welcomeTitle}</h1>
-          {welcomeText}
+          {welcomeText1}
+          <Image src={prize} alt='' width={250} className={styles.prize} />
+          {welcomeText2}
         </section>
         <section className={styles.video}>
           <LiteYouTubeEmbed

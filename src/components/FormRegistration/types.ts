@@ -27,7 +27,16 @@ export type SoloContestField = (Style & { selected: boolean; id: string; price: 
 
 export type FullPassDiscount = 'group' | '30%' | '50%' | 'free' | 'none';
 
-export const yearsValues = ['2016', '2017', '2018', '2019', '2021', '2022', '2023'] as const;
+export const yearsValues = [
+  '2016',
+  '2017',
+  '2018',
+  '2019',
+  '2021',
+  '2022',
+  '2023',
+  '2024',
+] as const;
 
 export type yearsBefore = (typeof yearsValues)[number];
 
@@ -50,6 +59,7 @@ export interface FormFields {
   tel: string;
   workshops: WorkshopsField;
   workshopsType: WorkshopsType;
+  wsPrices: WsPrices | undefined;
   isFullPass: boolean;
   fullPassDiscount: FullPassDiscount;
   fullPassDiscountSource: string;
@@ -89,6 +99,17 @@ export interface StepProps {}
 
 export type PersonalStepProps = StepProps & {
   setIsNextDisabled: (state: boolean) => void;
+};
+
+export type WsPrices = {
+  group1: {
+    names: string;
+    price: number;
+  };
+  group2: {
+    names: string;
+    price: number;
+  };
 };
 
 export type WorkshopsStepProps = StepProps & {

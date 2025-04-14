@@ -9,10 +9,11 @@ import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/WorldShow.module.css';
 import worldShowLogo from '/public/images/world_show_logo.png';
-import { worldShowLimit } from '@/src/ulis/constants';
+import { currencySymbol, worldShowLimit } from '@/src/ulis/constants';
 import { WordpressApi } from '@/src/api/wordpressApi';
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
+import { formatTime } from '@/src/ulis/formatTime';
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
@@ -55,34 +56,43 @@ const WorldShow: NextPage = () => {
     />
   );
 
-  const formatTime = (time: number) => {
-    const min = Math.floor(time / 60);
-    const sec = Math.round(time % 60);
-    return `${min}:${sec < 10 ? '0' + sec : sec}`;
-  };
-
   const content = (
     <>
       <div className={styles.logoWrapper}>
         <Image src={worldShowLogo} alt={t('pageTitle')} fill />
       </div>
       <p className={textStyles.p}>
-        <span className={textStyles.accent}>{t('dateTitle')}:</span> 22.08.2024 / 20:00
+        <span className={textStyles.accent}>{t('dateTitle')}:</span> 21.08.2025 / 20:00
       </p>
       <p className={textStyles.p}>{t('description')}</p>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('conditionsTitle')}</h2>
       <p className={textStyles.p}>{t('conditionsGeneral')}</p>
       <p className={textStyles.p}>{attentionText2}</p>
       <p className={textStyles.p}>
-        {t('conditionsSolo')}
-        <span className={textStyles.accent}> {price?.worldShow?.solo}€</span>.
+        {t('conditionsSoloFP')}
+        <span className={textStyles.accent}>
+          {' '}
+          {price?.worldShow?.solofullpass}
+          {currencySymbol}
+        </span>
+        .
+      </p>
+      <p className={textStyles.p}>
+        {t('conditionsSoloNoFP')}
+        <span className={textStyles.accent}>
+          {' '}
+          {price?.worldShow?.solowithoutfullpass}
+          {currencySymbol}
+        </span>
+        .
       </p>
 
       <p className={textStyles.p}>
         {t('conditionsGroup')}{' '}
         <span className={textStyles.accent}>
           {' '}
-          {price?.worldShow?.groups}€ {t('perPerson')}
+          {price?.worldShow?.groups}
+          {currencySymbol} {t('perPerson')}
         </span>
       </p>
       <p className={textStyles.p}>

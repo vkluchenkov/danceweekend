@@ -50,7 +50,7 @@ class wordpressApi {
     const { page } = await this.request<GetSettingsQuery, GetSettingsQueryVariables>(
       GetSettingsDocument
     );
-    return page?.settingsDww;
+    return page?.settingsdww25;
   }
 
   public async getCta() {

@@ -30,9 +30,17 @@ export const CtaComponent: React.FC<CtaComponentProps> = ({
     />
   );
 
+  const formattedHeader = (
+    <Trans
+      i18nKey={''}
+      defaultTrans={header}
+      components={{ b: <span className={styles.cta__title_accent} key={1} /> }}
+    />
+  );
+
   return (
     <section className={styles.cta}>
-      <h2 className={styles.cta__title}>{header}</h2>
+      <h2 className={styles.cta__title}>{formattedHeader}</h2>
       <p className={clsx(styles.cta__subtitle)}>{formattedText}</p>
       {isBtnEnabled && (
         <button

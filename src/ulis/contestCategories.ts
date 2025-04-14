@@ -445,7 +445,7 @@ export const contestCategories: ContestCategory[] = [
   {
     age: '12-15',
     ageGroup: 'juniors',
-    description: 'descriptionJuniors',
+    // description: 'descriptionJuniors',
     levels: ['beginners', 'semi-pro', 'professionals'],
     translations: {
       en: {

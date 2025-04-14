@@ -3,7 +3,7 @@
   "live": "Live festival",
   "online": "Online festival",
   "onlineWarning": "Registration to online festival will be open later.",
-  "liveClosed": "Registration to live festival is closed, look at our social media for the announcements.",
+  "liveClosed": "Registration to the festival is closed, follow our social media for the announcements.",
   "onlineClosed": "Registration to online festival is closed, look at our social media for the announcements.",
   "form": {
     "common": {
@@ -37,7 +37,7 @@
       "fullPass": "Full Pass",
       "selectTitle": "Full Pass or one by one?",
       "fullPassDescription1": "It’s possible to buy workshops as a package — Full Pass or single workshops of your choice. ",
-      "fullPassDescription2Live": "Full Pass unlocks all the workshops, competition and World Show. You can pay for it in installments (except Promo tariff). Kids and Baby have 50% discount.",
+      "fullPassDescription2Live": "Full Pass unlocks all the workshops, access and discounts to competition and World Show. You can pay for it in installments (except Promo tariff). Kids and Baby have 30% discount.",
       "fullPassDescription2Online": "Full Pass unlocks access to all the workshops.",
       "fullPassDescriptionSoldOut": "Full Pass for this edition of our festival has been sold out. It is only possible to buy single workshops.",
       "singleWs": "Single workshops",

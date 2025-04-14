@@ -17,7 +17,7 @@ import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { SupportedLangs } from '@/src/types';
 import { schedule } from '@/src/ulis/schedule';
 import { WorkshopsList } from './WorkshopsList';
-import { singleWsPrice } from '@/src/ulis/price';
+// import { singleWsPrice } from '@/src/ulis/price';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   setStepTotal,
@@ -42,6 +42,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
   const isFullPass = watch('isFullPass');
   const workshops = watch('workshops');
   const workshopsType = watch('workshopsType');
+  const wsPrices = watch('wsPrices');
   const isFullPassDiscount = watch('fullPassDiscount');
   const version = watch('version');
 
@@ -74,10 +75,13 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
     if (isFullPass && fullPassPrice) {
       setStepTotal(fullPassPrice);
     } else if (!isFullPass && selectedWorkshops.length >= 1) {
-      const total = selectedWorkshops.reduce((acc, ws) => acc + singleWsPrice[version], 0);
+      const total = selectedWorkshops.reduce((acc, ws) => {
+        const price = wsPrices?.[ws.teachersPriceGroup].price;
+        return acc + price!;
+      }, 0);
       setStepTotal(total);
     } else setStepTotal(0);
-  }, [isFullPass, fullPassPrice, setStepTotal, selectedWorkshops, version]);
+  }, [isFullPass, fullPassPrice, setStepTotal, selectedWorkshops, wsPrices]);
 
   const handleFullPass = (event: React.ChangeEvent<HTMLInputElement>, value: WorkshopsType) => {
     setValue('isFullPass', value === 'fullPass', { shouldTouch: true });

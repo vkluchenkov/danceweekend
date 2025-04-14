@@ -7,7 +7,7 @@
   "criteria2": "Technique.",
   "criteria3": "Image: hair, make up, costume.",
   "criteria4": "Charisma / contact with audience.",
-  "criteria5": "Conformity of music.",
+  "criteria5": "Musicality.",
   "criteria6": "For duos / groups: Synchronization between dancers.",
   "place": "The rank from each judge is defined by the total points. The higher total score is, the better the rank is. In case of equal total score, it is allowed to have shared places (even in top-3).",
   "example": "Example",
@@ -24,6 +24,6 @@
   "tablaCriteria5": "Musicality (sense of rhythm).",
   "winnerPro": "The Absolute winner is decided by the sum of their ranks in all eligible categories. Whoever has lowest number wins.",
   "example4": "<0>Dancer A scored 1st places in all 4 Absolute winner categories. Her sum is 4.</0><0>Dancer B scored 2nd places in all 4 Absolute winner categories. Her sum is 8.</0><0>Dancer A wins.</0>",
-  "winnerProNote": "Considering the possibility of double places from the judges it is highly unlikely, but possible to have two dancers with the same average and the same places from judges. In this case the winner is defined by the Main Judge.",
-  "judgesLive": "Aida Bogomolova, Diana Gnatchenko, Alex Delora, Leandro Ferreyra, Levana, Mohanned Hawaz, Kate Ksenzova. Main judge: Aida Bogomolova. More judges may be announced later."
+  "winnerProNote": "Considering the possibility of double places from the judges it is highly unlikely, but possible to have two dancers with the same average and the same places from judges. In this case the winner is defined by the Main Judge points.",
+  "judgesLive": "Marta Korzun, Diana Gnatchenko, Pablo Acosta, Levana, Dariya Babak, Anna Danovskaya. Main judge: Diana Gnatchenko. More judges may be announced later."
 }

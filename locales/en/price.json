@@ -5,17 +5,17 @@
   "workshops": {
     "title": "Workshops",
     "singleTitle": "Single Workshops",
-    "description": "It’s possible to buy workshops as a package — FULL PASS, which gives you the right to visit all the festival workshops and opens access to the competition and the World Show or single workshops of your choice.",
+    "description": "It’s possible to buy workshops as a package — FULL PASS (gives you the right to visit ALL the festival workshops, open access and discounts to the competition and the World Show) or single workshops of your choice.",
     "promo": "Promo price",
     "fullPass": "Full Pass",
     "soldOut": "sold out",
-    "kidsDiscount": "Kids and baby age groups get 50% discount on Full Pass, applied automatically during the registration",
+    "kidsDiscount": "Kids and baby age groups get 30% discount on Full Pass, applied automatically during the registration",
     "groupOfferTitle": "Special offer for groups!",
-    "groupOfferText": "When you register a group of 3+ persons, each participant in this group is entitled to 20% discount for Full Pass (on condition that every person from this group buys Full Pass). Please, choose this discount during the registration. Discount can not be summarized with personal discounts or discounts for kids."
+    "groupOfferText": "When you register a group of 3+ persons, each participant in this group is entitled to 20% discount for Full Pass (on condition that every person from this group buys Full Pass). Сhoose this discount while filling the registration form. Discount can not be summarized with personal discounts or discounts for kids."
   },
   "competition": {
     "title": "Competition price",
-    "attention": "Attention! In order to take part in competition, you must have <0>Full Pass or at least 3 workshops</0>.",
+    "attention": "Attention! In order to take part in competition, you must have <0>Full Pass or at least 3 workshops (1 for baby or kids)</0>.",
     "attention2": "All the participants will receive photos and videos of their performances <0>FOR FREE</0>. Details on <1>Photo and video page</1>.",
     "categoryTitle": "Category",
     "kids": "Kids and baby solo",
@@ -30,13 +30,14 @@
     "soloPassProfessionals": "Professionals",
     "groups": "Groups and duos",
     "perPerson": "each dancer",
-    "price": "Price"
+    "priceFP": "with Full Pass",
+    "priceNoFP": "without Full Pass"
   },
   "worldShow": {
     "title": "World show",
-    "attention": "Attention! To participate in World show, you must have <0>Full Pass or at least 3 workshops</0>.",
-    "soloNormal": "Solo performance",
-    "soloDiscounted": "Solo performance (with Full Pass)",
+    "attention": "Attention! To participate in World show, you must have <0>Full Pass or at least 3 workshops (1 for baby or kids)</0>.",
+    "soloNormal": "Solo performance without Full Pass",
+    "soloDiscounted": "Solo performance with Full Pass",
     "groups": "Groups and duos",
     "perPerson": "per person"
   },
@@ -45,8 +46,8 @@
     "conditionsTitle": "Conditions",
     "conditionsText": "All the payments for the participation in the festival are non-refundable in any case, except for the cancellation of the festival. If you are not able to visit our festival, you are allowed to transfer your package to another person with mandatory notification of the organizers. In this case competition categories could be changed to other ones within the purchased package. Addition of new categories to this registration is possible only if there are free spots left.",
     "installmentsTitle": "Installments",
-    "installmentsText": "There is a possibility to pay for your registration in 2 installments. The first 50% should be paid right after the registration, the other 50% any time before 31.07.2024. Available for Full Pass holders only. Not available for Promo price period.",
-    "installmentsWarning": "In case if the second payment is failed to be transferred in due time, you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
+    "installmentsText": "There is a possibility to pay for your registration in 2 installments. The first 50% should be paid right after the registration, the other 50% can be paid at a place or any time before the festival. Available for Full Pass holders only. Not available for Promo price period.",
+    "installmentsWarning": "In case of not paying the second part, the first part is non-refundable.",
     "optionsTitle": "Payment options",
     "optionsDescription": "Details for the chosen payment options will be provided after the registration.",
     "optionsCards": "Credit / debit cards",
@@ -63,7 +64,7 @@
   "privacyPolicy": {
     "title": "Privacy policy and personal data",
     "p1": "We use your personal data provided during the registration ONLY in purposes related to your participation in our festival. We do not share this data with any 3rd party for any purpose.",
-    "p2": "Completing the registration to Dance Weekend in Warsaw you acknowledge and agree to be filmed and photographed for the marketing purposes of the festival and for the purposes of providing opportunity to every participant to buy photos and videos of their performances.",
+    "p2": "Completing the registration to Dance Weekend in Warsaw you acknowledge and agree to be filmed and photographed for the marketing purposes of the festival and for the purposes of providing opportunity to every participant to receive photos and videos of their performances.",
     "p3": "Completing the registration to Dance Weekend in Warsaw you also agree to be invited to a closed Telegram group for our participants. We will not send any marketing messages or messages not related to the festival. You can leave the group at any time or refuse to join. Beware that in this case you may not receive important information about the festival like schedule changes, competition information and other."
   }
 }

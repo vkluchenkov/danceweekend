@@ -118,6 +118,7 @@ const Price: NextPage = () => {
         </p>
 
         <h5 className={styles.period__singleTitle}>
+          {t('workshops.singleTitle')}:<br />
           {promoSingleWs?.group1.names}:{' '}
           <span className={textStyles.accent}>
             &nbsp;{promoSingleWs?.group1.price}
@@ -175,6 +176,7 @@ const Price: NextPage = () => {
               : `${t('workshops.fullPass')}: ${period[1].price.live}${currencySymbol}`}
           </p>
           <h5 className={styles.period__singleTitle}>
+            {t('workshops.singleTitle')}:<br />
             {period[1].singlews.group1.names}:{' '}
             <span className={textStyles.accent}>
               &nbsp;{period[1].singlews.group1.price}

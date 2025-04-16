@@ -11,7 +11,7 @@ import {
   MjmlText,
 } from '@faire/mjml-react';
 import { Translate } from 'next-translate';
-import { defaultUrl } from '../ulis/constants';
+import { currencySymbol, defaultUrl } from '../ulis/constants';
 import { renderReactToMjml } from './renderReactToMjml';
 import { PaymentFormFields } from '../types/payment.types';
 
@@ -53,7 +53,11 @@ export const paymentAdminEmail = (props: registrationUserEmailProps) => {
     if (i.key === 'qty')
       return (
         <li key={i.key}>
-          {t(`form.${i.key}`)}: <span style={{ color: accentColor }}>{value.trim()}€</span>
+          {t(`form.${i.key}`)}:{' '}
+          <span style={{ color: accentColor }}>
+            {value.trim()}
+            {currencySymbol}
+          </span>
         </li>
       );
 

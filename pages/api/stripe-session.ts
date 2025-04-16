@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { PaymentFormFields } from '@/src/types/payment.types';
 import { config } from '@/src/config';
+import { currencyCode } from '@/src/ulis/constants';
 
 // @ts-ignore
 const stripe = new Stripe(config.stripe.stripeSecretKey, { apiVersion: null });
@@ -15,7 +16,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const item = {
     price_data: {
-      currency: 'eur',
+      currency: currencyCode,
       product_data: {
         name,
       },

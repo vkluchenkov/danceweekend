@@ -37,6 +37,7 @@ export const ContestSoloList: React.FC = () => {
   const settings = watch('settings');
   const soloContest = watch('soloContest');
   const isSoloPass = watch('isSoloPass');
+  const isFullpass = watch('isFullPass');
   const contestAgeGroup = watch('contestAgeGroup');
   const contestLevel = watch('contestLevel');
 
@@ -60,7 +61,10 @@ export const ContestSoloList: React.FC = () => {
 
   const getCategoryPrice = useCallback(
     (isImprovisation: boolean): number => {
-      const contestSoloPrice = settings?.price.contest?.contestsoloprice!;
+      // const contestSoloPrice = settings?.price.contest?.contestsoloprice!;
+      const contestSoloPrice = isFullpass
+        ? settings?.price.contest?.contestsoloprice!
+        : settings?.price.contest?.contestsolopricewithoutfullpass!;
 
       const priceKids = contestSoloPrice.kids;
       const priceRisingStar = contestSoloPrice.risingstar;
@@ -73,7 +77,7 @@ export const ContestSoloList: React.FC = () => {
       if (contestLevel === 'professionals') return priceProfessionals;
       return priceRisingStar;
     },
-    [contestAgeGroup, isSoloPass, contestLevel, settings]
+    [contestAgeGroup, isSoloPass, isFullpass, contestLevel, settings]
   );
 
   // Re-set prices when fields or Solo Pass change

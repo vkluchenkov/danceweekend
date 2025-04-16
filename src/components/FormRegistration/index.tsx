@@ -22,7 +22,7 @@ import {
 } from './types';
 import { getAgeGroup } from '@/src/ulis/getAgeGroup';
 import { ContestSolo } from './ContestSolo';
-import { defaultUrl, motionVariants } from '@/src/ulis/constants';
+import { defaultUrl, minWsAdults, minWsKids, motionVariants } from '@/src/ulis/constants';
 import { contestCategories, Level } from '@/src/ulis/contestCategories';
 import { ContestGroups } from './ContestGroups';
 import { WorldShow } from './WorldShow';
@@ -134,7 +134,6 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
 
   // Map solo contest styles and levels into form state
   useEffect(() => {
-    // console.log('mapping contest fields');
     const res: SoloContestField = [];
     // Filter by age
     const filteredByAgeGroup = contestCategories.filter(
@@ -183,14 +182,18 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
     setValue('workshops', res);
   }, [setValue, currentLang]);
 
-  // Check if has full pass or at least 3 workshops
+  // Check if has enough workshops selected
   const isEligeble = useMemo(() => {
     if (isFullPass) return true;
-    if (selectedWorkshops.length >= 3) {
+    if (ageGroup === 'baby' || (ageGroup === 'kids' && selectedWorkshops.length >= minWsKids))
       return true;
-    }
+    if (
+      (ageGroup === 'juniors' || ageGroup === 'adults' || ageGroup === 'seniors') &&
+      selectedWorkshops.length >= minWsAdults
+    )
+      return true;
     return false;
-  }, [isFullPass, selectedWorkshops]);
+  }, [isFullPass, selectedWorkshops, ageGroup]);
 
   // Summarize step totals
   useEffect(() => {

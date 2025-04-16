@@ -236,76 +236,8 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
     },
   };
 
-  const onlinePayload: CreatePageParameters = {
-    parent: {
-      database_id: config.notion.onlineDbId,
-      type: 'database_id',
-    },
-    properties: {
-      Name: {
-        type: 'title',
-        title: [
-          {
-            type: 'text',
-            text: { content: form.name },
-          },
-        ],
-      },
-      Surname: {
-        type: 'rich_text',
-        rich_text: [
-          {
-            type: 'text',
-            text: { content: form.surname },
-          },
-        ],
-      },
-      Social: {
-        type: 'rich_text',
-        rich_text: [
-          {
-            type: 'text',
-            text: { content: form.social },
-          },
-        ],
-      },
-      Email: {
-        type: 'email',
-        email: form.email,
-      },
-      FullPass: {
-        type: 'checkbox',
-        checkbox: form.isFullPass,
-      },
-      Discount: {
-        type: 'select',
-        select: fullPassDiscountSelect() ? { name: fullPassDiscountSelect()! } : null,
-      },
-      'Certificate source': {
-        type: 'rich_text',
-        rich_text: [
-          {
-            text: {
-              content: form.fullPassDiscountSource || '',
-            },
-          },
-        ],
-      },
-      'Single WS': {
-        type: 'multi_select',
-        multi_select: singleWs,
-      },
-      Total: {
-        type: 'number',
-        number: form.total,
-      },
-    },
-  };
-
-  const notionPayload = form.version === 'live' ? livePayload : onlinePayload;
-
   try {
-    await notion.pages.create(notionPayload);
+    await notion.pages.create(livePayload);
   } catch (error) {
     console.log(error);
     throw new Error('Notion save failed');

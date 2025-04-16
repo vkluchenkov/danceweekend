@@ -26,7 +26,6 @@ export const Summary: React.FC<SummaryStepProps> = ({
   const { watch, control } = methods;
 
   const settings = watch('settings');
-  const version = watch('version');
   const wsPrices = watch('wsPrices');
   const form = watch();
 

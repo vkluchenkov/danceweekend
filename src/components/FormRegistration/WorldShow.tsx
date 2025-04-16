@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useFormContext } from 'react-hook-form';
 import { Collapse } from '@mui/material';
@@ -7,6 +7,7 @@ import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { WorldShowStepProps, FormFields } from './types';
 import { FormInputCheckbox, FormInputField } from '@/src/ui-kit/input';
+import { currencySymbol } from '@/src/ulis/constants';
 
 export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligible }) => {
   const { t } = useTranslation('registration');
@@ -22,6 +23,7 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
   const isWorldShowSolo = watch('isWorldShowSolo');
   const isWorldShowGroup = watch('isWorldShowGroup');
   const worldShowGroup = watch('worldShowGroup');
+  const isFullPass = watch('isFullPass');
   const settings = watch('settings');
 
   // Calculate group price
@@ -59,6 +61,12 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
     }
   }, [isEligible, setValue]);
 
+  const worldShowSoloPrice = useMemo(() => {
+    return isFullPass
+      ? settings?.price.worldShow?.solofullpass!
+      : settings?.price.worldShow?.solowithoutfullpass!;
+  }, [isFullPass, settings]);
+
   return (
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.worldShow.title')}</h2>
@@ -73,7 +81,8 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
               <p className={textStyles.p}>
                 {t('form.worldShow.solo')}:{' '}
                 <span className={textStyles.accent}>
-                  {settings?.price.worldShow?.solofullpass!}€
+                  {worldShowSoloPrice}
+                  {currencySymbol}
                 </span>
               </p>
             }
@@ -86,7 +95,8 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
               <p className={textStyles.p}>
                 {t('form.worldShow.group')}:{' '}
                 <span className={textStyles.accent}>
-                  {settings?.price.worldShow?.groups!}€ / {t('form.worldShow.perPerson')}
+                  {settings?.price.worldShow?.groups!}
+                  {currencySymbol} / {t('form.worldShow.perPerson')}
                 </span>
               </p>
             }

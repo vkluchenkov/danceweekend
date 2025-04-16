@@ -5,7 +5,7 @@ import TelegramBot from 'node-telegram-bot-api';
 import { OrderPayload } from '@/src/components/FormRegistration/types';
 import { registrationUserEmail } from '@/src/email/registrationUserEmail';
 import { sendMail } from '@/src/email/sendMail';
-import { senderEmail, senderName } from '@/src/ulis/constants';
+import { currencySymbol, senderEmail, senderName } from '@/src/ulis/constants';
 import { registrationAdminEmail } from '@/src/email/registrationAdminEmail';
 import { saveRegistrationToNotion } from '@/src/notion/saveRegistrationToNotion';
 import { registrationPayloadSchema } from '@/src/validation/registrationPayloadSchema';
@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const message = `
       New registration from ${orderPayload.name.trim()} ${orderPayload.surname.trim()}.
-      Total: ${orderPayload.total}€.
+      Total: ${orderPayload.total}${currencySymbol}.
       Check email for more details.
       `;
 

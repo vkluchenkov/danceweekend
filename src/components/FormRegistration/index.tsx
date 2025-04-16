@@ -306,9 +306,9 @@ export const FormRegistration: React.FC<FormRegistrationProps> = ({ version, pri
       ? settings?.price.contest?.contestsoloprice!
       : settings?.price.contest?.contestsolopricewithoutfullpass!;
 
-    const priceKids = soloPrice.kids;
-    const priceRisingStar = soloPrice.risingstar;
-    const priceProfessionals = soloPrice.professionals;
+    const priceKids = soloPrice.soloPassKids;
+    const priceRisingStar = soloPrice.soloPassRisingStar;
+    const priceProfessionals = soloPrice.soloPassProfessionals;
 
     if (ageGroup === 'baby' || ageGroup === 'kids') return priceKids;
     if (contestLevel === 'professionals') return priceProfessionals;

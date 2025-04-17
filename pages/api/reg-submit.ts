@@ -44,6 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const userEmailContent = registrationUserEmail({ form: orderPayload, t: t }).html;
       const adminEmailContent = registrationAdminEmail({ form: orderPayload, t: t }).html;
       const userEmailErrors = registrationUserEmail({ form: orderPayload, t: t }).errors;
+      const adminEmailErrors = registrationAdminEmail({ form: orderPayload, t: t }).errors;
 
       const userMailPayload = {
         senderEmail: senderEmail,
@@ -65,6 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       };
 
       // console.log(userEmailErrors);
+      // console.log(adminEmailErrors);
       // console.log(userEmailContent);
       sendMail(userMailPayload);
       sendMail(adminMailPayload);

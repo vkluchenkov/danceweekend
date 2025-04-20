@@ -13,7 +13,9 @@ export const registrationPayloadSchema = Joi.object({
   beenBefore: Joi.boolean().required(),
   yearsBefore2: Joi.array().items(
     Joi.object({
-      year: Joi.string().required().equal('2016', '2017', '2018', '2019', '2021', '2022', '2023'),
+      year: Joi.string()
+        .required()
+        .equal('2016', '2017', '2018', '2019', '2021', '2022', '2023', '2024'),
       selected: Joi.boolean().required(),
       id: Joi.string().required(),
     })
@@ -31,6 +33,7 @@ export const registrationPayloadSchema = Joi.object({
       start: Joi.string().required(),
       end: Joi.string().required(),
       type: Joi.string().required().equal('workshop'),
+      teachersPriceGroup: Joi.string().required().equal('group1', 'group2'),
       translations: Joi.object({
         ru: Joi.object({
           title: Joi.string().required(),
@@ -46,7 +49,7 @@ export const registrationPayloadSchema = Joi.object({
   isFullPass: Joi.boolean().required(),
   fullPassDiscount: Joi.string().equal('group', '30%', '50%', 'free', 'none'),
   fullPassDiscountSource: Joi.string().allow(''),
-  fullPassGroupName: Joi.string(),
+  fullPassGroupName: Joi.string().allow(''),
   ageGroup: Joi.string().required().equal('baby', 'kids', 'juniors', 'adults', 'seniors'),
   isSoloContest: Joi.boolean().required(),
   contestAgeGroup: Joi.string().required().equal('baby', 'kids', 'juniors', 'adults', 'seniors'),

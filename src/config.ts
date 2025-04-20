@@ -8,7 +8,6 @@ export const config = {
   notion: {
     token: must(process.env.NOTION_TOKEN, 'Notion token is missing'),
     liveDbId: must(process.env.NOTION_DATABASE_LIVE, 'Notion live database is missing'),
-    onlineDbId: must(process.env.NOTION_DATABASE_ONLINE, 'Notion online database is missing'),
   },
   brevo: {
     token: must(process.env.SENDINBLUE_SECRET, 'Sendinblue token is missing'),

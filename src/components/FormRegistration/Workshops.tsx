@@ -17,7 +17,7 @@ import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { SupportedLangs } from '@/src/types';
 import { schedule } from '@/src/ulis/schedule';
 import { WorkshopsList } from './WorkshopsList';
-// import { singleWsPrice } from '@/src/ulis/price';
+import { currencySymbol } from '@/src/ulis/constants';
 
 export const Workshops: React.FC<WorkshopsStepProps> = ({
   setStepTotal,
@@ -137,7 +137,7 @@ export const Workshops: React.FC<WorkshopsStepProps> = ({
               <p className={textStyles.p}>
                 {t('form.workshops.fullPass')}{' '}
                 <span className={textStyles.accent}>
-                  {fullPassPrice ? fullPassPrice + '€' : ''}
+                  {fullPassPrice ? fullPassPrice + currencySymbol : ''}
                 </span>
               </p>
             }

@@ -60,7 +60,7 @@
       "soloPassLabel": "I want to buy Solo Pass",
       "soloPassTitle": "Solo Pass",
       "solosPassDescription": "With the Solo Pass you can dance unlimited times in all solo categories, except live tabla solo. You save, if you dance more than 3 times.",
-      "notEligible": "In order to take part in the competition all the participants are required to have at least 3 workshops or Full Pass.",
+      "notEligible": "In order to take part in the competition all the participants are required to have at least 3 workshops (1 for baby and kids) or Full Pass.",
       "ageGroups": {
         "title": "Competition age group",
         "baby": "Baby",
@@ -101,7 +101,7 @@
     "worldShow": {
       "title": "World show",
       "description": "You have a unique opportunity to perform on the main festival’s stage during the World Show, which will take place on the last day of the festival.",
-      "notEligible": "In order to take part in the World Show all the participants are required to have at least 3 workshops or Full Pass.",
+      "notEligible": "In order to take part in the World Show all the participants are required to have at least 3 workshops (1 for baby and kids) or Full Pass.",
       "solo": "I want to perform solo",
       "group": "I want to add duo or group",
       "perPerson": "per person",
@@ -118,9 +118,9 @@
         "title": "Finances",
         "total": "Your registration total",
         "installments": "I want to pay with 2 installments",
-        "installmentsDetails": "There is a possibility to pay for your package in 2 installments. The first 50% should be paid right after the registration, the other 50% any time before 31.07.2024. In case if the second payment is failed to be transferred in due time, you will be fined the amount of 100€, which must be paid with the second part before the festival begins.",
+        "installmentsDetails": "There is a possibility to pay for your registration in 2 installments. The first 50% should be paid right after the registration, the other 50% can be paid at a place or any time before the festival. In case of not paying the second part, the first part is non-refundable.",
         "amountNow": "Amount to pay now",
-        "amountAfter": "Amount to pay till 31.07.2024"
+        "amountAfter": "Amount to pay at the festival"
       }
     },
     "error": "Oops. Something went wrong. Please try again later or contact us to resolve the issue."

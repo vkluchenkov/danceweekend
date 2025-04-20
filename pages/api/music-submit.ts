@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const t = await getT('en', 'music');
 
-  const form = new formidable.IncomingForm();
+  const form = formidable();
 
   const formData = await new Promise<FormData | undefined>((resolve, reject) => {
     let file: File;

@@ -445,11 +445,11 @@ export const registrationAdminEmail = (props: registrationUserEmailProps) => {
             {/* Order title */}
             <MjmlText mj-class='h2'>{t('email.adminOrderTitle')}:</MjmlText>
 
-            {/* Festival version */}
+            {/* Festival version 
             <MjmlText mj-class='h3'>
               {t('form.summary.versionTitle')}:{' '}
               <span style={{ color: accentColor }}>{form.version}</span>
-            </MjmlText>
+            </MjmlText>*/}
 
             {/* Personal data*/}
             <MjmlText mj-class='h3'>{t('form.summary.personalTitle')}</MjmlText>

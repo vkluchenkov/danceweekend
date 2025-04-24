@@ -3,7 +3,7 @@ import formidable, { File } from 'formidable';
 import path from 'path';
 import sanitize from 'sanitize-filename';
 
-import { config as siteConfig } from '@/src/config';
+import { configServer as siteConfig } from '@/src/configServer';
 import { FormFields, FormData } from '@/src/types/photo.types';
 import TelegramBot from 'node-telegram-bot-api';
 

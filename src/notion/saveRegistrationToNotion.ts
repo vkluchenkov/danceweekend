@@ -4,7 +4,7 @@ import { Translate } from 'next-translate';
 
 import { OrderPayload } from '../components/FormRegistration/types';
 import { contestCategories } from '../ulis/contestCategories';
-import { config } from '../config';
+import { configServer } from '../configServer';
 
 interface saveRegistrationToNotionProps {
   form: OrderPayload;
@@ -14,7 +14,7 @@ interface saveRegistrationToNotionProps {
 export const saveRegistrationToNotion = async (props: saveRegistrationToNotionProps) => {
   const { form, t } = props;
 
-  const notion = new Client({ auth: config.notion.token });
+  const notion = new Client({ auth: configServer.notion.token });
 
   const fullPassDiscountSelect = () => {
     switch (form.fullPassDiscount) {
@@ -87,7 +87,7 @@ export const saveRegistrationToNotion = async (props: saveRegistrationToNotionPr
 
   const livePayload: CreatePageParameters = {
     parent: {
-      database_id: config.notion.liveDbId,
+      database_id: configServer.notion.liveDbId,
       type: 'database_id',
     },
     properties: {

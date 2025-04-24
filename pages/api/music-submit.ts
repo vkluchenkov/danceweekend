@@ -6,7 +6,7 @@ import sanitize from 'sanitize-filename';
 import getT from 'next-translate/getT';
 import TelegramBot from 'node-telegram-bot-api';
 
-import { config as appConfig } from '@/src/config';
+import { configServer as appConfig } from '@/src/configServer';
 import { FormFields, FormData } from '@/src/types/music.types';
 
 export const config = {

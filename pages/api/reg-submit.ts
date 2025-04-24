@@ -9,7 +9,7 @@ import { currencySymbol, senderEmail, senderName } from '@/src/ulis/constants';
 import { registrationAdminEmail } from '@/src/email/registrationAdminEmail';
 import { saveRegistrationToNotion } from '@/src/notion/saveRegistrationToNotion';
 import { registrationPayloadSchema } from '@/src/validation/registrationPayloadSchema';
-import { config } from '@/src/config';
+import { configServer } from '@/src/configServer';
 import { registrationOnlinePayloadSchema } from '@/src/validation/registrationOnlinePayloadSchema';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -29,9 +29,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const enT = await getT('en', 'registration');
 
     try {
-      const bot = new TelegramBot(config.telegram.botToken, { polling: false });
-      const chatId = config.telegram.chatId;
-      const threadId = config.telegram.threadId;
+      const bot = new TelegramBot(configServer.telegram.botToken, { polling: false });
+      const chatId = configServer.telegram.chatId;
+      const threadId = configServer.telegram.threadId;
 
       const message = `
       New registration from ${orderPayload.name.trim()} ${orderPayload.surname.trim()}.

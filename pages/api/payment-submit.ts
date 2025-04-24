@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import TelegramBot from 'node-telegram-bot-api';
 
 import { PaymentFormFields } from '@/src/types/payment.types';
-import { config } from '@/src/config';
+import { configServer } from '@/src/configServer';
 import { orderPayloadSchema } from '@/src/validation/orderPayloadSchema';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -16,9 +16,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   } else {
     try {
-      const bot = new TelegramBot(config.telegram.botToken, { polling: false });
-      const chatId = config.telegram.chatId;
-      const threadId = config.telegram.threadId;
+      const bot = new TelegramBot(configServer.telegram.botToken, { polling: false });
+      const chatId = configServer.telegram.chatId;
+      const threadId = configServer.telegram.threadId;
 
       bot.sendMessage(
         chatId,

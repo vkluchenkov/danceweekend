@@ -2,11 +2,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { PaymentFormFields } from '@/src/types/payment.types';
-import { config } from '@/src/config';
+import { configServer } from '@/src/configServer';
 import { currencyCode } from '@/src/ulis/constants';
 
 // @ts-ignore
-const stripe = new Stripe(config.stripe.stripeSecretKey, { apiVersion: null });
+const stripe = new Stripe(configServer.stripe.stripeSecretKey, { apiVersion: null });
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const orderPayload: PaymentFormFields = req.body;

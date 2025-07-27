@@ -161,6 +161,19 @@ const babySoloSet: Style[] = [
   },
   {
     isSolo: true,
+    isImprovisation: true,
+    isForWin: true,
+    translations: {
+      en: {
+        categoryTitle: 'Live tabla improvisation',
+      },
+      ru: {
+        categoryTitle: 'Импровизация Live tabla',
+      },
+    },
+  },
+  {
+    isSolo: true,
     translations: {
       en: {
         categoryTitle: 'Show/fusion',

@@ -11,6 +11,8 @@ export interface GroupContest {
   qty: number;
   name: string;
   price: number;
+  id?: string;
+  index?: number;
 }
 
 export type WorkshopsField = (Workshop & { selected: boolean; day: string })[];

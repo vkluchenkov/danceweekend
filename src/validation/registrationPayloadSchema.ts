@@ -86,6 +86,8 @@ export const registrationPayloadSchema = Joi.object({
       qty: Joi.number().required(),
       name: Joi.string().required(),
       price: Joi.number().required(),
+      id: Joi.string(),
+      index: Joi.number(),
     })
   ),
   isWorldShowSolo: Joi.boolean().required(),

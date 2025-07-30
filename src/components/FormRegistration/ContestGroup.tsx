@@ -11,6 +11,7 @@ import { GroupContest, FormFields } from './types';
 import { FormInputField, FormInputSelect } from '@/src/ui-kit/input';
 import { contestCategories } from '@/src/ulis/contestCategories';
 import { ageGroupArray, SupportedLangs } from '@/src/types';
+import { currencyCode } from '@/src/ulis/constants';
 
 interface ContestGroupProps {
   field: GroupContest & { id: string; index: number };
@@ -168,7 +169,11 @@ export const ContestGroup: React.FC<ContestGroupProps> = ({ field, onDelete }) =
       />
 
       <p className={textStyles.p}>
-        {t('form.contest.groups.price')}: <span className={textStyles.accent}>{field.price}€</span>
+        {t('form.contest.groups.price')}:{' '}
+        <span className={textStyles.accent}>
+          {field.price}
+          {currencyCode}
+        </span>
       </p>
     </div>
   );

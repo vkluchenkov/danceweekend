@@ -9,7 +9,14 @@ import { Layout } from '@/src/components/Layout';
 import textStyles from '@/styles/Text.module.css';
 import styles from '@/styles/Registration.module.css';
 import { Loader } from '@/src/components/Loader';
-import { darkTheme, groupsLimit, margin, soloLimit, worldShowLimit } from '@/src/ulis/constants';
+import {
+  darkTheme,
+  groupsLimit,
+  margin,
+  soloLimit,
+  soloProfessionalsLimit,
+  worldShowLimit,
+} from '@/src/ulis/constants';
 import { MusicFormFields } from '@/src/types/music.types';
 import { Style, Level, contestCategories } from '@/src/ulis/contestCategories';
 import { FormMusic } from '@/src/components/FormMusic';
@@ -45,8 +52,10 @@ const Music: NextPage = () => {
 
   const audioLimit = useMemo(() => {
     if (event === 'worldShow') return worldShowLimit;
-    else return type === 'group' || type === 'duo' ? groupsLimit : soloLimit;
-  }, [type, event]);
+    if (type === 'group' || type === 'duo') return groupsLimit;
+    if (type === 'solo' && level === 'professionals') return soloProfessionalsLimit;
+    return soloLimit;
+  }, [type, event, level]);
 
   // Check if audio is within limits
   useEffect(() => {

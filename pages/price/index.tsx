@@ -273,7 +273,7 @@ const Price: NextPage = () => {
     <>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('competition.title')}</h2>
       <p className={textStyles.p}>{contestAttention}</p>
-      <p className={textStyles.p}>{photoAttention}</p>
+      {/* <p className={textStyles.p}>{photoAttention}</p> */}
 
       {/* Price table */}
       <div className={styles.table}>

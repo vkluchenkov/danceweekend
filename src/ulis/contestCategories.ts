@@ -50,7 +50,7 @@ const mainSoloSet: Style[] = [
         categoryTitle: 'Folklore (except Baladi/Shaabi)',
       },
       ru: {
-        categoryTitle: 'Фольклор',
+        categoryTitle: 'Фольклор (кроме Балади/Шааби)',
       },
     },
   },
@@ -157,7 +157,7 @@ const babySoloSet: Style[] = [
         categoryTitle: 'Folklore (except Baladi/Shaabi)',
       },
       ru: {
-        categoryTitle: 'Фольклор',
+        categoryTitle: 'Фольклор (кроме Балади/Шааби)',
       },
     },
   },

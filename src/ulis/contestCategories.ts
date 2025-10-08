@@ -47,10 +47,22 @@ const mainSoloSet: Style[] = [
     isForWin: true,
     translations: {
       en: {
-        categoryTitle: 'Folklore',
+        categoryTitle: 'Folklore (except Baladi/Shaabi)',
       },
       ru: {
         categoryTitle: 'Фольклор',
+      },
+    },
+  },
+  {
+    isSolo: true,
+    isForWin: true,
+    translations: {
+      en: {
+        categoryTitle: 'Baladi/Shaabi',
+      },
+      ru: {
+        categoryTitle: 'Балади/Шааби',
       },
     },
   },
@@ -139,12 +151,25 @@ const babySoloSet: Style[] = [
   },
   {
     isSolo: true,
+    isForWin: true,
     translations: {
       en: {
-        categoryTitle: 'Folklore',
+        categoryTitle: 'Folklore (except Baladi/Shaabi)',
       },
       ru: {
         categoryTitle: 'Фольклор',
+      },
+    },
+  },
+  {
+    isSolo: true,
+    isForWin: true,
+    translations: {
+      en: {
+        categoryTitle: 'Baladi/Shaabi',
+      },
+      ru: {
+        categoryTitle: 'Балади/Шааби',
       },
     },
   },

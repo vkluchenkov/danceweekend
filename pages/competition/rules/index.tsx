@@ -125,7 +125,7 @@ const ContestRules: NextPage = () => {
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('attentionTitle')}</h2>
       <p className={textStyles.p}>{t('attentionText')}</p>
-      <p className={textStyles.p}>{attentionText2}</p>
+      {/* <p className={textStyles.p}>{attentionText2}</p> */}
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>1. {t('categoriesTitle')}</h2>
       {getCatsList}

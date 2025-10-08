@@ -62,12 +62,12 @@ const WorldShow: NextPage = () => {
         <Image src={worldShowLogo} alt={t('pageTitle')} fill />
       </div>
       <p className={textStyles.p}>
-        <span className={textStyles.accent}>{t('dateTitle')}:</span> 21.08.2025 / 20:00
+        <span className={textStyles.accent}>{t('dateTitle')}:</span> 20.08.2026 / 20:00
       </p>
       <p className={textStyles.p}>{t('description')}</p>
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>{t('conditionsTitle')}</h2>
       <p className={textStyles.p}>{t('conditionsGeneral')}</p>
-      <p className={textStyles.p}>{attentionText2}</p>
+      {/* <p className={textStyles.p}>{attentionText2}</p> */}
       <p className={textStyles.p}>
         {t('conditionsSoloFP')}
         <span className={textStyles.accent}>

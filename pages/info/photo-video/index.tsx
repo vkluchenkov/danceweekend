@@ -21,6 +21,13 @@ const PhotoVideo: NextPage = () => {
     />
   );
 
+  const videographerText = (
+    <Trans
+      i18nKey='photoVideo:videographerText'
+      components={[<Link href='https://www.bestpicture.pro' target='_blank' key={1} />]}
+    />
+  );
+
   const photoshootBooking = (
     <Trans
       i18nKey='photoVideo:photoshootBooking'
@@ -34,6 +41,15 @@ const PhotoVideo: NextPage = () => {
         <Hero name={t('andre')} title={t('photographer')} image={andre} />
         <p className={textStyles.p}>{photographerText}</p>
 
+        <h3 className={clsx(textStyles.h3, textStyles.accent)}>{t('price')}:</h3>
+        <ul className={textStyles.list}>
+          <li>{t('photoPack')} 20€</li>
+          <li>10 {t('pictures')}: 30€*</li>
+          <li>20 {t('pictures')}: 50€*</li>
+          <li>30 {t('pictures')}: 60€*</li>
+        </ul>
+        <p className={textStyles.p}>{t('photoNote')}</p>
+
         <h3 className={clsx(textStyles.h3, textStyles.accent)}>{t('photoshootTitle')}:</h3>
         <p className={textStyles.p}>{t('photoshootIntro')}</p>
         <h4 className={textStyles.h4}>{t('photoshootPriceTitle')}</h4>
@@ -43,7 +59,11 @@ const PhotoVideo: NextPage = () => {
 
       <section className={styles.section}>
         <Hero name={t('vladimir')} title={t('videographer')} image={vladimir} />
-        <p className={textStyles.p}>{t('videographerText')}</p>
+        <p className={textStyles.p}>{videographerText}</p>
+        <h3 className={clsx(textStyles.h3, textStyles.accent)}>{t('price')}:</h3>
+        <ul className={textStyles.list}>
+          <li>{t('videoPrice')}</li>
+        </ul>
       </section>
     </div>
   );

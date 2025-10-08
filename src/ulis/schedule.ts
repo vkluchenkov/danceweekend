@@ -165,7 +165,7 @@ export const schedule: Day[] = [
         translations: {
           en: {
             title: 'Diana Gnatchenko',
-            description: 'TBA',
+            description: 'To be announced',
           },
           ru: {
             title: 'Диана Гнатченко',

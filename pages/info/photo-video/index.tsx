@@ -42,13 +42,7 @@ const PhotoVideo: NextPage = () => {
         <p className={textStyles.p}>{photographerText}</p>
 
         <h3 className={clsx(textStyles.h3, textStyles.accent)}>{t('price')}:</h3>
-        <ul className={textStyles.list}>
-          <li>{t('photoPack')} 20€</li>
-          <li>10 {t('pictures')}: 30€*</li>
-          <li>20 {t('pictures')}: 50€*</li>
-          <li>30 {t('pictures')}: 60€*</li>
-        </ul>
-        <p className={textStyles.p}>{t('photoNote')}</p>
+        <p className={textStyles.p}>{t('photoPack')}</p>
 
         <h3 className={clsx(textStyles.h3, textStyles.accent)}>{t('photoshootTitle')}:</h3>
         <p className={textStyles.p}>{t('photoshootIntro')}</p>

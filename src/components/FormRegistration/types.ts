@@ -38,6 +38,7 @@ export const yearsValues = [
   '2022',
   '2023',
   '2024',
+  '2025',
 ] as const;
 
 export type yearsBefore = (typeof yearsValues)[number];

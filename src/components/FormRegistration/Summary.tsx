@@ -369,9 +369,9 @@ export const Summary: React.FC<SummaryStepProps> = ({
     <div className={styles.form}>
       <h2 className={textStyles.h2}>{t('form.summary.title')}</h2>
 
-      <h3 className={clsx(textStyles.h3)}>
+      {/*<h3 className={clsx(textStyles.h3)}>
         {t('form.summary.versionTitle')}: <span className={textStyles.accent}>{form.version}</span>
-      </h3>
+      </h3>*/}
 
       {/* Personal data */}
       <h3 className={clsx(textStyles.h3, textStyles.centered)}>

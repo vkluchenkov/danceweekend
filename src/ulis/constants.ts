@@ -39,7 +39,7 @@ export const senderEmail = 'danceweekend@aliah.dance';
 export const senderName = 'Dance Weekend in Warsaw festival';
 
 // talegram
-export const telegramUrl = 'https://t.me/+RYwBbu9w0GVkMmY0';
+export const telegramUrl = 'https://t.me/+ZnirDhjlhY4xNGY0';
 
 // Social links
 export const facebookUrl = 'https://www.facebook.com/danceweekendwarsaw';

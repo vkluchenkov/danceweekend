@@ -15,7 +15,7 @@ export const registrationPayloadSchema = Joi.object({
     Joi.object({
       year: Joi.string()
         .required()
-        .equal('2016', '2017', '2018', '2019', '2021', '2022', '2023', '2024'),
+        .equal('2016', '2017', '2018', '2019', '2021', '2022', '2023', '2024', '2025'),
       selected: Joi.boolean().required(),
       id: Joi.string().required(),
     })

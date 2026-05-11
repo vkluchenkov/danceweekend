@@ -56,7 +56,7 @@ const mainSoloSet: Style[] = [
   },
   {
     isSolo: true,
-    isForWin: true,
+    isForWin: false,
     translations: {
       en: {
         categoryTitle: 'Baladi/Shaabi',
@@ -163,7 +163,7 @@ const babySoloSet: Style[] = [
   },
   {
     isSolo: true,
-    isForWin: true,
+    isForWin: false,
     translations: {
       en: {
         categoryTitle: 'Baladi/Shaabi',

@@ -75,7 +75,7 @@ export default function Home() {
         <section className={styles.content}>
           <h1 className={styles.content__title}>{welcomeTitle}</h1>
           {welcomeText1}
-          <Image src={prize} alt='' width={250} className={styles.prize} />
+          {/* <Image src={prize} alt='' width={250} className={styles.prize} /> */}
           {welcomeText2}
         </section>
         <section className={styles.video}>

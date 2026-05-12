@@ -108,7 +108,7 @@ const ContestRules: NextPage = () => {
           </div>
         );
       }),
-    [currentLang, t]
+    [currentLang, t],
   );
 
   const changeDate = DateTime.fromISO(contestSettings?.from!)
@@ -154,7 +154,7 @@ const ContestRules: NextPage = () => {
 
       <h2 className={clsx(textStyles.h2, textStyles.accent)}>5. {t('prizesTitle')}</h2>
 
-      <Image src={prize} alt='' width={250} className={styles.prize} />
+      {/* <Image src={prize} alt='' width={250} className={styles.prize} /> */}
 
       <p className={textStyles.p}>{t('prizesMain')}</p>
       <p className={textStyles.p}>{t('prizesSolo')}</p>

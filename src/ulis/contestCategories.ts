@@ -44,7 +44,7 @@ const mainSoloSet: Style[] = [
   },
   {
     isSolo: true,
-    isForWin: true,
+    isForWin: false,
     translations: {
       en: {
         categoryTitle: 'Folklore (except Baladi/Shaabi)',
@@ -56,7 +56,7 @@ const mainSoloSet: Style[] = [
   },
   {
     isSolo: true,
-    isForWin: false,
+    isForWin: true,
     translations: {
       en: {
         categoryTitle: 'Baladi/Shaabi',
@@ -151,7 +151,7 @@ const babySoloSet: Style[] = [
   },
   {
     isSolo: true,
-    isForWin: true,
+    isForWin: false,
     translations: {
       en: {
         categoryTitle: 'Folklore (except Baladi/Shaabi)',
@@ -163,7 +163,7 @@ const babySoloSet: Style[] = [
   },
   {
     isSolo: true,
-    isForWin: false,
+    isForWin: true,
     translations: {
       en: {
         categoryTitle: 'Baladi/Shaabi',

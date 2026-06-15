@@ -120,12 +120,12 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'Kazafy',
-            description: 'Muwashahat choreography',
+            title: 'Leandro Ferreyra',
+            description: 'Latin drum solo fusion choreography',
           },
           ru: {
-            title: 'Kazafy',
-            description: 'Хореография Muwashahat',
+            title: 'Leandro Ferreyra',
+            description: 'Хореография Latin drum solo fusion',
           },
         },
         teachersPriceGroup: 'group2',
@@ -259,11 +259,11 @@ export const schedule: Day[] = [
         type: 'workshop',
         translations: {
           en: {
-            title: 'Kazafy',
+            title: 'Romina Maluf',
             description: 'Classical oriental choreography',
           },
           ru: {
-            title: 'Kazafy',
+            title: 'Romina Maluf',
             description: 'Хореография Classical oriental',
           },
         },

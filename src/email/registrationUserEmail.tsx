@@ -144,7 +144,14 @@ export const registrationUserEmail = (props: registrationUserEmailProps) => {
                 </span>
               </li>
 
-              {form.fullPassDiscount != 'none' && (
+              {form.fullPassDiscount === 'group' && (
+                <li>
+                  {t('form.workshops.discounts.groupName')}:{' '}
+                  <span style={{ color: accentColor }}>{form.fullPassGroupName}</span>
+                </li>
+              )}
+
+              {form.fullPassDiscount != 'group' && form.fullPassDiscount != 'none' && (
                 <li>
                   {t('form.workshops.discounts.details')}:{' '}
                   <span style={{ color: accentColor }}>{form.fullPassDiscountSource}</span>

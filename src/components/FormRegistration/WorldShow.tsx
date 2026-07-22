@@ -34,12 +34,18 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
     }
   }, [setValue, worldShowGroup?.qty, settings]);
 
+  const worldShowSoloPrice = useMemo(() => {
+    return isFullPass
+      ? settings?.price.worldShow?.solofullpass!
+      : settings?.price.worldShow?.solowithoutfullpass!;
+  }, [isFullPass, settings]);
+
   // Calculate step total
   useEffect(() => {
-    const solo = isWorldShowSolo ? settings?.price.worldShow?.solofullpass! : 0;
+    const solo = isWorldShowSolo ? worldShowSoloPrice : 0;
     const group = worldShowGroup?.price ? worldShowGroup.price : 0;
     setStepTotal(solo + group);
-  }, [isWorldShowSolo, worldShowGroup?.price, settings, setStepTotal]);
+  }, [isWorldShowSolo, worldShowSoloPrice, worldShowGroup?.price, setStepTotal]);
 
   // Set/delete default group values on checkbox change
   useEffect(() => {
@@ -60,12 +66,6 @@ export const WorldShow: React.FC<WorldShowStepProps> = ({ setStepTotal, isEligib
       setValue('isWorldShowGroup', false);
     }
   }, [isEligible, setValue]);
-
-  const worldShowSoloPrice = useMemo(() => {
-    return isFullPass
-      ? settings?.price.worldShow?.solofullpass!
-      : settings?.price.worldShow?.solowithoutfullpass!;
-  }, [isFullPass, settings]);
 
   return (
     <div className={styles.form}>

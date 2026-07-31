@@ -18,7 +18,7 @@ export const registrationPayloadSchema = Joi.object({
         .equal('2016', '2017', '2018', '2019', '2021', '2022', '2023', '2024', '2025'),
       selected: Joi.boolean().required(),
       id: Joi.string().required(),
-    })
+    }),
   ),
   email: Joi.string().email().required(),
   social: Joi.string(),
@@ -44,7 +44,7 @@ export const registrationPayloadSchema = Joi.object({
           description: Joi.string().required(),
         }),
       }),
-    })
+    }),
   ),
   isFullPass: Joi.boolean().required(),
   fullPassDiscount: Joi.string().equal('group', '30%', '50%', 'free', 'none'),
@@ -55,7 +55,7 @@ export const registrationPayloadSchema = Joi.object({
   contestAgeGroup: Joi.string().required().equal('baby', 'kids', 'juniors', 'adults', 'seniors'),
   isSoloPass: Joi.boolean().required(),
   contestLevels: Joi.array().items(
-    Joi.string().equal('debut', 'beginners', 'semi-pro', 'professionals', 'openLevel')
+    Joi.string().equal('debut', 'beginners', 'semi-pro', 'professionals', 'openLevel'),
   ),
   contestLevel: Joi.string().equal('debut', 'beginners', 'semi-pro', 'professionals', 'openLevel'),
   soloContest: Joi.array().items(
@@ -74,7 +74,7 @@ export const registrationPayloadSchema = Joi.object({
           categoryTitle: Joi.string().required(),
         }),
       }),
-    })
+    }),
   ),
   isGroupContest: Joi.boolean().required(),
   groupContest: Joi.array().items(
@@ -88,7 +88,7 @@ export const registrationPayloadSchema = Joi.object({
       price: Joi.number().required(),
       id: Joi.string(),
       index: Joi.number(),
-    })
+    }),
   ),
   isWorldShowSolo: Joi.boolean().required(),
   isWorldShowGroup: Joi.boolean().required(),
@@ -96,7 +96,7 @@ export const registrationPayloadSchema = Joi.object({
     qty: Joi.number().required(),
     name: Joi.string().required(),
     price: Joi.number().required(),
-  }),
+  }).allow(null),
   rulesAccepted: Joi.boolean().required(),
   isInstallments: Joi.boolean(),
   currentStep: Joi.string(),
